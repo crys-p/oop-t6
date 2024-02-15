@@ -1,9 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.EntityManager.Entity;
 
 public class Triangle extends Entity {
     private Color color;

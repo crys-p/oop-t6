@@ -4,6 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.EntityManager.EntityManager;
 
 public class GameMaster extends ApplicationAdapter {
 	private SpriteBatch batch;

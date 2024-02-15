@@ -1,8 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.EntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.EntityManager.Entity;
+
 import java.util.Random;
 
 public class TextureObject extends Entity {

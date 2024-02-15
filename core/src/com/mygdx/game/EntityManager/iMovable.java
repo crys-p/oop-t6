@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.EntityManager;
 
 public interface iMovable {
     public void moveAIControlled();
