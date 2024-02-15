@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.Random;
 
-public abstract class Entity implements iMovable {
+public abstract class Entity {
+
     private float x;
     private float y;
     private float speed;
@@ -22,10 +23,9 @@ public abstract class Entity implements iMovable {
         this.x = random.nextFloat(700);
         this.y = 450;
         this.speed = random.nextFloat(1, 8);
-        System.out.println("Speed = " + this.speed);
     };
 
-    // Constructor for entities with fixed position
+    // Constructor for entities that start at fixed positions
     public Entity(float x, float y, float speed) {
         this.x = x;
         this.y = y;
@@ -48,8 +48,20 @@ public abstract class Entity implements iMovable {
         this.y = y;
     }
 
-    public void decrementY(float value) {
+    public void moveUp(float value) {
+        this.y += value;
+    }
+
+    public void moveDown(float value) {
         this.y -= value;
+    }
+
+    public void moveLeft(float value) {
+        this.x -= value;
+    }
+
+    public void moveRight(float value) {
+        this.x += value;
     }
 
     public float getSpeed() {
@@ -68,6 +80,6 @@ public abstract class Entity implements iMovable {
         // Method override for Shapes
     }
 
-    public abstract void update();
+    public abstract void updateExistence();
 
 }

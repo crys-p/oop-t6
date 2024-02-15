@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EntityManager {
     private List<Entity> entityList = new ArrayList<>();
@@ -14,19 +15,20 @@ public class EntityManager {
     public EntityManager() {}
 
     public void createEntities() {
+        Random random = new Random();
         // Creating Sprites
-        entityList.add(new TextureObject("bucket.png", 300, 0, 200, false));
+        entityList.add(new Player(300, 0, 200, "bucket.png"));
         for (int i = 0; i < 10; i++) {
-            entityList.add(new TextureObject("droplet.png", true));
+            entityList.add(new Item(random, "droplet.png"));
         }
         // Creating Shapes
-        entityList.add(new Circle(200, 300, 400, 50, Color.RED));
+        entityList.add(new Circle(200, 300, 400, Color.RED, 50));
         entityList.add(new Triangle(300, 200, 40, Color.GREEN, 50));
     }
 
     public void drawEntities(SpriteBatch batch, ShapeRenderer shape) {
         for (Entity e: entityList) {
-            if (e instanceof TextureObject) {
+            if (e instanceof Player || e instanceof Item) {
                 e.draw(batch);
             } else {
                 e.draw(shape);
@@ -35,12 +37,6 @@ public class EntityManager {
     }
 
     public void entityMovement() {
-        for (Entity e: entityList) {
-            if (e instanceof TextureObject && ((TextureObject) e).getAIControl()) {
-                e.moveAIControlled();
-            } else {
-                e.moveUserControlled();
-            }
-        }
+
     }
 }
