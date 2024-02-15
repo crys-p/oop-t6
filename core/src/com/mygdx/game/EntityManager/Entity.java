@@ -10,6 +10,8 @@ public abstract class Entity {
     private float x;
     private float y;
     private float speed;
+    
+    private float velocityY = 0; // Vertical velocity
 
     // Default constructor
     public Entity() {
@@ -20,9 +22,9 @@ public abstract class Entity {
 
     // Constructor for entities that start at random places
     public Entity(Random random) {
-        this.x = random.nextFloat(700);
+        this.x = random.nextFloat();
         this.y = 450;
-        this.speed = random.nextFloat(1, 8);
+        this.speed = random.nextFloat();
     };
 
     // Constructor for entities that start at fixed positions
@@ -63,6 +65,10 @@ public abstract class Entity {
     public void moveRight(float value) {
         this.x += value;
     }
+    
+    public void jump() { //shermaine
+        velocityY = 500; // Adjust jump velocity as needed
+    }
 
     public float getSpeed() {
         return this.speed;
@@ -81,5 +87,19 @@ public abstract class Entity {
     }
 
     public abstract void updateExistence();
+    
+    public void update(float deltaTime) { //shermaine
+        // Update player's position based on velocity
+        y += velocityY * deltaTime;
+
+        // Simulate gravity
+        velocityY -= 1000 * deltaTime; // Adjust gravity as needed
+
+        // Prevent player from falling through the ground
+        if (y < 0) {
+            y = 0;
+            velocityY = 0;
+        }
+    }
 
 }
