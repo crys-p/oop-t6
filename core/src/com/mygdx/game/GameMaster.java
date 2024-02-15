@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.EntityManager.Player;
-import com.mygdx.game.PlayerControlManager.PlayerInputManager;
+
+import PlayerControlManager.PlayerInputManager;
 
 public class GameMaster extends ApplicationAdapter {
 	private SpriteBatch batch;
