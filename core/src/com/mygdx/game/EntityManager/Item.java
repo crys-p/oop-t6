@@ -18,7 +18,12 @@ public class Item extends Entity {
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
-    public void updateExistence() {
+    public void logConsole() {
         System.out.printf("I am item at %f, %f%n", this.getX(), this.getY());
+    }
+
+    @Override
+    public void movement(float deltaTime) {
+
     }
 }

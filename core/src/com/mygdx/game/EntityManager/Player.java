@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class Player extends Entity {
     private final Texture texture;
 
-    public Player(float x, float y, float speed, String image) {
-        super(x, y, speed);
+    public Player(float x, float y, float velocityX, float velocityY, String image) {
+        super(x, y, velocityX, velocityY);
         this.texture = new Texture(Gdx.files.internal(image));
     }
 
@@ -16,7 +16,7 @@ public class Player extends Entity {
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
-    public void update(float deltaTime) { //shermaine
+    public void movement(float deltaTime) { //shermaine
         // Update player's position based on velocity
         this.y += velocityY * deltaTime;
 
@@ -29,7 +29,7 @@ public class Player extends Entity {
             velocityY = 0;
         }
     }
-    public void updateExistence() {
+    public void logConsole() {
         System.out.printf("I am a player at %f, %f%n", this.getX(), this.getY());
     }
 }

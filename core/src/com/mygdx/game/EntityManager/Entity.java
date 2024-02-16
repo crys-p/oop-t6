@@ -9,29 +9,31 @@ public abstract class Entity {
 
     protected float x;
     protected float y;
-    protected float speed;
-
-    protected float velocityY = 0; // Vertical velocity
+    protected float velocityX; // Horizontal velocity
+    protected float velocityY; // Vertical velocity
 
     // Default constructor
-    public Entity() {
+    public Entity(float x, float y, float speed) {
         this.x = 0;
         this.y = 0;
-        this.speed = 0;
+        this.velocityX = 0;
+        this.velocityY = 0;
     }
 
     // Constructor for entities that start at random places
     public Entity(Random random) {
         this.x = random.nextFloat();
         this.y = 450;
-        this.speed = random.nextFloat();
+        this.velocityX = random.nextFloat();
+        this.velocityY = random.nextFloat();
     };
 
     // Constructor for entities that start at fixed positions
-    public Entity(float x, float y, float speed) {
+    public Entity(float x, float y, float velocityX, float velocityY) {
         this.x = x;
         this.y = y;
-        this.speed = speed;
+        this.velocityX = velocityX;
+        this.velocityY = velocityY;
     }
 
     public float getX() {
@@ -70,12 +72,24 @@ public abstract class Entity {
         velocityY = 500; // Adjust jump velocity as needed
     }
 
-    public float getSpeed() {
-        return this.speed;
+    public float getVelocityX() {
+        return this.velocityX;
     }
 
-    public void incrementSpeed(float value) {
-        this.speed += value;
+    public float getVelocityY() {
+        return this.velocityY;
+    }
+
+    public void incrementVelocityX(float value) {
+        this.velocityX += value;
+    }
+
+    public void setVelocityX(float value) {
+        this.velocityX = value;
+    }
+
+    public void setVelocityY(float value) {
+        this.velocityY = value;
     }
 
     public void draw(SpriteBatch batch) {
@@ -86,6 +100,7 @@ public abstract class Entity {
         // Method override for Shapes
     }
 
-    public abstract void updateExistence();
+    public abstract void logConsole();
 
+    public abstract void movement(float deltaTime);
 }

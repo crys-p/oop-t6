@@ -9,8 +9,8 @@ public class Circle extends Enemy {
     private float radius;
 
     // Constructor with values assigned
-    public Circle(float x, float y, float speed, Color color, float radius) {
-        super(x, y, speed, color);
+    public Circle(float x, float y, float velocityX, float velocityY, Color color, float radius) {
+        super(x, y, velocityX, velocityY, color);
         this.radius = radius;
     }
 
@@ -33,7 +33,12 @@ public class Circle extends Enemy {
     }
 
     @Override
-    public void updateExistence() {
+    public void logConsole() {
         System.out.printf("In a Circle with radius %f at %f,%f position.\n", this.getRadius(), this.getX(), this.getY());
+    }
+
+    @Override
+    public void movement(float deltaTime) {
+
     }
 }
