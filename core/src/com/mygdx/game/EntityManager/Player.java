@@ -6,20 +6,30 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Player extends Entity {
     private final Texture texture;
-    private float width, height;
 
-    public Player(float x, float y, float speed, String image, float width, float height){
-        super(x, y, speed);
-        this.width = width;
-        this.height = height;
+    public Player(float x, float y, float velocityX, float velocityY, String image) {
+        super(x, y, velocityX, velocityY);
         this.texture = new Texture(Gdx.files.internal(image));
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(this.texture, this.getX(), this.getY(), this.width, this.height);
+        batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
-    public void updateExistence() {
+    public void movement(float deltaTime) { //shermaine
+        // Update player's position based on velocity
+        this.y += velocityY * deltaTime;
+
+        // Simulate gravity
+        velocityY -= 1000 * deltaTime; // Adjust gravity as needed
+
+        // Prevent player from falling through the ground
+        if (y < 0) {
+            y = 0;
+            velocityY = 0;
+        }
+    }
+    public void logConsole() {
         System.out.printf("I am a player at %f, %f%n", this.getX(), this.getY());
     }
 }

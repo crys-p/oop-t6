@@ -11,8 +11,8 @@ public class Triangle extends Enemy {
     private float sideLength;
 
     // Constructor with values assigned
-    public Triangle(float x, float y, float speed, Color color, float sideLength) {
-        super(x, y, speed, color);
+    public Triangle(float x, float y, float velocityX, float velocityY, Color color, float sideLength) {
+        super(x, y, velocityX, velocityY, color);
         this.sideLength = sideLength;
     }
 
@@ -29,8 +29,13 @@ public class Triangle extends Enemy {
     }
 
 
-    public void updateExistence() {
+    public void logConsole() {
         System.out.printf("In a Triangle with %f-length sides at %f,%f position.\n", this.sideLength, this.getX(), this.getY());
+    }
+
+    @Override
+    public void movement(float deltaTime) {
+
     }
 
     @Override
