@@ -1,11 +1,9 @@
 package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.PlayerControlManager.PlayerInputManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,7 @@ import java.util.Random;
 
 public class EntityManager {
     private List<Entity> entityList = new ArrayList<>();
-    private List<Player> playerList = new ArrayList<>();
+    private List<Character> characterList = new ArrayList<>();
     private List<Enemy> enemyList = new ArrayList<>();
     private List<Item> itemList = new ArrayList<>();
 
@@ -23,8 +21,8 @@ public class EntityManager {
     }
 
     public void createEntities() {
-        // Creating Player
-        this.addEntity(new Player(-100, -100, 20, 0, "player.png"));
+        // Creating Character
+        this.addEntity(new Character(-100, -100, 20, 0, "player.png"));
 
         // Creating Items
         for (int i = 0; i < 10; i++) {
@@ -36,9 +34,10 @@ public class EntityManager {
         this.addEntity(new Triangle(300, 200, 40, 40, Color.GREEN, 50));
     }
 
-    private void addEntity(Player player) {
-        entityList.add(player);
-        playerList.add(player);
+    // Add entity to respective lists
+    private void addEntity(Character character) {
+        entityList.add(character);
+        characterList.add(character);
     }
     private void addEntity(Enemy enemy) {
         entityList.add(enemy);
@@ -51,7 +50,7 @@ public class EntityManager {
 
     public void drawEntities(SpriteBatch batch, ShapeRenderer shape) {
         for (Entity e : entityList) {
-            if (e instanceof Player || e instanceof Item) {
+            if (e instanceof Character || e instanceof Item) {
                 e.draw(batch);
             } else {
                 e.draw(shape);
@@ -77,7 +76,7 @@ public class EntityManager {
         }
     }
 
-    public List<Player> getPlayers() {
-        return this.playerList;
+    public List<Character> getPlayers() {
+        return this.characterList;
     }
 }

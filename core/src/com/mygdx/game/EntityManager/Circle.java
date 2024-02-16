@@ -1,7 +1,5 @@
 package com.mygdx.game.EntityManager;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
@@ -28,8 +26,8 @@ public class Circle extends Enemy {
     }
 
     @Override
-    public void inflictDamage(Player player) {
-        System.out.println("I am inflicting Circle Damage on " + player + "\n");
+    public void inflictDamage(Character character) {
+        System.out.println("I am inflicting Circle Damage on " + character + "\n");
     }
 
     @Override

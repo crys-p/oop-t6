@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Player extends Entity {
+public class Character extends Entity {
     private final Texture texture;
 
-    public Player(float x, float y, float velocityX, float velocityY, String image) {
+    public Character(float x, float y, float velocityX, float velocityY, String image) {
         super(x, y, velocityX, velocityY);
         this.texture = new Texture(Gdx.files.internal(image));
     }
