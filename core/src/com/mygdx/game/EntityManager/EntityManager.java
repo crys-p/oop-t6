@@ -15,7 +15,7 @@ public class EntityManager {
     public EntityManager() {
         Random random = new Random();
         // Creating Sprites
-        entityList.add(new Player(300, 0, 200, "bucket.png"));
+        entityList.add(new Player(300, 0, 200, "bucket.png", 200,200));
         for (int i = 0; i < 10; i++) {
             entityList.add(new Item(random, "droplet.png"));
         }

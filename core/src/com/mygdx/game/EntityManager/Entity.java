@@ -10,6 +10,7 @@ public abstract class Entity {
     private float x;
     private float y;
     private float speed;
+    private float width, height;
     
     private float velocityY = 0; // Vertical velocity
 
@@ -50,6 +51,21 @@ public abstract class Entity {
         this.y = y;
     }
 
+    public float getWidth() {
+        return this.width;
+    }
+
+    public void setWidth(float width) {
+        this.width = width;
+    }
+    public float getHeight() {
+        return this.height;
+    }
+
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
     public void moveUp(float value) {
         this.y += value;
     }
@@ -67,7 +83,7 @@ public abstract class Entity {
     }
     
     public void jump() { //shermaine
-        velocityY = 500; // Adjust jump velocity as needed
+        velocityY = 300; // Adjust jump velocity as needed
     }
 
     public float getSpeed() {
@@ -88,7 +104,7 @@ public abstract class Entity {
 
     public abstract void updateExistence();
     
-    public void update(float deltaTime) { //shermaine
+    public void movement(float deltaTime) { //shermaine
         // Update player's position based on velocity
         y += velocityY * deltaTime;
 
