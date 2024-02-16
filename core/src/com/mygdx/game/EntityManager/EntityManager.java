@@ -35,7 +35,19 @@ public class EntityManager {
         }
     }
 
+    public void createEntity(Entity entity) {
+        entityList.add(entity);
+    }
+
+    public void deleteAllEntities() {
+        entityList.clear();
+    }
+
     public void entityMovement() {
+
+    }
+
+    public void reduceHealth(Entity e, int amount) {
 
     }
 }
