@@ -62,7 +62,12 @@ public class AI extends Entity {
     }
 
     @Override
-    public void updateExistence() {
+    public void logConsole() {
+
+    }
+
+    @Override
+    public void movement(float deltaTime) {
 
     }
 
