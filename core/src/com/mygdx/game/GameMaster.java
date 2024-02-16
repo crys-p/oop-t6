@@ -7,16 +7,15 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.EntityManager.Player;
-
 import com.mygdx.game.PlayerControlManager.PlayerInputManager;
 
 public class GameMaster extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
 	private EntityManager entityMgr;
-	
-    private Player player;
-    private PlayerInputManager inputManager;
+
+	private Player player;
+	private PlayerInputManager inputManager;
 
 	public void create() {
 		// Creating renderers
@@ -24,26 +23,26 @@ public class GameMaster extends ApplicationAdapter {
 		shape = new ShapeRenderer();
 		// Setting up Entities
 		entityMgr = new EntityManager();
-        
-        // Create player object
-        player = new Player(-100,-100,20,"player.png"); //shermaine
-        
-        // Create input manager
-        inputManager = new PlayerInputManager(); //shermaine
+
+		// Create player object
+		player = new Player(-100,-100,20,"player.png"); //shermaine
+
+		// Create input manager
+		inputManager = new PlayerInputManager(); //shermaine
 	}
-	
+
 	public void render() {
-        inputManager.handleInput(player); // Handle player input //shermaine 37-54
-        
-        // Update player position
-        player.update(Gdx.graphics.getDeltaTime());
-        
-        // Keep the player within the screen bounds
-        if(player.getX() > Gdx.graphics.getWidth())
-            player.setX(Gdx.graphics.getWidth());
-        if(player.getY() > Gdx.graphics.getHeight())
-        	player.setY(Gdx.graphics.getHeight());
-		
+		inputManager.handleInput(player); // Handle player input //shermaine 37-54
+
+		// Update player position
+		player.update(Gdx.graphics.getDeltaTime());
+
+		// Keep the player within the screen bounds
+		if(player.getX() > Gdx.graphics.getWidth())
+			player.setX(Gdx.graphics.getWidth());
+		if(player.getY() > Gdx.graphics.getHeight())
+			player.setY(Gdx.graphics.getHeight());
+
 		ScreenUtils.clear(0, 0, 0.2f, 1);
 		// Rendering sprites and shapes
 		batch.begin();
@@ -55,7 +54,7 @@ public class GameMaster extends ApplicationAdapter {
 
 		entityMgr.entityMovement();
 	}
-	
+
 	@Override
 	public void dispose() {
 		batch.dispose();
