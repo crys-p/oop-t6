@@ -7,11 +7,11 @@ import java.util.Random;
 
 public abstract class Entity {
 
-    private float x;
-    private float y;
-    private float speed;
-    
-    private float velocityY = 0; // Vertical velocity
+    protected float x;
+    protected float y;
+    protected float speed;
+
+    protected float velocityY = 0; // Vertical velocity
 
     // Default constructor
     public Entity() {
@@ -87,19 +87,5 @@ public abstract class Entity {
     }
 
     public abstract void updateExistence();
-    
-    public void update(float deltaTime) { //shermaine
-        // Update player's position based on velocity
-        y += velocityY * deltaTime;
-
-        // Simulate gravity
-        velocityY -= 1000 * deltaTime; // Adjust gravity as needed
-
-        // Prevent player from falling through the ground
-        if (y < 0) {
-            y = 0;
-            velocityY = 0;
-        }
-    }
 
 }
