@@ -35,8 +35,4 @@ public class Triangle extends Enemy {
 
     }
 
-    @Override
-    public void inflictDamage(Character character) {
-        System.out.println("I am inflicting Triangle Damage on " + character + "\n");
-    }
 }

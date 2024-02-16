@@ -10,7 +10,4 @@ public abstract class Enemy extends Entity {
         super(x, y, velocityX, velocityY);
         this.color = color;
     }
-
-    public abstract void inflictDamage(Character character);
-
 }

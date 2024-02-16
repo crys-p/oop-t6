@@ -36,71 +36,71 @@ public abstract class Entity {
         this.velocityY = velocityY;
     }
 
-    public float getX() {
+    protected float getX() {
         return this.x;
     }
 
-    public void setX(float x) {
+    protected void setX(float x) {
         this.x = x;
     }
 
-    public float getY() {
+    protected float getY() {
         return this.y;
     }
 
-    public void setY(float y) {
+    protected void setY(float y) {
         this.y = y;
     }
 
-    public void moveUp(float value) {
+    protected void moveUp(float value) {
         this.y += value;
     }
 
-    public void moveDown(float value) {
+    protected void moveDown(float value) {
         this.y -= value;
     }
 
-    public void moveLeft(float value) {
+    protected void moveLeft(float value) {
         this.x -= value;
     }
 
-    public void moveRight(float value) {
+    protected void moveRight(float value) {
         this.x += value;
     }
     
-    public void jump() { //shermaine
+    protected void jump() { //shermaine
         velocityY = 500; // Adjust jump velocity as needed
     }
 
-    public float getVelocityX() {
+    protected float getVelocityX() {
         return this.velocityX;
     }
 
-    public float getVelocityY() {
+    protected float getVelocityY() {
         return this.velocityY;
     }
 
-    public void incrementVelocityX(float value) {
+    protected void incrementVelocityX(float value) {
         this.velocityX += value;
     }
 
-    public void setVelocityX(float value) {
+    protected void setVelocityX(float value) {
         this.velocityX = value;
     }
 
-    public void setVelocityY(float value) {
+    protected void setVelocityY(float value) {
         this.velocityY = value;
     }
 
-    public void draw(SpriteBatch batch) {
+    protected void draw(SpriteBatch batch) {
         // Method override for Sprites
     }
 
-    public void draw(ShapeRenderer shape) {
+    protected void draw(ShapeRenderer shape) {
         // Method override for Shapes
     }
 
-    public abstract void logConsole();
+    protected abstract void logConsole();
 
-    public abstract void movement(float deltaTime);
+    protected abstract void movement(float deltaTime);
 }
