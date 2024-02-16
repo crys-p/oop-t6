@@ -25,15 +25,12 @@ public class GameMaster extends ApplicationAdapter {
 		shape = new ShapeRenderer();
 		// Setting up Entities
 		entityMgr = new EntityManager();
-<<<<<<< HEAD
-=======
         
         // Create player object
         player = new Player(-100,-100,20,"player.png"); //shermaine
         
         // Create input manager
         inputManager = new PlayerInputManager(); //shermaine
->>>>>>> 5f5ff7dcc6bf196dea6aa877a94914caa4d984e6
 	}
 	
 	public void render() {
