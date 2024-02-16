@@ -17,7 +17,6 @@ public class GameMaster extends ApplicationAdapter {
 		shape = new ShapeRenderer();
 		// Setting up Entities
 		entityMgr = new EntityManager();
-		entityMgr.createEntities();
 	}
 	
 	public void render() {

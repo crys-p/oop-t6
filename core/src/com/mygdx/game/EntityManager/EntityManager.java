@@ -12,9 +12,7 @@ public class EntityManager {
     private List<Entity> entityList = new ArrayList<>();
 
     // Constructor
-    public EntityManager() {}
-
-    public void createEntities() {
+    public EntityManager() {
         Random random = new Random();
         // Creating Sprites
         entityList.add(new Player(300, 0, 200, "bucket.png"));
@@ -25,6 +23,7 @@ public class EntityManager {
         entityList.add(new Circle(200, 300, 400, Color.RED, 50));
         entityList.add(new Triangle(300, 200, 40, Color.GREEN, 50));
     }
+
 
     public void drawEntities(SpriteBatch batch, ShapeRenderer shape) {
         for (Entity e: entityList) {
