@@ -24,7 +24,6 @@ public class GameMaster extends ApplicationAdapter {
 		shape = new ShapeRenderer();
 		// Setting up Entities
 		entityMgr = new EntityManager();
-		entityMgr.createEntities();
         
         // Create player object
         player = new Player(-100,-100,20,"player.png"); //shermaine
