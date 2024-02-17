@@ -1,22 +1,24 @@
 package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Character extends Entity {
     private final Texture texture;
+    protected String inputControls;
 
     public Character(float x, float y, float velocityX, float velocityY, String image) {
         super(x, y, velocityX, velocityY);
         this.texture = new Texture(Gdx.files.internal(image));
     }
 
-    public void draw(SpriteBatch batch) {
+    protected void draw(SpriteBatch batch) {
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
-    public void movement(float deltaTime) { //shermaine
+    protected void movement(float deltaTime) { //shermaine
         // Update player's position based on velocity
         this.y += velocityY * deltaTime;
 
@@ -29,7 +31,28 @@ public class Character extends Entity {
             velocityY = 0;
         }
     }
-    public void logConsole() {
+
+    protected void inputMove(int key) {
+        switch(key) {
+            case Input.Keys.LEFT:
+                this.moveLeft(20);
+                break;
+            case Input.Keys.RIGHT:
+                this.moveRight(20);
+                break;
+            case Input.Keys.UP:
+                this.moveUp(20);
+                break;
+            case Input.Keys.DOWN:
+                this.moveDown(20);
+        }
+    }
+
+    protected void setInputControls(String control) {
+        this.inputControls = control;
+    }
+
+    protected void logConsole() {
         System.out.printf("I am a player at %f, %f%n", this.getX(), this.getY());
     }
 }

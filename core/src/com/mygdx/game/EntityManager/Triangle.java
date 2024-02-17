@@ -14,7 +14,7 @@ public class Triangle extends Enemy {
     }
 
 
-    public void draw(ShapeRenderer shape) {
+    protected void draw(ShapeRenderer shape) {
         shape.setColor(this.color);
         float x1 = this.getX() - sideLength;
         float x2 = this.getX();
@@ -26,12 +26,12 @@ public class Triangle extends Enemy {
     }
 
 
-    public void logConsole() {
+    protected void logConsole() {
         System.out.printf("In a Triangle with %f-length sides at %f,%f position.\n", this.sideLength, this.getX(), this.getY());
     }
 
     @Override
-    public void movement(float deltaTime) {
+    protected void movement(float deltaTime) {
 
     }
 

@@ -1,12 +1,14 @@
 package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class EntityManager {
@@ -22,7 +24,9 @@ public class EntityManager {
 
     public void createEntities() {
         // Creating Character
-        this.addEntity(new Character(-100, -100, 20, 0, "player.png"));
+        Character character = new Character(-100, -100, 20, 0, "player.png");
+        this.addEntity(character);
+        character.setInputControls("UDLR");
 
         // Creating Items
         for (int i = 0; i < 10; i++) {
@@ -34,19 +38,6 @@ public class EntityManager {
         this.addEntity(new Triangle(300, 200, 40, 40, Color.GREEN, 50));
     }
 
-    // Add entity to respective lists
-    private void addEntity(Character character) {
-        entityList.add(character);
-        characterList.add(character);
-    }
-    private void addEntity(Enemy enemy) {
-        entityList.add(enemy);
-        enemyList.add(enemy);
-    }
-    private void addEntity(Item item) {
-        entityList.add(item);
-        itemList.add(item);
-    }
 
     public void drawEntities(SpriteBatch batch, ShapeRenderer shape) {
         for (Entity e : entityList) {
@@ -66,9 +57,6 @@ public class EntityManager {
 
     }
 
-    public void reduceHealth(Entity e, int amount) {
-
-    }
 
     public void setUpMovement() {
         for (Entity e : entityList) {
@@ -76,7 +64,29 @@ public class EntityManager {
         }
     }
 
-    public List<Character> getPlayers() {
-        return this.characterList;
+    public void inputMovement(int key) {
+        for (Character character : characterList) {
+            if (Objects.equals(character.inputControls, "UDLR") &&
+                    (key == Input.Keys.LEFT || key == Input.Keys.RIGHT || key == Input.Keys.UP || key == Input.Keys.DOWN)) {
+                character.inputMove(key);
+            }
+        }
     }
+
+    // Add entity to respective lists
+    private void addEntity(Character character) {
+        entityList.add(character);
+        characterList.add(character);
+    }
+
+    private void addEntity(Enemy enemy) {
+        entityList.add(enemy);
+        enemyList.add(enemy);
+    }
+
+    private void addEntity(Item item) {
+        entityList.add(item);
+        itemList.add(item);
+    }
+
 }

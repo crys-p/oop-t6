@@ -12,31 +12,27 @@ public class Circle extends Enemy {
         this.radius = radius;
     }
 
-    public float getRadius() {
+    protected float getRadius() {
         return this.radius;
     }
 
-    public void setRadius(float radius) {
+    protected void setRadius(float radius) {
         this.radius = radius;
     }
 
-    public void draw(ShapeRenderer shape) {
+    protected void draw(ShapeRenderer shape) {
         shape.setColor(this.color);
         shape.circle(this.getX(), this.getY(), this.radius);
     }
 
-    @Override
-    public void inflictDamage(Character character) {
-        System.out.println("I am inflicting Circle Damage on " + character + "\n");
-    }
 
     @Override
-    public void logConsole() {
+    protected void logConsole() {
         System.out.printf("In a Circle with radius %f at %f,%f position.\n", this.getRadius(), this.getX(), this.getY());
     }
 
     @Override
-    public void movement(float deltaTime) {
+    protected void movement(float deltaTime) {
 
     }
 }

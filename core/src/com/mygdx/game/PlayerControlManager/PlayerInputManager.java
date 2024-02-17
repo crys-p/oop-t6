@@ -9,18 +9,18 @@ import java.util.List;
 public class PlayerInputManager {
 //	private boolean isJumping = false; // Flag to track if the entity is currently jumping
 
-    public void setUpPlayerControl(List<Character> characters) {
-        for (Character character : characters) {
-            // Move entity based on input
-//            if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-//                character.moveLeft(20);
-//            if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-//                character.moveRight(20);
-//            if (Gdx.input.isKeyPressed(Input.Keys.UP))
-//                character.moveUp(20);
-//            if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-//                character.moveDown(20);
-        }
+    public void setUpInputControl() {
+        // if input key pressed, entityMgr.inputMove(key) (?)
+//         Move entity based on input
+//        if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
+//            character.moveLeft(20);
+//        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+//            character.moveRight(20);
+//        if (Gdx.input.isKeyPressed(Input.Keys.UP))
+//            character.moveUp(20);
+//        if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
+//            character.moveDown(20);
+
 //        // Jump action
 //        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && !isJumping) { // Check if space key is pressed and entity is not already jumping
 //            entity.jump();

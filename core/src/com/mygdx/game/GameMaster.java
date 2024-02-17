@@ -29,7 +29,7 @@ public class GameMaster extends ApplicationAdapter {
 
 	public void render() {
 		entityMgr.setUpMovement();
-		inputManager.setUpPlayerControl(entityMgr.getPlayers());
+		inputManager.setUpInputControl();
 
 		// Keep the player within the screen bounds
 //		if(player.getX() > Gdx.graphics.getWidth())
