@@ -5,10 +5,14 @@ import java.util.logging.*;
 public class SimulationManager {
     private static final Logger logger = Logger.getLogger(SimulationManager.class.getName());
 
+    static {
+        logger.setLevel(Level.INFO); // Set logger level to INFO
+    }
+
     private static SimulationManager instance;
 
     private SimulationManager() {
-        // initialization of the logic
+        // Initialization logic
         logger.info("SimulationManager initialized");
     }
 
@@ -20,7 +24,9 @@ public class SimulationManager {
     }
 
     public void logInfo(String message) {
-        logger.info(message);
+        // 2 different way to show the log
+        //logger.info(message);
+        System.out.println("[INFO] " + message);
     }
 
     public void logWarning(String message) {

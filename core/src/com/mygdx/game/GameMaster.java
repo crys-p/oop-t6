@@ -47,9 +47,14 @@ public class GameMaster extends Game {
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
 		sceneManager.showStartScene();
 
+		// 2 different way to show log 2nd way might be better as log will go to every manager
+		// the first code consume unnecessary memory and resources as "this.simulationManager" is only use in logging
 		// Initialize SimulationManager
-		this.simulationManager = SimulationManager.getInstance();
-		simulationManager.logInfo("GameEngine initialized");
+		//this.simulationManager = SimulationManager.getInstance();
+		//simulationManager.logInfo("GameMaster initialized");
+
+		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
 	}
 	// Method to switch to another scene
