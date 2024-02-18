@@ -35,12 +35,10 @@ public class GameMaster extends Game {
 		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
-		// Setting up Entities
+
+		// Create respective managers
 		entityManager = new EntityManager();
-
-		// Create input manager
 		inputManager = new PlayerInputManager(); //shermaine
-
 
 		//sceneManager = new SceneManager(this);
 		// Pass the game instance to SceneManager

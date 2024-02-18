@@ -81,14 +81,13 @@ public class EntityManager implements EntityCreation {
 
     }
 
-
     public void movement() {
         for (Entity entity : entityList) {
             entity.movement();
         }
     }
 
-    // movement / inputmovement to confirm again ..??
+    // movement / inputmovement to confirm implementation again ..??
     public void movement(int entityID, int keyMovement) {
         Entity entity = this.entityIDMap.get(entityID);
         entity.inputMovement(keyMovement);
