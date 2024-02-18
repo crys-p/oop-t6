@@ -9,7 +9,7 @@ public class Character extends Entity {
     private final Texture texture;
     protected String inputControls;
 
-    public Character(float x, float y, float velocityX, float velocityY, String image) {
+    protected Character(float x, float y, float velocityX, float velocityY, String image) {
         super(x, y, velocityX, velocityY);
         this.texture = new Texture(Gdx.files.internal(image));
     }

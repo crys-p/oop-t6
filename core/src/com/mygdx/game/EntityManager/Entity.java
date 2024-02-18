@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.Random;
 
 public abstract class Entity {
-
+    protected int entityID;
     protected float x;
     protected float y;
     protected float velocityX; // Horizontal velocity
@@ -67,7 +67,10 @@ public abstract class Entity {
     protected void moveRight(float value) {
         this.x += value;
     }
-    
+
+    protected void setEntityID(int id) {
+        this.entityID = id;
+    }
     protected void jump() { //shermaine
         velocityY = 500; // Adjust jump velocity as needed
     }
