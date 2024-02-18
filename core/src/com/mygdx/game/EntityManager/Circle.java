@@ -28,7 +28,7 @@ public class Circle extends Enemy {
 
     @Override
     protected void logConsole() {
-        System.out.printf("In a Circle with radius %f at %f,%f position.\n", this.getRadius(), this.getX(), this.getY());
+        System.out.printf("In a Circle with radius %f at %f,%f position. My EntityID is %d\n", this.getRadius(), this.getX(), this.getY(), this.entityID);
     }
 
     @Override

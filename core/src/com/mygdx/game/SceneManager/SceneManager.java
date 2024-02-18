@@ -1,22 +1,36 @@
 package com.mygdx.game.SceneManager;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
+
+import java.util.Random;
 
 public class SceneManager {
     private final Game game;
     private StartScene startScene;
     private GameScene gameScene;
     private Scene currentScene;
+
     private SimulationManager simulationManager;
+
+    private EntityManager entityManager;
+
 
     public SceneManager(Game game) {
         this.game = game;
         initializeScenes();
-        // Initialize SimulationManager
+        //Initialize SimulationManager
         this.simulationManager = SimulationManager.getInstance();
         simulationManager.logInfo("SceneManager initialized");
+    }
+
+    public SceneManager(Game game, EntityManager entityManager) {
+        this.game = game;
+        this.entityManager = entityManager;
+        initializeScenes();
     }
 
     private void initializeScenes() {
@@ -29,11 +43,12 @@ public class SceneManager {
     public void showStartScene() {
         changeScene(startScene);
         // for adding of entities specific to the game scene
-        //entityManager.createDroplet();
-        //entityManager.createBucket();
-        //entityManager.createTriangle();
-        //entityManager.createCircle();
-
+        entityManager.createCharacter(1, 100, -100, 20, 0);
+        Random random = new Random();
+        entityManager.createItemRandomX(10, random, 680, 0, 20);
+        entityManager.createTriangle(1, 300, 200, 40, 40, Color.GREEN, 50);
+        entityManager.createCircle(1, 200, 300, 400, 0, Color.RED, 50);
+        entityManager.logAll(); // for debugging
     }
 
     public void showGameScene() {

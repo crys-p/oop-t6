@@ -1,6 +1,5 @@
 package com.mygdx.game.EntityManager;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -8,35 +7,23 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.util.*;
 
-public class EntityManager {
-    private List<Entity> entityList = new ArrayList<>();
-    private List<Character> characterList = new ArrayList<>();
-    private List<Enemy> enemyList = new ArrayList<>();
-    private List<Item> itemList = new ArrayList<>();
-    private Map<Integer, Entity> entityIDMap = new HashMap<>();
+public class EntityManager implements EntityCreation {
+    private List<Entity> entityList;
+    private List<Character> characterList;
+    private List<Enemy> enemyList;
+    private List<Item> itemList;
+    private Map<Integer, Entity> entityIDMap;
 
     // Constructor
     public EntityManager() {
-
+        entityList = new ArrayList<>();
+        characterList = new ArrayList<>();
+        enemyList = new ArrayList<>();
+        itemList = new ArrayList<>();
+        entityIDMap = new HashMap<>();
     }
 
-    public void createEntities() {
-        // FUNCTION TO ABANDON ONCE ENTITY CREATION IS SETUP IN SCENE!!!!
-        // Creating Character
-        Character character = new Character(-100, -100, 20, 0, "player.png");
-        this.addEntity(character);
-        character.setInputControls("UDLR");
-
-        // Creating Items
-        for (int i = 0; i < 10; i++) {
-            Random random = new Random();
-            this.addEntity(new Item(random, "droplet.png"));
-        }
-        // Creating Enemies
-        this.addEntity(new Circle(200, 300, 400, 0, Color.RED, 50));
-        this.addEntity(new Triangle(300, 200, 40, 40, Color.GREEN, 50));
-    }
-
+    @Override
     public void createCharacter(int quantity, float x, float y, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
             Character character = new Character(x, y, velocityX, velocityY, "player.png");
@@ -45,25 +32,29 @@ public class EntityManager {
         }
     }
 
+    @Override
     public void createCircle(int quantity, float x, float y, float velocityX, float velocityY, Color color, float radius) {
         for (int i = 0; i < quantity; i++) {
             this.addEntity(new Circle(x, y, velocityX, velocityY, color, radius));
         }
     }
 
+    @Override
     public void createTriangle(int quantity, float x, float y, float velocityX, float velocityY, Color color, float sideLength) {
         for (int i = 0; i < quantity; i++) {
             this.addEntity(new Triangle(x, y, velocityX, velocityY, color, sideLength));
         }
     }
 
-    // Create item at random
-    public void createItem(int quantity, Random random) {
+    @Override
+    // Create item at random x positions
+    public void createItemRandomX(int quantity, Random random, float y, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
-            this.addEntity(new Item(random, "droplet.png"));
-        }
+            this.addEntity(new Item(random.nextFloat(0, 1280), y, velocityX, velocityY, "droplet.png"));
+        } // 1280 as screen width --> use constant variable instead?
     }
 
+    @Override
     // Create item at specific location
     public void createItem(int quantity, float x, float y, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
@@ -90,14 +81,13 @@ public class EntityManager {
 
     }
 
-
     public void movement() {
         for (Entity entity : entityList) {
             entity.movement();
         }
     }
 
-    // movement / inputmovement to confirm again ..??
+    // movement / inputmovement to confirm implementation again ..??
     public void movement(int entityID, int keyMovement) {
         Entity entity = this.entityIDMap.get(entityID);
         entity.inputMovement(keyMovement);
@@ -127,6 +117,12 @@ public class EntityManager {
             enemyList.add((Enemy) entity);
         } else if (entity instanceof Item) {
             itemList.add((Item) entity);
+        }
+    }
+
+    public void logAll() {
+        for (Entity e: entityList) {
+            e.logConsole();
         }
     }
 

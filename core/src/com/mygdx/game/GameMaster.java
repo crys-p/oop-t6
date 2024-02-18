@@ -25,7 +25,7 @@ public class GameMaster extends Game {
 
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
-	private EntityManager entityMgr;
+	private EntityManager entityManager;
 	private PlayerInputManager inputManager;
 	private SceneManager sceneManager;
 	private Scene currentScene; // storing of the current scene reference
@@ -37,17 +37,14 @@ public class GameMaster extends Game {
 		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
-		// Setting up Entities
-		entityMgr = new EntityManager();
-		entityMgr.createEntities();
 
-		// Create input manager
+		// Create respective managers
+		entityManager = new EntityManager();
 		inputManager = new PlayerInputManager(); //shermaine
-
 
 		//sceneManager = new SceneManager(this);
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener());
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
 		sceneManager.showStartScene();
 
 		// Initialize SimulationManager
@@ -78,8 +75,10 @@ public class GameMaster extends Game {
 			System.out.println("Currently not on the StartScreen");
 		}
 
+
 		//entityMgr.setUpMovement();
-		entityMgr.movement();
+		entityManager.movement();
+
 
 		inputManager.setUpInputControl();
 
@@ -95,11 +94,11 @@ public class GameMaster extends Game {
 		// Rendering sprites and shapes
 		batch.begin();
 		shape.begin(ShapeRenderer.ShapeType.Filled);
-			entityMgr.drawEntities(batch, shape);
+			entityManager.drawEntities(batch, shape);
 		shape.end();
 		batch.end();
 
-		entityMgr.entityMovement();
+		entityManager.entityMovement();
 
 
 
