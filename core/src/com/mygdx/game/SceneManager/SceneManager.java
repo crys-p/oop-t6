@@ -2,22 +2,28 @@ package com.mygdx.game.SceneManager;
 
 import com.badlogic.gdx.Game;
 import com.mygdx.game.EntityManager.EntityManager;
+import com.mygdx.game.SimulationManager.SimulationManager;
 
 public class SceneManager {
     private final Game game;
     private StartScene startScene;
     private GameScene gameScene;
     private Scene currentScene;
+    private SimulationManager simulationManager;
 
     public SceneManager(Game game) {
         this.game = game;
         initializeScenes();
+        // Initialize SimulationManager
+        this.simulationManager = SimulationManager.getInstance();
+        simulationManager.logInfo("SceneManager initialized");
     }
 
     private void initializeScenes() {
         startScene = new StartScene(game);
-        gameScene = new GameScene(game);
+        gameScene = new GameScene(game); // Ensure gameScene is initialized correctly
         currentScene = startScene; // Set the initial scene
+
     }
 
     public void showStartScene() {

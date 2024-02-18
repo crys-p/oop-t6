@@ -1,7 +1,10 @@
 package com.mygdx.game.SceneManager;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.GameMaster;
 import com.badlogic.gdx.graphics.Color;
 
@@ -24,7 +27,17 @@ public class GameScene extends Scene {
 
     @Override
     public void render(float delta) {
-        clearScreen();
+        //clearScreen();
         // Rendering logic for the game scene
+        ScreenUtils.clear(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
+        //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        // Update the viewport
+        viewport.update(width, height);
+
     }
 }

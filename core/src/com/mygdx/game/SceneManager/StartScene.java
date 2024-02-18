@@ -18,6 +18,7 @@ public class StartScene extends Scene {
 
     @Override
     public void show() {
+
         // After 10 seconds, switch to the GameScene
         Timer.schedule(new Timer.Task() {
             @Override

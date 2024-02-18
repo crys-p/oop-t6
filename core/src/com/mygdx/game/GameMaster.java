@@ -15,6 +15,7 @@ import com.mygdx.game.SceneManager.StartScene; // Adjust the package name as nee
 import com.badlogic.gdx.utils.ScreenUtils; // edmund scene
 
 import com.badlogic.gdx.graphics.Color; // background color
+import com.mygdx.game.SimulationManager.SimulationManager;
 
 //public class GameMaster extends ApplicationAdapter
 public class GameMaster extends Game {
@@ -28,6 +29,7 @@ public class GameMaster extends Game {
 	private PlayerInputManager inputManager;
 	private SceneManager sceneManager;
 	private Scene currentScene; // storing of the current scene reference
+	private SimulationManager simulationManager; // Add SimulationManager reference
 
 	public void create() {
 		// Setting the initial size of the window
@@ -48,17 +50,20 @@ public class GameMaster extends Game {
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener());
 		sceneManager.showStartScene();
 
+		// Initialize SimulationManager
+		this.simulationManager = SimulationManager.getInstance();
+		simulationManager.logInfo("GameEngine initialized");
+
 	}
 	// Method to switch to another scene
 
 
+
+
 	public void render() {
-<<<<<<< HEAD
 		// Clear the screen with the background color of the current scene
 		//ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
 		//ScreenUtils.clear(0, 0, 0.2f, 1);
-
-
 		Scene currentScene = sceneManager.getCurrentScene();
 		if (currentScene != null) {
 			ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
@@ -73,10 +78,9 @@ public class GameMaster extends Game {
 			System.out.println("Currently not on the StartScreen");
 		}
 
-		entityMgr.setUpMovement();
-=======
+		//entityMgr.setUpMovement();
 		entityMgr.movement();
->>>>>>> 0e39b5fe5fcdcbc43811dd7096a354434924978c
+
 		inputManager.setUpInputControl();
 
 		// Keep the player within the screen bounds
@@ -96,6 +100,7 @@ public class GameMaster extends Game {
 		batch.end();
 
 		entityMgr.entityMovement();
+
 
 
 	}
