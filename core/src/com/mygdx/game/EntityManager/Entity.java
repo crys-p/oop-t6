@@ -105,5 +105,8 @@ public abstract class Entity {
 
     protected abstract void logConsole();
 
-    protected abstract void movement(float deltaTime);
+    protected abstract void movement();
+
+    protected void inputMovement(int keyMovement) {
+    }
 }

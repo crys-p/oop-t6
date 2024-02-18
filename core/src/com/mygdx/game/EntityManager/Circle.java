@@ -32,7 +32,7 @@ public class Circle extends Enemy {
     }
 
     @Override
-    protected void movement(float deltaTime) {
+    protected void movement() {
 
     }
 }

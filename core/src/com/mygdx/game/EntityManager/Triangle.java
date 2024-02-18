@@ -31,7 +31,7 @@ public class Triangle extends Enemy {
     }
 
     @Override
-    protected void movement(float deltaTime) {
+    protected void movement() {
 
     }
 

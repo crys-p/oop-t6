@@ -28,7 +28,7 @@ public class GameMaster extends ApplicationAdapter {
 	}
 
 	public void render() {
-		entityMgr.setUpMovement();
+		entityMgr.movement();
 		inputManager.setUpInputControl();
 
 		// Keep the player within the screen bounds
