@@ -54,6 +54,6 @@ public class Character extends Entity {
     }
 
     protected void logConsole() {
-        System.out.printf("I am a player at %f, %f%n", this.getX(), this.getY());
+        System.out.printf("I am a character at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.entityID);
     }
 }

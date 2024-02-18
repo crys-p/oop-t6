@@ -24,7 +24,7 @@ public class GameMaster extends Game {
 
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
-	private EntityManager entityMgr;
+	private EntityManager entityManager;
 	private PlayerInputManager inputManager;
 	private SceneManager sceneManager;
 	private Scene currentScene; // storing of the current scene reference
@@ -36,8 +36,7 @@ public class GameMaster extends Game {
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 		// Setting up Entities
-		entityMgr = new EntityManager();
-		entityMgr.createEntities();
+		entityManager = new EntityManager();
 
 		// Create input manager
 		inputManager = new PlayerInputManager(); //shermaine
@@ -45,7 +44,7 @@ public class GameMaster extends Game {
 
 		//sceneManager = new SceneManager(this);
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener());
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
 		sceneManager.showStartScene();
 
 	}
@@ -53,7 +52,6 @@ public class GameMaster extends Game {
 
 
 	public void render() {
-<<<<<<< HEAD
 		// Clear the screen with the background color of the current scene
 		//ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
 		//ScreenUtils.clear(0, 0, 0.2f, 1);
@@ -73,10 +71,6 @@ public class GameMaster extends Game {
 			System.out.println("Currently not on the StartScreen");
 		}
 
-		entityMgr.setUpMovement();
-=======
-		entityMgr.movement();
->>>>>>> 0e39b5fe5fcdcbc43811dd7096a354434924978c
 		inputManager.setUpInputControl();
 
 		// Keep the player within the screen bounds
@@ -91,11 +85,11 @@ public class GameMaster extends Game {
 		// Rendering sprites and shapes
 		batch.begin();
 		shape.begin(ShapeRenderer.ShapeType.Filled);
-			entityMgr.drawEntities(batch, shape);
+			entityManager.drawEntities(batch, shape);
 		shape.end();
 		batch.end();
 
-		entityMgr.entityMovement();
+		entityManager.entityMovement();
 
 
 	}
