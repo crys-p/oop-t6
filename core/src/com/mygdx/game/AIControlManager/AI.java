@@ -67,7 +67,7 @@ public class AI extends Entity {
     }
 
     @Override
-    public void movement(float deltaTime) {
+    public void movement() {
 
     }
 

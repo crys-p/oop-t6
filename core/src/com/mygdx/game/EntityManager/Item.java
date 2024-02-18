@@ -30,7 +30,7 @@ public class Item extends Entity {
     }
 
     @Override
-    protected void movement(float deltaTime) {
+    protected void movement() {
 
     }
 }

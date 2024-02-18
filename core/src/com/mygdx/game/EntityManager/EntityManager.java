@@ -91,17 +91,23 @@ public class EntityManager {
     }
 
 
-    public void setUpMovement() {
-        for (Entity e : entityList) {
-            e.movement(Gdx.graphics.getDeltaTime());
+    public void movement() {
+        for (Entity entity : entityList) {
+            entity.movement();
         }
+    }
+
+    // movement / inputmovement to confirm again ..??
+    public void movement(int entityID, int keyMovement) {
+        Entity entity = this.entityIDMap.get(entityID);
+        entity.inputMovement(keyMovement);
     }
 
     public void inputMovement(int key) {
         for (Character character : characterList) {
             if (Objects.equals(character.inputControls, "UDLR") &&
                     (key == Input.Keys.LEFT || key == Input.Keys.RIGHT || key == Input.Keys.UP || key == Input.Keys.DOWN)) {
-                character.inputMove(key);
+                character.inputMovement(key);
             }
         }
     }

@@ -18,7 +18,8 @@ public class Character extends Entity {
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
-    protected void movement(float deltaTime) { //shermaine
+    protected void movement() { //shermaine
+        float deltaTime = Gdx.graphics.getDeltaTime();
         // Update player's position based on velocity
         this.y += velocityY * deltaTime;
 
@@ -32,7 +33,7 @@ public class Character extends Entity {
         }
     }
 
-    protected void inputMove(int key) {
+    protected void inputMovement(int key) {
         switch(key) {
             case Input.Keys.LEFT:
                 this.moveLeft(20);

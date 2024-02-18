@@ -53,6 +53,7 @@ public class GameMaster extends Game {
 
 
 	public void render() {
+<<<<<<< HEAD
 		// Clear the screen with the background color of the current scene
 		//ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
 		//ScreenUtils.clear(0, 0, 0.2f, 1);
@@ -73,6 +74,9 @@ public class GameMaster extends Game {
 		}
 
 		entityMgr.setUpMovement();
+=======
+		entityMgr.movement();
+>>>>>>> 0e39b5fe5fcdcbc43811dd7096a354434924978c
 		inputManager.setUpInputControl();
 
 		// Keep the player within the screen bounds
