@@ -1,6 +1,6 @@
 package com.mygdx.game.SoundManager;
 
-public abstract class Sound {
+public abstract class 	Sound {
 	private String filename;
 
 	public Sound(String filename) {
