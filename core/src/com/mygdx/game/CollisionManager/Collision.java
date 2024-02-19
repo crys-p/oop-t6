@@ -1,5 +1,7 @@
 package com.mygdx.game.CollisionManager;
 
+import com.badlogic.gdx.math.Rectangle;
+
 public class Collision {
     private Rectangle PlayerRect;
     private Rectangle EnemyRect;
