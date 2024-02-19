@@ -15,6 +15,7 @@ import com.mygdx.game.SceneManager.StartScene; // Adjust the package name as nee
 import com.badlogic.gdx.utils.ScreenUtils; // edmund scene
 
 import com.badlogic.gdx.graphics.Color; // background color
+import com.mygdx.game.SimulationManager.SimulationManager;
 
 //public class GameMaster extends ApplicationAdapter
 public class GameMaster extends Game {
@@ -28,6 +29,7 @@ public class GameMaster extends Game {
 	private PlayerInputManager inputManager;
 	private SceneManager sceneManager;
 	private Scene currentScene; // storing of the current scene reference
+	private SimulationManager simulationManager; // Add SimulationManager reference
 
 	public void create() {
 		// Setting the initial size of the window
@@ -45,8 +47,19 @@ public class GameMaster extends Game {
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
 		sceneManager.showStartScene();
 
+		// 2 different way to show log 2nd way might be better as log will go to every manager
+		// the first code consume unnecessary memory and resources as "this.simulationManager" is only use in logging
+		// Initialize SimulationManager
+		//this.simulationManager = SimulationManager.getInstance();
+		//simulationManager.logInfo("GameMaster initialized");
+
+		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
+
 	}
 	// Method to switch to another scene
+
+
 
 
 	public void render() {
@@ -68,6 +81,11 @@ public class GameMaster extends Game {
 			System.out.println("Currently not on the StartScreen");
 		}
 
+
+		//entityMgr.setUpMovement();
+		entityManager.movement();
+
+
 		inputManager.setUpInputControl();
 
 		// Keep the player within the screen bounds
@@ -87,6 +105,7 @@ public class GameMaster extends Game {
 		batch.end();
 
 		entityManager.entityMovement();
+
 
 
 	}
