@@ -36,6 +36,7 @@ public class SceneManager {
         this.game = game;
         this.entityManager = entityManager;
         initializeScenes();
+
         //this.simulationManager = SimulationManager.getInstance();
         //simulationManager.logInfo("SceneManager initialized");
 
@@ -45,10 +46,9 @@ public class SceneManager {
     }
 
     private void initializeScenes() {
-        startScene = new StartScene(game);
+        startScene = new StartScene(game, this);
         gameScene = new GameScene(game); // Ensure gameScene is initialized correctly
         currentScene = startScene; // Set the initial scene
-
     }
 
     public void showStartScene() {

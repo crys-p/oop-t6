@@ -74,8 +74,9 @@ public class GameMaster extends Game {
 
 	public void render() {
 		// Clear the screen with the background color of the current scene
-		//ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
-		//ScreenUtils.clear(0, 0, 0.2f, 1);
+		// ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
+		// ScreenUtils.clear(0, 0, 0.2f, 1);
+
 		Scene currentScene = sceneManager.getCurrentScene();
 		if (currentScene != null) {
 			ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
@@ -115,10 +116,6 @@ public class GameMaster extends Game {
 			entityManager.drawEntities(batch, shape);
 		shape.end();
 		batch.end();
-
-		entityManager.entityMovement();
-
-
 
 	}
 

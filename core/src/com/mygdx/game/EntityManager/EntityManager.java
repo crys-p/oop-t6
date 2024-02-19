@@ -13,6 +13,7 @@ public class EntityManager implements EntityCreation {
     private List<Enemy> enemyList;
     private List<Item> itemList;
     private Map<Integer, Entity> entityIDMap;
+    private int entityCount;
 
     // Constructor
     public EntityManager() {
@@ -75,10 +76,8 @@ public class EntityManager implements EntityCreation {
 
     public void deleteAllEntities() {
         entityList.clear();
-    }
-
-    public void entityMovement() {
-
+        entityIDMap.clear();
+        entityCount = 0;
     }
 
     public void movement() {
@@ -106,7 +105,7 @@ public class EntityManager implements EntityCreation {
     private void addEntity(Entity entity) {
         // Add entity to list of all entities and set its ID
         entityList.add(entity);
-        int id = entityIDMap.size();
+        int id = this.entityCount++;
         entity.setEntityID(id);
         entityIDMap.put(id, entity);
 

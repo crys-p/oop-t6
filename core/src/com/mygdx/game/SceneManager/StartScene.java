@@ -8,12 +8,12 @@ import com.badlogic.gdx.Gdx;
 
 public class StartScene extends Scene {
 
+    private SceneManager sceneManager;
 
-
-    public StartScene(Game game) {
+    public StartScene(Game game, SceneManager sceneManager) {
         super(game);
         setBackgroundColor(Color.GRAY); // Set background color for start scene
-
+        this.sceneManager = sceneManager;
 
     }
 
@@ -25,12 +25,9 @@ public class StartScene extends Scene {
             @Override
             public void run() {
                 Gdx.app.log("Timer", "Switching to GameScene after 10 seconds");
-                SceneManager sceneManager = new SceneManager(game);
                 sceneManager.showGameScene();
             }
         }, 2); // Delay of 10 seconds
-
-
     }
 
     @Override
@@ -40,10 +37,10 @@ public class StartScene extends Scene {
 
     @Override
     public void render(float delta) {
+        Gdx.app.log("Start scene", "rendering!");
+
         // Clear the screen
         clearScreen();
-
-
         // Update the camera and viewport
         //camera.update();
     }
