@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.GameMaster;
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.SimulationManager.SimulationManager;
 
 public class GameScene extends Scene {
 
@@ -30,6 +31,7 @@ public class GameScene extends Scene {
         //clearScreen();
         // Rendering logic for the game scene
         ScreenUtils.clear(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
+        clearScreen();
         //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
