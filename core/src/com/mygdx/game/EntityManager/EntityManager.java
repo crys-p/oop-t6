@@ -75,6 +75,7 @@ public class EntityManager implements EntityCreation {
 
     public void deleteAllEntities() {
         entityList.clear();
+        entityIDMap.clear();
     }
 
     public void entityMovement() {

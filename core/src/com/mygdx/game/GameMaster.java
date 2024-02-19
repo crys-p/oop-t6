@@ -54,7 +54,6 @@ public class GameMaster extends Game {
 		//ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
 		//ScreenUtils.clear(0, 0, 0.2f, 1);
 
-
 		Scene currentScene = sceneManager.getCurrentScene();
 		if (currentScene != null) {
 			ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
