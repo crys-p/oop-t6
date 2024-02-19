@@ -13,6 +13,7 @@ import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
 import com.mygdx.game.SceneManager.StartScene; // Adjust the package name as needed edmund scene
 import com.badlogic.gdx.utils.ScreenUtils; // edmund scene
+import com.mygdx.game.SoundManager.SoundManager; // sound manager
 
 import com.badlogic.gdx.graphics.Color; // background color
 import com.mygdx.game.SimulationManager.SimulationManager;
@@ -31,6 +32,8 @@ public class GameMaster extends Game {
 	private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
 
+	private SoundManager soundManager;
+
 	public void create() {
 		// Setting the initial size of the window
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT); // done in IO
@@ -46,6 +49,13 @@ public class GameMaster extends Game {
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
 		sceneManager.showStartScene();
+
+		// Initialize SoundManager with background music and sound effect files
+// Initialize SoundManager with background music file
+
+
+		// Initialize SoundManager with background music and sound effect files
+		soundManager = new SoundManager("background_music.mp3", "sound_effect.mp3");
 
 		// 2 different way to show log 2nd way might be better as log will go to every manager
 		// the first code consume unnecessary memory and resources as "this.simulationManager" is only use in logging
@@ -70,6 +80,9 @@ public class GameMaster extends Game {
 		if (currentScene != null) {
 			ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
 		}
+
+		// Play background music
+		soundManager.playBackgroundMusic();
 
 		// Check if the current screen is the StartScene
 		if (getScreen() instanceof StartScene) {

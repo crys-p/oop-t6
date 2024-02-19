@@ -1,28 +1,13 @@
 package com.mygdx.game.SoundManager;
 
-public class Sound {
-	private String audioFile;
-	private String sound;
-	
-	public Sound(String audioFile, String sound) {
-		this.audioFile = audioFile;
-		this.sound = sound;
-	}
-	
-	public void play() {
-		
-	}
-	
-	public void stop() {
-		
+public abstract class Sound {
+	private String filename;
+
+	public Sound(String filename) {
+		this.filename = filename;
 	}
 
-	public String getSound() {
-		return sound;
-	}
+	public abstract void play();
 
-	public void setSound(String sound) {
-		this.sound = sound;
-	}
-	
+	public abstract void stop();
 }

@@ -55,6 +55,7 @@ public class SceneManager {
         changeScene(startScene);
         // Log initialization message
         //simulationManager.logInfo("StartScene initialized");
+
         // for adding of entities specific to the game scene
         entityManager.createCharacter(1, 100, -100, 20, 0);
         Random random = new Random();
@@ -68,6 +69,7 @@ public class SceneManager {
         changeScene(gameScene);
         // Log initialization message
         simulationManager.logInfo("GameScene initialized");
+
     }
 
     private void changeScene(Scene newScene) {

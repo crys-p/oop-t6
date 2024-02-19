@@ -14,6 +14,7 @@ public class StartScene extends Scene {
         super(game);
         setBackgroundColor(Color.GRAY); // Set background color for start scene
 
+
     }
 
     @Override

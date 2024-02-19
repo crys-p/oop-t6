@@ -1,19 +1,18 @@
 package com.mygdx.game.SoundManager;
 
-public class SoundEffect {
-	private String audioFile;
-	private String soundEffect;
-	
-	public SoundEffect (String audioFile, String soundEffect) {
-		this.audioFile = audioFile;
-		this.soundEffect = soundEffect;
+public class SoundEffect extends Sound {
+	public SoundEffect(String filename) {
+		super(filename);
+		// Additional initialization for sound effect
 	}
-	
+
+	@Override
 	public void play() {
-		
+		// Logic to play the sound effect
 	}
-	
+
+	@Override
 	public void stop() {
-		
+		// Logic to stop the sound effect
 	}
 }
