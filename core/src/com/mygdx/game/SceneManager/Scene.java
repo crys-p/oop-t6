@@ -37,6 +37,9 @@ public abstract class Scene extends ScreenAdapter {
 
     @Override
     public abstract void show();
+
+    // Abstract method to create entities specific to the scene
+    protected abstract void createEntities();
     @Override
     public void resize(int width, int height) {
         Gdx.app.log("Scene", "Resizing scene to width: " + width + ", height: " + height);
@@ -67,5 +70,7 @@ public abstract class Scene extends ScreenAdapter {
     public Color getBackgroundColor() {
         return backgroundColor;
     }
+
+
 
 }

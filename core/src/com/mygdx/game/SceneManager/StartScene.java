@@ -1,54 +1,73 @@
-package com.mygdx.game.SceneManager;
+    package com.mygdx.game.SceneManager;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.utils.Timer;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.Gdx;
+    import com.badlogic.gdx.Game;
+    import com.badlogic.gdx.ScreenAdapter;
+    import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+    import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+    import com.badlogic.gdx.utils.Timer;
+    import com.badlogic.gdx.graphics.Color;
+    import com.badlogic.gdx.Gdx;
+    import com.mygdx.game.EntityManager.EntityManager;
 
-public class StartScene extends Scene {
+    import java.util.Random;
 
-    private SceneManager sceneManager;
+    public class StartScene extends Scene {
 
-    public StartScene(Game game, SceneManager sceneManager) {
-        super(game);
-        setBackgroundColor(Color.GRAY); // Set background color for start scene
-        this.sceneManager = sceneManager;
+        private SceneManager sceneManager;
+        private EntityManager entityManager;
+
+        public StartScene(Game game, SceneManager sceneManager,EntityManager entityManager) {
+            super(game);
+            setBackgroundColor(Color.GRAY); // Set background color for start scene
+            this.sceneManager = sceneManager;
+            this.entityManager = entityManager;
+
+        }
+
+        @Override
+        public void show() {
+            createEntities();
+
+
+        }
+
+        @Override
+        protected void createEntities() {
+            // Create entities specific to the start scene
+            // Implement entity creation logic here
+            entityManager.createCharacter(1, 100, -100, 20, 0);
+            Random random = new Random();
+            entityManager.createItemRandomX(10, random, 680, 0, 20);
+            entityManager.createTriangle(1, 300, 200, 40, 40, Color.GREEN, 50);
+            entityManager.createCircle(1, 200, 300, 400, 0, Color.RED, 50);
+            entityManager.logAll(); // for debugging
+        }
+
+        // creation of entities specific to the start scene
+
+
+        @Override
+        public void hide() {
+            // Logic when the start scene is hidden
+        }
+
+        @Override
+        public void render(float delta) {
+            // Rendering sprites and shapes
+            Gdx.app.log("Start scene", "rendering!");
+
+            // Clear the screen
+            clearScreen();
+            // Update the camera and viewport
+            //camera.update();
+        }
+
+        @Override
+        public void resize(int width, int height) {
+            // Update the viewport
+            viewport.update(width, height);
+
+        }
+
 
     }
-
-    @Override
-    public void show() {
-
-        // After 10 seconds, switch to the GameScene
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                Gdx.app.log("Timer", "Switching to GameScene after 10 seconds");
-                sceneManager.showGameScene();
-            }
-        }, 2); // Delay of 10 seconds
-    }
-
-    @Override
-    public void hide() {
-        // Logic when the start scene is hidden
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.app.log("Start scene", "rendering!");
-
-        // Clear the screen
-        clearScreen();
-        // Update the camera and viewport
-        //camera.update();
-    }
-
-    @Override
-    public void resize(int width, int height) {
-        // Update the viewport
-        viewport.update(width, height);
-
-    }
-}

@@ -5,11 +5,16 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.GameMaster;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.SimulationManager.SimulationManager;
 
+import java.util.Random;
+
 public class GameScene extends Scene {
+
+    private EntityManager entityManager;
 
     public GameScene(Game game) {
         super(game);
@@ -20,6 +25,17 @@ public class GameScene extends Scene {
     public void show() {
         // Logic when the game scene is shown
     }
+
+    @Override
+    public void createEntities() {
+        entityManager.createCharacter(1, 100, -100, 20, 0);
+        Random random = new Random();
+        entityManager.createItemRandomX(10, random, 680, 0, 20);
+        entityManager.createTriangle(1, 300, 200, 40, 40, Color.GREEN, 50);
+        entityManager.createCircle(1, 200, 300, 400, 0, Color.RED, 50);
+        entityManager.logAll(); // for debugging
+    }
+
 
     @Override
     public void hide() {

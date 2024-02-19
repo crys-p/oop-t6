@@ -1,7 +1,9 @@
 package com.mygdx.game.SceneManager;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
@@ -46,7 +48,7 @@ public class SceneManager {
     }
 
     private void initializeScenes() {
-        startScene = new StartScene(game, this);
+        startScene = new StartScene(game, this, entityManager);
         gameScene = new GameScene(game); // Ensure gameScene is initialized correctly
         currentScene = startScene; // Set the initial scene
     }
@@ -56,13 +58,17 @@ public class SceneManager {
         // Log initialization message
         //simulationManager.logInfo("StartScene initialized");
 
-        // for adding of entities specific to the game scene
-        entityManager.createCharacter(1, 100, -100, 20, 0);
-        Random random = new Random();
-        entityManager.createItemRandomX(10, random, 680, 0, 20);
-        entityManager.createTriangle(1, 300, 200, 40, 40, Color.GREEN, 50);
-        entityManager.createCircle(1, 200, 300, 400, 0, Color.RED, 50);
-        entityManager.logAll(); // for debugging
+
+
+        // After 10 seconds, switch to the GameScene
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                Gdx.app.log("Timer", "Switching to GameScene after 10 seconds");
+                showGameScene();
+            }
+        }, 5); // Delay of 10 seconds
+
     }
 
     public void showGameScene() {
