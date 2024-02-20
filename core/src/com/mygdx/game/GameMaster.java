@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
+import com.mygdx.game.IOManager.IOManager;
 import com.mygdx.game.PlayerControlManager.HealthBar;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.PlayerControlManager.PlayerInputManager;
@@ -34,6 +35,7 @@ public class GameMaster extends Game {
 	private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
 	private SoundManager soundManager;
+	private IOManager ioManager;
 
 	private PlayerControlManager playerControlManager;
 	private HealthBar healthBar;
@@ -48,10 +50,11 @@ public class GameMaster extends Game {
 		// Create respective managers
 		entityManager = new EntityManager();
 		inputManager = new PlayerInputManager();
+		//ioManager = new IOManager();
 
 		//sceneManager = new SceneManager(this);
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager );
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files

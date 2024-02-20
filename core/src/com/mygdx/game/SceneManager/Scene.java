@@ -14,7 +14,7 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.EntityManager.EntityCreation;
 import com.mygdx.game.EntityManager.EntityManager;
-
+import com.mygdx.game.IOManager.IOManager;
 // implements Screen
 // usage of ScreenAdapter over Screen as promote code reuse and maintains consistency
 // accross screen and also without needing to apply all lifecycle Method
@@ -26,16 +26,18 @@ public abstract class Scene extends ScreenAdapter {
     protected SpriteBatch batch;
     protected ShapeRenderer shape;
     protected EntityManager entityManager;
+    protected IOManager ioManager;
     // Set the desired viewport size
     private final int VIEWPORT_WIDTH = 1280;
     private final int VIEWPORT_HEIGHT = 720;
 
-    public Scene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape) {
+    public Scene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         this.game = game;
         this.backgroundColor = Color.BLACK; // Default background color
         this.entityManager = entityManager;
         this.batch = batch;
         this.shape = shape;
+        this.ioManager = ioManager;
         // Create a camera and viewport
         //camera = new OrthographicCamera();
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);

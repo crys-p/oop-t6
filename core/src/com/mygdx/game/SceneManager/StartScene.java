@@ -9,13 +9,14 @@
     import com.badlogic.gdx.graphics.Color;
     import com.badlogic.gdx.Gdx;
     import com.mygdx.game.EntityManager.EntityManager;
+    import com.mygdx.game.IOManager.IOManager;
 
     import java.util.Random;
 
     public class StartScene extends Scene {
 
-        public StartScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape) {
-            super(game, entityManager, batch, shape);
+        public StartScene(Game game, EntityManager entityManager, SpriteBatch batch,ShapeRenderer shape, IOManager ioManager) {
+            super(game, entityManager, batch, shape, ioManager);
             setBackgroundColor(Color.GRAY); // Set background color for start scene
             this.entityManager = entityManager;
         }
