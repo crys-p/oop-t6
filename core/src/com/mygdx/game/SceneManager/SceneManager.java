@@ -3,6 +3,8 @@ package com.mygdx.game.SceneManager;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
@@ -49,9 +51,9 @@ public class SceneManager {
     }
 
     private void initializeScenes() {
-        startScene = new StartScene(game, this, entityManager);
-        gameScene = new GameScene(game); // Ensure gameScene is initialized correctly
-        currentScene = startScene; // Set the initial scene
+        startScene = new StartScene(game, entityManager, new SpriteBatch(), new ShapeRenderer());
+        gameScene = new GameScene(game, entityManager, new SpriteBatch(), new ShapeRenderer()); // Ensure gameScene is initialized correctly
+        currentScene = null;
     }
 
     public void showStartScene() {
@@ -61,16 +63,14 @@ public class SceneManager {
         // Log initialization message
         //simulationManager.logInfo("StartScene initialized");
 
-
-
         // After 10 seconds, switch to the GameScene
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                Gdx.app.log("Timer", "Switching to GameScene after 10 seconds");
+                Gdx.app.log("Timer", "Switching to GameScene after 2 seconds");
                 showGameScene();
             }
-        }, 10); // Delay of 10 seconds
+        }, 2); // Delay of 10 seconds
 
     }
 
@@ -94,7 +94,10 @@ public class SceneManager {
 
     private void disposeCurrentScene() {
         if (currentScene != null) {
+            currentScene.batch.dispose();
+            currentScene.shape.dispose();
             currentScene.dispose();
+            entityManager.deleteAllEntities();
             System.out.println("Disposed of previous scene: " + currentScene.getClass().getSimpleName());
         }
     }
