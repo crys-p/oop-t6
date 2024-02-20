@@ -18,6 +18,10 @@ public class Character extends Entity {
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
+    //shermaine
+    public int getHeight() { return this.texture.getHeight(); }
+    public int getWidth() { return this.texture.getWidth(); }
+
     protected void movement() { //shermaine
         float deltaTime = Gdx.graphics.getDeltaTime();
         // Update player's position based on velocity

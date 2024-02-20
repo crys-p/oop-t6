@@ -44,6 +44,17 @@ public abstract class Entity {
         this.x = x;
     }
 
+    //shermaine
+    // Public accessor method
+    public float getEntityX() {
+        return getX();
+    }
+    public float getEntityY() {
+        return getY();
+    }
+    public void setEntityX(float x) { this.x = x; }
+    public void setEntityY(float y) { this.y = y; }
+
     protected float getY() {
         return this.y;
     }
