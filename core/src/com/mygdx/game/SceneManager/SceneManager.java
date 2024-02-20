@@ -7,6 +7,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
+import com.mygdx.game.SoundManager.SoundManager;
 
 import java.util.Random;
 
@@ -19,7 +20,7 @@ public class SceneManager {
     private SimulationManager simulationManager;
 
     private EntityManager entityManager;
-
+    private SoundManager soundManager;
 
     public SceneManager(Game game) {
         this.game = game;
@@ -44,7 +45,7 @@ public class SceneManager {
 
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("SceneManager initialized"); // Log initialization message
-
+        soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3", "sound_effect.mp3");
     }
 
     private void initializeScenes() {
@@ -55,6 +56,8 @@ public class SceneManager {
 
     public void showStartScene() {
         changeScene(startScene);
+        // play StartScene Song
+        soundManager.playStartSceneMusic();
         // Log initialization message
         //simulationManager.logInfo("StartScene initialized");
 
@@ -67,18 +70,22 @@ public class SceneManager {
                 Gdx.app.log("Timer", "Switching to GameScene after 10 seconds");
                 showGameScene();
             }
-        }, 5); // Delay of 10 seconds
+        }, 10); // Delay of 10 seconds
 
     }
 
     public void showGameScene() {
         changeScene(gameScene);
+        // play the GameScene Song
+        soundManager.playGameSceneMusic();
         // Log initialization message
         simulationManager.logInfo("GameScene initialized");
 
     }
 
     private void changeScene(Scene newScene) {
+        // stop all music before changing the scene
+        soundManager.stopAllMusic();
         disposeCurrentScene();
         currentScene = newScene;
         game.setScreen(currentScene);
@@ -95,5 +102,6 @@ public class SceneManager {
     public Scene getCurrentScene() {
         return currentScene;
     }
+
 }
 

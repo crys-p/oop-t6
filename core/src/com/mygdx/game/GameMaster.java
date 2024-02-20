@@ -53,10 +53,6 @@ public class GameMaster extends Game {
 		// Initialize SoundManager with background music and sound effect files
 // Initialize SoundManager with background music file
 
-
-		// Initialize SoundManager with background music and sound effect files
-		soundManager = new SoundManager("background_music.mp3", "sound_effect.mp3");
-
 		// 2 different way to show log 2nd way might be better as log will go to every manager
 		// the first code consume unnecessary memory and resources as "this.simulationManager" is only use in logging
 		// Initialize SimulationManager
@@ -82,8 +78,7 @@ public class GameMaster extends Game {
 			ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
 		}
 
-		// Play background music
-		soundManager.playBackgroundMusic();
+
 
 		// Check if the current screen is the StartScene
 		if (getScreen() instanceof StartScene) {
