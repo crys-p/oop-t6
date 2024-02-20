@@ -8,6 +8,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
+import com.mygdx.game.PlayerControlManager.HealthBar;
+import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.PlayerControlManager.PlayerInputManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
@@ -31,8 +33,10 @@ public class GameMaster extends Game {
 	private SceneManager sceneManager;
 	private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
-
 	private SoundManager soundManager;
+
+	private PlayerControlManager playerControlManager;
+	private HealthBar healthBar;
 
 	public void create() {
 		// Setting the initial size of the window
@@ -43,7 +47,7 @@ public class GameMaster extends Game {
 
 		// Create respective managers
 		entityManager = new EntityManager();
-		inputManager = new PlayerInputManager(); //shermaine
+		inputManager = new PlayerInputManager();
 
 		//sceneManager = new SceneManager(this);
 		// Pass the game instance to SceneManager
@@ -51,11 +55,11 @@ public class GameMaster extends Game {
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
-// Initialize SoundManager with background music file
+		// Initialize SoundManager with background music file
 
 
 		// Initialize SoundManager with background music and sound effect files
-		soundManager = new SoundManager("background_music.mp3", "sound_effect.mp3");
+		soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3","sound_effect.mp3");
 
 		// 2 different way to show log 2nd way might be better as log will go to every manager
 		// the first code consume unnecessary memory and resources as "this.simulationManager" is only use in logging
@@ -66,6 +70,11 @@ public class GameMaster extends Game {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
+		// Create PlayerControlManager and HealthBar instances
+		playerControlManager = new PlayerControlManager(entityManager);
+		healthBar = new HealthBar(playerControlManager);
+		playerControlManager.setMaxHealth(100); // Set maximum health
+		playerControlManager.setHealth(100); // Set initial health
 	}
 	// Method to switch to another scene
 
@@ -83,7 +92,7 @@ public class GameMaster extends Game {
 		}
 
 		// Play background music
-		soundManager.playBackgroundMusic();
+		soundManager.playStartSceneMusic();
 
 		// Check if the current screen is the StartScene
 		if (getScreen() instanceof StartScene) {
@@ -94,11 +103,8 @@ public class GameMaster extends Game {
 			System.out.println("Currently not on the StartScreen");
 		}
 
-
 		//entityMgr.setUpMovement();
 		entityManager.movement();
-
-
 		inputManager.setUpInputControl();
 
 		// Keep the player within the screen bounds
@@ -113,10 +119,19 @@ public class GameMaster extends Game {
 		// Rendering sprites and shapes
 		batch.begin();
 		shape.begin(ShapeRenderer.ShapeType.Filled);
-			entityManager.drawEntities(batch, shape);
+		entityManager.drawEntities(batch, shape);
 		shape.end();
 		batch.end();
 
+		//shermaine
+		// Get the player's position
+		float playerX = playerControlManager.getPlayerX();
+		float playerY = playerControlManager.getPlayerY();
+
+		shape.begin(ShapeRenderer.ShapeType.Filled);
+		// Render the health bar on top of the player
+		healthBar.render(shape, playerX, playerY);
+		shape.end();
 	}
 
 
@@ -130,7 +145,6 @@ public class GameMaster extends Game {
 //		}
 //		bucket.getTexture().dispose();
 		shape.dispose();
-
 		super.dispose();
 	}
 

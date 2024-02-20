@@ -49,34 +49,34 @@ public class PlayerControlManager {
     }
 
     //to be clarified
-    public void moveLeft() {
-        List<Character> characters = getCharacters();
-        if (!characters.isEmpty() && collisionManager.canMoveLeft(characters.get(0))) {
-            Character player = characters.get(0);
-            float newX = player.getEntityX() - movementSpeed;
-            player.setEntityX(newX);
-        }
-    }
-
-    public void moveRight() {
-        List<Character> characters = getCharacters();
-        if (!characters.isEmpty() && collisionManager.canMoveRight(characters.get(0))) {
-            Character player = characters.get(0);
-            float newX = player.getEntityX() + movementSpeed;
-            player.setEntityX(newX);
-        }
-    }
-    public void jump() {
-        List<Character> characters = getCharacters();
-        if (!characters.isEmpty()) {
-            Character player = characters.get(0);
-            if (onGround) {
-                float newY = player.getEntityY() + jump;
-                player.setEntityY(newY);
-                onGround = false;
-            }
-        }
-    }
+//    public void moveLeft() {
+//        List<Character> characters = getCharacters();
+//        if (!characters.isEmpty() && collisionManager.canMoveLeft(characters.get(0))) {
+//            Character player = characters.get(0);
+//            float newX = player.getEntityX() - movementSpeed;
+//            player.setEntityX(newX);
+//        }
+//    }
+//
+//    public void moveRight() {
+//        List<Character> characters = getCharacters();
+//        if (!characters.isEmpty() && collisionManager.canMoveRight(characters.get(0))) {
+//            Character player = characters.get(0);
+//            float newX = player.getEntityX() + movementSpeed;
+//            player.setEntityX(newX);
+//        }
+//    }
+//    public void jump() {
+//        List<Character> characters = getCharacters();
+//        if (!characters.isEmpty()) {
+//            Character player = characters.get(0);
+//            if (onGround) {
+//                float newY = player.getEntityY() + jump;
+//                player.setEntityY(newY);
+//                onGround = false;
+//            }
+//        }
+//    }
     public void setOnGround(boolean onGround) { this.onGround = onGround; }
     public boolean isOnGround() { return onGround; }
 }
