@@ -2,7 +2,6 @@ package com.mygdx.game.PlayerControlManager;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector;
-import com.mygdx.game.EntityManager.Character;
 
 public class PlayerControl {
     protected Character playerCharacter;

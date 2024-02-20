@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-public class Character extends Entity {
+class Character extends Entity {
     private final Texture texture;
     protected String inputControls;
 
@@ -14,14 +14,21 @@ public class Character extends Entity {
         this.texture = new Texture(Gdx.files.internal(image));
     }
 
+    @Override
+    public float getHeight() {
+        return this.texture.getHeight();
+    }
+
+    @Override
+    public float getWidth() {
+        return this.texture.getWidth();
+    }
+
     protected void draw(SpriteBatch batch) {
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
-    //shermaine
-    public int getHeight() { return this.texture.getHeight(); }
-    public int getWidth() { return this.texture.getWidth(); }
-
+    // can this movement code combine with input movement?
     protected void movement() { //shermaine
         float deltaTime = Gdx.graphics.getDeltaTime();
         // Update player's position based on velocity
@@ -51,6 +58,7 @@ public class Character extends Entity {
             case Input.Keys.DOWN:
                 this.moveDown(20);
         }
+        updateBoundingBox();
     }
 
     protected void setInputControls(String control) {

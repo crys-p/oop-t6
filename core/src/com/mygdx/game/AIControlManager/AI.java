@@ -3,9 +3,8 @@ package com.mygdx.game.AIControlManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.EntityManager.Entity;
 
-public class AI extends Entity {
+public class AI  {
     private final Texture texture;
     private float x;
     private float y;
@@ -14,7 +13,7 @@ public class AI extends Entity {
     private boolean movingRight = true; // Initial direction
 
     public AI(float x, float y, float speed, String image, float width, float height){
-        super(x, y, speed);
+        //super(x, y, speed);
         this.width = width;
         this.height = height;
         this.texture = new Texture(Gdx.files.internal(image));
@@ -61,15 +60,6 @@ public class AI extends Entity {
         this.y = y;
     }
 
-    @Override
-    public void logConsole() {
-
-    }
-
-    @Override
-    public void movement() {
-
-    }
 
     // Other methods for controlling the entity's behavior
 }
