@@ -94,8 +94,6 @@ public class GameMaster extends Game {
 			ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
 		}
 
-		// Play background music
-		soundManager.playStartSceneMusic();
 
 		// Check if the current screen is the StartScene
 		if (getScreen() instanceof StartScene) {

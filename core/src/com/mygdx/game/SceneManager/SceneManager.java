@@ -69,7 +69,7 @@ public class SceneManager {
                 Gdx.app.log("Timer", "Switching to GameScene after 2 seconds");
                 showGameScene();
             }
-        }, 2); // Delay of 10 seconds
+        }, 5); // Delay of 10 seconds
 
     }
 
