@@ -1,9 +1,7 @@
 package com.mygdx.game.PlayerControlManager;
 
 import com.mygdx.game.CollisionManager.CollisionManager;
-import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
-import com.mygdx.game.EntityManager.Character;
 
 import java.util.List;
 
@@ -22,8 +20,10 @@ public class PlayerControlManager {
     }
     // Getter for characters
     public List<Character> getCharacters() {
-        return entityManager.getCharacters();
+        // return entityManager.getCharacters(); //character is package protected
+        return null;
     }
+
     public int getHealth() { return health; }
     public void setHealth(int health) { this.health = health; }
     public int getMaxHealth() { return maxHealth; }
@@ -32,10 +32,11 @@ public class PlayerControlManager {
     public void setMovementSpeed(float movementSpeed) { this.movementSpeed = movementSpeed; }
     public float getJump() { return jump; }
     public void setJump(float jump) { this.jump = jump; }
+
     public float getPlayerX() {
         List<Character> characters = getCharacters();
         if (!characters.isEmpty()) {
-            return characters.get(0).getEntityX();
+//            return characters.get(0).getEntityX(); // comment out for compile testing - crys
         }
         return 0; // Return default value if no player character found
     }
@@ -43,7 +44,7 @@ public class PlayerControlManager {
     public float getPlayerY() {
         List<Character> characters = getCharacters();
         if (!characters.isEmpty()) {
-            return characters.get(0).getEntityY();
+//            return characters.get(0).getEntityY(); // comment out for compile testing - crys
         }
         return 0; // Return default value if no player character found
     }

@@ -14,6 +14,16 @@ public class Triangle extends Enemy {
     }
 
 
+    @Override
+    protected float getHeight() {
+        return (float) ((Math.sqrt(3) / 2) * sideLength);
+    }
+
+    @Override
+    protected float getWidth() {
+        return sideLength;
+    }
+
     protected void draw(ShapeRenderer shape) {
         shape.setColor(this.color);
         float x1 = this.getX() - sideLength;
@@ -32,7 +42,7 @@ public class Triangle extends Enemy {
 
     @Override
     protected void movement() {
-
+        updateBoundingBox();
     }
 
 }

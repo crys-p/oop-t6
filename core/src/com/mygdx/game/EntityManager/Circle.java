@@ -3,7 +3,7 @@ package com.mygdx.game.EntityManager;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class Circle extends Enemy {
+class Circle extends Enemy {
     private float radius;
 
     // Constructor with values assigned
@@ -20,6 +20,16 @@ public class Circle extends Enemy {
         this.radius = radius;
     }
 
+    @Override
+    protected float getHeight() {
+        return radius * 2;
+    }
+
+    @Override
+    protected float getWidth() {
+        return radius * 2;
+    }
+
     protected void draw(ShapeRenderer shape) {
         shape.setColor(this.color);
         shape.circle(this.getX(), this.getY(), this.radius);
@@ -33,6 +43,6 @@ public class Circle extends Enemy {
 
     @Override
     protected void movement() {
-
+        updateBoundingBox();
     }
 }

@@ -12,33 +12,26 @@ public class Collision {
     private float Entx;
     private float Enty;
 
-    public Collision(EntityManager entityManager) {
-        super();
-    }
 
-    //public Collision(EntityManager entityManager) {
-    //    super(entityManager);
-    //}
-
-    public void createPlayerRect(float x, float y, float width, float height)
-    {
-        PlayerRect = new Rectangle(x,y,width,height);
-    }
-
-    public void createPlayerRect()
-    {
-        PlayerRect = new Rectangle(100,100,100,100);
-    }
-
-    public void createEnemyRect()
-    {
-        EnemyRect = new Rectangle(100,100,100,100);
-    }
-
-    public void createObjectRect()
-    {
-        ObjectRect = new Rectangle(100,100,100,100);
-    }
+//    public void createPlayerRect(float x, float y, float width, float height)
+//    {
+//        PlayerRect = new Rectangle(x,y,width,height);
+//    }
+//
+//    public void createPlayerRect()
+//    {
+//        PlayerRect = new Rectangle(100,100,100,100);
+//    }
+//
+//    public void createEnemyRect()
+//    {
+//        EnemyRect = new Rectangle(100,100,100,100);
+//    }
+//
+//    public void createObjectRect()
+//    {
+//        ObjectRect = new Rectangle(100,100,100,100);
+//    }
 
     public void collided()
     {

@@ -2,8 +2,10 @@ package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.graphics.Color;
 
-public abstract class Enemy extends Entity {
+abstract class Enemy extends Entity {
     protected Color color;
+
+    // TODO: Set damage in respective classes
     protected int damage;
 
     Enemy(float x, float y, float velocityX, float velocityY, Color color) {

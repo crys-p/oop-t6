@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.mygdx.game.EntityManager.EntityCreation;
+import com.mygdx.game.EntityManager.EntityLifeCycle;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
 // implements Screen
@@ -47,7 +47,9 @@ public abstract class Scene extends ScreenAdapter {
     }
 
     @Override
-    public abstract void show();
+    public void show() {
+
+    };
 
     // Abstract method to create entities specific to the scene
     protected abstract void createEntities();

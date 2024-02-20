@@ -2,17 +2,14 @@ package com.mygdx.game.SceneManager;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Timer;
-import com.mygdx.game.EntityManager.Entity;
+import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
-
-import java.util.Random;
 
 public class SceneManager {
     private final Game game;
@@ -24,21 +21,23 @@ public class SceneManager {
     private SimulationManager simulationManager;
 
     private EntityManager entityManager;
+
     private SoundManager soundManager;
     private IOManager ioManager;
 
 
-    public SceneManager(Game game) {
-        this.game = game;
-        initializeScenes();
-        //Initialize SimulationManager
-        //this.simulationManager = SimulationManager.getInstance(); // this is to log the Scene change
-        //simulationManager.logInfo("SceneManager initialized"); // This to log the Scene change
-
-        simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
-        simulationManager.logInfo("SceneManager initialized"); // Log initialization message
-
-    }
+    private CollisionManager collisionManager;
+//    public SceneManager(Game game) {
+//        this.game = game;
+//        initializeScenes();
+//        //Initialize SimulationManager
+//        //this.simulationManager = SimulationManager.getInstance(); // this is to log the Scene change
+//        //simulationManager.logInfo("SceneManager initialized"); // This to log the Scene change
+//
+//        simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+//        simulationManager.logInfo("SceneManager initialized"); // Log initialization message
+//
+//    }
 
 
     public SceneManager(Game game, EntityManager entityManager ){
