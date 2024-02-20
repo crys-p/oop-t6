@@ -51,6 +51,7 @@ public class GameMaster extends Game {
 		// Create respective managers
 		inputManager = new PlayerInputManager();
 		entityManager = new EntityManager();
+
 		// Initialize SoundManager with background music and sound effect files
 		soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3","sound_effect.mp3");
 		// Initialise Collision Manager for all collision detection and handling
@@ -126,8 +127,8 @@ public class GameMaster extends Game {
 
 		//shermaine
 		// Get the player's position
-		float playerX = playerControlManager.getPlayerX();
-		float playerY = playerControlManager.getPlayerY();
+//		float playerX = playerControlManager.getPlayerX(); // comment out for compile testing - crystal
+//		float playerY = playerControlManager.getPlayerY(); // comment out for compile testing - crystal
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		// Render the health bar on top of the player

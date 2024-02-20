@@ -119,7 +119,6 @@ public class EntityManager implements EntityLifeCycle {
     public HashMap<Rectangle, Integer> getCharacterBoundingBoxes() {
         HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
         for (Character character: characterList) {
-            character.boundingBox = new Rectangle(character.x, character.y, character.getWidth(), character.getHeight());
             boundingBoxes.put(character.boundingBox, character.entityID);
         }
         return boundingBoxes;
@@ -128,7 +127,6 @@ public class EntityManager implements EntityLifeCycle {
     public HashMap<Rectangle, Integer> getEnemyBoundingBoxes() {
         HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
         for (Enemy enemy: enemyList) {
-            enemy.boundingBox = new Rectangle(enemy.x, enemy.y, enemy.getWidth(), enemy.getHeight());
             boundingBoxes.put(enemy.boundingBox, enemy.entityID);
         }
         return boundingBoxes;
@@ -137,7 +135,6 @@ public class EntityManager implements EntityLifeCycle {
     public HashMap<Rectangle, Integer> getCollectibleBoundingBoxes() {
         HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
         for (Collectible collectible: collectibleList) {
-            collectible.boundingBox = new Rectangle(collectible.x, collectible.y, collectible.getWidth(), collectible.getHeight());
             boundingBoxes.put(collectible.boundingBox, collectible.entityID);
         }
         return boundingBoxes;
@@ -152,6 +149,7 @@ public class EntityManager implements EntityLifeCycle {
         entity.setEntityID(id);
 
         this.addToList(entity, id);
+        this.createBoundingBox(entity);
     }
 
     // Add entity to correct entity list/groups
@@ -168,6 +166,10 @@ public class EntityManager implements EntityLifeCycle {
         } else if (entity instanceof Collectible) {
             collectibleList.add((Collectible) entity);
         }
+    }
+
+    private void createBoundingBox(Entity e) {
+        e.boundingBox = new Rectangle(e.x, e.y, e.getWidth(), e.getHeight());
     }
 
     public void logAll() {
