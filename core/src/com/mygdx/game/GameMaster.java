@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
+import com.mygdx.game.IOManager.IOManager;
 import com.mygdx.game.PlayerControlManager.HealthBar;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.PlayerControlManager.PlayerInputManager;
@@ -23,8 +24,8 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 //public class GameMaster extends ApplicationAdapter
 public class GameMaster extends Game {
 
-	private static final int SCREEN_WIDTH = 1280; // done in IO
-	private static final int SCREEN_HEIGHT = 720; // done in IO
+	private static final int SCREEN_WIDTH = 1280; // done in IO -> set in IOManager
+	private static final int SCREEN_HEIGHT = 720; // done in IO -> set in IOManager
 
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
@@ -34,14 +35,15 @@ public class GameMaster extends Game {
 	private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
 	private SoundManager soundManager;
-
+	private IOManager ioManager;
 	private PlayerControlManager playerControlManager;
 	private HealthBar healthBar;
 	private CollisionManager collisionManager;
 
 	public void create() {
 		// Setting the initial size of the window
-		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT); // done in IO
+		ioManager = new IOManager();
+		ioManager.setWindowedMode(); // done in IO
 		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();

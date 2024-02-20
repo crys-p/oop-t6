@@ -4,6 +4,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.CollisionManager.CollisionManager;
 
@@ -102,11 +103,14 @@ public class EntityManager implements EntityLifeCycle {
         entity.inputMovement(keyMovement);
     }
 
-    public void inputMovement(int key) {
+    //updated so that io can call
+    public void inputMovement(List<Integer> keys) {
         for (Character character : characterList) {
-            if (Objects.equals(character.inputControls, "UDLR") &&
-                    (key == Input.Keys.LEFT || key == Input.Keys.RIGHT || key == Input.Keys.UP || key == Input.Keys.DOWN)) {
-                character.inputMovement(key);
+            for (int key :keys) {
+                if (Objects.equals(character.inputControls, "UDLR") &&
+                        (key == Input.Keys.LEFT || key == Input.Keys.RIGHT || key == Input.Keys.UP || key == Input.Keys.DOWN)) {
+                    character.inputMovement(key);
+                }
             }
         }
     }
