@@ -23,10 +23,6 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 
 //public class GameMaster extends ApplicationAdapter
 public class GameMaster extends Game {
-
-	private static final int SCREEN_WIDTH = 1280; // done in IO -> set in IOManager
-	private static final int SCREEN_HEIGHT = 720; // done in IO -> set in IOManager
-
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
 	private EntityManager entityManager;
@@ -46,19 +42,20 @@ public class GameMaster extends Game {
 		// Initialize SoundManager with background music and sound effect files
 		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","sound_effect.mp3");
 
-		ioManager = new IOManager(5, soundManager);
+		ioManager = new IOManager(entityManager,5, soundManager);
 		ioManager.setWindowedMode(); // done in IO
+
 		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 
 		// Create respective managers
 		inputManager = new PlayerInputManager();
-
-		//ioManager = new IOManager();
-
 		entityManager = new EntityManager();
 
+
+
+		// Initialize SoundManager with background music and sound effect files
 		// Initialise Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
@@ -95,18 +92,21 @@ public class GameMaster extends Game {
 
 
 
+		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
+		entityManager.movement(12);
+
 		//entityMgr.setUpMovement();
 		entityManager.movement();
+		ioManager.updateMovement();
 		inputManager.setUpInputControl();
-
+		entityManager.HARDCODED_INPUT_LISTENER_FOR_AARON();
 		// Keep the player within the screen bounds
 //		if(player.getX() > Gdx.graphics.getWidth())
 //			player.setX(Gdx.graphics.getWidth());
 //		if(player.getY() > Gdx.graphics.getHeight())
 //			player.setY(Gdx.graphics.getHeight());
-
-		//ScreenUtils.clear(defaultBackgroundColor.r, defaultBackgroundColor.g, defaultBackgroundColor.b, defaultBackgroundColor.a);
-		//ScreenUtils.clear(0, 0, 0.2f, 1);
+		collisionManager.setCollidables();
+		collisionManager.detectCollisions();
 
 		//shermaine
 		// Get the player's position
@@ -115,7 +115,7 @@ public class GameMaster extends Game {
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		// Render the health bar on top of the player
-//		healthBar.render(shape, playerX, playerY); // comment out for compile testing - crystal
+		healthBar.render(shape, batch); // comment out for compile testing - crystal
 		shape.end();
 	}
 

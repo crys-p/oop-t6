@@ -35,7 +35,7 @@ public class GameScene extends Scene {
         Random random = new Random();
         entityManager.createItemRandomX(10, random, 680, 0, 20);
         entityManager.createTriangle(1, 300, 200, 40, 40, Color.GREEN, 50);
-        entityManager.createCircle(1, 200, 300, 400, 0, Color.RED, 50);
+        entityManager.createCircle(1, 200, 300, 40, 0, Color.RED, 50);
         entityManager.logAll(); // for debugging
     }
 

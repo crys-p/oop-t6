@@ -4,7 +4,6 @@ import com.mygdx.game.Config;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SoundManager.SoundManager;
-import sun.jvm.hotspot.types.CIntegerField;
 
 import java.util.HashMap;
 
@@ -38,20 +37,86 @@ public class CollisionManager {
     // METHODS TO FILL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void detectCollisions() {
         // Loop through different maps to detect collision
-
         // If collision is being detected, handle collision reaction using handleCharacterCollectibleCollision etc.
+
+
+        for(Rectangle charRect : characterMap.keySet())
+        {
+            for(Rectangle enemyRect : enemyMap.keySet())
+            {
+                if(charRect.overlaps(enemyRect))
+                {
+                    handleCharacterEnemyCollision();
+                }
+            }
+        }
+
+        for(Rectangle charRect : characterMap.keySet())
+        {
+            for(Rectangle collectibleRect : collectibleMap.keySet())
+            {
+                if(charRect.overlaps(collectibleRect))
+                {
+                    handleCharacterCollectibleCollision();
+                }
+            }
+        }
+
+       /* for (int i=0; i < keys.length; i++)
+        {
+            for (int j = i; j < keys.length; j++)
+            {
+                Rectangle rect1 = characterMap.get(keys[i]);
+                Rectangle rect2 = enemyMap.get(keys[j]);
+                if(rect1.overlaps(rect2))
+                {
+                    handleCharacterEnemyCollision(i,j);
+                    System.out.println("Collided");
+                }
+            }
+        }
+
+        for (int i=0; i < keys.length; i++)
+        {
+            for (int j = i; j < keys.length; j++)
+            {
+                Rectangle rect1 = characterMap.get(keys[i]);
+                Rectangle rect2 = collectibleMap.get(keys[j]);
+                if(rect1.overlaps(rect2))
+                {
+                    handleCharacterCollectibleCollision(i,j);
+                    System.out.println("Item found!");
+                }
+            }
+        } */
+    }
+
+    private void handleCharacterCollectibleCollision() {
+        // soundmanager.playsfx (if have idk)
+        // playercontrol.increasepoints
+        // entitymgr.removeentity(collectibleID)
+        System.out.println("Item found working");
     }
 
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
         // soundmanager.playsfx (if have idk)
         // playercontrol.increasepoints
         // entitymgr.removeentity(collectibleID)
+        System.out.println("Item found working");
+    }
+
+    private void handleCharacterEnemyCollision() {
+        // soundmanager.playsfx (if have idk)
+        // playercontrol.decreasehealth
+        // entitymgr.removeentity(enemyID)
+        System.out.println("Collided working");
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
         // entitymgr.removeentity(enemyID)
+        System.out.println("Collided working");
     }
 
 

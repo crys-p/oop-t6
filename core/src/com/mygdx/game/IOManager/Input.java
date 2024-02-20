@@ -1,38 +1,55 @@
 package com.mygdx.game.IOManager;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Input {
+class Input {
 	protected Keyboard keyboard;
 	protected Mouse mouse;
+	private  IOManager ioManager;
+
+	protected Input(IOManager ioManager) {
+		this.ioManager = ioManager;
+	}
+
+	protected void receiveInput(int key) {
+		// Process input if needed
+		ioManager.updateMovement();
+	}
 	
-	public Input(Keyboard keyboard, Mouse mouse) {
+	/*protected Input(Keyboard keyboard, Mouse mouse) {
 		this.keyboard = keyboard;
 		this.mouse = mouse;
 	}
 
-	public Keyboard getKeyboard() {
+	protected Keyboard getKeyboard() {
 		return keyboard;
 	}
 
-	public void setKeyboard(Keyboard keyboard) {
+	protected void setKeyboard(Keyboard keyboard) {
 		this.keyboard = keyboard;
 	}
 
-	public Mouse getMouse() {
+	protected Mouse getMouse() {
 		return mouse;
 	}
 
-	public void setMouse(Mouse mouse) {
+	protected void setMouse(Mouse mouse) {
 		this.mouse = mouse;
 	}
 
-	public abstract void update();
+	protected void update() {
+		mouse.update();
+		System.out.println("mouse update");
+
+		List<Integer> pressedKeys = getKeys();
+		System.out.println("keys update");
+
+		// Pass pressed keys to IOManager
+		IOManager.getInstance().handleInput(pressedKeys);
+	}
 
 	//retrieve keys as list
+<<<<<<< HEAD
 	public List<Integer> getKeys() {
 		List<Integer> pressedKeys = new ArrayList<>();
 		if (Gdx.input.isKeyPressed(Keys.UP))
@@ -47,5 +64,8 @@ public abstract class Input {
 	}
 
 
+
+
+	protected abstract List<Integer> getKeys();*/
 
 }
