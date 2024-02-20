@@ -2,34 +2,28 @@ package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 import java.util.Random;
 
-public abstract class Entity {
+abstract class Entity {
     protected int entityID;
     protected float x;
     protected float y;
     protected float velocityX; // Horizontal velocity
     protected float velocityY; // Vertical velocity
+    protected Rectangle boundingBox;
 
     // Default constructor
-    public Entity(float x, float y, float speed) {
+    protected Entity(float x, float y, float speed) {
         this.x = 0;
         this.y = 0;
         this.velocityX = 0;
         this.velocityY = 0;
     }
 
-    // Constructor for entities that start at random places
-    public Entity(Random random) {
-        this.x = random.nextFloat();
-        this.y = 450;
-        this.velocityX = random.nextFloat();
-        this.velocityY = random.nextFloat();
-    };
-
     // Constructor for entities that start at fixed positions
-    public Entity(float x, float y, float velocityX, float velocityY) {
+    protected Entity(float x, float y, float velocityX, float velocityY) {
         this.x = x;
         this.y = y;
         this.velocityX = velocityX;
@@ -52,8 +46,6 @@ public abstract class Entity {
     public float getEntityY() {
         return getY();
     }
-    public void setEntityX(float x) { this.x = x; }
-    public void setEntityY(float y) { this.y = y; }
 
     protected float getY() {
         return this.y;
@@ -105,6 +97,9 @@ public abstract class Entity {
     protected void setVelocityY(float value) {
         this.velocityY = value;
     }
+
+    protected  abstract float getHeight();
+    protected abstract float getWidth();
 
     protected void draw(SpriteBatch batch) {
         // Method override for Sprites

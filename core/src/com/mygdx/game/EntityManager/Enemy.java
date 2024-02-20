@@ -2,7 +2,7 @@ package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.graphics.Color;
 
-public abstract class Enemy extends Entity {
+abstract class Enemy extends Entity {
     protected Color color;
     protected int damage;
 
