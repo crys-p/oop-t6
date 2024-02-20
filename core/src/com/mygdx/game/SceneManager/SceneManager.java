@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
+import com.mygdx.game.IOManager.IOManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
@@ -14,6 +15,7 @@ public class SceneManager {
     private final Game game;
     private StartScene startScene;
     private GameScene gameScene;
+    private MenuScene menuScene;
     private Scene currentScene;
 
     private SimulationManager simulationManager;
@@ -21,6 +23,8 @@ public class SceneManager {
     private EntityManager entityManager;
 
     private SoundManager soundManager;
+    private IOManager ioManager;
+
 
     private CollisionManager collisionManager;
 //    public SceneManager(Game game) {
@@ -36,9 +40,10 @@ public class SceneManager {
 //    }
 
 
-    public SceneManager(Game game, EntityManager entityManager) {
+    public SceneManager(Game game, EntityManager entityManager ){
         this.game = game;
         this.entityManager = entityManager;
+        this.ioManager = ioManager;
         initializeScenes();
 
         //this.simulationManager = SimulationManager.getInstance();
@@ -50,8 +55,9 @@ public class SceneManager {
     }
 
     private void initializeScenes() {
-        startScene = new StartScene(game, entityManager, new SpriteBatch(), new ShapeRenderer());
-        gameScene = new GameScene(game, entityManager, new SpriteBatch(), new ShapeRenderer()); // Ensure gameScene is initialized correctly
+        startScene = new StartScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
+        gameScene = new GameScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager); // Ensure gameScene is initialized correctly
+        menuScene = new MenuScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager); // Ensure gameScene is initialized correctly
         currentScene = null;
     }
 

@@ -11,14 +11,15 @@ import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.GameMaster;
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.IOManager.IOManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.Random;
 
 public class GameScene extends Scene {
 
-    public GameScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape) {
-        super(game, entityManager, batch, shape);
+    public GameScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
+        super(game, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
 

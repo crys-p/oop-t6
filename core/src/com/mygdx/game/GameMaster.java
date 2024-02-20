@@ -36,6 +36,7 @@ public class GameMaster extends Game {
 	private SimulationManager simulationManager; // Add SimulationManager reference
 	private SoundManager soundManager;
 	private IOManager ioManager;
+
 	private PlayerControlManager playerControlManager;
 	private HealthBar healthBar;
 	private CollisionManager collisionManager;
@@ -50,6 +51,9 @@ public class GameMaster extends Game {
 
 		// Create respective managers
 		inputManager = new PlayerInputManager();
+
+		//ioManager = new IOManager();
+
 		entityManager = new EntityManager();
 
 		// Initialize SoundManager with background music and sound effect files
@@ -58,7 +62,7 @@ public class GameMaster extends Game {
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager );
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files

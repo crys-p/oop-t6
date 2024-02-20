@@ -1,5 +1,6 @@
 package com.mygdx.game.IOManager;
 
+
 import com.badlogic.gdx.Gdx;
 import com.mygdx.game.EntityManager.EntityManager;
 import java.util.ArrayList;
@@ -36,5 +37,6 @@ public class IOManager {
 			entityManager.inputMovement(keys);
 		}
 	}
+
 
 }
