@@ -1,15 +1,11 @@
 package com.mygdx.game.PlayerControlManager;
 
 import com.mygdx.game.CollisionManager.CollisionManager;
-import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
-import com.mygdx.game.EntityManager.Character;
-import com.mygdx.game.EntityManager.Item;
 
 import java.util.ArrayList;
 import java.util.List;
 
-//public class PlayerControlManager extends Entity{
 public class PlayerControlManager{
     private int health;
     private int maxHealth;
@@ -26,10 +22,6 @@ public class PlayerControlManager{
         this.entityManager = entityManager;
         this.inventory = new ArrayList<>(); // Initialize the inventory list
     }
-    // Getter for characters
-    public List<Character> getCharacters() {
-        return entityManager.getCharacters();
-    }
     public int getHealth() { return health; }
     public void setHealth(int health) { this.health = health; }
     public int getMaxHealth() { return maxHealth; }
@@ -38,74 +30,19 @@ public class PlayerControlManager{
     public void setMovementSpeed(float movementSpeed) { this.movementSpeed = movementSpeed; }
     public float getJump() { return jump; }
     public void setJump(float jump) { this.jump = jump; }
-    public float getPlayerX() {
-        List<Character> characters = getCharacters();
-        if (!characters.isEmpty()) {
-            return characters.get(0).getEntityX();
-        }
-        return 0; // Return default value if no player character found
-    }
-
-    public float getPlayerY() {
-        List<Character> characters = getCharacters();
-        if (!characters.isEmpty()) {
-            return characters.get(0).getEntityY();
-        }
-        return 0; // Return default value if no player character found
-    }
     // Method to add an item to the inventory
     public void addItemToInventory(Item item) {
         inventory.add(item);
     }
-
     // Method to remove an item from the inventory
     public void removeItemFromInventory(Item item) {
         inventory.remove(item);
     }
-
     // Method to get the inventory
     public List<Item> getInventory() {
         return inventory;
     }
-    //to be clarified
-//    public void moveLeft() {
-//        List<Character> characters = getCharacters();
-//        if (!characters.isEmpty() && collisionManager.canMoveLeft(characters.get(0))) {
-//            Character player = characters.get(0);
-//            float newX = player.getEntityX() - movementSpeed;
-//            player.setEntityX(newX);
-//        }
-//    }
-//
-//    public void moveRight() {
-//        List<Character> characters = getCharacters();
-//        if (!characters.isEmpty() && collisionManager.canMoveRight(characters.get(0))) {
-//            Character player = characters.get(0);
-//            float newX = player.getEntityX() + movementSpeed;
-//            player.setEntityX(newX);
-//        }
-//    }
-//    public void jump() {
-//        List<Character> characters = getCharacters();
-//        if (!characters.isEmpty()) {
-//            Character player = characters.get(0);
-//            if (onGround) {
-//                float newY = player.getEntityY() + jump;
-//                player.setEntityY(newY);
-//                onGround = false;
-//            }
-//        }
-//    }
     public void setOnGround(boolean onGround) { this.onGround = onGround; }
     public boolean isOnGround() { return onGround; }
 
-//    @Override
-//    protected void logConsole() {
-//
-//    }
-//
-//    @Override
-//    protected void movement() {
-//
-//    }
 }

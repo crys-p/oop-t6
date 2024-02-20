@@ -38,16 +38,6 @@ abstract class Entity {
         this.x = x;
     }
 
-    //shermaine
-    // Public accessor method
-    public float getEntityX() {
-        return getX();
-    }
-
-    public float getEntityY() {
-        return getY();
-    }
-
     protected float getY() {
         return this.y;
     }

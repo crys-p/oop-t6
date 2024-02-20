@@ -101,6 +101,9 @@ public class GameMaster extends Game {
 			System.out.println("Currently not on the StartScreen");
 		}
 
+		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
+		entityManager.movement(12);
+
 		//entityMgr.setUpMovement();
 		entityManager.movement();
 		inputManager.setUpInputControl();
@@ -121,7 +124,7 @@ public class GameMaster extends Game {
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		// Render the health bar on top of the player
-//		healthBar.render(shape, playerX, playerY); // comment out for compile testing - crystal
+		healthBar.render(shape, batch); // comment out for compile testing - crystal
 		shape.end();
 	}
 

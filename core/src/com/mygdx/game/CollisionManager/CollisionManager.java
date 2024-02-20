@@ -4,7 +4,6 @@ import com.mygdx.game.Config;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SoundManager.SoundManager;
-import sun.jvm.hotspot.types.CIntegerField;
 
 import java.util.HashMap;
 

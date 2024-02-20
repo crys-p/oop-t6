@@ -1,11 +1,13 @@
 package com.mygdx.game.EntityManager;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.AIControlManager.AIControlManager;
 import com.mygdx.game.CollisionManager.CollisionManager;
 
 import java.util.*;
@@ -17,7 +19,8 @@ public class EntityManager implements EntityLifeCycle {
     private List<Collectible> collectibleList;
     private Map<Integer, Entity> entityIDMap;
     private int entityCount;
-
+    private AIControlManager aiControlManager;
+//    private boolean movingRight = true;
     // Constructor
     public EntityManager() {
         entityList = new ArrayList<>();
@@ -25,6 +28,8 @@ public class EntityManager implements EntityLifeCycle {
         enemyList = new ArrayList<>();
         collectibleList = new ArrayList<>();
         entityIDMap = new HashMap<>();
+        this.aiControlManager = new AIControlManager();
+
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR SCENEMANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -86,10 +91,6 @@ public class EntityManager implements EntityLifeCycle {
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR AI/IO MOVEMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    //shermaine
-    public List<Character> getCharacters() {
-        return characterList;
-    }
 
     public void movement() {
         for (Entity entity : entityList) {
@@ -97,10 +98,45 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
-    // movement / inputmovement to confirm implementation again ..??
-    public void movement(int entityID, int keyMovement) {
-        Entity entity = this.entityIDMap.get(entityID);
-        entity.inputMovement(keyMovement);
+//    public void movement(int entityID) {
+//        Entity entity = entityIDMap.get(entityID);
+//        if (entity != null) {
+//            System.out.println("Entity ID: " + entityID);
+//            System.out.println("Entity X Position: " + entity.getX());
+//
+//            // Calculate movement based on direction
+//            float movement = movingRight ? 20 : -20; // if movingRight = true, entity moves to the right; if movingRight = false, entity moves to the left
+//
+//            // Update position based on movement
+//            float newX = entity.getX() + movement;
+//
+//            // Check if AI has reached the edge of the screen
+//            if (newX < 0) {
+//                newX = 0; // Reset position to prevent going off-screen
+//                movingRight = true; // Change direction to right
+//            } else if (newX > (float) Gdx.graphics.getWidth() / 2) {
+//                newX = (float) Gdx.graphics.getWidth() / 2; // Reset position
+//                movingRight = false; // Change direction to left
+//            }
+//
+//            // Set the new position of the entity
+//            entity.setX(newX);
+//
+//            System.out.println("New X Position: " + entity.getX());
+//        } else {
+//            System.out.println("Entity is null for ID: " + entityID);
+//        }
+//    }
+
+
+    public void movement(int entityID) {
+        Entity entity = entityIDMap.get(entityID);
+        if (entity != null) {
+            float newX = aiControlManager.moveRandomly(entity.getX());
+            entity.setX(newX);
+        } else {
+            System.out.println("Entity is null for ID: " + entityID);
+        }
     }
 
     //updated so that io can call
@@ -115,7 +151,6 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
     public HashMap<Rectangle, Integer> getCharacterBoundingBoxes() {
         HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
         for (Character character: characterList) {
