@@ -40,10 +40,11 @@ public class SceneManager {
 //    }
 
 
-    public SceneManager(Game game, EntityManager entityManager ){
+    public SceneManager(Game game, EntityManager entityManager, IOManager ioManager, SoundManager soundManager ){
         this.game = game;
         this.entityManager = entityManager;
         this.ioManager = ioManager;
+        this.soundManager = soundManager; // Use the provided SoundManager instance
         initializeScenes();
 
         //this.simulationManager = SimulationManager.getInstance();
@@ -51,7 +52,7 @@ public class SceneManager {
 
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("SceneManager initialized"); // Log initialization message
-        soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3", "sound_effect.mp3");
+        //soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3", "sound_effect.mp3");
     }
 
     private void initializeScenes() {
@@ -75,12 +76,13 @@ public class SceneManager {
                 Gdx.app.log("Timer", "Switching to GameScene after 2 seconds");
                 showGameScene();
             }
-        }, 5); // Delay of 10 seconds
+        }, 2); // Delay of 10 seconds
 
     }
 
     public void showGameScene() {
-        changeScene(gameScene);
+        //changeScene(gameScene);
+        changeScene(menuScene);
         // play the GameScene Song
         soundManager.playGameSceneMusic();
         // Log initialization message

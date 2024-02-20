@@ -45,4 +45,7 @@ public abstract class Input {
 			pressedKeys.add(Keys.RIGHT);
 		return pressedKeys;
 	}
+
+
+
 }

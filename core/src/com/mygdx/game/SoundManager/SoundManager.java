@@ -4,6 +4,7 @@ public class SoundManager {
 	private BackgroundMusic startSceneMusic;
 	private BackgroundMusic gameSceneMusic;
 	private SoundEffect soundEffect;
+	private boolean musicOn = true; // Initially music is on
 
 	public SoundManager(String startSceneMusicFile, String gameSceneMusicFile, String soundEffectFile) {
 		startSceneMusic = new BackgroundMusic(startSceneMusicFile);
@@ -12,16 +13,34 @@ public class SoundManager {
 	}
 
 	public void playStartSceneMusic() {
-		startSceneMusic.play();
+		if (musicOn) {
+			startSceneMusic.play();
+			System.out.println("Start scene music played");
+		}
 	}
 
 	public void playGameSceneMusic() {
-		gameSceneMusic.play();
+		if (musicOn) {
+			gameSceneMusic.play();
+			System.out.println("Game scene music played");
+		}
 	}
 
 	public void stopAllMusic() {
 		startSceneMusic.stop();
 		gameSceneMusic.stop();
+		System.out.println("All music stopped");
+	}
+
+	public void toggleMusic() {
+		musicOn = !musicOn;
+		if (!musicOn) {
+			stopAllMusic();
+			System.out.println("Music turned off");
+		} else {
+			playGameSceneMusic(); // Or any other appropriate method to play music
+			System.out.println("Music turned on");
+		}
 	}
 
 	public void playSoundEffect() {

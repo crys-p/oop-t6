@@ -43,7 +43,10 @@ public class GameMaster extends Game {
 
 	public void create() {
 		// Setting the initial size of the window
-		ioManager = new IOManager();
+		// Initialize SoundManager with background music and sound effect files
+		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","sound_effect.mp3");
+
+		ioManager = new IOManager(5, soundManager);
 		ioManager.setWindowedMode(); // done in IO
 		// Creating renderers
 		batch = new SpriteBatch();
@@ -56,13 +59,11 @@ public class GameMaster extends Game {
 
 		entityManager = new EntityManager();
 
-		// Initialize SoundManager with background music and sound effect files
-		soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3","sound_effect.mp3");
 		// Initialise Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager );
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager,soundManager );
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
@@ -92,14 +93,7 @@ public class GameMaster extends Game {
 	public void render() {
 		super.render();
 
-		// Check if the current screen is the StartScene
-		if (getScreen() instanceof StartScene) {
-			// Your StartScreen-specific code here
-			System.out.println("Currently on the StartScreen");
-		} else {
-			// Code for when the screen is not the StartScreen
-			System.out.println("Currently not on the StartScreen");
-		}
+
 
 		//entityMgr.setUpMovement();
 		entityManager.movement();
