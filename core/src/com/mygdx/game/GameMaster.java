@@ -86,15 +86,7 @@ public class GameMaster extends Game {
 
 
 	public void render() {
-		// Clear the screen with the background color of the current scene
-		// ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
-		// ScreenUtils.clear(0, 0, 0.2f, 1);
-
-		Scene currentScene = sceneManager.getCurrentScene();
-		if (currentScene != null) {
-			ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
-		}
-
+		super.render();
 
 		// Check if the current screen is the StartScene
 		if (getScreen() instanceof StartScene) {
@@ -117,13 +109,6 @@ public class GameMaster extends Game {
 
 		//ScreenUtils.clear(defaultBackgroundColor.r, defaultBackgroundColor.g, defaultBackgroundColor.b, defaultBackgroundColor.a);
 		//ScreenUtils.clear(0, 0, 0.2f, 1);
-
-		// Rendering sprites and shapes
-		batch.begin();
-		shape.begin(ShapeRenderer.ShapeType.Filled);
-		entityManager.drawEntities(batch, shape);
-		shape.end();
-		batch.end();
 
 		//shermaine
 		// Get the player's position
