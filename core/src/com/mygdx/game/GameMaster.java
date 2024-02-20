@@ -25,8 +25,8 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 //public class GameMaster extends ApplicationAdapter
 public class GameMaster extends Game {
 
-	private static final int SCREEN_WIDTH = 1280; // done in IO
-	private static final int SCREEN_HEIGHT = 720; // done in IO
+	private static final int SCREEN_WIDTH = 1280; // done in IO -> set in IOManager
+	private static final int SCREEN_HEIGHT = 720; // done in IO -> set in IOManager
 
 	private SpriteBatch batch;
 	private ShapeRenderer shape;

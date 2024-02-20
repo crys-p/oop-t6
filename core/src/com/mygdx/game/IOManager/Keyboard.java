@@ -13,6 +13,7 @@ public class Keyboard {
 		keys = new HashMap<>();
 	}
 
+	//should be called before updateInputs(in IOManager)
 	public void updateKeys() {
 		keys.clear();
 		keys.put(Keys.UP, Gdx.input.isKeyPressed(Keys.UP));

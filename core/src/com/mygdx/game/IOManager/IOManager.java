@@ -28,7 +28,7 @@ public class IOManager {
 		inputList.add(input);
 	}
 
-	//Update all inputs in the list and communicate with EntityManager
+	//Update all input in the list and communicate with EntityManager
 	public void updateInputs() {
 		for (Input input : inputList) {
 			input.update();

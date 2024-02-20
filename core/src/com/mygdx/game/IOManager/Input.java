@@ -32,6 +32,7 @@ public abstract class Input {
 
 	public abstract void update();
 
+	//retrieve keys as list
 	public List<Integer> getKeys() {
 		List<Integer> pressedKeys = new ArrayList<>();
 		if (Gdx.input.isKeyPressed(Keys.UP))

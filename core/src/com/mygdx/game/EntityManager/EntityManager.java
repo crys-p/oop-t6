@@ -103,7 +103,7 @@ public class EntityManager implements EntityLifeCycle {
         entity.inputMovement(keyMovement);
     }
 
-    //updated so io can use
+    //updated so that io can call
     public void inputMovement(List<Integer> keys) {
         for (Character character : characterList) {
             for (int key :keys) {

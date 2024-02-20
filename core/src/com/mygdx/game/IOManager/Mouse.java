@@ -37,7 +37,7 @@ public class Mouse {
 		// Add more button checks if needed
 	}
 
-	//keeps track of mouse's position changes suing deltaX/Y
+	//keep track of mouse's position changes suing deltaX/Y
 	public float getDeltaX() {
 		return deltaX;
 	}
