@@ -6,6 +6,7 @@ import com.mygdx.game.EntityManager.EntityManager;
 import java.util.List;
 
 public class PlayerControlManager {
+    private int playerEntityID;
     private int health;
     private int maxHealth;
     private float movementSpeed;

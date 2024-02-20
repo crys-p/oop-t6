@@ -106,7 +106,7 @@ public class EntityManager implements EntityLifeCycle {
     //updated so that io can call
     public void inputMovement(List<Integer> keys) {
         for (Character character : characterList) {
-            for (int key :keys) {
+            for (int key : keys) {
                 if (Objects.equals(character.inputControls, "UDLR") &&
                         (key == Input.Keys.LEFT || key == Input.Keys.RIGHT || key == Input.Keys.UP || key == Input.Keys.DOWN)) {
                     character.inputMovement(key);
@@ -114,6 +114,13 @@ public class EntityManager implements EntityLifeCycle {
             }
         }
     }
+
+    public void HARDCODED_INPUT_LISTENER_FOR_AARON() {
+        for (Character character : characterList) {
+            character.hardcodeMovementListener();
+        }
+    }
+
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public HashMap<Rectangle, Integer> getCharacterBoundingBoxes() {
