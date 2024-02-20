@@ -23,10 +23,6 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 
 //public class GameMaster extends ApplicationAdapter
 public class GameMaster extends Game {
-
-	private static final int SCREEN_WIDTH = 1280; // done in IO -> set in IOManager
-	private static final int SCREEN_HEIGHT = 720; // done in IO -> set in IOManager
-
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
 	private EntityManager entityManager;
@@ -42,19 +38,17 @@ public class GameMaster extends Game {
 	private CollisionManager collisionManager;
 
 	public void create() {
-		// Setting the initial size of the window
-		ioManager = new IOManager();
-		ioManager.setWindowedMode(); // done in IO
 		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 
 		// Create respective managers
 		inputManager = new PlayerInputManager();
-
-		//ioManager = new IOManager();
-
 		entityManager = new EntityManager();
+
+		// Setting the initial size of the window
+		ioManager = new IOManager(entityManager);
+		ioManager.setWindowedMode(); // done in IO
 
 		// Initialize SoundManager with background music and sound effect files
 		soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3","sound_effect.mp3");
@@ -106,6 +100,7 @@ public class GameMaster extends Game {
 
 		//entityMgr.setUpMovement();
 		entityManager.movement();
+		ioManager.updateMovement();
 		inputManager.setUpInputControl();
 		entityManager.HARDCODED_INPUT_LISTENER_FOR_AARON();
 		// Keep the player within the screen bounds

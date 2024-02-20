@@ -5,22 +5,26 @@ import com.badlogic.gdx.Input.Buttons;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Mouse {
-	private float lastX;
-	private float lastY;
-	private float deltaX;
-	private float deltaY;
-	private List<Integer> buttons;
+class Mouse {
+	protected float lastX;
+	protected float lastY;
+	protected float deltaX;
+	protected float deltaY;
+	protected List<Integer> buttons;
 
-	public Mouse() {
-		lastX = Gdx.input.getX();
+	protected Mouse(Keyboard keyboard, Mouse mouse) {
+        lastX = Gdx.input.getX();
 		lastY = Gdx.input.getY();
 		deltaX = 0;
 		deltaY = 0;
 		buttons = new ArrayList<>();
 	}
 
-	public void update() {
+	protected void update() {
+		updateMouse();
+	}
+
+	private void updateMouse() {
 		deltaX = Gdx.input.getX() - lastX;
 		deltaY = Gdx.input.getY() - lastY;
 
@@ -37,16 +41,21 @@ public class Mouse {
 		// Add more button checks if needed
 	}
 
-	//keep track of mouse's position changes suing deltaX/Y
-	public float getDeltaX() {
+	//keep track of mouse's position changes using deltaX/Y
+	protected float getDeltaX() {
 		return deltaX;
 	}
 
-	public float getDeltaY() {
+	protected float getDeltaY() {
 		return deltaY;
 	}
 
-	public List<Integer> getButtons() {
+	protected List<Integer> getButtons() {
 		return buttons;
+	}
+
+	protected List<Integer> getKeys() {
+		// Override the method from Input if needed
+		return new ArrayList<>();
 	}
 }
