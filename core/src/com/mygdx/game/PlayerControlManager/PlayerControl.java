@@ -4,14 +4,14 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector;
 
 public class PlayerControl {
-    protected Character playerCharacter;
-    protected Vector playerPosition;
-    protected Sprite sprite;
+    private Character playerCharacter;
+    private Vector playerPosition;
+    private Sprite sprite;
     private String username;
 
-    protected Sprite getSprite() { return sprite;}
-    protected Vector getPlayerPosition() { return playerPosition;}
-    protected void setSprite(Sprite sprite) { this.sprite = sprite; }
-    protected void setPlayerPosition(Vector position) {this.playerPosition = position; }
+    public Sprite getSprite() { return sprite; }
+    public Vector getPlayerPosition() { return playerPosition;}
+    public void setSprite(Sprite sprite) { this.sprite = sprite; }
+    public void setPlayerPosition(Vector position) {this.playerPosition = position; }
 
 }

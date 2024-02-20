@@ -107,15 +107,14 @@ public class GameMaster extends Game {
 		//entityMgr.setUpMovement();
 		entityManager.movement();
 		inputManager.setUpInputControl();
-
+		entityManager.HARDCODED_INPUT_LISTENER_FOR_AARON();
 		// Keep the player within the screen bounds
 //		if(player.getX() > Gdx.graphics.getWidth())
 //			player.setX(Gdx.graphics.getWidth());
 //		if(player.getY() > Gdx.graphics.getHeight())
 //			player.setY(Gdx.graphics.getHeight());
-
-		//ScreenUtils.clear(defaultBackgroundColor.r, defaultBackgroundColor.g, defaultBackgroundColor.b, defaultBackgroundColor.a);
-		//ScreenUtils.clear(0, 0, 0.2f, 1);
+		collisionManager.setCollidables();
+		collisionManager.detectCollisions();
 
 		//shermaine
 		// Get the player's position

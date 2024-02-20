@@ -61,6 +61,22 @@ class Character extends Entity {
         updateBoundingBox();
     }
 
+    protected void hardcodeMovementListener() {
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+            this.moveLeft(20);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+            this.moveRight(20);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            this.moveUp(20);
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+            this.moveDown(20);
+        }
+        updateBoundingBox();
+    }
+
     protected void setInputControls(String control) {
         this.inputControls = control;
     }
