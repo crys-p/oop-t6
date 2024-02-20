@@ -51,7 +51,7 @@ public class EntityManager implements EntityCreation {
     // Create item at random x positions
     public void createItemRandomX(int quantity, Random random, float y, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
-            this.addEntity(new Item(random.nextFloat(0, 1280), y, velocityX, velocityY, "droplet.png"));
+            this.addEntity(new Item(random.nextFloat() * 1280, y, velocityX, velocityY, "droplet.png"));
         } // 1280 as screen width --> use constant variable instead?
     }
 

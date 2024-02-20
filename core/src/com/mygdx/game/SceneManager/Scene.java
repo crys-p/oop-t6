@@ -7,8 +7,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 //import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.mygdx.game.EntityManager.EntityCreation;
+import com.mygdx.game.EntityManager.EntityManager;
+
 // implements Screen
 // usage of ScreenAdapter over Screen as promote code reuse and maintains consistency
 // accross screen and also without needing to apply all lifecycle Method
@@ -17,22 +23,25 @@ public abstract class Scene extends ScreenAdapter {
     protected Color backgroundColor; // Background color for the scene
     //protected OrthographicCamera camera;
     protected Viewport viewport;
-
+    protected SpriteBatch batch;
+    protected ShapeRenderer shape;
+    protected EntityManager entityManager;
     // Set the desired viewport size
     private final int VIEWPORT_WIDTH = 1280;
     private final int VIEWPORT_HEIGHT = 720;
 
-    public Scene(Game game) {
+    public Scene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape) {
         this.game = game;
         this.backgroundColor = Color.BLACK; // Default background color
-
+        this.entityManager = entityManager;
+        this.batch = batch;
+        this.shape = shape;
         // Create a camera and viewport
         //camera = new OrthographicCamera();
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);
         //viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         viewport.apply();
-
     }
 
     @Override
@@ -58,8 +67,10 @@ public abstract class Scene extends ScreenAdapter {
 
 
     protected void clearScreen() {
-        Gdx.gl.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+//        Gdx.gl.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
+//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        ScreenUtils.clear(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
+
     }
 
     public void setBackgroundColor(Color color) {
@@ -70,7 +81,5 @@ public abstract class Scene extends ScreenAdapter {
     public Color getBackgroundColor() {
         return backgroundColor;
     }
-
-
 
 }

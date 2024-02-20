@@ -24,30 +24,23 @@ public class GameMaster extends Game {
 	private static final int SCREEN_WIDTH = 1280; // done in IO
 	private static final int SCREEN_HEIGHT = 720; // done in IO
 
-	private SpriteBatch batch;
-	private ShapeRenderer shape;
 	private EntityManager entityManager;
 	private PlayerInputManager inputManager;
-	private SceneManager sceneManager;
-	private Scene currentScene; // storing of the current scene reference
+    private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
 
+	private SceneManager sceneManager;
 	private SoundManager soundManager;
 
 	public void create() {
 		// Setting the initial size of the window
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT); // done in IO
-		// Creating renderers
-		batch = new SpriteBatch();
-		shape = new ShapeRenderer();
 
 		// Create respective managers
 		entityManager = new EntityManager();
 		inputManager = new PlayerInputManager(); //shermaine
 
-		//sceneManager = new SceneManager(this);
-		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
+        sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
@@ -69,16 +62,8 @@ public class GameMaster extends Game {
 
 
 	public void render() {
-		// Clear the screen with the background color of the current scene
-		// ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
-		// ScreenUtils.clear(0, 0, 0.2f, 1);
 
-		Scene currentScene = sceneManager.getCurrentScene();
-		if (currentScene != null) {
-			ScreenUtils.clear(currentScene.getBackgroundColor().r, currentScene.getBackgroundColor().g, currentScene.getBackgroundColor().b, currentScene.getBackgroundColor().a);
-		}
-
-
+		super.render();
 
 		// Check if the current screen is the StartScene
 		if (getScreen() instanceof StartScene) {
@@ -90,7 +75,6 @@ public class GameMaster extends Game {
 		}
 
 
-		//entityMgr.setUpMovement();
 		entityManager.movement();
 
 
@@ -101,17 +85,6 @@ public class GameMaster extends Game {
 //			player.setX(Gdx.graphics.getWidth());
 //		if(player.getY() > Gdx.graphics.getHeight())
 //			player.setY(Gdx.graphics.getHeight());
-
-		//ScreenUtils.clear(defaultBackgroundColor.r, defaultBackgroundColor.g, defaultBackgroundColor.b, defaultBackgroundColor.a);
-		//ScreenUtils.clear(0, 0, 0.2f, 1);
-
-		// Rendering sprites and shapes
-		batch.begin();
-		shape.begin(ShapeRenderer.ShapeType.Filled);
-			entityManager.drawEntities(batch, shape);
-		shape.end();
-		batch.end();
-
 	}
 
 
@@ -119,12 +92,12 @@ public class GameMaster extends Game {
 
 	@Override
 	public void dispose() {
-		batch.dispose();
+//		batch.dispose();
 //		for (TextureObject drop: droplets) {
 //			drop.getTexture().dispose();
 //		}
 //		bucket.getTexture().dispose();
-		shape.dispose();
+//		shape.dispose();
 
 		super.dispose();
 	}
