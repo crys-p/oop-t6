@@ -29,6 +29,7 @@ public class GameMaster extends Game {
     private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
 
+	private SceneManager sceneManager;
 	private SoundManager soundManager;
 
 	public void create() {
@@ -39,7 +40,7 @@ public class GameMaster extends Game {
 		entityManager = new EntityManager();
 		inputManager = new PlayerInputManager(); //shermaine
 
-        SceneManager sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
+        sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
