@@ -110,6 +110,8 @@ public class GameMaster extends Game {
 //			player.setX(Gdx.graphics.getWidth());
 //		if(player.getY() > Gdx.graphics.getHeight())
 //			player.setY(Gdx.graphics.getHeight());
+		collisionManager.setCollidables();
+		collisionManager.detectCollisions();
 
 		//shermaine
 		// Get the player's position
