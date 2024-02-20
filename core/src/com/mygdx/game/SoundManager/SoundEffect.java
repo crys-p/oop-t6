@@ -1,18 +1,21 @@
 package com.mygdx.game.SoundManager;
 
-public class SoundEffect extends Sound {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+
+public class SoundEffect {
+	private Sound sound;
+
 	public SoundEffect(String filename) {
-		super(filename);
-		// Additional initialization for sound effect
+		sound = Gdx.audio.newSound(Gdx.files.internal(filename));
 	}
 
-	@Override
 	public void play() {
-		// Logic to play the sound effect
+		sound.play();
 	}
 
-	@Override
-	public void stop() {
-		// Logic to stop the sound effect
+	public void dispose() {
+		sound.dispose();
 	}
 }

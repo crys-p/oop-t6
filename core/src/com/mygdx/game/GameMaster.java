@@ -8,8 +8,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
-import com.mygdx.game.PlayerControlManager.HealthBar;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.PlayerControlManager.PlayerInputManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
@@ -33,10 +31,8 @@ public class GameMaster extends Game {
 	private SceneManager sceneManager;
 	private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
-	private SoundManager soundManager;
 
-	private PlayerControlManager playerControlManager;
-	private HealthBar healthBar;
+	private SoundManager soundManager;
 
 	public void create() {
 		// Setting the initial size of the window
@@ -47,7 +43,7 @@ public class GameMaster extends Game {
 
 		// Create respective managers
 		entityManager = new EntityManager();
-		inputManager = new PlayerInputManager();
+		inputManager = new PlayerInputManager(); //shermaine
 
 		//sceneManager = new SceneManager(this);
 		// Pass the game instance to SceneManager
@@ -55,7 +51,7 @@ public class GameMaster extends Game {
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
-		// Initialize SoundManager with background music file
+// Initialize SoundManager with background music file
 
 
 		// Initialize SoundManager with background music and sound effect files
@@ -70,11 +66,6 @@ public class GameMaster extends Game {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
-		// Create PlayerControlManager and HealthBar instances
-		playerControlManager = new PlayerControlManager(entityManager);
-		healthBar = new HealthBar(playerControlManager);
-		playerControlManager.setMaxHealth(100); // Set maximum health
-		playerControlManager.setHealth(100); // Set initial health
 	}
 	// Method to switch to another scene
 
@@ -103,8 +94,11 @@ public class GameMaster extends Game {
 			System.out.println("Currently not on the StartScreen");
 		}
 
+
 		//entityMgr.setUpMovement();
 		entityManager.movement();
+
+
 		inputManager.setUpInputControl();
 
 		// Keep the player within the screen bounds
@@ -123,15 +117,6 @@ public class GameMaster extends Game {
 		shape.end();
 		batch.end();
 
-		//shermaine
-		// Get the player's position
-		float playerX = playerControlManager.getPlayerX();
-		float playerY = playerControlManager.getPlayerY();
-
-		shape.begin(ShapeRenderer.ShapeType.Filled);
-		// Render the health bar on top of the player
-		healthBar.render(shape, playerX, playerY);
-		shape.end();
 	}
 
 
@@ -145,6 +130,7 @@ public class GameMaster extends Game {
 //		}
 //		bucket.getTexture().dispose();
 		shape.dispose();
+
 		super.dispose();
 	}
 

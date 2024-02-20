@@ -1,18 +1,24 @@
 package com.mygdx.game.SoundManager;
 
-public class BackgroundMusic extends Sound {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+
+public class BackgroundMusic {
+    private Music music;
+
     public BackgroundMusic(String filename) {
-        super(filename);
-        // Additional initialization for background music
+        music = Gdx.audio.newMusic(Gdx.files.internal(filename));
     }
 
-    @Override
     public void play() {
-        // Logic to play the background music
+        music.play();
     }
 
-    @Override
     public void stop() {
-        // Logic to stop the background music
+        music.stop();
+    }
+
+    public void dispose() {
+        music.dispose();
     }
 }

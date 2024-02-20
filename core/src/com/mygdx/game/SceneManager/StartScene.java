@@ -4,6 +4,7 @@
     import com.badlogic.gdx.ScreenAdapter;
     import com.badlogic.gdx.graphics.g2d.SpriteBatch;
     import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+    import com.badlogic.gdx.utils.ScreenUtils;
     import com.badlogic.gdx.utils.Timer;
     import com.badlogic.gdx.graphics.Color;
     import com.badlogic.gdx.Gdx;
@@ -13,22 +14,15 @@
 
     public class StartScene extends Scene {
 
-        private SceneManager sceneManager;
-        private EntityManager entityManager;
-
-        public StartScene(Game game, SceneManager sceneManager,EntityManager entityManager) {
-            super(game);
+        public StartScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape) {
+            super(game, entityManager, batch, shape);
             setBackgroundColor(Color.GRAY); // Set background color for start scene
-            this.sceneManager = sceneManager;
             this.entityManager = entityManager;
-
         }
 
         @Override
         public void show() {
             createEntities();
-
-
         }
 
         @Override
@@ -36,11 +30,7 @@
             // Create entities specific to the start scene
             // Implement entity creation logic here
             entityManager.createCharacter(1, 100, -100, 20, 0);
-            Random random = new Random();
-            entityManager.createItemRandomX(10, random, 680, 0, 20);
-            entityManager.createTriangle(1, 300, 200, 40, 40, Color.GREEN, 50);
-            entityManager.createCircle(1, 200, 300, 400, 0, Color.RED, 50);
-            entityManager.logAll(); // for debugging
+            entityManager.logAll();
         }
 
         // creation of entities specific to the start scene
@@ -53,11 +43,13 @@
 
         @Override
         public void render(float delta) {
-            // Rendering sprites and shapes
-            Gdx.app.log("Start scene", "rendering!");
-
             // Clear the screen
             clearScreen();
+            batch.begin();
+            shape.begin(ShapeRenderer.ShapeType.Filled);
+            entityManager.drawEntities(batch, shape);
+            shape.end();
+            batch.end();
             // Update the camera and viewport
             //camera.update();
         }
@@ -68,6 +60,5 @@
             viewport.update(width, height);
 
         }
-
 
     }
