@@ -4,21 +4,27 @@ import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.Entity;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.EntityManager.Character;
+import com.mygdx.game.EntityManager.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerControlManager {
+//public class PlayerControlManager extends Entity{
+public class PlayerControlManager{
     private int health;
     private int maxHealth;
     private float movementSpeed;
     private float jump;
     private CollisionManager collisionManager;
     private boolean onGround;
+    private final List<Item> inventory;
     private final EntityManager entityManager;
 
     // Constructor to initialize EntityManager
     public PlayerControlManager(EntityManager entityManager) {
+//        super();
         this.entityManager = entityManager;
+        this.inventory = new ArrayList<>(); // Initialize the inventory list
     }
     // Getter for characters
     public List<Character> getCharacters() {
@@ -47,7 +53,20 @@ public class PlayerControlManager {
         }
         return 0; // Return default value if no player character found
     }
+    // Method to add an item to the inventory
+    public void addItemToInventory(Item item) {
+        inventory.add(item);
+    }
 
+    // Method to remove an item from the inventory
+    public void removeItemFromInventory(Item item) {
+        inventory.remove(item);
+    }
+
+    // Method to get the inventory
+    public List<Item> getInventory() {
+        return inventory;
+    }
     //to be clarified
 //    public void moveLeft() {
 //        List<Character> characters = getCharacters();
@@ -79,4 +98,14 @@ public class PlayerControlManager {
 //    }
     public void setOnGround(boolean onGround) { this.onGround = onGround; }
     public boolean isOnGround() { return onGround; }
+
+//    @Override
+//    protected void logConsole() {
+//
+//    }
+//
+//    @Override
+//    protected void movement() {
+//
+//    }
 }

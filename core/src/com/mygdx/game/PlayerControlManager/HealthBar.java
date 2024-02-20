@@ -1,42 +1,56 @@
 package com.mygdx.game.PlayerControlManager;
-
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.EntityManager.Character;
 import com.mygdx.game.EntityManager.Entity;
 
 public class HealthBar {
-    private static final float BAR_WIDTH = 100;
-    private static final float BAR_HEIGHT = 10;
+    protected static final float BAR_WIDTH = 500;
+    protected static final float BAR_HEIGHT = 25;
+    private static final int BAR_OFFSET_X = 10;
+    private static final int BAR_OFFSET_Y = 10;
 
-    private final PlayerControlManager playerControlManager;
+    protected final PlayerControlManager playerControlManager;
+    protected final BitmapFont font;
 
     public HealthBar(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
+        this.font = new BitmapFont();
     }
 
-    public void render(ShapeRenderer shapeRenderer, float playerX, float playerY) {
+    public void render(ShapeRenderer shapeRenderer, float playerX, float playerY, SpriteBatch batch) {
         int health = playerControlManager.getHealth();
         float healthPercentage = (float) health / playerControlManager.getMaxHealth();
         Character player = playerControlManager.getCharacters().get(0);
         float playerHeight = player.getHeight();
         float playerWidth = player.getWidth();
 
-        // Set the color for the health bar
+        // Draw the health bar background
         shapeRenderer.setColor(Color.RED);
+        shapeRenderer.rect(BAR_OFFSET_X, Gdx.graphics.getHeight() - BAR_OFFSET_Y - BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
 
-        // Draw the background of the health bar
-        shapeRenderer.rect(playerX + playerWidth / 2, playerY + playerHeight, BAR_WIDTH, BAR_HEIGHT);
-
-        // Set the color for the remaining health
+        // Draw the remaining health bar
         shapeRenderer.setColor(Color.GREEN);
+        float barY = Gdx.graphics.getHeight() - BAR_OFFSET_Y - BAR_HEIGHT;
+        shapeRenderer.rect(BAR_OFFSET_X, barY, BAR_WIDTH * healthPercentage, BAR_HEIGHT);
 
-        // Calculate the position of the health bar relative to the player's head
-        float barX = playerX + playerWidth / 2;
-        float barY = playerY + playerHeight;
+        // Begin batch for drawing text
+        batch.begin();
 
-        // Draw the remaining health bar based on the health percentage
-        shapeRenderer.rect(barX, barY, BAR_WIDTH * healthPercentage, BAR_HEIGHT);
+        // Draw text showing current health
+        String healthText = "Health: " + health + "/" + playerControlManager.getMaxHealth();
+        System.out.println(health + ", " + playerControlManager.getMaxHealth());
+        font.setColor(Color.WHITE);
+        font.draw(batch, healthText, BAR_OFFSET_X + 10, Gdx.graphics.getHeight() - BAR_OFFSET_Y - 30);
+
+        // End batch
+        batch.end();
+    }
+    public void dispose() {
+        font.dispose();
     }
 
 }
