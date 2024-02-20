@@ -2,7 +2,6 @@ package com.mygdx.game.PlayerControlManager;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.mygdx.game.EntityManager.Character;
 
 import java.util.List;
 

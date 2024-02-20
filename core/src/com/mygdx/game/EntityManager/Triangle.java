@@ -42,7 +42,7 @@ public class Triangle extends Enemy {
 
     @Override
     protected void movement() {
-
+        updateBoundingBox();
     }
 
 }

@@ -43,6 +43,7 @@ abstract class Entity {
     public float getEntityX() {
         return getX();
     }
+
     public float getEntityY() {
         return getY();
     }
@@ -74,6 +75,12 @@ abstract class Entity {
     protected void setEntityID(int id) {
         this.entityID = id;
     }
+
+    protected void updateBoundingBox() {
+        this.boundingBox.setX(this.x);
+        this.boundingBox.setY(this.y);
+    }
+
     protected void jump() { //shermaine
         velocityY = 500; // Adjust jump velocity as needed
     }

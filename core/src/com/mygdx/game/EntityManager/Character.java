@@ -28,6 +28,7 @@ class Character extends Entity {
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
+    // can this movement code combine with input movement?
     protected void movement() { //shermaine
         float deltaTime = Gdx.graphics.getDeltaTime();
         // Update player's position based on velocity
@@ -57,6 +58,7 @@ class Character extends Entity {
             case Input.Keys.DOWN:
                 this.moveDown(20);
         }
+        updateBoundingBox();
     }
 
     protected void setInputControls(String control) {

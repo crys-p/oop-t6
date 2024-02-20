@@ -2,8 +2,6 @@ package com.mygdx.game.PlayerControlManager;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.EntityManager.Character;
-import com.mygdx.game.EntityManager.Entity;
 
 public class HealthBar {
     private static final float BAR_WIDTH = 100;
@@ -15,12 +13,12 @@ public class HealthBar {
         this.playerControlManager = playerControlManager;
     }
 
-    public void render(ShapeRenderer shapeRenderer, float playerX, float playerY) {
+    public void render(ShapeRenderer shapeRenderer, float playerX, float playerY, float playerWidth, float playerHeight) {
         int health = playerControlManager.getHealth();
         float healthPercentage = (float) health / playerControlManager.getMaxHealth();
         Character player = playerControlManager.getCharacters().get(0);
-        float playerHeight = player.getHeight();
-        float playerWidth = player.getWidth();
+//        float playerHeight = player.getHeight();
+//        float playerWidth = player.getWidth();
 
         // Set the color for the health bar
         shapeRenderer.setColor(Color.RED);

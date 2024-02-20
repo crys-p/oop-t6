@@ -43,6 +43,6 @@ class Circle extends Enemy {
 
     @Override
     protected void movement() {
-
+        updateBoundingBox();
     }
 }

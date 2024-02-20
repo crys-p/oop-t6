@@ -6,7 +6,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.CollisionManager.CollisionHandler;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.PlayerControlManager.HealthBar;
@@ -39,7 +38,6 @@ public class GameMaster extends Game {
 	private PlayerControlManager playerControlManager;
 	private HealthBar healthBar;
 	private CollisionManager collisionManager;
-	private CollisionHandler collisionHandler;
 
 	public void create() {
 		// Setting the initial size of the window
@@ -54,7 +52,7 @@ public class GameMaster extends Game {
 		// Initialize SoundManager with background music and sound effect files
 		soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3","sound_effect.mp3");
 		// Initialise Collision Manager for all collision detection and handling
-		collisionManager = new CollisionManager(entityManager, soundManager, );
+		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager);
@@ -131,7 +129,7 @@ public class GameMaster extends Game {
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		// Render the health bar on top of the player
-		healthBar.render(shape, playerX, playerY);
+//		healthBar.render(shape, playerX, playerY); // comment out for compile testing - crystal
 		shape.end();
 	}
 
