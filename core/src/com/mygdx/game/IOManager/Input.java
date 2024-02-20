@@ -1,8 +1,13 @@
 package com.mygdx.game.IOManager;
 
-public class Input {
-	private Keyboard keyboard;
-	private Mouse mouse;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Keys;
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Input {
+	protected Keyboard keyboard;
+	protected Mouse mouse;
 	
 	public Input(Keyboard keyboard, Mouse mouse) {
 		this.keyboard = keyboard;
@@ -24,6 +29,19 @@ public class Input {
 	public void setMouse(Mouse mouse) {
 		this.mouse = mouse;
 	}
-	
 
+	public abstract void update();
+
+	public List<Integer> getKeys() {
+		List<Integer> pressedKeys = new ArrayList<>();
+		if (Gdx.input.isKeyPressed(Keys.UP))
+			pressedKeys.add(Keys.UP);
+		if (Gdx.input.isKeyPressed(Keys.DOWN))
+			pressedKeys.add(Keys.DOWN);
+		if (Gdx.input.isKeyPressed(Keys.LEFT))
+			pressedKeys.add(Keys.LEFT);
+		if (Gdx.input.isKeyPressed(Keys.RIGHT))
+			pressedKeys.add(Keys.RIGHT);
+		return pressedKeys;
+	}
 }

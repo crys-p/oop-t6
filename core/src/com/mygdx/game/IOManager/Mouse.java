@@ -1,62 +1,52 @@
 package com.mygdx.game.IOManager;
 
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import javax.swing.JFrame;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input.Buttons;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Mouse implements MouseListener {
-
-	JFrame frame = new JFrame();
-
-	public static void main(String[] args) {
-		new Mouse();
-	}
+public class Mouse {
+	private float lastX;
+	private float lastY;
+	private float deltaX;
+	private float deltaY;
+	private List<Integer> buttons;
 
 	public Mouse() {
-		// Initialize your game or any setup here
-		initialize();
+		lastX = Gdx.input.getX();
+		lastY = Gdx.input.getY();
+		deltaX = 0;
+		deltaY = 0;
+		buttons = new ArrayList<>();
 	}
 
-	public void initialize() {
-		// Add the mouse listener to your game component ->not sure about this part
-		// For example:
-		// gameComponent.addMouseListener(this);
+	public void update() {
+		deltaX = Gdx.input.getX() - lastX;
+		deltaY = Gdx.input.getY() - lastY;
 
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //exit application
-		frame.setSize(1280, 720); //width, height
-		frame.setLocationRelativeTo(null); //center to the screen
-		frame.setVisible(true); //frame appear on screen
+		// Update last position for the next frame
+		lastX = Gdx.input.getX();
+		lastY = Gdx.input.getY();
 
+		// Update pressed buttons
+		buttons.clear();
+		if (Gdx.input.isButtonPressed(Buttons.LEFT))
+			buttons.add(Buttons.LEFT);
+		if (Gdx.input.isButtonPressed(Buttons.RIGHT))
+			buttons.add(Buttons.RIGHT);
+		// Add more button checks if needed
 	}
 
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// Handle mouse click event
-		int x = e.getX();
-		int y = e.getY();
-		System.out.println("Mouse Clicked at (" + x + ", " + y + ")");
+	//keeps track of mouse's position changes suing deltaX/Y
+	public float getDeltaX() {
+		return deltaX;
 	}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		System.out.println("You have pressed the mouse");
+	public float getDeltaY() {
+		return deltaY;
 	}
 
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		int x = e.getX();
-		int y = e.getY();
-		System.out.println("Mouse Released at (" + x + ", " + y + ")");
+	public List<Integer> getButtons() {
+		return buttons;
 	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		System.out.println("Mouse cursor enters bounds");
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		System.out.println("Mouse cursor out of bounds");
-	}
-
 }
