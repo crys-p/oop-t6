@@ -9,6 +9,7 @@ import java.util.*;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
 public class IOManager implements InputProcessor {
@@ -20,6 +21,7 @@ public class IOManager implements InputProcessor {
 	private Input input;
 	private SoundManager soundManager; // Reference to SoundManager
 	private PlayerControlManager playerControlManager;
+	private SceneManager sceneManager;
 
 	//Setting initial size of window
 	public void setWindowedMode() {
@@ -49,17 +51,19 @@ public class IOManager implements InputProcessor {
 	));
 
 
-	public IOManager (int numButtons, SoundManager soundManager, PlayerControlManager playerControlManager) {
+	public IOManager (int numButtons, SoundManager soundManager, PlayerControlManager playerControlManager, SceneManager sceneManager) {
 		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
 		output = new Output(numButtons);
 		this.soundManager = soundManager;
 		this.playerControlManager = playerControlManager;
+		this.sceneManager = sceneManager;
+		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
+		output = new Output(numButtons);
 		setUpKeyStates();
 	}
 
 	private void setUpKeyStates() {
-		for (int keycode : keysAccepted)
-		{
+		for (int keycode : keysAccepted) {
 			keyStates.put(keycode, false);
 		}
 	}
@@ -85,10 +89,10 @@ public class IOManager implements InputProcessor {
 	}
 
 
-	public void handleKeyPress(int keycode, boolean isPressed) {
-		keyStates.put(keycode, isPressed);
-		updateMovement();
-	}
+	public void handleKeyPress(int keycode, boolean isPressed){
+			keyStates.put(keycode, isPressed);
+			updateMovement();
+
 //		switch (keycode) {
 //			case Input.Keys.LEFT:
 //				leftKeyPressed = isPressed;
@@ -103,6 +107,7 @@ public class IOManager implements InputProcessor {
 //				downKeyPressed = isPressed;
 //				break;
 //		}
+		}
 
 	public void updateMovement() {
 		List<Integer> keys = new ArrayList<>();
@@ -170,8 +175,8 @@ public class IOManager implements InputProcessor {
 		processInput();
 	}
 
-	public TextButton createButton(String text, int index, float x, float y, float width, float height) {
-		return output.createButton(text, index, x, y, width, height);
+	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
+		return output.createButton(text, index, x, y, width, height, styleName);
 	}
 
 	// Method to handle button clicks
@@ -183,7 +188,7 @@ public class IOManager implements InputProcessor {
 				// Example: Change to another scene
 				//game.setScreen(new AnotherScene(game));
 				System.out.println("Button clicked: " + buttonIndex);
-				Gdx.app.exit();
+				sceneManager.showGameScene();
 				break;
 			case 1:
 				// Handle button 2 clickound
@@ -197,6 +202,15 @@ public class IOManager implements InputProcessor {
 				// Example: Exit the game
 				System.out.println("Button clicked: " + buttonIndex);
 				Gdx.app.exit();
+				break;
+			// Add cases for other buttons as needed
+			case 3:
+				// Handle button 3 click
+				// Example: Exit the game
+				System.out.println("Button clicked: " + buttonIndex);
+				//Gdx.app.exit();
+				//sceneManager.pauseGameSceneAndSwitchToMenu();
+				sceneManager.showMenuScene();
 				break;
 			// Add cases for other buttons as needed
 		}
@@ -223,6 +237,13 @@ public class IOManager implements InputProcessor {
 		float buttonHeight = 50f; // Height of each button
 		float buttonYDiff = 100f; // Difference in y-coordinate between buttons
 
+		float buttonGameWidth = 300f; // Width of each button
+		float buttonGameHeight = 100f; // Height of each button
+
+		// Adjust the x and y coordinates based on the button index
+		float buttonX = SCREEN_WIDTH - buttonGameWidth - 20; // 20 is the padding from the right edge
+		float buttonY = 20; // 20 is the padding from the top edge
+
 		// Check if the touch coordinates are within the bounds of each button
 		// Adjust the y-coordinate bounds based on the button index
 		if (touchX >= 500 && touchX <= 550 + buttonWidth && touchY >= 300 + buttonIndex * buttonYDiff && touchY <= 300 + buttonIndex * buttonYDiff + buttonHeight) {
@@ -231,7 +252,10 @@ public class IOManager implements InputProcessor {
 			buttonIndex = 1;
 		} else if (touchX >= 500 && touchX <= 550 + buttonWidth && touchY >= 500 + buttonIndex * buttonYDiff && touchY <= 500 + buttonIndex * buttonYDiff + buttonHeight) {
 			buttonIndex = 2;
+		} else if (touchX >= buttonX && touchX <= buttonX + buttonGameWidth && touchY >= buttonY && touchY <= buttonY + buttonGameHeight) {
+			buttonIndex = 3;
 		}
+
 
 		return buttonIndex;
 	}

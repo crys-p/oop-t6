@@ -31,9 +31,19 @@ public class GameMaster extends Game {
 	private Inventory inventory;
     private CollisionManager collisionManager;
 
+//	private IOManager getIOManager() {
+//		if (ioManager == null) {
+//			ioManager = new IOManager( 5, soundManager, playerControlManager, sceneManager);
+//			ioManager.setWindowedMode();
+//		}
+//		return ioManager;
+//	}
+
 	public void create() {
 		// Initialize SoundManager with background music and sound effect files
-		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","sound_effect.mp3");
+
+		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","menu_music.mp3","sound_effect.mp3");
+
 
 		// Creating renderers
 		batch = new SpriteBatch();
@@ -41,6 +51,8 @@ public class GameMaster extends Game {
 
 		// Create EntityManager
 		entityManager = new EntityManager();
+
+
 
 		// Create PlayerControlManager and HealthBar instances
 		playerControlManager = new PlayerControlManager(entityManager);
@@ -53,7 +65,7 @@ public class GameMaster extends Game {
 		playerControlManager.setPlayerControl(0, "UDLR"); // udlr or wasd
 
 		//Initialize IOManager
-		ioManager = new IOManager(5, soundManager, playerControlManager);
+		ioManager = new IOManager(5, soundManager, playerControlManager, sceneManager);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Initialize Collision Manager for all collision detection and handling
@@ -61,6 +73,7 @@ public class GameMaster extends Game {
 
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
+
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
@@ -81,6 +94,11 @@ public class GameMaster extends Game {
 	public void render() {
 		super.render();
 
+		//System.out.println("Current scene: " + sceneManager.getCurrentScene().getClass().getSimpleName());
+	// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
+		entityManager.movement();
+
+		//entityMgr.setUpMovement();
 		entityManager.movement();
 		ioManager.updateMovement();
 		ioManager.updateMouse();
