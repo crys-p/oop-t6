@@ -1,10 +1,10 @@
 package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.game.AIControlManager.AIControlManager;
 
-abstract class Enemy extends Entity {
+abstract class Enemy extends Entity implements AIControlled {
     protected Color color;
-
     // TODO: Set damage in respective classes
     protected int damage;
 

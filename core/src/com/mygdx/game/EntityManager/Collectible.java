@@ -3,8 +3,9 @@ package com.mygdx.game.EntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.AIControlManager.AIControlManager;
 
-public class Collectible extends Entity {
+public class Collectible extends Entity implements AIControlled {
     private final Texture texture;
 
     protected Collectible(float x, float y, float velocityX, float velocityY, String image) {
@@ -33,6 +34,8 @@ public class Collectible extends Entity {
 
     @Override
     protected void movement() {
-
+        float newY = aiControlManager.moveUD(this.getY());
+        this.setY(newY);
     }
+
 }

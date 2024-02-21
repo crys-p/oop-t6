@@ -42,8 +42,8 @@ public class Triangle extends Enemy {
 
     @Override
     protected void movement() {
-
-        updateBoundingBox();
+        float newX = aiControlManager.moveLR(this.getX());
+        this.setX(newX);
     }
 
 }
