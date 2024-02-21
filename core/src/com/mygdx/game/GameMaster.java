@@ -46,7 +46,6 @@ public class GameMaster extends Game {
 		shape = new ShapeRenderer();
 
 		// Create respective managers
-		inputManager = new PlayerInputManager();
 		entityManager = new EntityManager();
 
 		ioManager = new IOManager(entityManager,5, soundManager);
@@ -57,7 +56,7 @@ public class GameMaster extends Game {
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager,soundManager );
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager);
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
@@ -88,12 +87,8 @@ public class GameMaster extends Game {
 		super.render();
 
 
-
-		//entityMgr.setUpMovement();
 		entityManager.movement();
 		ioManager.updateMovement();
-		inputManager.setUpInputControl();
-		entityManager.HARDCODED_INPUT_LISTENER_FOR_AARON();
 		// Keep the player within the screen bounds
 //		if(player.getX() > Gdx.graphics.getWidth())
 //			player.setX(Gdx.graphics.getWidth());

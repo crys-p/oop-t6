@@ -8,20 +8,20 @@ import java.util.Random;
 
 // This interface is implemented by EntityManager for the creation, drawing and deleting in SceneManager
 public interface EntityLifeCycle {
-    void createCharacter(int quantity, float x, float y, float velocityX, float velocityY);
+    void createCharacter(int quantity, float x, float y, float speed, float velocityY, String controls);
 
-    void createCircle(int quantity, float x, float y, float velocityX, float velocityY, Color color, float radius);
+    void createNinjaRandomY(int quantity, float x, Random random, float speed, float velocityY);
 
-    void createTriangle(int quantity, float x, float y, float velocityX, float velocityY, Color color, float sideLength);
+    void createKnightRandomY(int quantity, float x, Random random, float speed, float velocityY);
 
     // Create item at specific location
-    void createItem(int quantity, float x, float y, float velocityX, float velocityY);
+    void createCollectible(int quantity, float x, float y, float speed, float velocityY);
 
     // Create item at random x positions
-    void createItemRandomX(int quantity, Random random, float y, float velocityX, float velocityY);
+    void createCollectibleRandom(int quantity, Random random, float speed, float velocityY);
 
-    // Draw all entities in entity list
-    void drawEntities(SpriteBatch batch, ShapeRenderer shape);
+    // Draw all Sprite in entity list
+    void drawAllEntities(SpriteBatch batch);
 
     // Delete all entities in entity list
     void deleteAllEntities();
