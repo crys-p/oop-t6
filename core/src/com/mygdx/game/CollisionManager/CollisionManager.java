@@ -95,21 +95,21 @@ public class CollisionManager {
         // soundmanager.playsfx (if have idk)
         // playercontrol.increasepoints
         // entitymgr.removeentity(collectibleID)
-        System.out.println("Item found working");
+        System.out.println("Character Item collide");
     }
 
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
         // soundmanager.playsfx (if have idk)
         // playercontrol.increasepoints
         // entitymgr.removeentity(collectibleID)
-        System.out.println("Item found working");
+        System.out.println("Character Item collide");
     }
 
     private void handleCharacterEnemyCollision() {
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
         // entitymgr.removeentity(enemyID)
-        System.out.println("Collided working");
+        System.out.println("Character Enemy collide");
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {

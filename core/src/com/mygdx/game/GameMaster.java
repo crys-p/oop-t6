@@ -38,12 +38,8 @@ public class GameMaster extends Game {
 	private CollisionManager collisionManager;
 
 	public void create() {
-		// Setting the initial size of the window
 		// Initialize SoundManager with background music and sound effect files
 		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","sound_effect.mp3");
-
-		ioManager = new IOManager(entityManager,5, soundManager);
-		ioManager.setWindowedMode(); // done in IO
 
 		// Creating renderers
 		batch = new SpriteBatch();
@@ -53,9 +49,10 @@ public class GameMaster extends Game {
 		inputManager = new PlayerInputManager();
 		entityManager = new EntityManager();
 
+		ioManager = new IOManager(entityManager,5, soundManager);
+		ioManager.setWindowedMode(); // done in IO
 
 
-		// Initialize SoundManager with background music and sound effect files
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
@@ -76,11 +73,11 @@ public class GameMaster extends Game {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
-		// HealthBar instances
-		// Create a PlayerControlManager instance associated with the player
-		playerControlManager = new PlayerControlManager();
-		healthBar =  new HealthBar(playerControlManager);
-
+		// Create PlayerControlManager and HealthBar instances
+		playerControlManager = new PlayerControlManager(entityManager);
+		healthBar = new HealthBar(playerControlManager);
+		playerControlManager.setMaxHealth(100); // Set maximum health
+		playerControlManager.setHealth(100); // Set initial health
 	}
 	// Method to switch to another scene
 
@@ -90,10 +87,7 @@ public class GameMaster extends Game {
 	public void render() {
 		super.render();
 
-		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
-//		entityManager.movement(1, "UDmovement"); //to be clarified
-		entityManager.LRmovement(11);
-		entityManager.UDmovement(12);
+
 
 		//entityMgr.setUpMovement();
 		entityManager.movement();
@@ -117,8 +111,6 @@ public class GameMaster extends Game {
 		// Render the health bar on top of the player
 		healthBar.render(shape, batch); // comment out for compile testing - crystal
 		shape.end();
-
-//		playerControlManager.takeDamage(0,20); // Example: deducts 20 health from the player
 	}
 
 

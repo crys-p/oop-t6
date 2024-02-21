@@ -2,6 +2,7 @@ package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.AIControlManager.AIControlManager;
 
 class Circle extends Enemy {
     private float radius;
@@ -43,6 +44,7 @@ class Circle extends Enemy {
 
     @Override
     protected void movement() {
-        updateBoundingBox();
+        float newX = aiControlManager.moveLR(this.getX());
+        this.setX(newX);
     }
 }

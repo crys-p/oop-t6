@@ -29,7 +29,6 @@ public class EntityManager implements EntityLifeCycle {
         collectibleList = new ArrayList<>();
         entityIDMap = new HashMap<>();
         this.aiControlManager = new AIControlManager();
-
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR SCENEMANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -95,27 +94,28 @@ public class EntityManager implements EntityLifeCycle {
     public void movement() {
         for (Entity entity : entityList) {
             entity.movement();
+            entity.updateBoundingBox();
         }
     }
 
-    public void LRmovement(int entityID) {
-        Entity entity = entityIDMap.get(entityID);
-        if (entity != null) {
-            float newX = aiControlManager.moveLR(entity.getX());
-            entity.setX(newX);
-        } else {
-            System.out.println("Entity is null for ID: " + entityID);
-        }
-    }
-    public void UDmovement(int entityID) {
-        Entity entity = entityIDMap.get(entityID);
-        if (entity != null) {
-            float newY = aiControlManager.moveUD(entity.getY());
-            entity.setY(newY);
-        } else {
-            System.out.println("Entity is null for ID: " + entityID);
-        }
-    }
+//    public void LRmovement(int entityID) {
+//        Entity entity = entityIDMap.get(entityID);
+//        if (entity != null) {
+//            float newX = aiControlManager.moveLR(entity.getX());
+//            entity.setX(newX);
+//        } else {
+//            System.out.println("Entity is null for ID: " + entityID);
+//        }
+//    }
+//    public void UDmovement(int entityID) {
+//        Entity entity = entityIDMap.get(entityID);
+//        if (entity != null) {
+//            float newY = aiControlManager.moveUD(entity.getY());
+//            entity.setY(newY);
+//        } else {
+//            System.out.println("Entity is null for ID: " + entityID);
+//        }
+//    }
 
 //    public void movement(int entityID, String aiBehavior) {
 //        Entity entity = entityIDMap.get(entityID);
