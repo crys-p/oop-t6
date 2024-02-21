@@ -11,17 +11,19 @@ public class PlayerControlManager {
     protected final ArrayList<Player> allPlayers;
     private final Map<Player, Integer> playerEntityMap; // Map to store playerEntityID and corresponding Player instances
     private final EntityManager entityManager; // Assume you have a reference to EntityManager
+    private final Inventory inventory; // Add the inventory field
 
     public PlayerControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
+        this.inventory = new Inventory(this);
         playerEntityMap = new HashMap<>();
         allPlayers = new ArrayList<>();
     }
 
-    // Method to create a player
+    // Method to create a players
     public void createPlayers(int qty) {
         for (int i = 0; i < qty; i++) {
-            Player player = new Player();
+            Player player = new Player(this.inventory);
             allPlayers.add(player);
         }
     }
@@ -74,5 +76,9 @@ public class PlayerControlManager {
         } catch (Exception IndexOutOfBoundsException) {
             System.out.println("Error: Player does not exist.");
         }
+    }
+    // Getter for the inventory
+    public Inventory getInventory() {
+        return inventory;
     }
 }

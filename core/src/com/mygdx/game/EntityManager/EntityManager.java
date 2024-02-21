@@ -85,6 +85,20 @@ public class EntityManager implements EntityLifeCycle {
         return -1;
     }
 
+    public List<Integer> getCollectibleEntityIDs() {
+        List<Integer> collectibleEntityIDs = new ArrayList<>();
+
+        // Iterate through all entities in the EntityManager
+        for (Entity entity : entityList) {
+            // Check if the entity is a collectible
+            if (entity instanceof Collectible) {
+                // If it is, add its entity ID to the list
+                collectibleEntityIDs.add(entity.getEntityID());
+            }
+        }
+
+        return collectibleEntityIDs;
+    }
 
     public void removeEntity(int entityID) {
         Entity entity = entityIDMap.get(entityID);

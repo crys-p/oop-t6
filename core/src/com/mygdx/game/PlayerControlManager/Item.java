@@ -1,29 +1,20 @@
 package com.mygdx.game.PlayerControlManager;
 
 public class Item {
-    private String name;
-    private String description;
+    private int itemID;
 
     // Constructor
-    public Item(String name, String description) {
-        this.name = name;
-        this.description = description;
+    public Item(int itemID) {
+        this.itemID = itemID;
     }
 
     // Getters and setters
-    public String getName() {
-        return name;
+    public int getItemID() {
+        return itemID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

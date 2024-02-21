@@ -1,9 +1,5 @@
 package com.mygdx.game.PlayerControlManager;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.math.Vector2;
-
 public class Player {
     protected int playerControlledEntityID;
     protected int maxHealth = 100;
@@ -11,9 +7,9 @@ public class Player {
     protected Inventory inventory;
     private String keyControls;
 
-    protected Player() {
+    protected Player(Inventory inventory) {
         this.health = maxHealth;
-        this.inventory = new Inventory();
+        this.inventory = inventory;
     }
 //
 //    protected void heal(int amount) {
@@ -27,7 +23,7 @@ public class Player {
 //        position.add(direction);
 //    }
 
-    protected void addItemToInventory(Item item, int quantity) {
+    public void addItemToInventory(Item item, int quantity) {
         inventory.addItem(item, quantity);
     }
 
@@ -35,7 +31,7 @@ public class Player {
         inventory.removeItem(item, quantity);
     }
 
-    protected int getTotalItems() {
+    public int getTotalItems() {
         return inventory.getTotalItems();
     }
 
