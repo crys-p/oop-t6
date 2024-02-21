@@ -4,8 +4,8 @@ public class Item {
     private int itemID;
 
     // Constructor
-    public Item(int itemID) {
-        this.itemID = itemID;
+    public Item() {
+
     }
 
     // Getters and setters

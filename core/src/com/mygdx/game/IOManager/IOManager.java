@@ -3,6 +3,8 @@ package com.mygdx.game.IOManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.EntityManager.EntityManager;
 
 import java.util.*;
@@ -28,6 +30,8 @@ public class IOManager implements InputProcessor {
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
+	private InventoryDisplay inventoryDisplay;
+	private HealthBar healthBar;
 	private boolean leftKeyPressed = false;
 	private boolean rightKeyPressed = false;
 	private boolean upKeyPressed = false;
@@ -57,6 +61,8 @@ public class IOManager implements InputProcessor {
 		this.soundManager = soundManager;
 		this.playerControlManager = playerControlManager;
 		this.sceneManager = sceneManager;
+		this.inventoryDisplay = new InventoryDisplay(playerControlManager);
+		this.healthBar = new HealthBar(playerControlManager);
 		setUpKeyStates();
 	}
 
@@ -153,6 +159,15 @@ public class IOManager implements InputProcessor {
 	public void updateMouse() {
 		updateMousePosition(mouseX, mouseY);
 		processInput();
+	}
+
+	public void displayPlayerInventory(SpriteBatch batch) {
+		InventoryDisplay inventoryDisplay = new InventoryDisplay(playerControlManager);
+		inventoryDisplay.render(batch);
+	}
+
+	public void displayPlayerHealth(SpriteBatch batch, ShapeRenderer shape) {
+		healthBar.render(shape, batch);
 	}
 
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {

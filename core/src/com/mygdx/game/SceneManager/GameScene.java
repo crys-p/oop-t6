@@ -94,13 +94,15 @@ public class GameScene extends Scene {
         // Rendering logic for the game scene
         clearScreen();
         batch.begin();
-        gameSceneButton.draw(batch, 1); // Adjust parameters as needed
-        shape.begin(ShapeRenderer.ShapeType.Filled);
-        shape.end();
-        entityManager.drawAllEntities(batch);
+            gameSceneButton.draw(batch, 1); // Adjust parameters as needed
+            entityManager.drawAllEntities(batch);
+            ioManager.displayPlayerInventory(batch);
         batch.end();
 
-        // Process input events
+        // This has to be rendered outside of normal batch as it requires shape which cannot overlap with SpriteBatch
+        ioManager.displayPlayerHealth(new SpriteBatch(), new ShapeRenderer());
+
+            // Process input events
         ioManager.processInput();
         //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

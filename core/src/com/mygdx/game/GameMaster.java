@@ -55,9 +55,6 @@ public class GameMaster extends Game {
 
 		// Create PlayerControlManager and HealthBar instances
 		playerControlManager = new PlayerControlManager(entityManager);
-		// Initialise health bar and inventory //ps: maybe can put in scene? Idk
-		healthBar = new HealthBar(playerControlManager);
-		inventory = new Inventory(playerControlManager);
 
 		// Set up single player mode with default Up down left right key controls
 		playerControlManager.createPlayers(1);
@@ -113,8 +110,8 @@ public class GameMaster extends Game {
 
 		// Should be wrapped inside output(?)
 		// Render the health bar on top of the player
-		healthBar.render(shape, batch);
-		inventory.render(batch);
+//		healthBar.render(shape, batch);
+//		inventory.render(batch);
 	}
 
 

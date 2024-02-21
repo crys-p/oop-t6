@@ -10,13 +10,16 @@ import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import java.util.HashMap;
 import java.util.List;
 
+import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
+import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
+
 public class HealthBar {
-    protected static final float BAR_WIDTH = 500;
+    protected static final float BAR_WIDTH = (float) SCREEN_WIDTH / 2;
     protected static final float BAR_HEIGHT = 15;
     protected final BitmapFont font;
     protected final PlayerControlManager playerControlManager;
 
-    public HealthBar(PlayerControlManager playerControlManager) {
+    protected HealthBar(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
         this.font = new BitmapFont();
     }
@@ -30,8 +33,8 @@ public class HealthBar {
 //        }
 
         // Define the position of the health bar
-        float healthBarX = Gdx.graphics.getWidth() * 0.01f; // Distance from the left edge of the screen
-        float healthBarY = Gdx.graphics.getHeight() * 0.6f; // Distance from the top edge of the screen
+        float healthBarX = SCREEN_WIDTH * 0.01f; // Distance from the left edge of the screen
+        float healthBarY = SCREEN_HEIGHT * 0.9f; // Distance from the top edge of the screen
 
         // Health Stats are defined as: currentHealth, maxHealth
         HashMap<Integer, List<Integer>> allPlayerHealthStats = playerControlManager.getAllPlayerHealthStats();

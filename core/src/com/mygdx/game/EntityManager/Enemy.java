@@ -4,11 +4,10 @@ package com.mygdx.game.EntityManager;
 import com.mygdx.game.AIControlManager.AIControlled;
 
 class Enemy extends Entity implements AIControlled {
-    protected float damage;
+    protected float damage = 5; // default damage is 5
 
     Enemy(float x, float y, float velocityX, float velocityY, String image) {
         super(x, y, velocityX, velocityY, image);
-        this.setDamage(20);
     }
 
     protected void setDamage(float dmg) {

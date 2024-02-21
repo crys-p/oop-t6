@@ -10,11 +10,9 @@ public class PlayerControlManager {
     protected final ArrayList<Player> allPlayers;
     private final Map<Player, Integer> playerEntityMap; // Map to store Player instances and corresponding entity being controlled
     private final EntityManager entityManager; // Assume you have a reference to EntityManager
-    private final Inventory inventory; // Add the inventory field
     private final HashMap<String, List<Integer>> keyMaps =  new HashMap<>();
     public PlayerControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.inventory = new Inventory(this);
         playerEntityMap = new HashMap<>();
         allPlayers = new ArrayList<>();
         this.setKeyMaps();
@@ -23,7 +21,7 @@ public class PlayerControlManager {
     // Method to create players
     public void createPlayers(int qty) {
         for (int i = 0; i < qty; i++) {
-            Player player = new Player(this.inventory);
+            Player player = new Player();
             allPlayers.add(player);
         }
     }
@@ -70,9 +68,12 @@ public class PlayerControlManager {
         }
     }
 
-    // Getter for the inventory
-    public Inventory getInventory() {
-        return inventory;
+    public void addItemToInventory(int characterID) {
+        for (Player player: allPlayers) {
+             if (playerEntityMap.get(player) == characterID) {
+                 player.addToInventory(new Item(), 1);
+             }
+        }
     }
 
     public int getTotalNumberOfPlayers() {
@@ -140,4 +141,13 @@ public class PlayerControlManager {
         keyMaps.put("UDLR", Arrays.asList(Input.Keys.LEFT, Input.Keys.RIGHT, Input.Keys.UP, Input.Keys.DOWN));
         keyMaps.put("WASD", Arrays.asList(Input.Keys.A, Input.Keys.D, Input.Keys.W, Input.Keys.S));
     }
+
+    public List<Integer> getAllPlayerInventory() {
+        List <Integer> allInventory = new ArrayList<>();
+        for (Player player : allPlayers) {
+            allInventory.add(player.getInventoryCount());
+        }
+        return allInventory;
+    }
+
 }
