@@ -80,25 +80,11 @@ public class CollisionManager {
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         entityManager.removeEntity(enemyID);
+        playerControlManager.takeDamage(20);
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
 
     }
-
-    private void handlePlayerEnemyCollision() {
-        // Handle collision between player and enemy
-        // For example:
-//        soundManager.playEnemyCollisionSound();
-        playerControlManager.takeDamage(20);
-    }
-
-//    private void handlePlayerCollectibleCollision() {
-//        // Handle collision between player and collectible
-//        // For example:
-//        soundManager.playCollectibleCollisionSound();
-//        playerControlManager.addToInventory(collectible);
-//        entityManager.removeEntity(collectible);
-//    }
 
 
 //    //shermaine

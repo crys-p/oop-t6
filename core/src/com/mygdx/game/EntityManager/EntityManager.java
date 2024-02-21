@@ -93,7 +93,6 @@ public class EntityManager implements EntityLifeCycle {
     }
 
 
-
     public void removeEntity(int entityID) {
         Entity entity = entityIDMap.get(entityID);
         if (entity != null) {

@@ -3,7 +3,7 @@ package com.mygdx.game.EntityManager;
 class Knight extends Enemy {
 
     // Constructor with values assigned
-    public Knight(float x, float y, float velocityX, float velocityY, String image) {
+    protected Knight(float x, float y, float velocityX, float velocityY, String image) {
         super(x, y, velocityX, velocityY, image);
     }
 

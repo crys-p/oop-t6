@@ -1,9 +1,9 @@
 package com.mygdx.game.EntityManager;
 
-public class Ninja extends Enemy {
+class Ninja extends Enemy {
 
     // Constructor with values assigned
-    public Ninja(float x, float y, float velocityX, float velocityY, String image) {
+    protected Ninja(float x, float y, float velocityX, float velocityY, String image) {
         super(x, y, velocityX, velocityY, image);
     }
 
