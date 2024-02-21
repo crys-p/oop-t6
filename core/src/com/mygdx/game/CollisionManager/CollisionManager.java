@@ -49,7 +49,6 @@ public class CollisionManager {
                     int charID = characterMap.get(charRect);
                     int enemyID = enemyMap.get(enemyRect);
                     handleCharacterEnemyCollision(charID, enemyID);
-                    entityManager.logAll();
                 }
             }
         }
@@ -58,9 +57,7 @@ public class CollisionManager {
                 if (charRect.overlaps(collectibleRect)) {
                     int charID = characterMap.get(charRect);
                     int collectibleID = collectibleMap.get(collectibleRect);
-                    System.out.println("Collided with Collectible");
                     handleCharacterCollectibleCollision(charID, collectibleID);
-                    entityManager.logAll();
                 }
             }
         }
@@ -81,7 +78,6 @@ public class CollisionManager {
         playerControlManager.takeDamage(20);
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
-
     }
 
 
