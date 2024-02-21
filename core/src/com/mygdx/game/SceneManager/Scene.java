@@ -31,6 +31,8 @@ public abstract class Scene extends ScreenAdapter {
     private final int VIEWPORT_WIDTH = 1280;
     private final int VIEWPORT_HEIGHT = 720;
 
+    private boolean paused = false;
+
     public Scene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         this.game = game;
         this.backgroundColor = Color.BLACK; // Default background color
@@ -50,6 +52,22 @@ public abstract class Scene extends ScreenAdapter {
     public void show() {
 
     };
+
+    @Override
+    public void pause() {
+        paused = true;
+        // Additional logic to pause the scene
+    }
+
+    @Override
+    public void resume() {
+        paused = false;
+        // Additional logic to resume the scene
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
 
     // Abstract method to create entities specific to the scene
     protected abstract void createEntities();

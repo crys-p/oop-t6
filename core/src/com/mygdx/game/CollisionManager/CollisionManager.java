@@ -109,7 +109,7 @@ public class CollisionManager {
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
         // entitymgr.removeentity(enemyID)
-        System.out.println("Collided working");
+        //System.out.println("Collided working");
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {

@@ -37,13 +37,18 @@ public class GameMaster extends Game {
 	private HealthBar healthBar;
 	private CollisionManager collisionManager;
 
+	private IOManager getIOManager() {
+		if (ioManager == null) {
+			ioManager = new IOManager(entityManager, 5, soundManager, sceneManager);
+			ioManager.setWindowedMode();
+		}
+		return ioManager;
+	}
+
 	public void create() {
 		// Setting the initial size of the window
 		// Initialize SoundManager with background music and sound effect files
-		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","sound_effect.mp3");
-
-		ioManager = new IOManager(entityManager,5, soundManager);
-		ioManager.setWindowedMode(); // done in IO
+		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","menu_music.mp3","sound_effect.mp3");
 
 		// Creating renderers
 		batch = new SpriteBatch();
@@ -54,12 +59,16 @@ public class GameMaster extends Game {
 		entityManager = new EntityManager();
 
 
+		ioManager = new IOManager(entityManager,5, soundManager,sceneManager);
+		ioManager.setWindowedMode(); // done in IO
+
+
 
 		// Initialize SoundManager with background music and sound effect files
 		// Initialise Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
-		// Pass the game instance to SceneManager
+// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager,soundManager );
 		sceneManager.showStartScene();
 
@@ -90,9 +99,11 @@ public class GameMaster extends Game {
 	public void render() {
 		super.render();
 
+		//System.out.println("Current scene: " + sceneManager.getCurrentScene().getClass().getSimpleName());
 
 
-		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
+
+	// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
 		entityManager.movement(12);
 
 		//entityMgr.setUpMovement();

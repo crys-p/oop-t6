@@ -20,13 +20,14 @@ public class MenuScene extends Scene {
 
     public MenuScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, entityManager, batch, shape, ioManager);
-        createButtons();
+
         //createButtons();
     }
 
     @Override
     public void show() {
         // Logic when the game scene is shown
+        createButtons();
     }
 
     @Override
@@ -74,9 +75,9 @@ public class MenuScene extends Scene {
         float buttonY3 = buttonY2 - 100; // Adjust this value for the third button's vertical position
 
         // Create buttons using the IOManager
-        button1 = ioManager.createButton("Resume", 0, buttonX, buttonY1, buttonWidth, buttonHeight);
-        button2 = ioManager.createButton("Toogle Sound", 1, buttonX, buttonY2, buttonWidth, buttonHeight);
-        button3 = ioManager.createButton("EXIT GAME", 2, buttonX, buttonY3, buttonWidth, buttonHeight);
+        button1 = ioManager.createButton("Resume", 0, buttonX, buttonY1, buttonWidth, buttonHeight, "buttonMenuStyle");
+        button2 = ioManager.createButton("Toogle Sound", 1, buttonX, buttonY2, buttonWidth, buttonHeight, "buttonMenuStyle");
+        button3 = ioManager.createButton("EXIT GAME", 2, buttonX, buttonY3, buttonWidth, buttonHeight, "buttonMenuStyle");
 
         // Add click listeners to the buttons
         button1.addListener(new ClickListener() {
@@ -108,6 +109,18 @@ public class MenuScene extends Scene {
         // Set button positions and add listeners if needed
     }
     // Other methods for managing the menu scene
+
+    @Override
+    public void pause() {
+        super.pause();
+        // Additional logic to pause the game scene
+    }
+
+    @Override
+    public void resume() {
+        super.resume();
+        // Additional logic to resume the game scene
+    }
 
 
 }

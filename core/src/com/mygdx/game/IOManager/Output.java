@@ -21,20 +21,33 @@ public class Output {
 
 	private void createSkin() {
 		// Load button textures
-		Texture buttonTextureUp = new Texture("button.png");
-		Texture buttonTextureDown = new Texture("button.png");
+		Texture buttonMenu = new Texture("menubutton.png");
+		Texture buttonGame = new Texture("gamebutton.png");
+		Texture buttonStart = new Texture("menuButton.png"); // Ensure this is the correct texture
 
-		// Define button styles
-		TextButton.TextButtonStyle buttonStyle = new TextButton.TextButtonStyle();
-		buttonStyle.font = new BitmapFont(); // Set font directly
-		buttonStyle.fontColor = Color.WHITE; // Set font color directly
-		buttonStyle.up = new TextureRegionDrawable(new TextureRegion(buttonTextureUp));
-		buttonStyle.down = new TextureRegionDrawable(new TextureRegion(buttonTextureDown));
-		skin.add("default", buttonStyle);
+		// Define button styles for each scene
+		TextButtonStyle buttonStyleMenu = new TextButtonStyle();
+		buttonStyleMenu.font = new BitmapFont();
+		buttonStyleMenu.fontColor = Color.WHITE;
+		buttonStyleMenu.up = new TextureRegionDrawable(new TextureRegion(buttonMenu));
+
+		TextButtonStyle buttonStyleGame = new TextButtonStyle();
+		buttonStyleGame.font = new BitmapFont();
+		buttonStyleGame.fontColor = Color.WHITE;
+		buttonStyleGame.up = new TextureRegionDrawable(new TextureRegion(buttonGame));
+
+		TextButtonStyle buttonStyleStart = new TextButtonStyle();
+		buttonStyleStart.font = new BitmapFont();
+		buttonStyleStart.fontColor = Color.WHITE;
+		buttonStyleStart.up = new TextureRegionDrawable(new TextureRegion(buttonStart));
+
+		// Add button styles to the skin with unique names
+		skin.add("buttonMenuStyle", buttonStyleMenu);
+		skin.add("buttonGameStyle", buttonStyleGame);
+		skin.add("buttonStartStyle", buttonStyleStart);
 	}
-
-	public TextButton createButton(String text, int index, float x, float y, float width, float height) {
-		buttons[index] = new TextButton(text, skin);
+	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
+		buttons[index] = new TextButton(text, skin, styleName);
 		buttons[index].setPosition(x, y);
 		buttons[index].setSize(width, height);
 		return buttons[index];

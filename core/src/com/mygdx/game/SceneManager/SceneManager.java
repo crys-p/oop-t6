@@ -83,13 +83,24 @@ public class SceneManager {
     public void showGameScene() {
         //changeScene(gameScene);
         changeScene(menuScene);
+        //changeScene(menuScene);
         // play the GameScene Song
         soundManager.playGameSceneMusic();
         // Log initialization message
         simulationManager.logInfo("GameScene initialized");
-
     }
 
+    public void showMenuScene() {
+        changeScene(menuScene);
+        // play the GameScene Song
+        soundManager.playMenuSceneMusic();
+        // Log initialization message
+        simulationManager.logInfo("MenuScene initialized");
+    }
+
+    public void setIOManager(IOManager ioManager) {
+        this.ioManager = ioManager;
+    }
     private void changeScene(Scene newScene) {
         // stop all music before changing the scene
         soundManager.stopAllMusic();
@@ -109,8 +120,27 @@ public class SceneManager {
         }
     }
 
+    public void pauseGameSceneAndSwitchToMenu() {
+        // Check if the current scene is an instance of GameScene
+        if (currentScene instanceof GameScene) {
+            // Pause the game scene
+            currentScene.pause();
+
+            // Create and set the menu scene
+            MenuScene menuScene = new MenuScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
+            changeScene(menuScene);
+        } else {
+            System.out.println("Error: Current scene is not a GameScene.");
+        }
+    }
+
     public Scene getCurrentScene() {
         return currentScene;
+    }
+
+    public void setScene(Scene scene) {
+        currentScene = scene;
+        game.setScreen(currentScene);
     }
 
 }

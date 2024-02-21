@@ -22,7 +22,7 @@ public class AIControlManager {
             movingRight = false; // Change direction to left
         }
 
-        System.out.println("New X Position: " +newX);
+        //System.out.println("New X Position: " +newX);
 
         // Return the new X position
         return newX;
