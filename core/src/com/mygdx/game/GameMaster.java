@@ -1,19 +1,24 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
 import com.mygdx.game.PlayerControlManager.HealthBar;
-import com.mygdx.game.PlayerControlManager.Player;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.PlayerControlManager.PlayerInputManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
+import com.mygdx.game.SceneManager.StartScene; // Adjust the package name as needed edmund scene
+import com.badlogic.gdx.utils.ScreenUtils; // edmund scene
 import com.mygdx.game.SoundManager.SoundManager; // sound manager
 
+import com.badlogic.gdx.graphics.Color; // background color
 import com.mygdx.game.SimulationManager.SimulationManager;
 
 //public class GameMaster extends ApplicationAdapter
@@ -21,6 +26,7 @@ public class GameMaster extends Game {
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
 	private EntityManager entityManager;
+	private PlayerInputManager inputManager;
 	private SceneManager sceneManager;
 	private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
@@ -40,11 +46,12 @@ public class GameMaster extends Game {
 		shape = new ShapeRenderer();
 
 		// Create respective managers
+		inputManager = new PlayerInputManager();
 		entityManager = new EntityManager();
 
+		//Initialize IOManager
 		ioManager = new IOManager(entityManager,5, soundManager);
-		ioManager.setWindowedMode(); // done in IO
-
+		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
@@ -55,6 +62,7 @@ public class GameMaster extends Game {
 
 		// Initialize SoundManager with background music and sound effect files
 		// Initialize SoundManager with background music file
+
 
 		// 2 different way to show log 2nd way might be better as log will go to every manager
 		// the first code consume unnecessary memory and resources as "this.simulationManager" is only use in logging
@@ -68,14 +76,10 @@ public class GameMaster extends Game {
 		// Create PlayerControlManager and HealthBar instances
 		playerControlManager = new PlayerControlManager(entityManager);
 		healthBar = new HealthBar(playerControlManager);
-
-		playerControlManager.createPlayer(10,10);
-
+		playerControlManager.setMaxHealth(100); // Set maximum health
+		playerControlManager.setHealth(100); // Set initial health
 	}
 	// Method to switch to another scene
-
-
-
 
 	public void render() {
 		super.render();
@@ -83,6 +87,8 @@ public class GameMaster extends Game {
 		//entityMgr.setUpMovement();
 		entityManager.movement();
 		ioManager.updateMovement();
+		ioManager.updateMouse();
+		inputManager.setUpInputControl();
 		entityManager.HARDCODED_INPUT_LISTENER_FOR_AARON();
 		// Keep the player within the screen bounds
 //		if(player.getX() > Gdx.graphics.getWidth())
@@ -91,6 +97,11 @@ public class GameMaster extends Game {
 //			player.setY(Gdx.graphics.getHeight());
 		collisionManager.setCollidables();
 		collisionManager.detectCollisions();
+
+		//shermaine
+		// Get the player's position
+//		float playerX = playerControlManager.getPlayerX(); // comment out for compile testing - crystal
+//		float playerY = playerControlManager.getPlayerY(); // comment out for compile testing - crystal
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		// Render the health bar on top of the player

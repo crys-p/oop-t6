@@ -23,12 +23,16 @@ public class IOManager implements InputProcessor {
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
-	//Reference to EntityManager
-	private EntityManager entityManager;
+	private EntityManager entityManager; //Reference to EntityManager
 	private boolean leftKeyPressed = false;
 	private boolean rightKeyPressed = false;
 	private boolean upKeyPressed = false;
 	private boolean downKeyPressed = false;
+	private float mouseX;
+	private float mouseY;
+	private boolean leftButtonPressed;
+	private boolean rightButtonPressed;
+
 	public IOManager (EntityManager entityManager,int numButtons, SoundManager soundManager) {
 		this.entityManager = entityManager;
 		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
@@ -36,7 +40,7 @@ public class IOManager implements InputProcessor {
 		this.soundManager = soundManager;
 	}
 
-
+	// Keys
 	@Override
 	public boolean keyDown(int keycode) {
 		handleKeyPress(keycode, true);
@@ -51,36 +55,6 @@ public class IOManager implements InputProcessor {
 
 	@Override
 	public boolean keyTyped(char character) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(float amountX, float amountY) {
 		return false;
 	}
 
@@ -112,6 +86,55 @@ public class IOManager implements InputProcessor {
 		if (!keys.isEmpty()) {
 			entityManager.inputMovement(keys);
 		}
+	}
+
+	// Mouse
+	public boolean isLeftButtonPressed() {
+		return leftButtonPressed;
+	}
+
+	public boolean isRightButtonPressed() {
+		return rightButtonPressed;
+	}
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
+	}
+
+	@Override
+	public boolean scrolled(float amountX, float amountY) {
+		return false;
+	}
+
+	public void updateMousePosition(float mouseX, float mouseY) {
+		this.mouseX = mouseX;
+		this.mouseY = mouseY;
+		//System.out.println("Mouse position: (" + mouseX + ", " + mouseY + ")");
+	}
+
+	public void updateMouse() {
+		updateMousePosition(mouseX, mouseY);
+		processInput();
 	}
 
 	public TextButton createButton(String text, int index, float x, float y, float width, float height) {

@@ -1,61 +1,96 @@
 package com.mygdx.game.IOManager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Buttons;
-import java.util.ArrayList;
-import java.util.List;
+import com.badlogic.gdx.InputProcessor;
 
-class Mouse {
-	protected float lastX;
-	protected float lastY;
-	protected float deltaX;
-	protected float deltaY;
-	protected List<Integer> buttons;
+public class Mouse implements InputProcessor{
 
-	protected Mouse(Keyboard keyboard, Mouse mouse) {
-		lastX = Gdx.input.getX();
-		lastY = Gdx.input.getY();
-		deltaX = 0;
-		deltaY = 0;
-		buttons = new ArrayList<>();
+	protected float mouseX;
+	protected float mouseY;
+	private Input input;
+	private boolean leftButtonPressed;
+	private boolean rightButtonPressed;
+
+	protected Mouse(Input input) {
+		this.input = input;
 	}
 
-	protected void update() {
-		updateMouse();
+	public float getMouseX() {
+		return mouseX;
 	}
 
-	private void updateMouse() {
-		deltaX = Gdx.input.getX() - lastX;
-		deltaY = Gdx.input.getY() - lastY;
-
-		// Update last position for the next frame
-		lastX = Gdx.input.getX();
-		lastY = Gdx.input.getY();
-
-		// Update pressed buttons
-		buttons.clear();
-		if (Gdx.input.isButtonPressed(Buttons.LEFT))
-			buttons.add(Buttons.LEFT);
-		if (Gdx.input.isButtonPressed(Buttons.RIGHT))
-			buttons.add(Buttons.RIGHT);
-		// Add more button checks if needed
+	public float getMouseY() {
+		return mouseY;
 	}
 
-	//keep track of mouse's position changes using deltaX/Y
-	protected float getDeltaX() {
-		return deltaX;
+	@Override
+	public boolean keyDown(int keycode) {
+		return false;
 	}
 
-	protected float getDeltaY() {
-		return deltaY;
+	@Override
+	public boolean keyUp(int keycode) {
+		return false;
 	}
 
-	protected List<Integer> getButtons() {
-		return buttons;
+	@Override
+	public boolean keyTyped(char character) {
+		return false;
 	}
 
-	protected List<Integer> getKeys() {
-		// Override the method from Input if needed
-		return new ArrayList<>();
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		updateMousePosition(screenX, screenY);
+		handleMouseButtonPress(button, true);
+		return true;
 	}
+
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		updateMousePosition(screenX, screenY);
+		handleMouseButtonPress(button, false);
+		return true;
+	}
+
+	@Override
+	public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
+		return false;
+	}
+
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		updateMousePosition(screenX, screenY);
+		return true;
+	}
+
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		updateMousePosition(screenX, screenY);
+		return true;
+	}
+
+	@Override
+	public boolean scrolled(float amountX, float amountY) {
+		// Handle mouse scroll if needed
+		return false;
+	}
+
+	protected void updateMousePosition(int screenX, int screenY) {
+		input.receiveMouseInput();
+		mouseX = screenX;
+		mouseY = Gdx.graphics.getHeight() - screenY; // Invert Y-axis
+	}
+
+	protected void handleMouseButtonPress(int button, boolean isPressed) {
+		switch (button) {
+			case com.badlogic.gdx.Input.Buttons.LEFT:
+				leftButtonPressed = isPressed;
+				break;
+			case com.badlogic.gdx.Input.Buttons.RIGHT:
+				rightButtonPressed = isPressed;
+				break;
+			// Add cases for other mouse buttons as needed
+		}
+	}
+
 }
