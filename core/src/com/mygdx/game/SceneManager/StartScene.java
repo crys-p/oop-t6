@@ -28,10 +28,8 @@
 
         @Override
         protected void createEntities() {
-            // Create entities specific to the start scene
-            // Implement entity creation logic here
+            // Create entities specific to the start scenex
             entityManager.createCharacter(1, 100, -100, 20, 0);
-            entityManager.logAll();
         }
 
         // creation of entities specific to the start scene
