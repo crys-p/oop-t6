@@ -4,14 +4,12 @@ public class Player {
     private int playerControlledEntityID;
     private int maxHealth = 100;
     private int health;
-    private float speed;
     protected Inventory inventory;
     private String keyControls = "UDLR"; // default key controls if not set
 
     protected Player(Inventory inventory) {
         this.health = maxHealth;
         this.inventory = inventory;
-        this.speed = 400;
     }
 //
 //    protected void heal(int amount) {
@@ -62,12 +60,5 @@ public class Player {
         return this.playerControlledEntityID;
     }
 
-    protected float getSpeed() {
-        return this.speed;
-    }
-
-    protected void setSpeed(float speed) {
-        this.speed = speed;
-    }
 }
 

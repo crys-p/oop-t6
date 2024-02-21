@@ -44,7 +44,6 @@ public class GameMaster extends Game {
 
 		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","menu_music.mp3","sound_effect.mp3");
 
-
 		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();

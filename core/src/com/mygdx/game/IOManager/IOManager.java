@@ -57,8 +57,6 @@ public class IOManager implements InputProcessor {
 		this.soundManager = soundManager;
 		this.playerControlManager = playerControlManager;
 		this.sceneManager = sceneManager;
-		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
-		output = new Output(numButtons);
 		setUpKeyStates();
 	}
 
@@ -89,26 +87,13 @@ public class IOManager implements InputProcessor {
 	}
 
 
-	public void handleKeyPress(int keycode, boolean isPressed){
-			keyStates.put(keycode, isPressed);
-			updateMovement();
+	// Set key states based on pressed keys
+	public void handleKeyPress(int keycode, boolean isPressed) {
+		keyStates.put(keycode, isPressed);
+		updateMovement();
+	}
 
-//		switch (keycode) {
-//			case Input.Keys.LEFT:
-//				leftKeyPressed = isPressed;
-//				break;
-//			case Input.Keys.RIGHT:
-//				rightKeyPressed = isPressed;
-//				break;
-//			case Input.Keys.UP:
-//				upKeyPressed = isPressed;
-//				break;
-//			case Input.Keys.DOWN:
-//				downKeyPressed = isPressed;
-//				break;
-//		}
-		}
-
+	// Activate player control when movement is updated
 	public void updateMovement() {
 		List<Integer> keys = new ArrayList<>();
 		for (Map.Entry<Integer, Boolean> entry : keyStates.entrySet()) {
@@ -116,11 +101,6 @@ public class IOManager implements InputProcessor {
 				keys.add(entry.getKey());
 			}
 		}
-//		if (leftKeyPressed) keys.add(Input.Keys.LEFT);
-//		if (rightKeyPressed) keys.add(Input.Keys.RIGHT);
-//		if (upKeyPressed) keys.add(Input.Keys.UP);
-//		if (downKeyPressed) keys.add(Input.Keys.DOWN);
-//
 		if (!keys.isEmpty()) {
 			playerControlManager.handlePressedKeys(keys);
 		}
