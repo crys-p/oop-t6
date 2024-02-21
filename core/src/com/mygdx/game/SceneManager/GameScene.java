@@ -41,8 +41,9 @@ public class GameScene extends Scene {
         entityManager.createCharacter(1, 100, 0, 400, 20, "UDLR");
 
         Random random = new Random();
-        entityManager.createCollectibleRandom(10, random, 0, 20);
-        entityManager.createEnemyRandomY(10, 300, random, 40, 40);
+        entityManager.createCollectibleRandom(10, random, 0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -10, 10, -10, 10);
+        entityManager.createEnemyRandomY(10, random, 0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -10, 10, -10, 10);
+
         entityManager.logAll(); // for debugging
     }
 

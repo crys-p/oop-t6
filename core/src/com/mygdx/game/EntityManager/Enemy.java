@@ -25,7 +25,7 @@ class Enemy extends Entity implements AIControlled {
 
     @Override
     protected void movement() {
-        float newX = aiControlManager.moveLR(this.getX());
+        float newX = aiControlManager.moveLR(this.getX(), this.getSpeed());
         this.setX(newX);
     }
 }

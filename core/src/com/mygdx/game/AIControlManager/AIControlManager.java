@@ -2,21 +2,47 @@ package com.mygdx.game.AIControlManager;
 
 import com.badlogic.gdx.Gdx;
 
+import java.util.Random;
+
 public class AIControlManager {
     private boolean movingRight = true;
     private boolean movingDown = true;
-    public float moveLR(float entityX) {
+    private float acceleration; // Adjust the acceleration value as needed
+    private float deceleration; // Adjust the deceleration value as needed
+    private Random random = new Random(); // Create a Random object to generate random values
+    public AIControlManager() {
+        this.acceleration = random.nextFloat() * 5.0f; // Generate a random acceleration between 0 and 5
+        this.deceleration = random.nextFloat() * 2.0f; // Generate a random deceleration between 0 and 2
+    }
+    public float moveLR(float entityX, float currentSpeed) {
+        // Calculate acceleration
+        float accelerationX = random.nextFloat() * (2 * acceleration) - acceleration;
+
+        // Calculate new speed by adding acceleration
+        float newSpeed = currentSpeed + accelerationX;
+
+        // Apply deceleration only if the AI hits the screen edge and needs to reverse its direction
+        if ((newSpeed > 0 && !movingRight && entityX <= 0) || (newSpeed < 0 && movingRight && entityX >= Gdx.graphics.getWidth())) {
+            newSpeed -= Math.min(Math.abs(newSpeed), deceleration) * Math.signum(newSpeed);
+        }
+
+        // Ensure the speed is always positive
+        newSpeed = Math.max(5, newSpeed); // Minimum speed of 5
+
         // Calculate movement based on direction
-        float movement = movingRight ? 10 : -10; // if movingRight = true, entity moves to the right; if movingRight = false, entity moves to the left
+        float movement = movingRight ? newSpeed : -newSpeed; // Adjust the movement speed as needed
 
         // Update position based on movement
         float newX = entityX + movement;
 
+        // Debug statement to print the new X position and updated speed
+        System.out.println("New X Position: " + newX + ", Speed: " + newSpeed);
+
         // Check if AI has reached the edge of the screen
-        if (newX < 0) {
+        if (newX <= 0) {
             newX = 0; // Reset position to prevent going off-screen
             movingRight = true; // Change direction to right
-        } else if (newX > (float) Gdx.graphics.getWidth()) {
+        } else if (newX >= (float) Gdx.graphics.getWidth()) {
             newX = (float) Gdx.graphics.getWidth(); // Reset position
             movingRight = false; // Change direction to left
         }
@@ -24,25 +50,45 @@ public class AIControlManager {
         // Return the new X position
         return newX;
     }
-    public float moveUD(float entityY) {
+
+    public float moveUD(float entityY, float currentSpeed) {
+        // Calculate acceleration
+        float accelerationY = random.nextFloat() * (2 * acceleration) - acceleration;
+
+        // Calculate new speed by adding acceleration
+        float newSpeed = currentSpeed + accelerationY;
+
+        // Apply deceleration only if the AI hits the screen edge and needs to reverse its direction
+        if ((newSpeed > 0 && !movingDown && entityY <= 0) || (newSpeed < 0 && movingDown && entityY >= Gdx.graphics.getHeight())) {
+            newSpeed -= Math.min(Math.abs(newSpeed), deceleration) * Math.signum(newSpeed);
+        }
+
+        // Ensure the speed is always positive
+        newSpeed = Math.max(5, newSpeed); // Minimum speed of 5
+
         // Calculate movement based on direction
-        float movement = movingDown ? 10 : -10; // if movingRight = true, entity moves to the right; if movingRight = false, entity moves to the left
+        float movement = movingDown ? newSpeed : -newSpeed; // Adjust the movement speed as needed
+
 
         // Update position based on movement
         float newY = entityY + movement;
 
+        // Debug statement to print the new Y position and updated speed
+        System.out.println("New Y Position: " + newY + ", Speed: " + newSpeed);
+
         // Check if AI has reached the edge of the screen
-        if (newY < 0) {
+        if (newY <= 0) {
             newY = 0; // Reset position to prevent going off-screen
-            movingDown = true; // Change direction to right
-        } else if (newY > (float) Gdx.graphics.getHeight()) {
+            movingDown = true; // Change direction to down
+        } else if (newY >= (float) Gdx.graphics.getHeight()) {
             newY = (float) Gdx.graphics.getHeight(); // Reset position
-            movingDown = false; // Change direction to left
+            movingDown = false; // Change direction to up
         }
 
-        // Return the new X position
+        // Return the new Y position
         return newY;
     }
+
     public void chasePlayer() {}
 
 //    public float moveRandomly(float entityPosition, String movementCase) {
