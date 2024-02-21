@@ -1,6 +1,5 @@
 package com.mygdx.game.CollisionManager;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.Config;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SoundManager.SoundManager;
@@ -95,28 +94,28 @@ public class CollisionManager {
         // soundmanager.playsfx (if have idk)
         // playercontrol.increasepoints
         // entitymgr.removeentity(collectibleID)
-        System.out.println("Character Item collide");
+//        System.out.println("Character Item collide");
     }
 
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
         // soundmanager.playsfx (if have idk)
         // playercontrol.increasepoints
         // entitymgr.removeentity(collectibleID)
-        System.out.println("Character Item collide");
+//        System.out.println("Character Item collide");
     }
 
     private void handleCharacterEnemyCollision() {
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
         // entitymgr.removeentity(enemyID)
-        System.out.println("Character Enemy collide");
+//        System.out.println("Character Enemy collide");
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
         // entitymgr.removeentity(enemyID)
-        System.out.println("Collided working");
+//        System.out.println("Collided working");
     }
 
 

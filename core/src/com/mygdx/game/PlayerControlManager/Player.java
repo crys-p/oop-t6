@@ -1,84 +1,75 @@
 package com.mygdx.game.PlayerControlManager;
 
-import com.mygdx.game.CollisionManager.CollisionManager;
-
-import java.util.ArrayList;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
 
 public class Player {
-    protected int playerEntityID;
-    protected int health;
+    protected float x;
+    protected float y;
+    protected final Texture texture;
     protected int maxHealth = 100;
-    protected final ArrayList<String> inventory;
-    protected float movementSpeed;
-    protected float jump;
-    protected boolean onGround;
+    protected int health;
+    protected Inventory inventory;
+    protected Vector2 position;
 
-    // Constructor
-    protected Player() {
-        this.health = 100;
-        this.inventory = new ArrayList<>();
+    protected Player(float x, float y, String image) {
+        this.x = x;
+        this.y = y;
+        this.texture = new Texture(Gdx.files.internal(image));
+        this.health = maxHealth;
+        this.inventory = new Inventory();
     }
 
-    // Getter for health
-    protected int getHealth() {
-        return health;
-    }
-
-    // Setter for health
-    protected void setHealth(int health) {
-        this.health = Math.min(health, maxHealth); // Ensure health doesn't exceed maxHealth
-    }
-    protected int getMaxHealth() { return maxHealth; }
-
-    // Method to add an item to the inventory
-    protected void addItemToInventory(String item) {
-        inventory.add(item);
-    }
-
-    // Method to remove an item from the inventory
-    protected void removeItemFromInventory(String item) {
-        inventory.remove(item);
-    }
-
-    // Method to print the player's inventory
-    public void printInventory() {
-        System.out.println("Player's Inventory:");
-        for (String item : inventory) {
-            System.out.println(item);
+    protected void takeDamage(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            System.out.println("Player has died");
         }
     }
 
-    // Method to get the total number of items in the inventory
-    protected int getTotalItems() {
-        return inventory.size();
+    protected void heal(int amount) {
+        health = Math.min(health + amount, maxHealth);
     }
-    protected float getMovementSpeed() { return movementSpeed; }
-    protected void setMovementSpeed(float movementSpeed) { this.movementSpeed = movementSpeed; }
-    protected float getJump() { return jump; }
-    protected void setJump(float jump) { this.jump = jump; }
-    protected void setOnGround(boolean onGround) { this.onGround = onGround; }
-    protected boolean isOnGround() { return onGround; }
 
-//    // Example main method to test the Player class
-//    public void main(String[] args) {
-//        // Create a new player with initial health of 100
-//        Player player = new Player(100);
-//
-//        // Add some items to the inventory
-//        player.addItemToInventory("Sword");
-//        player.addItemToInventory("Potion");
-//        player.addItemToInventory("Shield");
-//
-//        // Print the player's inventory
-//        player.printInventory();
-//
-//        // Print the total number of items in the inventory
-//        System.out.println("Total Items: " + player.getTotalItems());
-//
-//        // Set the player's health to 80
-//        player.setHealth(80);
-//
-//        // Print the player's health
-//        System.out.println("Player's Health: " + player.getHealth());
-//    }
+    protected void move(Vector2 direction) {
+        position.add(direction);
+    }
+
+    protected void addItemToInventory(Item item, int quantity) {
+        inventory.addItem(item, quantity);
+    }
+
+    protected void removeItemFromInventory(Item item, int quantity) {
+        inventory.removeItem(item, quantity);
+    }
+
+    protected int getTotalItems() {
+        return inventory.getTotalItems();
+    }
+    protected float getX() {
+        return x;
+    }
+    protected float getY() {
+        return y;
+    }
+    protected void setX(int x) {
+        this.x = x;
+    }
+    protected void setY(int y) {
+        this.y = y;
+    }
+    protected int getHealth() {
+        return this.health;
+    }
+    protected void setHealth(int health) {
+        this.health = health;
+    }
+    protected int getMaxHealth() {
+        return this.maxHealth;
+    }
+    public Vector2 getPosition() {
+        return position;
+    }
 }
+

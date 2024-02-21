@@ -61,7 +61,9 @@ abstract class Entity {
     protected void moveRight(float value) {
         this.x += value;
     }
-
+    public int getEntityID() {
+        return this.entityID;
+    }
     protected void setEntityID(int id) {
         this.entityID = id;
     }

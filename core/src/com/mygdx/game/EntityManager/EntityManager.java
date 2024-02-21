@@ -19,7 +19,7 @@ public class EntityManager implements EntityLifeCycle {
     private List<Collectible> collectibleList;
     private Map<Integer, Entity> entityIDMap;
     private int entityCount;
-    private AIControlManager aiControlManager;
+//    private AIControlManager aiControlManager;
 //    private boolean movingRight = true;
     // Constructor
     public EntityManager() {
@@ -28,7 +28,7 @@ public class EntityManager implements EntityLifeCycle {
         enemyList = new ArrayList<>();
         collectibleList = new ArrayList<>();
         entityIDMap = new HashMap<>();
-        this.aiControlManager = new AIControlManager();
+//        this.aiControlManager = new AIControlManager();
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR SCENEMANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -88,6 +88,21 @@ public class EntityManager implements EntityLifeCycle {
         entityIDMap.clear();
         entityCount = 0;
     }
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR PlayerControl~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public int getPlayerEntityID() {
+        // Iterate over the entityList
+        for (Entity entity : entityList) {
+            // Check if the entity is an instance of Character
+            if (entity instanceof Character) {
+                // If it is, return its entity ID
+                return entity.getEntityID();
+            }
+        }
+        // Return -1 if no player character is found
+        return -1;
+    }
+
+
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR AI/IO MOVEMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

@@ -1,38 +1,43 @@
+// PlayerControlManager.java
 package com.mygdx.game.PlayerControlManager;
+
+import com.mygdx.game.EntityManager.EntityManager;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class PlayerControlManager {
-    private Map<Integer, Player> players; // Map to store playerEntityID and corresponding Player instances
+    private final Map<Integer, Player> players; // Map to store playerEntityID and corresponding Player instances
+    private final EntityManager entityManager; // Assume you have a reference to EntityManager
 
-    public PlayerControlManager() {
+    public PlayerControlManager(EntityManager entityManager) {
         players = new HashMap<>();
+        this.entityManager = entityManager;
+    }
+
+    // Method to create a player
+    public void createPlayer(float x, float y) {
+        Player player = new Player(x, y, "player.png");
+        addPlayer(player); // Add the created player to the manager
+    }
+
+    public int getPlayerEntityID() {
+        return entityManager.getPlayerEntityID();
     }
 
     // Method to add a player to the manager
-    public void addPlayer(int playerEntityID, Player player) {
+    public void addPlayer(Player player) {
+        int playerEntityID = entityManager.getPlayerEntityID();
         players.put(playerEntityID, player);
+    }
+    // Method to remove a player from the manager
+    public void removePlayer(int playerEntityID) {
+        players.remove(playerEntityID);
     }
 
     // Method to get the player instance by entity ID
     public Player getPlayer(int playerEntityID) {
         return players.get(playerEntityID);
     }
-    // Method to deduct health from a player using playerEntityID
-//    public void takeDamage(int damageAmount) {
-//        int currentHealth = player.getHealth();
-//        currentHealth -= damageAmount;
-//        player.setHealth(currentHealth);
-//        if (currentHealth <= 0) {
-//            // Player has died, handle accordingly (e.g., game over)
-//            // You might want to have another method to handle player death
-//            handlePlayerDeath(player.playerEntityID);;
-//        }
-//    }
-    // Method to handle player death
-    public void handlePlayerDeath(int playerEntityID) {
-        // Handle player death logic here
-        System.out.println("Player with entity ID " + playerEntityID + " has died.");
-    }
+
 }
