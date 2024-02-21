@@ -129,11 +129,20 @@ public class EntityManager implements EntityLifeCycle {
 //    }
 
 
-    public void movement(int entityID) {
+    public void movement(int entityID, String aiBehavior) {
         Entity entity = entityIDMap.get(entityID);
         if (entity != null) {
-            float newX = aiControlManager.moveRandomly(entity.getX());
-            entity.setX(newX);
+            switch (aiBehavior) {
+                case "LRmovement":
+                    float newX = aiControlManager.moveRandomly(entity.getX(), aiBehavior);
+                    entity.setX(newX);
+                    break;
+                case "UDmovement":
+                    float newY = aiControlManager.moveRandomly(entity.getY(), aiBehavior);
+                    entity.setY(newY);
+                    break;
+
+            }
         } else {
             System.out.println("Entity is null for ID: " + entityID);
         }

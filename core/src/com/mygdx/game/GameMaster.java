@@ -93,7 +93,7 @@ public class GameMaster extends Game {
 
 
 		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
-		entityManager.movement(12);
+		entityManager.movement(12, "UDmovement");
 
 		//entityMgr.setUpMovement();
 		entityManager.movement();
