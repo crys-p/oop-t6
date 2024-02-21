@@ -1,20 +1,16 @@
 package com.mygdx.game.IOManager;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.mygdx.game.EntityManager.EntityManager;
-
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
-public class 	IOManager implements InputProcessor {
+public class IOManager implements InputProcessor {
 	//initialize from GameMaster?
 	public static final int SCREEN_WIDTH = 1280;
 	public static final int SCREEN_HEIGHT = 720;
@@ -29,14 +25,18 @@ public class 	IOManager implements InputProcessor {
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
-	//Reference to EntityManager
-	private EntityManager entityManager;
+	private EntityManager entityManager; //Reference to EntityManager
 	private boolean leftKeyPressed = false;
 	private boolean rightKeyPressed = false;
 	private boolean upKeyPressed = false;
 	private boolean downKeyPressed = false;
+	private float mouseX;
+	private float mouseY;
+	private boolean leftButtonPressed;
+	private boolean rightButtonPressed;
 
 	public IOManager(EntityManager entityManager, int numButtons, SoundManager soundManager, SceneManager sceneManager) {
+
 		this.entityManager = entityManager;
 		this.soundManager = soundManager;
 		this.sceneManager = sceneManager;
@@ -45,7 +45,7 @@ public class 	IOManager implements InputProcessor {
 
 	}
 
-
+	// Keys
 	@Override
 	public boolean keyDown(int keycode) {
 		handleKeyPress(keycode, true);
@@ -62,47 +62,6 @@ public class 	IOManager implements InputProcessor {
 	public boolean keyTyped(char character) {
 		return false;
 	}
-
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(float amountX, float amountY) {
-		return false;
-	}
-
-/*	public void processInput(int key) {
-		System.out.println("processing input: " + key);
-
-		if (entityManager != null) {
-			entityManager.inputMovement(Collections.singletonList(key));
-		} else {
-			System.out.println("EntityManager is null");
-		}
-
-	}*/
 
 	public void handleKeyPress(int keycode, boolean isPressed) {
 		switch (keycode) {
@@ -134,50 +93,54 @@ public class 	IOManager implements InputProcessor {
 		}
 	}
 
-	/*private static IOManager instance = new IOManager();
-
-	private final List<Input> inputList;
-	
-	public IOManager(int numButtons, SoundManager soundManager) {
-		inputList = new ArrayList<>();
-		output = new Output(numButtons);
-		this.soundManager = soundManager;
-
+	// Mouse
+	public boolean isLeftButtonPressed() {
+		return leftButtonPressed;
 	}
 
-	public Output getOutput() {
-		return output;
+	public boolean isRightButtonPressed() {
+		return rightButtonPressed;
+	}
+	@Override
+	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+		return false;
 	}
 
-	public static IOManager getInstance() {
-		return instance;
+	@Override
+	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+		return false;
 	}
 
-	//Add input to list
-	public void addInput(Input input) {
-		inputList.add(input);
+	@Override
+	public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
+		return false;
 	}
 
-	// Handle pressed keys and communicate with EntityManager
-	public void handleInput(List<Integer> pressedKeys) {
-		entityManager.inputMovement(pressedKeys);
-		System.out.println("updated pressed");
+	@Override
+	public boolean touchDragged(int screenX, int screenY, int pointer) {
+		return false;
 	}
 
-	//Update all input in the list and communicate with EntityManager
-	public void updateInputs() {
-		for (Input input : inputList) {
-			input.update();
+	@Override
+	public boolean mouseMoved(int screenX, int screenY) {
+		return false;
+	}
 
-			List<Integer> keys = input.getKeys();
-			if (entityManager != null) {
-				entityManager.inputMovement(keys);
-				System.out.println("updated");
-			}
+	@Override
+	public boolean scrolled(float amountX, float amountY) {
+		return false;
+	}
 
-		}
+	public void updateMousePosition(float mouseX, float mouseY) {
+		this.mouseX = mouseX;
+		this.mouseY = mouseY;
+		//System.out.println("Mouse position: (" + mouseX + ", " + mouseY + ")");
+	}
 
-	}*/
+	public void updateMouse() {
+		updateMousePosition(mouseX, mouseY);
+		processInput();
+	}
 
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
 		return output.createButton(text, index, x, y, width, height, styleName);
@@ -263,6 +226,5 @@ public class 	IOManager implements InputProcessor {
 
 		return buttonIndex;
 	}
-
 
 }

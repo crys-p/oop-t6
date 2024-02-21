@@ -1,18 +1,17 @@
 package com.mygdx.game.PlayerControlManager;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.EntityManager.EntityManager;
 
 public class HealthBar {
     protected static final float BAR_WIDTH = 500;
     protected static final float BAR_HEIGHT = 25;
-    private static final int BAR_OFFSET_X = 10;
-    private static final int BAR_OFFSET_Y = 10;
-
-    protected final PlayerControlManager playerControlManager;
-    protected final BitmapFont font;
+    private final BitmapFont font;
+    private final PlayerControlManager playerControlManager;
 
     public HealthBar(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
@@ -20,31 +19,46 @@ public class HealthBar {
     }
 
     public void render(ShapeRenderer shapeRenderer, SpriteBatch batch) {
-        int health = playerControlManager.getHealth();
-        float healthPercentage = (float) health / playerControlManager.getMaxHealth();
+            int playerEntityID = playerControlManager.getPlayerEntityID(); // Get the player entity ID from PlayerControlManager
+        Player player = playerControlManager.getPlayer(playerEntityID); // Get the player using the entity ID
+        if (player == null) {
+            System.out.println("Player not found");
+            return; // Player not found with the provided entity ID
+        }
+
+        int health = player.getHealth();
+        float healthPercentage = (float) health / player.getMaxHealth();
+
+        // Define the position of the health bar
+        float healthBarX = Gdx.graphics.getWidth() * 0.01f; // Distance from the left edge of the screen
+        float healthBarY = Gdx.graphics.getHeight() * 0.6f; // Distance from the top edge of the screen
+
+        // Debugging information
+        System.out.println("Health Bar X: " + healthBarX);
+        System.out.println("Health Bar Y: " + healthBarY);
 
         // Draw the health bar background
         shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect(BAR_OFFSET_X, Gdx.graphics.getHeight() - BAR_OFFSET_Y - BAR_HEIGHT, BAR_WIDTH, BAR_HEIGHT);
+        shapeRenderer.rect(healthBarX, healthBarY, BAR_WIDTH , BAR_HEIGHT );
 
         // Draw the remaining health bar
         shapeRenderer.setColor(Color.GREEN);
-        float barY = Gdx.graphics.getHeight() - BAR_OFFSET_Y - BAR_HEIGHT;
-        shapeRenderer.rect(BAR_OFFSET_X, barY, BAR_WIDTH * healthPercentage, BAR_HEIGHT);
+        shapeRenderer.rect(healthBarX, healthBarY, (BAR_WIDTH) * healthPercentage, BAR_HEIGHT);
 
         // Begin batch for drawing text
         batch.begin();
 
         // Draw text showing current health
-        String healthText = "Health: " + health + "/" + playerControlManager.getMaxHealth();
+        String healthText = "Health: " + health + "/" + player.getMaxHealth();
         font.setColor(Color.WHITE);
-        font.draw(batch, healthText, BAR_OFFSET_X + 10, Gdx.graphics.getHeight() - BAR_OFFSET_Y - 30);
+        font.draw(batch, healthText, healthBarX, healthBarY - 10);
 
         // End batch
         batch.end();
     }
+
+
     public void dispose() {
         font.dispose();
     }
-
 }

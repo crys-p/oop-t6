@@ -1,15 +1,18 @@
 package com.mygdx.game.EntityManager;
 
-import com.badlogic.gdx.graphics.Color;
 
-abstract class Enemy extends Entity {
-    protected Color color;
+abstract class Enemy extends Entity implements AIControlled {
+    protected float damage;
 
-    // TODO: Set damage in respective classes
-    protected int damage;
+    Enemy(float x, float y, float velocityX, float velocityY, String image) {
+        super(x, y, velocityX, velocityY, image);
+    }
 
-    Enemy(float x, float y, float velocityX, float velocityY, Color color) {
-        super(x, y, velocityX, velocityY);
-        this.color = color;
+    protected void setDamage(float dmg) {
+        this.damage = dmg;
+    }
+
+    protected float getDamage() {
+        return this.damage;
     }
 }

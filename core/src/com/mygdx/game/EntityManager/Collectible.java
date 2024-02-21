@@ -1,30 +1,16 @@
 package com.mygdx.game.EntityManager;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class Collectible extends Entity {
-    private final Texture texture;
+class Collectible extends Entity implements AIControlled {
 
     protected Collectible(float x, float y, float velocityX, float velocityY, String image) {
-        super(x, y, velocityX, velocityY);
-        this.texture = new Texture(Gdx.files.internal(image));
+        super(x, y, velocityX, velocityY, image);
     }
 
 
-    @Override
-    protected float getHeight() {
-        return this.texture.getHeight();
-    }
-
-    @Override
-    protected float getWidth() {
-        return this.texture.getWidth();
-    }
-
-    protected void draw(SpriteBatch batch) {
-        batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
+    protected void draw(ShapeRenderer shape) {
+//        shape.rect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
     }
 
     protected void logConsole() {
@@ -33,6 +19,9 @@ public class Collectible extends Entity {
 
     @Override
     protected void movement() {
-
+        float newY = aiControlManager.moveUD(this.getY());
+        this.setY(newY);
+        updateBoundingBox();
     }
+
 }

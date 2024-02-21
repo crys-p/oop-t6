@@ -38,12 +38,12 @@ public class GameScene extends Scene {
     @Override
     public void createEntities() {
 
+        entityManager.createCharacter(1, 100, 0, 400, 20, "UDLR");
 
-        entityManager.createCharacter(1, 100, -100, 20, 0);
         Random random = new Random();
-        entityManager.createItemRandomX(10, random, 680, 0, 20);
-        entityManager.createTriangle(1, 300, 200, 40, 40, Color.GREEN, 50);
-        entityManager.createCircle(1, 200, 300, 40, 0, Color.RED, 50);
+        entityManager.createCollectibleRandom(10, random, 0, 20);
+        entityManager.createKnightRandomY(5, 300, random, 40, 40);
+        entityManager.createNinjaRandomY(1, 200, random, 40, 0);
         entityManager.logAll(); // for debugging
     }
 
@@ -85,8 +85,8 @@ public class GameScene extends Scene {
         batch.begin();
         gameSceneButton.draw(batch, 1); // Adjust parameters as needed
         shape.begin(ShapeRenderer.ShapeType.Filled);
-        entityManager.drawEntities(batch, shape);
         shape.end();
+        entityManager.drawAllEntities(batch);
         batch.end();
 
         // Process input events

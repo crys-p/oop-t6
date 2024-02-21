@@ -28,14 +28,9 @@
 
         @Override
         protected void createEntities() {
-            // Create entities specific to the start scene
-            // Implement entity creation logic here
-            entityManager.createCharacter(1, 100, -100, 20, 0);
-            entityManager.logAll();
+            // Create entities specific to the start scenex
+            entityManager.createCharacter(1, 100, 0, 20, 0, null);
         }
-
-        // creation of entities specific to the start scene
-
 
         @Override
         public void hide() {
@@ -47,9 +42,7 @@
             // Clear the screen
             clearScreen();
             batch.begin();
-            shape.begin(ShapeRenderer.ShapeType.Filled);
-            entityManager.drawEntities(batch, shape);
-            shape.end();
+            entityManager.drawAllEntities(batch);
             batch.end();
             // Update the camera and viewport
             //camera.update();
@@ -61,5 +54,4 @@
             viewport.update(width, height);
 
         }
-
     }

@@ -1,84 +1,62 @@
+// PlayerControlManager.java
 package com.mygdx.game.PlayerControlManager;
 
-import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlayerControlManager {
-    private int playerEntityID;
-    private int health;
-    private int maxHealth;
-    private float movementSpeed;
-    private float jump;
-    private CollisionManager collisionManager;
-    private boolean onGround;
-    private final EntityManager entityManager;
+    private final Map<Integer, Player> players; // Map to store playerEntityID and corresponding Player instances
+    private final EntityManager entityManager; // Assume you have a reference to EntityManager
 
-    // Constructor to initialize EntityManager
     public PlayerControlManager(EntityManager entityManager) {
+        players = new HashMap<>();
         this.entityManager = entityManager;
     }
-    // Getter for characters
-    public List<Character> getCharacters() {
-        // return entityManager.getCharacters(); //character is package protected
-        return null;
+
+    // Method to create a player
+    public void createPlayer(float x, float y) {
+        Player player = new Player(x, y, "player.png");
+        addPlayer(player); // Add the created player to the manager
     }
 
-    public int getHealth() { return health; }
-    public void setHealth(int health) { this.health = health; }
-    public int getMaxHealth() { return maxHealth; }
-    public void setMaxHealth(int maxHealth) { this.maxHealth = maxHealth; }
-    public float getMovementSpeed() { return movementSpeed; }
-    public void setMovementSpeed(float movementSpeed) { this.movementSpeed = movementSpeed; }
-    public float getJump() { return jump; }
-    public void setJump(float jump) { this.jump = jump; }
+    public int getPlayerEntityID() {
+        return entityManager.getPlayerEntityID();
+    }
 
-    public float getPlayerX() {
-        List<Character> characters = getCharacters();
-        if (!characters.isEmpty()) {
-//            return characters.get(0).getEntityX(); // comment out for compile testing - crys
+    // Method to add a player to the manager
+    public void addPlayer(Player player) {
+        int playerEntityID = entityManager.getPlayerEntityID();
+        players.put(playerEntityID, player);
+    }
+    // Method to remove a player from the manager
+    public void removePlayer(int playerEntityID) {
+        players.remove(playerEntityID);
+    }
+
+    // Method to get the player instance by entity ID
+    public Player getPlayer(int playerEntityID) {
+        return players.get(playerEntityID);
+    }
+
+    // Method to handle taking damage
+// Method to handle taking damage
+    public void takeDamage(int damage) {
+        // Loop through all players and apply damage
+        for (Player player : players.values()) {
+            // Calculate the new health after taking damage
+            int newHealth = player.getHealth() - damage;
+
+            // Ensure health never goes below 0
+            if (newHealth < 0) {
+                newHealth = 0;
+            }
+
+            // Update the player's health
+            player.setHealth(newHealth);
+
         }
-        return 0; // Return default value if no player character found
     }
 
-    public float getPlayerY() {
-        List<Character> characters = getCharacters();
-        if (!characters.isEmpty()) {
-//            return characters.get(0).getEntityY(); // comment out for compile testing - crys
-        }
-        return 0; // Return default value if no player character found
-    }
-
-    //to be clarified
-//    public void moveLeft() {
-//        List<Character> characters = getCharacters();
-//        if (!characters.isEmpty() && collisionManager.canMoveLeft(characters.get(0))) {
-//            Character player = characters.get(0);
-//            float newX = player.getEntityX() - movementSpeed;
-//            player.setEntityX(newX);
-//        }
-//    }
-//
-//    public void moveRight() {
-//        List<Character> characters = getCharacters();
-//        if (!characters.isEmpty() && collisionManager.canMoveRight(characters.get(0))) {
-//            Character player = characters.get(0);
-//            float newX = player.getEntityX() + movementSpeed;
-//            player.setEntityX(newX);
-//        }
-//    }
-//    public void jump() {
-//        List<Character> characters = getCharacters();
-//        if (!characters.isEmpty()) {
-//            Character player = characters.get(0);
-//            if (onGround) {
-//                float newY = player.getEntityY() + jump;
-//                player.setEntityY(newY);
-//                onGround = false;
-//            }
-//        }
-//    }
-    public void setOnGround(boolean onGround) { this.onGround = onGround; }
-    public boolean isOnGround() { return onGround; }
 }

@@ -1,8 +1,5 @@
 package com.mygdx.game.AIControlManager;
 
-import com.badlogic.gdx.Gdx;
-import com.mygdx.game.Config;
-
 public class AIControl {
     private float movementSpeed;
     private float jump;

@@ -1,14 +1,8 @@
 package com.mygdx.game.EntityManager;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.AIControlManager.AIControlManager;
-import com.mygdx.game.CollisionManager.CollisionManager;
 
 import java.util.*;
 
@@ -19,7 +13,7 @@ public class EntityManager implements EntityLifeCycle {
     private List<Collectible> collectibleList;
     private Map<Integer, Entity> entityIDMap;
     private int entityCount;
-    private AIControlManager aiControlManager;
+
 //    private boolean movingRight = true;
     // Constructor
     public EntityManager() {
@@ -28,58 +22,50 @@ public class EntityManager implements EntityLifeCycle {
         enemyList = new ArrayList<>();
         collectibleList = new ArrayList<>();
         entityIDMap = new HashMap<>();
-        this.aiControlManager = new AIControlManager();
-
     }
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR SCENEMANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @Override
-    public void createCharacter(int quantity, float x, float y, float velocityX, float velocityY) {
+    public void createCharacter(int quantity, float x, float y, float speed, float velocityY, String controls) {
         for (int i = 0; i < quantity; i++) {
-            Character character = new Character(x, y, velocityX, velocityY, "player.png");
+            Character character = new Character(x, y, speed, velocityY, "player.png", controls);
             this.setUpEntityAttributes(character);
-            character.setInputControls("UDLR"); // probably has to be rewritten somewhere to set PlayerControl when user can choose
+        }
+    }
+
+    public void createKnightRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
+        for (int i = 0; i < quantity; i++) {
+            this.setUpEntityAttributes(new Knight(x, random.nextFloat() * 720, velocityX, velocityY, "knight.png"));
         }
     }
 
     @Override
-    public void createCircle(int quantity, float x, float y, float velocityX, float velocityY, Color color, float radius) {
+    public void createNinjaRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Circle(x, y, velocityX, velocityY, color, radius));
-        }
-    }
-
-    @Override
-    public void createTriangle(int quantity, float x, float y, float velocityX, float velocityY, Color color, float sideLength) {
-        for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Triangle(x, y, velocityX, velocityY, color, sideLength));
+            this.setUpEntityAttributes(new Ninja(x, random.nextFloat(), velocityX, velocityY, "ninja.png"));
         }
     }
 
     @Override
     // Create item at random x positions
-    public void createItemRandomX(int quantity, Random random, float y, float velocityX, float velocityY) {
+    public void createCollectibleRandom(int quantity, Random random, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Collectible(random.nextFloat() * 1280, y, velocityX, velocityY, "droplet.png"));
+            this.setUpEntityAttributes(new Collectible(random.nextFloat() * 1280, random.nextFloat() * 720, velocityX, velocityY, "star.png"));
         } // 1280 as screen width --> use constant variable instead?
     }
 
     @Override
     // Create item at specific location
-    public void createItem(int quantity, float x, float y, float velocityX, float velocityY) {
+    public void createCollectible(int quantity, float x, float y, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
             this.setUpEntityAttributes(new Collectible(x, y, velocityX, velocityY, "droplet.png"));
         }
     }
 
     @Override
-    public void drawEntities(SpriteBatch batch, ShapeRenderer shape) {
+    public void drawAllEntities(SpriteBatch batch) {
         for (Entity e : entityList) {
-            if (e instanceof Character || e instanceof Collectible) {
-                e.draw(batch);
-            } else {
-                e.draw(shape);
-            }
+            e.draw(batch);
         }
     }
 
@@ -88,54 +74,38 @@ public class EntityManager implements EntityLifeCycle {
         entityList.clear();
         entityIDMap.clear();
         entityCount = 0;
+        characterList.clear();
+        enemyList.clear();
+        collectibleList.clear();
+    }
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR PlayerControl~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public int getPlayerEntityID() {
+        // Iterate over the entityList
+        for (Entity entity : entityList) {
+            // Check if the entity is an instance of Character
+            if (entity instanceof Character) {
+                // If it is, return its entity ID
+                return entity.getEntityID();
+            }
+        }
+        // Return -1 if no player character is found
+        return -1;
     }
 
+
+    public void removeEntity(int entityID) {
+        Entity entity = entityIDMap.get(entityID);
+        if (entity != null) {
+            removeFromList(entity);
+        }
+        System.out.println("No. of entities: " + entityList.size());
+    }
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR AI/IO MOVEMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     public void movement() {
         for (Entity entity : entityList) {
             entity.movement();
-        }
-    }
-
-//    public void movement(int entityID) {
-//        Entity entity = entityIDMap.get(entityID);
-//        if (entity != null) {
-//            System.out.println("Entity ID: " + entityID);
-//            System.out.println("Entity X Position: " + entity.getX());
-//
-//            // Calculate movement based on direction
-//            float movement = movingRight ? 20 : -20; // if movingRight = true, entity moves to the right; if movingRight = false, entity moves to the left
-//
-//            // Update position based on movement
-//            float newX = entity.getX() + movement;
-//
-//            // Check if AI has reached the edge of the screen
-//            if (newX < 0) {
-//                newX = 0; // Reset position to prevent going off-screen
-//                movingRight = true; // Change direction to right
-//            } else if (newX > (float) Gdx.graphics.getWidth() / 2) {
-//                newX = (float) Gdx.graphics.getWidth() / 2; // Reset position
-//                movingRight = false; // Change direction to left
-//            }
-//
-//            // Set the new position of the entity
-//            entity.setX(newX);
-//
-//            System.out.println("New X Position: " + entity.getX());
-//        } else {
-//            System.out.println("Entity is null for ID: " + entityID);
-//        }
-//    }
-
-
-    public void movement(int entityID) {
-        Entity entity = entityIDMap.get(entityID);
-        if (entity != null) {
-            float newX = aiControlManager.moveRandomly(entity.getX());
-            entity.setX(newX);
-        } else {
-            System.out.println("Entity is null for ID: " + entityID);
+            entity.updateBoundingBox();
         }
     }
 
@@ -151,11 +121,6 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
-    public void HARDCODED_INPUT_LISTENER_FOR_AARON() {
-        for (Character character : characterList) {
-            character.hardcodeMovementListener();
-        }
-    }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public HashMap<Rectangle, Integer> getCharacterBoundingBoxes() {
@@ -209,6 +174,21 @@ public class EntityManager implements EntityLifeCycle {
             collectibleList.add((Collectible) entity);
         }
     }
+
+    private void removeFromList(Entity entity) {
+        entityList.remove(entity);
+        System.out.println("Removing entityID: " + entity.entityID);
+
+        // Add entity to its respective list
+        if (entity instanceof Character) {
+            characterList.remove((Character) entity);
+        } else if (entity instanceof Enemy) {
+            enemyList.remove((Enemy) entity);
+        } else if (entity instanceof Collectible) {
+            collectibleList.remove((Collectible) entity);
+        }
+    }
+
 
     private void createBoundingBox(Entity e) {
         e.boundingBox = new Rectangle(e.x, e.y, e.getWidth(), e.getHeight());
