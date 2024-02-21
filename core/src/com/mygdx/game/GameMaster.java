@@ -48,9 +48,9 @@ public class GameMaster extends Game {
 		// Create respective managers
 		entityManager = new EntityManager();
 
+		//Initialize IOManager
 		ioManager = new IOManager(entityManager,5, soundManager);
-		ioManager.setWindowedMode(); // done in IO
-
+		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
@@ -80,15 +80,15 @@ public class GameMaster extends Game {
 	}
 	// Method to switch to another scene
 
-
-
-
 	public void render() {
 		super.render();
 
-
+		//entityMgr.setUpMovement();
 		entityManager.movement();
 		ioManager.updateMovement();
+		ioManager.updateMouse();
+		inputManager.setUpInputControl();
+
 		// Keep the player within the screen bounds
 //		if(player.getX() > Gdx.graphics.getWidth())
 //			player.setX(Gdx.graphics.getWidth());
