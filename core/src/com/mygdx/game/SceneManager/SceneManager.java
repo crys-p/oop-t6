@@ -81,8 +81,8 @@ public class SceneManager {
     }
 
     public void showGameScene() {
-        //changeScene(gameScene);
-        changeScene(menuScene);
+        changeScene(gameScene);
+//        changeScene(menuScene);
         // play the GameScene Song
         soundManager.playGameSceneMusic();
         // Log initialization message
