@@ -38,12 +38,8 @@ public class GameMaster extends Game {
 	private CollisionManager collisionManager;
 
 	public void create() {
-		// Setting the initial size of the window
 		// Initialize SoundManager with background music and sound effect files
 		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","sound_effect.mp3");
-
-		ioManager = new IOManager(entityManager,5, soundManager);
-		ioManager.setWindowedMode(); // done in IO
 
 		// Creating renderers
 		batch = new SpriteBatch();
@@ -53,9 +49,10 @@ public class GameMaster extends Game {
 		inputManager = new PlayerInputManager();
 		entityManager = new EntityManager();
 
+		//Initialize IOManager
+		ioManager = new IOManager(entityManager,5, soundManager);
+		ioManager.setWindowedMode(); // Setting the initial size of the window
 
-
-		// Initialize SoundManager with background music and sound effect files
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
