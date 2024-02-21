@@ -33,16 +33,9 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
-    public void createKnightRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
+    public void createEnemyRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Knight(x, random.nextFloat() * 720, velocityX, velocityY, "knight.png"));
-        }
-    }
-
-    @Override
-    public void createNinjaRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
-        for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Ninja(x, random.nextFloat(), velocityX, velocityY, "ninja.png"));
+            this.setUpEntityAttributes(new Enemy(x, random.nextFloat() * 720, velocityX, velocityY, "knight.png"));
         }
     }
 

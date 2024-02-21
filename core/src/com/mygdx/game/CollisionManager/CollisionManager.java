@@ -30,7 +30,6 @@ public class CollisionManager {
         characterMap.clear();
         enemyMap.clear();
         collectibleMap.clear();
-
         // Add latest items to map
         HashMap<Rectangle, Integer> allCharacters = entityManager.getCharacterBoundingBoxes();
         characterMap.putAll(allCharacters);
@@ -75,7 +74,7 @@ public class CollisionManager {
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         entityManager.removeEntity(enemyID);
-        playerControlManager.takeDamage(20);
+        playerControlManager.takeDamage(characterID, 20);
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
     }

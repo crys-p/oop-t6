@@ -10,9 +10,7 @@ import java.util.Random;
 public interface EntityLifeCycle {
     void createCharacter(int quantity, float x, float y, float speed, float velocityY, String controls);
 
-    void createNinjaRandomY(int quantity, float x, Random random, float speed, float velocityY);
-
-    void createKnightRandomY(int quantity, float x, Random random, float speed, float velocityY);
+    void createEnemyRandomY(int quantity, float x, Random random, float speed, float velocityY);
 
     // Create item at specific location
     void createCollectible(int quantity, float x, float y, float speed, float velocityY);

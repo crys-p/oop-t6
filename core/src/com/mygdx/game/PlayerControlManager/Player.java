@@ -5,18 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player {
-    protected float x;
-    protected float y;
-    protected final Texture texture;
+    protected int playerControlledEntityID;
     protected int maxHealth = 100;
     protected int health;
     protected Inventory inventory;
-    protected Vector2 position;
+    private String keyControls;
 
-    protected Player(float x, float y, String image) {
-        this.x = x;
-        this.y = y;
-        this.texture = new Texture(Gdx.files.internal(image));
+    protected Player() {
         this.health = maxHealth;
         this.inventory = new Inventory();
     }
@@ -25,9 +20,12 @@ public class Player {
 //        health = Math.min(health + amount, maxHealth);
 //    }
 
-    protected void move(Vector2 direction) {
-        position.add(direction);
+    protected void setPlayerControlledEntityID(int entityID) {
+        this.playerControlledEntityID = entityID;
     }
+//    protected void move(Vector2 direction) {
+//        position.add(direction);
+//    }
 
     protected void addItemToInventory(Item item, int quantity) {
         inventory.addItem(item, quantity);
@@ -40,18 +38,7 @@ public class Player {
     protected int getTotalItems() {
         return inventory.getTotalItems();
     }
-    protected float getX() {
-        return x;
-    }
-    protected float getY() {
-        return y;
-    }
-    protected void setX(int x) {
-        this.x = x;
-    }
-    protected void setY(int y) {
-        this.y = y;
-    }
+
     protected int getHealth() {
         return this.health;
     }
@@ -61,8 +48,12 @@ public class Player {
     protected int getMaxHealth() {
         return this.maxHealth;
     }
-    public Vector2 getPosition() {
-        return position;
+//    public Vector2 getPosition() {
+//        return position;
+//    }
+
+    public void setPlayerKeyControls(String playerControl) {
+        this.keyControls = playerControl;
     }
 }
 

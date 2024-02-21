@@ -1,6 +1,7 @@
 package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.AIControlManager.AIControlled;
 
 class Collectible extends Entity implements AIControlled {
 

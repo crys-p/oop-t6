@@ -74,7 +74,9 @@ public class GameMaster extends Game {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
-		playerControlManager.createPlayer(10,10);
+		// Set up single player mode with default Up down left right key controls
+		playerControlManager.createPlayers(1);
+		playerControlManager.setPlayerControl(0, "UDLR");
 	}
 	// Method to switch to another scene
 
