@@ -81,7 +81,6 @@ public class GameMaster extends Game {
 	public void render() {
 		super.render();
 
-		//entityMgr.setUpMovement();
 		entityManager.movement();
 		ioManager.updateMovement();
 		ioManager.updateMouse();

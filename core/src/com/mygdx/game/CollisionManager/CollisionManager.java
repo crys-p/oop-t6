@@ -26,9 +26,6 @@ public class CollisionManager {
     }
 
     public void setCollidables() {
-    }
-
-    public void detectCollisions() {
         // Clear existing maps if any
         characterMap.clear();
         enemyMap.clear();
@@ -41,7 +38,9 @@ public class CollisionManager {
         enemyMap.putAll(allEnemies);
         HashMap<Rectangle, Integer> allCollectibles = entityManager.getCollectibleBoundingBoxes();
         collectibleMap.putAll(allCollectibles);
+    }
 
+    public void detectCollisions() {
         // Loop through different maps to detect collision
         // If collision is being detected, handle collision reaction using handleCharacterCollectibleCollision etc.
         for (Rectangle enemyRect : enemyMap.keySet()) {
@@ -53,16 +52,15 @@ public class CollisionManager {
                     entityManager.logAll();
                 }
             }
-
-            for (Rectangle collectibleRect : collectibleMap.keySet()) {
-                for (Rectangle charRect : characterMap.keySet()) {
-                    if (charRect.overlaps(collectibleRect)) {
-                        int charID = characterMap.get(charRect);
-                        int collectibleID = collectibleMap.get(collectibleRect);
-                        System.out.println("Collided with Collectible");
-                        handleCharacterCollectibleCollision(charID, collectibleID);
-                        entityManager.logAll();
-                    }
+        }
+        for (Rectangle collectibleRect : collectibleMap.keySet()) {
+            for (Rectangle charRect : characterMap.keySet()) {
+                if (charRect.overlaps(collectibleRect)) {
+                    int charID = characterMap.get(charRect);
+                    int collectibleID = collectibleMap.get(collectibleRect);
+                    System.out.println("Collided with Collectible");
+                    handleCharacterCollectibleCollision(charID, collectibleID);
+                    entityManager.logAll();
                 }
             }
         }
