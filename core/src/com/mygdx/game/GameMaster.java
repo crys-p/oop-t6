@@ -56,7 +56,7 @@ public class GameMaster extends Game {
 
 
 		// Initialize SoundManager with background music and sound effect files
-		// Initialise Collision Manager for all collision detection and handling
+		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
 		// Pass the game instance to SceneManager
@@ -93,7 +93,9 @@ public class GameMaster extends Game {
 
 
 		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
-		entityManager.movement(12, "UDmovement");
+//		entityManager.movement(1, "UDmovement"); //to be clarified
+		entityManager.LRmovement(11);
+		entityManager.UDmovement(12);
 
 		//entityMgr.setUpMovement();
 		entityManager.movement();

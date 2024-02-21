@@ -98,55 +98,43 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
-//    public void movement(int entityID) {
-//        Entity entity = entityIDMap.get(entityID);
-//        if (entity != null) {
-//            System.out.println("Entity ID: " + entityID);
-//            System.out.println("Entity X Position: " + entity.getX());
-//
-//            // Calculate movement based on direction
-//            float movement = movingRight ? 20 : -20; // if movingRight = true, entity moves to the right; if movingRight = false, entity moves to the left
-//
-//            // Update position based on movement
-//            float newX = entity.getX() + movement;
-//
-//            // Check if AI has reached the edge of the screen
-//            if (newX < 0) {
-//                newX = 0; // Reset position to prevent going off-screen
-//                movingRight = true; // Change direction to right
-//            } else if (newX > (float) Gdx.graphics.getWidth() / 2) {
-//                newX = (float) Gdx.graphics.getWidth() / 2; // Reset position
-//                movingRight = false; // Change direction to left
-//            }
-//
-//            // Set the new position of the entity
-//            entity.setX(newX);
-//
-//            System.out.println("New X Position: " + entity.getX());
-//        } else {
-//            System.out.println("Entity is null for ID: " + entityID);
-//        }
-//    }
-
-
-    public void movement(int entityID, String aiBehavior) {
+    public void LRmovement(int entityID) {
         Entity entity = entityIDMap.get(entityID);
         if (entity != null) {
-            switch (aiBehavior) {
-                case "LRmovement":
-                    float newX = aiControlManager.moveRandomly(entity.getX(), aiBehavior);
-                    entity.setX(newX);
-                    break;
-                case "UDmovement":
-                    float newY = aiControlManager.moveRandomly(entity.getY(), aiBehavior);
-                    entity.setY(newY);
-                    break;
-
-            }
+            float newX = aiControlManager.moveLR(entity.getX());
+            entity.setX(newX);
         } else {
             System.out.println("Entity is null for ID: " + entityID);
         }
     }
+    public void UDmovement(int entityID) {
+        Entity entity = entityIDMap.get(entityID);
+        if (entity != null) {
+            float newY = aiControlManager.moveUD(entity.getY());
+            entity.setY(newY);
+        } else {
+            System.out.println("Entity is null for ID: " + entityID);
+        }
+    }
+
+//    public void movement(int entityID, String aiBehavior) {
+//        Entity entity = entityIDMap.get(entityID);
+//        if (entity != null) {
+//            switch (aiBehavior) {
+//                case "LRmovement":
+//                    float newX = aiControlManager.moveRandomly(entity.getX(), aiBehavior);
+//                    entity.setX(newX);
+//                    break;
+//                case "UDmovement":
+//                    float newY = aiControlManager.moveRandomly(entity.getY(), aiBehavior);
+//                    entity.setY(newY);
+//                    break;
+//
+//            }
+//        } else {
+//            System.out.println("Entity is null for ID: " + entityID);
+//        }
+//    }
 
     //updated so that io can call
     public void inputMovement(List<Integer> keys) {
