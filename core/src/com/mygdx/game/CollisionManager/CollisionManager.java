@@ -44,83 +44,45 @@ public class CollisionManager {
 
         // Loop through different maps to detect collision
         // If collision is being detected, handle collision reaction using handleCharacterCollectibleCollision etc.
-        for(Rectangle enemyRect : enemyMap.keySet())
-        {
-            for (Rectangle charRect : characterMap.keySet())
-            {
-<<<<<<< HEAD
+        for (Rectangle enemyRect : enemyMap.keySet()) {
+            for (Rectangle charRect : characterMap.keySet()) {
                 if (charRect.overlaps(enemyRect)) {
                     int charID = characterMap.get(charRect);
                     int enemyID = enemyMap.get(enemyRect);
-
-                    System.out.println("Collided with Enemy");
                     handleCharacterEnemyCollision(charID, enemyID);
                     entityManager.logAll();
-=======
-                if(charRect.overlaps(enemyRect))
-                {
-                    handleCharacterEnemyCollision();
-                    handlePlayerEnemyCollision();
->>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
                 }
             }
-        }
 
-        for(Rectangle collectibleRect : collectibleMap.keySet())
-        {
-            for(Rectangle charRect : characterMap.keySet())
-            {
-                if(charRect.overlaps(collectibleRect))
-                {
-                    int charID = characterMap.get(charRect);
-                    int collectibleID = collectibleMap.get(collectibleRect);
-                    System.out.println("Collided with Collectible");
-                    handleCharacterCollectibleCollision(charID, collectibleID);
-                    entityManager.logAll();
+            for (Rectangle collectibleRect : collectibleMap.keySet()) {
+                for (Rectangle charRect : characterMap.keySet()) {
+                    if (charRect.overlaps(collectibleRect)) {
+                        int charID = characterMap.get(charRect);
+                        int collectibleID = collectibleMap.get(collectibleRect);
+                        System.out.println("Collided with Collectible");
+                        handleCharacterCollectibleCollision(charID, collectibleID);
+                        entityManager.logAll();
+                    }
                 }
             }
         }
     }
-
-<<<<<<< HEAD
-=======
-    private void handleCharacterCollectibleCollision() {
-        // soundmanager.playsfx (if have idk)
-        // playercontrol.increasepoints
-        // entitymgr.removeentity(collectibleID)
-//        System.out.println("Character Item collide");
-    }
->>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
 
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
         System.out.println("Character Item collide");
         entityManager.removeEntity(collectibleID);
         // soundmanager.playsfx (if have idk)
         // playercontrol.increasepoints
-<<<<<<< HEAD
-=======
+
         // entitymgr.removeentity(collectibleID)
 //        System.out.println("Character Item collide");
-    }
-
-    private void handleCharacterEnemyCollision() {
-        // soundmanager.playsfx (if have idk)
-        // playercontrol.decreasehealth
-        // entitymgr.removeentity(enemyID)
-//        System.out.println("Character Enemy collide");
->>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         entityManager.removeEntity(enemyID);
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
-<<<<<<< HEAD
-        // System.out.println("Character Enemy collide");
-=======
-        // entitymgr.removeentity(enemyID)
-//        System.out.println("Collided working");
->>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
+
     }
 
     private void handlePlayerEnemyCollision() {

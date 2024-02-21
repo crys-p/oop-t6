@@ -20,12 +20,7 @@ public class AIControlManager {
             newX = (float) Gdx.graphics.getWidth(); // Reset position
             movingRight = false; // Change direction to left
         }
-<<<<<<< HEAD
 
-        // System.out.println("New X Position: " +newX);
-
-=======
->>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
         // Return the new X position
         return newX;
     }
@@ -44,12 +39,7 @@ public class AIControlManager {
             newY = (float) Gdx.graphics.getHeight(); // Reset position
             movingDown = false; // Change direction to left
         }
-<<<<<<< HEAD
 
-        // System.out.println("New Y Position: " +newY);
-
-=======
->>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
         // Return the new X position
         return newY;
     }
