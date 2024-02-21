@@ -1,45 +1,68 @@
 package com.mygdx.game.PlayerControlManager;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Vector2;
+
 public class Player {
-    private float positionX;
-    private float positionY;
-    private int totalItems; // Variable to keep track of total items
+    protected float x;
+    protected float y;
+    protected final Texture texture;
+    protected int maxHealth = 100;
+    protected int health;
+    protected Inventory inventory;
+    protected Vector2 position;
 
-    // Constructor
-    public Player(float positionX, float positionY) {
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.totalItems = 0; // Initialize totalItems to 0 when creating a new player
+    protected Player(float x, float y, String image) {
+        this.x = x;
+        this.y = y;
+        this.texture = new Texture(Gdx.files.internal(image));
+        this.health = maxHealth;
+        this.inventory = new Inventory();
+    }
+//
+//    protected void heal(int amount) {
+//        health = Math.min(health + amount, maxHealth);
+//    }
+
+    protected void move(Vector2 direction) {
+        position.add(direction);
     }
 
-    // Getters and setters for positionX and positionY
-    public float getPositionX() {
-        return positionX;
+    protected void addItemToInventory(Item item, int quantity) {
+        inventory.addItem(item, quantity);
     }
 
-    public void setPositionX(float positionX) {
-        this.positionX = positionX;
+    protected void removeItemFromInventory(Item item, int quantity) {
+        inventory.removeItem(item, quantity);
     }
 
-    public float getPositionY() {
-        return positionY;
+    protected int getTotalItems() {
+        return inventory.getTotalItems();
     }
-
-    public void setPositionY(float positionY) {
-        this.positionY = positionY;
+    protected float getX() {
+        return x;
     }
-
-    // Getter and setter for totalItems
-    public int getTotalItems() {
-        return totalItems;
+    protected float getY() {
+        return y;
     }
-
-    public void setTotalItems(int totalItems) {
-        this.totalItems = totalItems;
+    protected void setX(int x) {
+        this.x = x;
     }
-
-    // Method to increment totalItems
-    public void incrementTotalItems() {
-        totalItems++;
+    protected void setY(int y) {
+        this.y = y;
+    }
+    protected int getHealth() {
+        return this.health;
+    }
+    protected void setHealth(int health) {
+        this.health = health;
+    }
+    protected int getMaxHealth() {
+        return this.maxHealth;
+    }
+    public Vector2 getPosition() {
+        return position;
     }
 }
+

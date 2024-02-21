@@ -13,6 +13,10 @@ public class EntityManager implements EntityLifeCycle {
     private List<Collectible> collectibleList;
     private Map<Integer, Entity> entityIDMap;
     private int entityCount;
+<<<<<<< HEAD
+=======
+//    private AIControlManager aiControlManager;
+>>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
 //    private boolean movingRight = true;
     // Constructor
     public EntityManager() {
@@ -21,6 +25,10 @@ public class EntityManager implements EntityLifeCycle {
         enemyList = new ArrayList<>();
         collectibleList = new ArrayList<>();
         entityIDMap = new HashMap<>();
+<<<<<<< HEAD
+=======
+//        this.aiControlManager = new AIControlManager();
+>>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -77,6 +85,21 @@ public class EntityManager implements EntityLifeCycle {
         enemyList.clear();
         collectibleList.clear();
     }
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR PlayerControl~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    public int getPlayerEntityID() {
+        // Iterate over the entityList
+        for (Entity entity : entityList) {
+            // Check if the entity is an instance of Character
+            if (entity instanceof Character) {
+                // If it is, return its entity ID
+                return entity.getEntityID();
+            }
+        }
+        // Return -1 if no player character is found
+        return -1;
+    }
+
+
 
     public void removeEntity(int entityID) {
         Entity entity = entityIDMap.get(entityID);

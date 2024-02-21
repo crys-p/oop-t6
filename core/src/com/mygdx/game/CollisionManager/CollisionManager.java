@@ -1,6 +1,5 @@
 package com.mygdx.game.CollisionManager;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.Config;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SoundManager.SoundManager;
@@ -49,6 +48,7 @@ public class CollisionManager {
         {
             for (Rectangle charRect : characterMap.keySet())
             {
+<<<<<<< HEAD
                 if (charRect.overlaps(enemyRect)) {
                     int charID = characterMap.get(charRect);
                     int enemyID = enemyMap.get(enemyRect);
@@ -56,6 +56,12 @@ public class CollisionManager {
                     System.out.println("Collided with Enemy");
                     handleCharacterEnemyCollision(charID, enemyID);
                     entityManager.logAll();
+=======
+                if(charRect.overlaps(enemyRect))
+                {
+                    handleCharacterEnemyCollision();
+                    handlePlayerEnemyCollision();
+>>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
                 }
             }
         }
@@ -76,20 +82,61 @@ public class CollisionManager {
         }
     }
 
+<<<<<<< HEAD
+=======
+    private void handleCharacterCollectibleCollision() {
+        // soundmanager.playsfx (if have idk)
+        // playercontrol.increasepoints
+        // entitymgr.removeentity(collectibleID)
+//        System.out.println("Character Item collide");
+    }
+>>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
 
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
         System.out.println("Character Item collide");
         entityManager.removeEntity(collectibleID);
         // soundmanager.playsfx (if have idk)
         // playercontrol.increasepoints
+<<<<<<< HEAD
+=======
+        // entitymgr.removeentity(collectibleID)
+//        System.out.println("Character Item collide");
+    }
+
+    private void handleCharacterEnemyCollision() {
+        // soundmanager.playsfx (if have idk)
+        // playercontrol.decreasehealth
+        // entitymgr.removeentity(enemyID)
+//        System.out.println("Character Enemy collide");
+>>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         entityManager.removeEntity(enemyID);
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
+<<<<<<< HEAD
         // System.out.println("Character Enemy collide");
+=======
+        // entitymgr.removeentity(enemyID)
+//        System.out.println("Collided working");
+>>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
     }
+
+    private void handlePlayerEnemyCollision() {
+        // Handle collision between player and enemy
+        // For example:
+//        soundManager.playEnemyCollisionSound();
+        playerControlManager.takeDamage(20);
+    }
+
+//    private void handlePlayerCollectibleCollision() {
+//        // Handle collision between player and collectible
+//        // For example:
+//        soundManager.playCollectibleCollisionSound();
+//        playerControlManager.addToInventory(collectible);
+//        entityManager.removeEntity(collectible);
+//    }
 
 
 //    //shermaine

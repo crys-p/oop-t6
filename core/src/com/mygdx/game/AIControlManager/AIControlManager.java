@@ -1,10 +1,6 @@
 package com.mygdx.game.AIControlManager;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.Config;
-import com.mygdx.game.EntityManager.EntityManager;
-
-import java.util.Objects;
 
 public class AIControlManager {
     private boolean movingRight = true;
@@ -24,9 +20,12 @@ public class AIControlManager {
             newX = (float) Gdx.graphics.getWidth(); // Reset position
             movingRight = false; // Change direction to left
         }
+<<<<<<< HEAD
 
         // System.out.println("New X Position: " +newX);
 
+=======
+>>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
         // Return the new X position
         return newX;
     }
@@ -45,9 +44,12 @@ public class AIControlManager {
             newY = (float) Gdx.graphics.getHeight(); // Reset position
             movingDown = false; // Change direction to left
         }
+<<<<<<< HEAD
 
         // System.out.println("New Y Position: " +newY);
 
+=======
+>>>>>>> 26404716c2e7d7c3b8ef8814ef47e2c9be603120
         // Return the new X position
         return newY;
     }
@@ -68,8 +70,8 @@ public class AIControlManager {
 //                if (newX < 0) {
 //                    newX = 0; // Reset position to prevent going off-screen
 //                    movingRight = true; // Change direction to right
-//                } else if (newX > (float) Gdx.graphics.getWidth() / 2) {
-//                    newX = (float) Gdx.graphics.getWidth() / 2; // Reset position
+//                } else if (newX > (float) Gdx.graphics.getWidth()) {
+//                    newX = (float) Gdx.graphics.getWidth(); // Reset position
 //                    movingRight = false; // Change direction to left
 //                }
 //                System.out.println("New X Position: " + newX);
@@ -85,8 +87,8 @@ public class AIControlManager {
 //                if (newY < 0) {
 //                    newY = 0; // Reset position to prevent going off-screen
 //                    movingDown = true; // Change direction to downwards
-//                } else if (newY > (float) Gdx.graphics.getHeight() / 2) {
-//                    newY = (float) Gdx.graphics.getHeight() / 2; // Reset position
+//                } else if (newY > (float) Gdx.graphics.getHeight()) {
+//                    newY = (float) Gdx.graphics.getHeight(); // Reset position
 //                    movingDown = false; // Change direction to upwards
 //                }
 //                System.out.println("New X Position: " + newY);
