@@ -46,6 +46,7 @@ public class CollisionManager {
                 if(charRect.overlaps(enemyRect))
                 {
                     handleCharacterEnemyCollision();
+                    handlePlayerEnemyCollision();
                 }
             }
         }
@@ -117,6 +118,21 @@ public class CollisionManager {
         // entitymgr.removeentity(enemyID)
 //        System.out.println("Collided working");
     }
+
+    private void handlePlayerEnemyCollision() {
+        // Handle collision between player and enemy
+        // For example:
+//        soundManager.playEnemyCollisionSound();
+        playerControlManager.takeDamage(20);
+    }
+
+//    private void handlePlayerCollectibleCollision() {
+//        // Handle collision between player and collectible
+//        // For example:
+//        soundManager.playCollectibleCollisionSound();
+//        playerControlManager.addToInventory(collectible);
+//        entityManager.removeEntity(collectible);
+//    }
 
 
 //    //shermaine

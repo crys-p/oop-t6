@@ -20,17 +20,10 @@ public class Player {
         this.health = maxHealth;
         this.inventory = new Inventory();
     }
-
-    protected void takeDamage(int damage) {
-        health -= damage;
-        if (health <= 0) {
-            System.out.println("Player has died");
-        }
-    }
-
-    protected void heal(int amount) {
-        health = Math.min(health + amount, maxHealth);
-    }
+//
+//    protected void heal(int amount) {
+//        health = Math.min(health + amount, maxHealth);
+//    }
 
     protected void move(Vector2 direction) {
         position.add(direction);

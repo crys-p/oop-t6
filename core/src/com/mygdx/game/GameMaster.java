@@ -11,7 +11,6 @@ import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
 import com.mygdx.game.PlayerControlManager.HealthBar;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
-import com.mygdx.game.PlayerControlManager.PlayerInputManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
 import com.mygdx.game.SceneManager.StartScene; // Adjust the package name as needed edmund scene
@@ -26,7 +25,6 @@ public class GameMaster extends Game {
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
 	private EntityManager entityManager;
-	private PlayerInputManager inputManager;
 	private SceneManager sceneManager;
 	private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
@@ -46,12 +44,15 @@ public class GameMaster extends Game {
 		shape = new ShapeRenderer();
 
 		// Create respective managers
-		inputManager = new PlayerInputManager();
 		entityManager = new EntityManager();
 
 		//Initialize IOManager
 		ioManager = new IOManager(entityManager,5, soundManager);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
+
+		// Create PlayerControlManager and HealthBar instances
+		playerControlManager = new PlayerControlManager(entityManager);
+		healthBar = new HealthBar(playerControlManager);
 
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
@@ -73,11 +74,7 @@ public class GameMaster extends Game {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
-		// Create PlayerControlManager and HealthBar instances
-		playerControlManager = new PlayerControlManager(entityManager);
-		healthBar = new HealthBar(playerControlManager);
-		playerControlManager.setMaxHealth(100); // Set maximum health
-		playerControlManager.setHealth(100); // Set initial health
+		playerControlManager.createPlayer(10,10);
 	}
 	// Method to switch to another scene
 
@@ -88,7 +85,6 @@ public class GameMaster extends Game {
 		entityManager.movement();
 		ioManager.updateMovement();
 		ioManager.updateMouse();
-		inputManager.setUpInputControl();
 		entityManager.HARDCODED_INPUT_LISTENER_FOR_AARON();
 		// Keep the player within the screen bounds
 //		if(player.getX() > Gdx.graphics.getWidth())

@@ -40,4 +40,23 @@ public class PlayerControlManager {
         return players.get(playerEntityID);
     }
 
+    // Method to handle taking damage
+// Method to handle taking damage
+    public void takeDamage(int damage) {
+        // Loop through all players and apply damage
+        for (Player player : players.values()) {
+            // Calculate the new health after taking damage
+            int newHealth = player.getHealth() - damage;
+
+            // Ensure health never goes below 0
+            if (newHealth < 0) {
+                newHealth = 0;
+            }
+
+            // Update the player's health
+            player.setHealth(newHealth);
+
+        }
+    }
+
 }
