@@ -1,4 +1,5 @@
 package com.mygdx.game.PlayerControlManager;
+
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -10,9 +11,8 @@ public class HealthBar {
     protected static final float BAR_HEIGHT = 25;
     private static final int BAR_OFFSET_X = 10;
     private static final int BAR_OFFSET_Y = 10;
-
-    protected final PlayerControlManager playerControlManager;
-    protected final BitmapFont font;
+    private final BitmapFont font;
+    private final PlayerControlManager playerControlManager;
 
     public HealthBar(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
@@ -20,8 +20,14 @@ public class HealthBar {
     }
 
     public void render(ShapeRenderer shapeRenderer, SpriteBatch batch) {
-        int health = playerControlManager.getHealth();
-        float healthPercentage = (float) health / playerControlManager.getMaxHealth();
+        Player player = playerControlManager.getPlayer(0); // Get the player from PlayerControlManager
+        if (player == null) {
+            System.out.println("No player");
+            return; // Player not found, cannot render health bar
+        }
+
+        int health = player.getHealth();
+        float healthPercentage = (float) health / player.getMaxHealth();
 
         // Draw the health bar background
         shapeRenderer.setColor(Color.RED);
@@ -36,15 +42,15 @@ public class HealthBar {
         batch.begin();
 
         // Draw text showing current health
-        String healthText = "Health: " + health + "/" + playerControlManager.getMaxHealth();
+        String healthText = "Health: " + health + "/" + player.getMaxHealth();
         font.setColor(Color.WHITE);
         font.draw(batch, healthText, BAR_OFFSET_X + 10, Gdx.graphics.getHeight() - BAR_OFFSET_Y - 30);
 
         // End batch
         batch.end();
     }
+
     public void dispose() {
         font.dispose();
     }
-
 }

@@ -76,11 +76,11 @@ public class GameMaster extends Game {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
-		// Create PlayerControlManager and HealthBar instances
-		playerControlManager = new PlayerControlManager(entityManager);
-		healthBar = new HealthBar(playerControlManager);
-		playerControlManager.setMaxHealth(100); // Set maximum health
-		playerControlManager.setHealth(100); // Set initial health
+		// HealthBar instances
+		// Create a PlayerControlManager instance associated with the player
+		playerControlManager = new PlayerControlManager();
+		healthBar =  new HealthBar(playerControlManager);
+
 	}
 	// Method to switch to another scene
 
@@ -89,8 +89,6 @@ public class GameMaster extends Game {
 
 	public void render() {
 		super.render();
-
-
 
 		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
 //		entityManager.movement(1, "UDmovement"); //to be clarified
@@ -119,6 +117,8 @@ public class GameMaster extends Game {
 		// Render the health bar on top of the player
 		healthBar.render(shape, batch); // comment out for compile testing - crystal
 		shape.end();
+
+//		playerControlManager.takeDamage(0,20); // Example: deducts 20 health from the player
 	}
 
 

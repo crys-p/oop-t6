@@ -1,45 +1,84 @@
 package com.mygdx.game.PlayerControlManager;
 
+import com.mygdx.game.CollisionManager.CollisionManager;
+
+import java.util.ArrayList;
+
 public class Player {
-    private float positionX;
-    private float positionY;
-    private int totalItems; // Variable to keep track of total items
+    protected int playerEntityID;
+    protected int health;
+    protected int maxHealth = 100;
+    protected final ArrayList<String> inventory;
+    protected float movementSpeed;
+    protected float jump;
+    protected boolean onGround;
 
     // Constructor
-    public Player(float positionX, float positionY) {
-        this.positionX = positionX;
-        this.positionY = positionY;
-        this.totalItems = 0; // Initialize totalItems to 0 when creating a new player
+    protected Player() {
+        this.health = 100;
+        this.inventory = new ArrayList<>();
     }
 
-    // Getters and setters for positionX and positionY
-    public float getPositionX() {
-        return positionX;
+    // Getter for health
+    protected int getHealth() {
+        return health;
     }
 
-    public void setPositionX(float positionX) {
-        this.positionX = positionX;
+    // Setter for health
+    protected void setHealth(int health) {
+        this.health = Math.min(health, maxHealth); // Ensure health doesn't exceed maxHealth
+    }
+    protected int getMaxHealth() { return maxHealth; }
+
+    // Method to add an item to the inventory
+    protected void addItemToInventory(String item) {
+        inventory.add(item);
     }
 
-    public float getPositionY() {
-        return positionY;
+    // Method to remove an item from the inventory
+    protected void removeItemFromInventory(String item) {
+        inventory.remove(item);
     }
 
-    public void setPositionY(float positionY) {
-        this.positionY = positionY;
+    // Method to print the player's inventory
+    public void printInventory() {
+        System.out.println("Player's Inventory:");
+        for (String item : inventory) {
+            System.out.println(item);
+        }
     }
 
-    // Getter and setter for totalItems
-    public int getTotalItems() {
-        return totalItems;
+    // Method to get the total number of items in the inventory
+    protected int getTotalItems() {
+        return inventory.size();
     }
+    protected float getMovementSpeed() { return movementSpeed; }
+    protected void setMovementSpeed(float movementSpeed) { this.movementSpeed = movementSpeed; }
+    protected float getJump() { return jump; }
+    protected void setJump(float jump) { this.jump = jump; }
+    protected void setOnGround(boolean onGround) { this.onGround = onGround; }
+    protected boolean isOnGround() { return onGround; }
 
-    public void setTotalItems(int totalItems) {
-        this.totalItems = totalItems;
-    }
-
-    // Method to increment totalItems
-    public void incrementTotalItems() {
-        totalItems++;
-    }
+//    // Example main method to test the Player class
+//    public void main(String[] args) {
+//        // Create a new player with initial health of 100
+//        Player player = new Player(100);
+//
+//        // Add some items to the inventory
+//        player.addItemToInventory("Sword");
+//        player.addItemToInventory("Potion");
+//        player.addItemToInventory("Shield");
+//
+//        // Print the player's inventory
+//        player.printInventory();
+//
+//        // Print the total number of items in the inventory
+//        System.out.println("Total Items: " + player.getTotalItems());
+//
+//        // Set the player's health to 80
+//        player.setHealth(80);
+//
+//        // Print the player's health
+//        System.out.println("Player's Health: " + player.getHealth());
+//    }
 }
