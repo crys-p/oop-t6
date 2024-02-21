@@ -10,6 +10,7 @@ import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
 import com.mygdx.game.PlayerControlManager.HealthBar;
+import com.mygdx.game.PlayerControlManager.Inventory;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
@@ -30,10 +31,10 @@ public class GameMaster extends Game {
 	private SimulationManager simulationManager; // Add SimulationManager reference
 	private SoundManager soundManager;
 	private IOManager ioManager;
-
 	private PlayerControlManager playerControlManager;
 	private HealthBar healthBar;
-	private CollisionManager collisionManager;
+	private Inventory inventory;
+    private CollisionManager collisionManager;
 
 	public void create() {
 		// Initialize SoundManager with background music and sound effect files
@@ -53,6 +54,7 @@ public class GameMaster extends Game {
 		// Create PlayerControlManager and HealthBar instances
 		playerControlManager = new PlayerControlManager(entityManager);
 		healthBar = new HealthBar(playerControlManager);
+		inventory = new Inventory(playerControlManager);
 
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
@@ -63,7 +65,6 @@ public class GameMaster extends Game {
 
 		// Initialize SoundManager with background music and sound effect files
 		// Initialize SoundManager with background music file
-
 
 		// 2 different way to show log 2nd way might be better as log will go to every manager
 		// the first code consume unnecessary memory and resources as "this.simulationManager" is only use in logging
@@ -90,17 +91,14 @@ public class GameMaster extends Game {
 //			player.setX(Gdx.graphics.getWidth());
 //		if(player.getY() > Gdx.graphics.getHeight())
 //			player.setY(Gdx.graphics.getHeight());
+
 		collisionManager.setCollidables();
 		collisionManager.detectCollisions();
-
-		//shermaine
-		// Get the player's position
-//		float playerX = playerControlManager.getPlayerX(); // comment out for compile testing - crystal
-//		float playerY = playerControlManager.getPlayerY(); // comment out for compile testing - crystal
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		// Render the health bar on top of the player
 		healthBar.render(shape, batch); // comment out for compile testing - crystal
+		inventory.render(batch);
 		shape.end();
 	}
 

@@ -9,15 +9,17 @@ import java.util.Map;
 public class PlayerControlManager {
     private final Map<Integer, Player> players; // Map to store playerEntityID and corresponding Player instances
     private final EntityManager entityManager; // Assume you have a reference to EntityManager
+    private final Inventory inventory; // Add the inventory field
 
     public PlayerControlManager(EntityManager entityManager) {
         players = new HashMap<>();
         this.entityManager = entityManager;
+        this.inventory = new Inventory(this);
     }
 
     // Method to create a player
     public void createPlayer(float x, float y) {
-        Player player = new Player(x, y, "player.png");
+        Player player = new Player(x, y, "player.png", this.getInventory());
         addPlayer(player); // Add the created player to the manager
     }
 
@@ -58,5 +60,8 @@ public class PlayerControlManager {
 
         }
     }
-
+    // Getter for the inventory
+    public Inventory getInventory() {
+        return inventory;
+    }
 }

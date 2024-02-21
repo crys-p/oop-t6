@@ -1,10 +1,13 @@
 package com.mygdx.game.CollisionManager;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.EntityManager.EntityManager;
+import com.mygdx.game.PlayerControlManager.Item;
+import com.mygdx.game.PlayerControlManager.Player;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class CollisionManager {
     private EntityManager entityManager;
@@ -65,17 +68,29 @@ public class CollisionManager {
 
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
         System.out.println("Character Item collide");
-        entityManager.removeEntity(collectibleID);
-        // soundmanager.playsfx (if have idk)
-        // playercontrol.increasepoints
 
-        // entitymgr.removeentity(collectibleID)
-//        System.out.println("Character Item collide");
+        // Remove the collectible from the entity manager
+        entityManager.removeEntity(collectibleID);
+
+        // Retrieve the player object
+        Player player = playerControlManager.getPlayer(characterID);
+
+        // Add the collided collectible to the player's inventory
+        Item collidedItem = new Item(collectibleID); // Assuming Item constructor takes the collectible ID
+        player.addItemToInventory(collidedItem, 1);
+
+        // Retrieve the total number of collectibles collected from the player's inventory
+        int totalCollectibles = player.getTotalItems();
+
+        // Print the total number of collectibles collected
+        System.out.println("Total collectibles collected: " + totalCollectibles);
+
+        // Here you can play sound effects or increase points
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         entityManager.removeEntity(enemyID);
-        playerControlManager.takeDamage(20);
+        playerControlManager.takeDamage(10);
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth
     }

@@ -13,12 +13,12 @@ public class Player {
     protected Inventory inventory;
     protected Vector2 position;
 
-    protected Player(float x, float y, String image) {
+    protected Player(float x, float y, String image, Inventory inventory) {
         this.x = x;
         this.y = y;
         this.texture = new Texture(Gdx.files.internal(image));
         this.health = maxHealth;
-        this.inventory = new Inventory();
+        this.inventory = inventory;
     }
 //
 //    protected void heal(int amount) {
@@ -29,7 +29,7 @@ public class Player {
         position.add(direction);
     }
 
-    protected void addItemToInventory(Item item, int quantity) {
+    public void addItemToInventory(Item item, int quantity) {
         inventory.addItem(item, quantity);
     }
 
@@ -37,7 +37,7 @@ public class Player {
         inventory.removeItem(item, quantity);
     }
 
-    protected int getTotalItems() {
+    public int getTotalItems() {
         return inventory.getTotalItems();
     }
     protected float getX() {
