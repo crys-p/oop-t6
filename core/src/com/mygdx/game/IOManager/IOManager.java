@@ -1,14 +1,10 @@
 package com.mygdx.game.IOManager;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.mygdx.game.EntityManager.EntityManager;
-
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.SoundManager.SoundManager;
@@ -88,17 +84,6 @@ public class IOManager implements InputProcessor {
 		return false;
 	}
 
-/*	public void processInput(int key) {
-		System.out.println("processing input: " + key);
-
-		if (entityManager != null) {
-			entityManager.inputMovement(Collections.singletonList(key));
-		} else {
-			System.out.println("EntityManager is null");
-		}
-
-	}*/
-
 	public void handleKeyPress(int keycode, boolean isPressed) {
 		switch (keycode) {
 			case Input.Keys.LEFT:
@@ -128,51 +113,6 @@ public class IOManager implements InputProcessor {
 			entityManager.inputMovement(keys);
 		}
 	}
-
-	/*private static IOManager instance = new IOManager();
-
-	private final List<Input> inputList;
-	
-	public IOManager(int numButtons, SoundManager soundManager) {
-		inputList = new ArrayList<>();
-		output = new Output(numButtons);
-		this.soundManager = soundManager;
-
-	}
-
-	public Output getOutput() {
-		return output;
-	}
-
-	public static IOManager getInstance() {
-		return instance;
-	}
-
-	//Add input to list
-	public void addInput(Input input) {
-		inputList.add(input);
-	}
-
-	// Handle pressed keys and communicate with EntityManager
-	public void handleInput(List<Integer> pressedKeys) {
-		entityManager.inputMovement(pressedKeys);
-		System.out.println("updated pressed");
-	}
-
-	//Update all input in the list and communicate with EntityManager
-	public void updateInputs() {
-		for (Input input : inputList) {
-			input.update();
-
-			List<Integer> keys = input.getKeys();
-			if (entityManager != null) {
-				entityManager.inputMovement(keys);
-				System.out.println("updated");
-			}
-
-		}
-
-	}*/
 
 	public TextButton createButton(String text, int index, float x, float y, float width, float height) {
 		return output.createButton(text, index, x, y, width, height);
@@ -239,9 +179,5 @@ public class IOManager implements InputProcessor {
 
 		return buttonIndex;
 	}
-
-
-
-
 
 }

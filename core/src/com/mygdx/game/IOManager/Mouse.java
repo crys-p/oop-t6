@@ -13,7 +13,7 @@ class Mouse {
 	protected List<Integer> buttons;
 
 	protected Mouse(Keyboard keyboard, Mouse mouse) {
-        lastX = Gdx.input.getX();
+		lastX = Gdx.input.getX();
 		lastY = Gdx.input.getY();
 		deltaX = 0;
 		deltaY = 0;
