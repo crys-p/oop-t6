@@ -110,50 +110,29 @@ public class PlayerControlManager {
     }
 
     public void handlePressedKeys(List<Integer> keys) {
-        System.out.println(playerEntityMap);
-        for (Player player : allPlayers) {
-            System.out.println(player.getPlayerKeyControls());
-        }
-
         // For each key pressed
         for (Integer key: keys) {
             for (Player player : allPlayers) {
                 // Check which player it belongs to
                 String keyConfigs = player.getPlayerKeyControls();
                 if (keyMaps.get(keyConfigs).contains(key)) {
-                    System.out.println("PlayerEntity: " + player.getPlayerControlledEntityID());
-                    System.out.println("PlayerKeyConfig: " + player.getPlayerKeyControls());
-                    PlayerInstructions instr = getDirectionFromKey(keyConfigs, key);
+                    PlayerInstructions instr = getDirectionFromKey(key);
                     entityManager.inputMovement(player.getPlayerControlledEntityID(), instr);
                 }
             }
         }
     }
 
-    private PlayerInstructions getDirectionFromKey(String keyConfigs, int key) {
-        if (keyConfigs.equals("UDLR")) {
-            // For UDLR controls
-            if (key == Input.Keys.LEFT) {
+    private PlayerInstructions getDirectionFromKey(int key) {
+            if (key == Input.Keys.LEFT || key == Input.Keys.A) {
                 return PlayerInstructions.LEFT;
-            } else if (key == Input.Keys.RIGHT) {
+            } else if (key == Input.Keys.RIGHT || key == Input.Keys.D) {
                 return PlayerInstructions.RIGHT;
-            } else if (key == Input.Keys.UP) {
+            } else if (key == Input.Keys.UP || key == Input.Keys.W) {
                 return PlayerInstructions.UP;
-            } else if (key == Input.Keys.DOWN) {
+            } else if (key == Input.Keys.DOWN || key == Input.Keys.S) {
                 return PlayerInstructions.DOWN;
             }
-        } else if (keyConfigs.equals("WASD")) {
-            // For WASD controls
-            if (key == Input.Keys.A) {
-                return PlayerInstructions.LEFT;
-            } else if (key == Input.Keys.D) {
-                return PlayerInstructions.RIGHT;
-            } else if (key == Input.Keys.W) {
-                return PlayerInstructions.UP;
-            } else if (key == Input.Keys.S) {
-                return PlayerInstructions.DOWN;
-            }
-        }
         return null; // No direction found for the given key in the control configuration
     }
 
