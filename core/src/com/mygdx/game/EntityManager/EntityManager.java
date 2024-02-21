@@ -33,16 +33,9 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
-    public void createKnightRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
+    public void createEnemyRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Knight(x, random.nextFloat() * 720, velocityX, velocityY, "knight.png"));
-        }
-    }
-
-    @Override
-    public void createNinjaRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
-        for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Ninja(x, random.nextFloat(), velocityX, velocityY, "ninja.png"));
+            this.setUpEntityAttributes(new Enemy(x, random.nextFloat() * 720, velocityX, velocityY, "knight.png"));
         }
     }
 
@@ -92,6 +85,20 @@ public class EntityManager implements EntityLifeCycle {
         return -1;
     }
 
+    public List<Integer> getCollectibleEntityIDs() {
+        List<Integer> collectibleEntityIDs = new ArrayList<>();
+
+        // Iterate through all entities in the EntityManager
+        for (Entity entity : entityList) {
+            // Check if the entity is a collectible
+            if (entity instanceof Collectible) {
+                // If it is, add its entity ID to the list
+                collectibleEntityIDs.add(entity.getEntityID());
+            }
+        }
+
+        return collectibleEntityIDs;
+    }
 
     public void removeEntity(int entityID) {
         Entity entity = entityIDMap.get(entityID);

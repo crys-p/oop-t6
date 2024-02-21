@@ -10,8 +10,8 @@ import com.mygdx.game.EntityManager.EntityManager;
 public class HealthBar {
     protected static final float BAR_WIDTH = 500;
     protected static final float BAR_HEIGHT = 25;
-    private final BitmapFont font;
-    private final PlayerControlManager playerControlManager;
+    protected final BitmapFont font;
+    protected final PlayerControlManager playerControlManager;
 
     public HealthBar(PlayerControlManager playerControlManager) {
         this.playerControlManager = playerControlManager;
@@ -19,8 +19,14 @@ public class HealthBar {
     }
 
     public void render(ShapeRenderer shapeRenderer, SpriteBatch batch) {
-            int playerEntityID = playerControlManager.getPlayerEntityID(); // Get the player entity ID from PlayerControlManager
-        Player player = playerControlManager.getPlayer(playerEntityID); // Get the player using the entity ID
+        Player player;
+        try {
+            player = playerControlManager.allPlayers.get(0);
+        } catch (Exception e) {
+            return;
+        }
+//        int playerEntityID = playerControlManager.getPlayerEntityID(); // Get the player entity ID from PlayerControlManager
+//        Player player = playerControlManager.getPlayer(playerEntityID); // Get the player using the entity ID
         if (player == null) {
             System.out.println("Player not found");
             return; // Player not found with the provided entity ID
@@ -34,8 +40,8 @@ public class HealthBar {
         float healthBarY = Gdx.graphics.getHeight() * 0.6f; // Distance from the top edge of the screen
 
         // Debugging information
-        System.out.println("Health Bar X: " + healthBarX);
-        System.out.println("Health Bar Y: " + healthBarY);
+//        System.out.println("Health Bar X: " + healthBarX);
+//        System.out.println("Health Bar Y: " + healthBarY);
 
         // Draw the health bar background
         shapeRenderer.setColor(Color.RED);

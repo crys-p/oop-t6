@@ -42,8 +42,7 @@ public class GameScene extends Scene {
 
         Random random = new Random();
         entityManager.createCollectibleRandom(10, random, 0, 20);
-        entityManager.createKnightRandomY(5, 300, random, 40, 40);
-        entityManager.createNinjaRandomY(1, 200, random, 40, 0);
+        entityManager.createEnemyRandomY(10, 300, random, 40, 40);
         entityManager.logAll(); // for debugging
     }
 
