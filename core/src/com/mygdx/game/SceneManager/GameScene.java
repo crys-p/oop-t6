@@ -12,14 +12,15 @@ import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.GameMaster;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.IOManager.IOManager;
+import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.Random;
 
 public class GameScene extends Scene {
 
-    public GameScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
-        super(game, entityManager, batch, shape, ioManager);
+    public GameScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
+        super(game, entityManager, batch, shape, ioManager, playerControlManager);
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
 
@@ -31,10 +32,20 @@ public class GameScene extends Scene {
 
     @Override
     public void createEntities() {
-        entityManager.createCharacter(1, 100, 0, 400, 20, "UDLR");
+        // Create main player entity based on the number of players existing
+        int totalPlayers = playerControlManager.getTotalNumberOfPlayers();
+        int x = 0;
+        for (int i = 0; i < totalPlayers; i++) {
+            // If there are multiple players, set them 100px apart
+            x += 100;
+            entityManager.createCharacter(1, x, 0, 400, 20, playerControlManager.getPlayerControls(i));
+            playerControlManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
+        }
+
+        // Create other entities
         Random random = new Random();
         entityManager.createCollectibleRandom(10, random, 0, 20);
-        entityManager.createEnemyRandomY(10, 300, random, 40, 40);
+        entityManager.createEnemyRandomY(2, 300, random, 40, 40);
         entityManager.logAll(); // for debugging
     }
 

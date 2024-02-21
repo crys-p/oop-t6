@@ -1,24 +1,19 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
-import com.mygdx.game.PlayerControlManager.HealthBar;
+import com.mygdx.game.IOManager.HealthBar;
 import com.mygdx.game.PlayerControlManager.Inventory;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
-import com.mygdx.game.SceneManager.StartScene; // Adjust the package name as needed edmund scene
-import com.badlogic.gdx.utils.ScreenUtils; // edmund scene
 import com.mygdx.game.SoundManager.SoundManager; // sound manager
 
-import com.badlogic.gdx.graphics.Color; // background color
 import com.mygdx.game.SimulationManager.SimulationManager;
 
 //public class GameMaster extends ApplicationAdapter
@@ -53,14 +48,20 @@ public class GameMaster extends Game {
 
 		// Create PlayerControlManager and HealthBar instances
 		playerControlManager = new PlayerControlManager(entityManager);
+		// Initialise health bar and inventory //ps: maybe can put in scene? Idk
 		healthBar = new HealthBar(playerControlManager);
 		inventory = new Inventory(playerControlManager);
+
+		// Set up single player mode with default Up down left right key controls
+		playerControlManager.createPlayers(1);
+		playerControlManager.setPlayerControl(0, "UDLR");
 
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
+
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager);
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
@@ -75,9 +76,6 @@ public class GameMaster extends Game {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
-		// Set up single player mode with default Up down left right key controls
-		playerControlManager.createPlayers(1);
-		playerControlManager.setPlayerControl(0, "UDLR");
 	}
 	// Method to switch to another scene
 
@@ -97,11 +95,10 @@ public class GameMaster extends Game {
 		collisionManager.setCollidables();
 		collisionManager.detectCollisions();
 
-		shape.begin(ShapeRenderer.ShapeType.Filled);
+		// Should be wrapped inside output(?)
 		// Render the health bar on top of the player
-		healthBar.render(shape, batch); // comment out for compile testing - crystal
+		healthBar.render(shape, batch);
 		inventory.render(batch);
-		shape.end();
 	}
 
 

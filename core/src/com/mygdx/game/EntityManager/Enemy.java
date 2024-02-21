@@ -8,6 +8,7 @@ class Enemy extends Entity implements AIControlled {
 
     Enemy(float x, float y, float velocityX, float velocityY, String image) {
         super(x, y, velocityX, velocityY, image);
+        this.setDamage(20);
     }
 
     protected void setDamage(float dmg) {

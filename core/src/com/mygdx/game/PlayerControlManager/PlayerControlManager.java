@@ -5,11 +5,12 @@ import com.mygdx.game.EntityManager.EntityManager;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class PlayerControlManager {
     protected final ArrayList<Player> allPlayers;
-    private final Map<Player, Integer> playerEntityMap; // Map to store playerEntityID and corresponding Player instances
+    private final Map<Player, Integer> playerEntityMap; // Map to store Player instances and corresponding entity being controlled
     private final EntityManager entityManager; // Assume you have a reference to EntityManager
     private final Inventory inventory; // Add the inventory field
 
@@ -20,7 +21,7 @@ public class PlayerControlManager {
         allPlayers = new ArrayList<>();
     }
 
-    // Method to create a players
+    // Method to create players
     public void createPlayers(int qty) {
         for (int i = 0; i < qty; i++) {
             Player player = new Player(this.inventory);
@@ -29,7 +30,6 @@ public class PlayerControlManager {
     }
 
     // Set player Entity ID when entity is created
-
     public int getPlayerEntityID() {
         return entityManager.getPlayerEntityID();
     }
@@ -41,32 +41,46 @@ public class PlayerControlManager {
     }
 
     // Method to get entity ID from player instance
-    public void setPlayerControlledEntityID(Player player, int entityID) {
-        playerEntityMap.put(player, entityID);
+    public void setPlayerControlledEntityID(int playerNumber, int entityID) {
+        try {
+            Player player = allPlayers.get(playerNumber);
+            playerEntityMap.put(player, entityID);
+        } catch (Exception e) {
+            System.out.println("There was an error: " + e);
+        }
     }
 
     // Method to get entity ID from player instance
-    public Integer getPlayerControlledEntityID(Player player) {
+    public int getPlayerControlledEntityID(Player player) {
         return playerEntityMap.get(player);
     }
 
     // Method to handle taking damage
-// Method to handle taking damage
-    public void takeDamage(int entityID, int damage) {
+    public void takeDamage(int characterID, int enemyID) {
+        float damage = entityManager.getDamage(enemyID);
         // Loop through all players and apply damage
-//        for (Player player : allPlayers) {
-//            if (playerEntityMap.get(player) == entityID){
-//                // Calculate the new health after taking damage
-//                int newHealth = player.getHealth() - damage;
-//
-//                // Ensure health never goes below 0
-//                if (newHealth < 0) {
-//                    newHealth = 0;
-//                }
-//                // Update the player's health
-//                player.setHealth(newHealth);
-//            }
-//        }
+        for (Player player : allPlayers) {
+            if (playerEntityMap.get(player) == characterID) {
+                // Calculate the new health after taking damage
+                int newHealth = player.getHealth() - (int) damage;
+
+                // Ensure health never goes below 0
+                if (newHealth < 0) {
+                    newHealth = 0;
+                }
+                // Update the player's health
+                player.setHealth(newHealth);
+            }
+        }
+    }
+
+    // Getter for the inventory
+    public Inventory getInventory() {
+        return inventory;
+    }
+
+    public int getTotalNumberOfPlayers() {
+        return allPlayers.size();
     }
 
     public void setPlayerControl(int playerNumber, String playerControl) {
@@ -77,8 +91,25 @@ public class PlayerControlManager {
             System.out.println("Error: Player does not exist.");
         }
     }
-    // Getter for the inventory
-    public Inventory getInventory() {
-        return inventory;
+
+    public String getPlayerControls(int playerNumber) {
+        return allPlayers.get(playerNumber).getPlayerKeyControls();
+    }
+
+    public int getPlayerHealth(int playerNumber) {
+        return allPlayers.get(playerNumber).getHealth();
+    }
+
+
+    public HashMap<Integer, List<Integer>> getAllPlayerHealthStats() {
+        HashMap<Integer, List<Integer>> allPlayerHealthStats = new HashMap<>();
+        int counter = 0;
+        for (Player player : allPlayers) {
+            allPlayerHealthStats.put(counter, new ArrayList<Integer>());
+            allPlayerHealthStats.get(counter).add(player.getHealth());
+            allPlayerHealthStats.get(counter).add(player.getMaxHealth());
+            counter++;
+        }
+        return allPlayerHealthStats;
     }
 }

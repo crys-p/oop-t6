@@ -89,7 +89,7 @@ public class CollisionManager {
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         entityManager.removeEntity(enemyID);
-        playerControlManager.takeDamage(characterID, 20);
+        playerControlManager.takeDamage(characterID, enemyID);
 
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth

@@ -96,16 +96,11 @@ public class EntityManager implements EntityLifeCycle {
                 collectibleEntityIDs.add(entity.getEntityID());
             }
         }
-
         return collectibleEntityIDs;
     }
 
-    public void removeEntity(int entityID) {
-        Entity entity = entityIDMap.get(entityID);
-        if (entity != null) {
-            removeFromList(entity);
-        }
-        System.out.println("No. of entities: " + entityList.size());
+    public int getLastEntityID() {
+        return this.entityCount - 1;
     }
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR AI/IO MOVEMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -154,6 +149,21 @@ public class EntityManager implements EntityLifeCycle {
         return boundingBoxes;
     }
 
+    public void removeEntity(int entityID) {
+        Entity entity = entityIDMap.get(entityID);
+        if (entity != null) {
+            removeFromList(entity);
+        }
+        System.out.println("No. of entities: " + entityList.size());
+    }
+
+    public float getDamage(int entityID) {
+        if (entityIDMap.get(entityID) instanceof Enemy) {
+            return ((Enemy) entityIDMap.get(entityID)).getDamage();
+        } else {
+            return 0;
+        }
+    }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~INTERNAL/TESTING CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set up Required Entity attributes

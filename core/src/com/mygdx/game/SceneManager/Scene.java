@@ -15,6 +15,9 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.EntityManager.EntityLifeCycle;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
+import com.mygdx.game.PlayerControlManager.Player;
+import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+
 // implements Screen
 // usage of ScreenAdapter over Screen as promote code reuse and maintains consistency
 // accross screen and also without needing to apply all lifecycle Method
@@ -27,6 +30,7 @@ public abstract class Scene extends ScreenAdapter {
     protected ShapeRenderer shape;
     protected EntityManager entityManager;
     protected IOManager ioManager;
+    protected PlayerControlManager playerControlManager;
     // Set the desired viewport size
     private final int VIEWPORT_WIDTH = 1280;
     private final int VIEWPORT_HEIGHT = 720;
@@ -38,6 +42,23 @@ public abstract class Scene extends ScreenAdapter {
         this.batch = batch;
         this.shape = shape;
         this.ioManager = ioManager;
+        // Create a camera and viewport
+        //camera = new OrthographicCamera();
+        //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);
+        //viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+        viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        viewport.apply();
+    }
+
+    // Scene constructor for scenes that need to handle playerControl
+    public Scene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
+        this.game = game;
+        this.backgroundColor = Color.BLACK; // Default background color
+        this.entityManager = entityManager;
+        this.batch = batch;
+        this.shape = shape;
+        this.ioManager = ioManager;
+        this.playerControlManager = playerControlManager;
         // Create a camera and viewport
         //camera = new OrthographicCamera();
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);

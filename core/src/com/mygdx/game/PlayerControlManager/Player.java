@@ -51,5 +51,9 @@ public class Player {
     public void setPlayerKeyControls(String playerControl) {
         this.keyControls = playerControl;
     }
+
+    public String getPlayerKeyControls() {
+        return this.keyControls;
+    }
 }
 

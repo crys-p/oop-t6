@@ -49,7 +49,7 @@ public class Inventory {
     }
 
     public void render(SpriteBatch batch) {
-        int playerEntityID = playerControlManager.getPlayerEntityID(); // Get the player entity ID from PlayerControlManager
+        // int playerEntityID = playerControlManager.getPlayerEntityID(); // Get the player entity ID from PlayerControlManager
 
         // Get the total number of collectibles collected by the player
         // int totalCollectibles = playerControlManager.getPlayer(playerEntityID).getTotalItems(); // CRYSTAL COME BACK
