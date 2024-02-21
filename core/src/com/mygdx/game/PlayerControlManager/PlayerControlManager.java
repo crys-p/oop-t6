@@ -1,24 +1,23 @@
 // PlayerControlManager.java
 package com.mygdx.game.PlayerControlManager;
 
+import com.badlogic.gdx.Input;
 import com.mygdx.game.EntityManager.EntityManager;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class PlayerControlManager {
     protected final ArrayList<Player> allPlayers;
     private final Map<Player, Integer> playerEntityMap; // Map to store Player instances and corresponding entity being controlled
     private final EntityManager entityManager; // Assume you have a reference to EntityManager
     private final Inventory inventory; // Add the inventory field
-
+    private final HashMap<String, List<Integer>> keyMaps =  new HashMap<>();
     public PlayerControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
         this.inventory = new Inventory(this);
         playerEntityMap = new HashMap<>();
         allPlayers = new ArrayList<>();
+        this.setKeyMaps();
     }
 
     // Method to create players
@@ -29,11 +28,11 @@ public class PlayerControlManager {
         }
     }
 
-    // Set player Entity ID when entity is created
-    public int getPlayerEntityID() {
-        return entityManager.getPlayerEntityID();
-    }
 
+//    // Set player Entity ID when entity is created
+//    public int getPlayerEntityID() {
+//        return entityManager.getPlayerEntityID();
+//    }
 
     // Method to remove a player from the manager
     public void removePlayer(int index) {
@@ -42,12 +41,9 @@ public class PlayerControlManager {
 
     // Method to get entity ID from player instance
     public void setPlayerControlledEntityID(int playerNumber, int entityID) {
-        try {
-            Player player = allPlayers.get(playerNumber);
-            playerEntityMap.put(player, entityID);
-        } catch (Exception e) {
-            System.out.println("There was an error: " + e);
-        }
+        Player player = allPlayers.get(playerNumber);
+        playerEntityMap.put(player, entityID);
+        player.setPlayerControlledEntityID(entityID);
     }
 
     // Method to get entity ID from player instance
@@ -111,5 +107,58 @@ public class PlayerControlManager {
             counter++;
         }
         return allPlayerHealthStats;
+    }
+
+    public void handlePressedKeys(List<Integer> keys) {
+        System.out.println(playerEntityMap);
+        for (Player player : allPlayers) {
+            System.out.println(player.getPlayerKeyControls());
+        }
+
+        // For each key pressed
+        for (Integer key: keys) {
+            for (Player player : allPlayers) {
+                // Check which player it belongs to
+                String keyConfigs = player.getPlayerKeyControls();
+                if (keyMaps.get(keyConfigs).contains(key)) {
+                    System.out.println("PlayerEntity: " + player.getPlayerControlledEntityID());
+                    System.out.println("PlayerKeyConfig: " + player.getPlayerKeyControls());
+                    PlayerInstructions instr = getDirectionFromKey(keyConfigs, key);
+                    entityManager.inputMovement(player.getPlayerControlledEntityID(), instr);
+                }
+            }
+        }
+    }
+
+    private PlayerInstructions getDirectionFromKey(String keyConfigs, int key) {
+        if (keyConfigs.equals("UDLR")) {
+            // For UDLR controls
+            if (key == Input.Keys.LEFT) {
+                return PlayerInstructions.LEFT;
+            } else if (key == Input.Keys.RIGHT) {
+                return PlayerInstructions.RIGHT;
+            } else if (key == Input.Keys.UP) {
+                return PlayerInstructions.UP;
+            } else if (key == Input.Keys.DOWN) {
+                return PlayerInstructions.DOWN;
+            }
+        } else if (keyConfigs.equals("WASD")) {
+            // For WASD controls
+            if (key == Input.Keys.A) {
+                return PlayerInstructions.LEFT;
+            } else if (key == Input.Keys.D) {
+                return PlayerInstructions.RIGHT;
+            } else if (key == Input.Keys.W) {
+                return PlayerInstructions.UP;
+            } else if (key == Input.Keys.S) {
+                return PlayerInstructions.DOWN;
+            }
+        }
+        return null; // No direction found for the given key in the control configuration
+    }
+
+    private void setKeyMaps() {
+        keyMaps.put("UDLR", Arrays.asList(Input.Keys.LEFT, Input.Keys.RIGHT, Input.Keys.UP, Input.Keys.DOWN));
+        keyMaps.put("WASD", Arrays.asList(Input.Keys.A, Input.Keys.D, Input.Keys.W, Input.Keys.S));
     }
 }

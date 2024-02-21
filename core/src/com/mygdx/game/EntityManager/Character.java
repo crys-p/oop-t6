@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.PlayerControlManager.PlayerInstructions;
 
 class Character extends Entity {
     protected String inputControls;
@@ -35,19 +36,19 @@ class Character extends Entity {
         updateBoundingBox();
     }
 
-    protected void inputMovement(int key) {
+    protected void inputMovement(PlayerInstructions instructions) {
         float movementAmount = this.getSpeed() * Gdx.graphics.getDeltaTime();
-        switch(key) {
-            case Input.Keys.LEFT:
+        switch(instructions) {
+            case LEFT:
                 this.moveLeft(movementAmount);
                 break;
-            case Input.Keys.RIGHT:
+            case RIGHT:
                 this.moveRight(movementAmount);
                 break;
-            case Input.Keys.UP:
+            case UP:
                 this.moveUp(movementAmount);
                 break;
-            case Input.Keys.DOWN:
+            case DOWN:
                 this.moveDown(movementAmount);
         }
         updateBoundingBox();

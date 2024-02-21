@@ -1,15 +1,17 @@
 package com.mygdx.game.PlayerControlManager;
 
 public class Player {
-    protected int playerControlledEntityID;
-    protected int maxHealth = 100;
-    protected int health;
+    private int playerControlledEntityID;
+    private int maxHealth = 100;
+    private int health;
+    private float speed;
     protected Inventory inventory;
-    private String keyControls;
+    private String keyControls = "UDLR"; // default key controls if not set
 
     protected Player(Inventory inventory) {
         this.health = maxHealth;
         this.inventory = inventory;
+        this.speed = 400;
     }
 //
 //    protected void heal(int amount) {
@@ -54,6 +56,18 @@ public class Player {
 
     public String getPlayerKeyControls() {
         return this.keyControls;
+    }
+
+    protected int getPlayerControlledEntityID() {
+        return this.playerControlledEntityID;
+    }
+
+    protected float getSpeed() {
+        return this.speed;
+    }
+
+    protected void setSpeed(float speed) {
+        this.speed = speed;
     }
 }
 

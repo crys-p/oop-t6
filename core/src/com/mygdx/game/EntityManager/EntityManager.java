@@ -3,6 +3,7 @@ package com.mygdx.game.EntityManager;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.PlayerControlManager.PlayerInstructions;
 
 import java.util.*;
 
@@ -112,17 +113,9 @@ public class EntityManager implements EntityLifeCycle {
     }
 
     //updated so that io can call
-    public void inputMovement(List<Integer> keys) {
-        for (Character character : characterList) {
-            for (int key : keys) {
-                if (Objects.equals(character.inputControls, "UDLR") &&
-                        (key == Input.Keys.LEFT || key == Input.Keys.RIGHT || key == Input.Keys.UP || key == Input.Keys.DOWN)) {
-                    character.inputMovement(key);
-                }
-            }
-        }
+    public void inputMovement(int entityID, PlayerInstructions control) {
+            entityIDMap.get(entityID).inputMovement(control);
     }
-
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public HashMap<Rectangle, Integer> getCharacterBoundingBoxes() {

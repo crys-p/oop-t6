@@ -4,9 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.mygdx.game.EntityManager.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
 public class IOManager implements InputProcessor {
@@ -17,13 +19,13 @@ public class IOManager implements InputProcessor {
 	private Output output;
 	private Input input;
 	private SoundManager soundManager; // Reference to SoundManager
+	private PlayerControlManager playerControlManager;
 
 	//Setting initial size of window
 	public void setWindowedMode() {
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
-	private EntityManager entityManager; //Reference to EntityManager
 	private boolean leftKeyPressed = false;
 	private boolean rightKeyPressed = false;
 	private boolean upKeyPressed = false;
@@ -33,17 +35,41 @@ public class IOManager implements InputProcessor {
 	private boolean leftButtonPressed;
 	private boolean rightButtonPressed;
 
-	public IOManager (EntityManager entityManager,int numButtons, SoundManager soundManager) {
-		this.entityManager = entityManager;
+	private Map<Integer, Boolean> keyStates = new HashMap<>();
+
+	Set<Integer> keysAccepted = new HashSet<>(Arrays.asList(
+			Input.Keys.LEFT,
+			Input.Keys.RIGHT,
+			Input.Keys.UP,
+			Input.Keys.DOWN,
+			Input.Keys.A,
+			Input.Keys.D,
+			Input.Keys.W,
+			Input.Keys.S
+	));
+
+
+	public IOManager (int numButtons, SoundManager soundManager, PlayerControlManager playerControlManager) {
 		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
 		output = new Output(numButtons);
 		this.soundManager = soundManager;
+		this.playerControlManager = playerControlManager;
+		setUpKeyStates();
+	}
+
+	private void setUpKeyStates() {
+		for (int keycode : keysAccepted)
+		{
+			keyStates.put(keycode, false);
+		}
 	}
 
 	// Keys
 	@Override
 	public boolean keyDown(int keycode) {
-		handleKeyPress(keycode, true);
+		if (keysAccepted.contains(keycode)) {
+			handleKeyPress(keycode, true);
+		}
 		return true; // To indicate event was handled
 	}
 
@@ -58,33 +84,40 @@ public class IOManager implements InputProcessor {
 		return false;
 	}
 
+
 	public void handleKeyPress(int keycode, boolean isPressed) {
-		switch (keycode) {
-			case Input.Keys.LEFT:
-				leftKeyPressed = isPressed;
-				break;
-			case Input.Keys.RIGHT:
-				rightKeyPressed = isPressed;
-				break;
-			case Input.Keys.UP:
-				upKeyPressed = isPressed;
-				break;
-			case Input.Keys.DOWN:
-				downKeyPressed = isPressed;
-				break;
-		}
+		keyStates.put(keycode, isPressed);
 		updateMovement();
 	}
+//		switch (keycode) {
+//			case Input.Keys.LEFT:
+//				leftKeyPressed = isPressed;
+//				break;
+//			case Input.Keys.RIGHT:
+//				rightKeyPressed = isPressed;
+//				break;
+//			case Input.Keys.UP:
+//				upKeyPressed = isPressed;
+//				break;
+//			case Input.Keys.DOWN:
+//				downKeyPressed = isPressed;
+//				break;
+//		}
 
 	public void updateMovement() {
 		List<Integer> keys = new ArrayList<>();
-		if (leftKeyPressed) keys.add(Input.Keys.LEFT);
-		if (rightKeyPressed) keys.add(Input.Keys.RIGHT);
-		if (upKeyPressed) keys.add(Input.Keys.UP);
-		if (downKeyPressed) keys.add(Input.Keys.DOWN);
-
+		for (Map.Entry<Integer, Boolean> entry : keyStates.entrySet()) {
+			if (entry.getValue()) {
+				keys.add(entry.getKey());
+			}
+		}
+//		if (leftKeyPressed) keys.add(Input.Keys.LEFT);
+//		if (rightKeyPressed) keys.add(Input.Keys.RIGHT);
+//		if (upKeyPressed) keys.add(Input.Keys.UP);
+//		if (downKeyPressed) keys.add(Input.Keys.DOWN);
+//
 		if (!keys.isEmpty()) {
-			entityManager.inputMovement(keys);
+			playerControlManager.handlePressedKeys(keys);
 		}
 	}
 

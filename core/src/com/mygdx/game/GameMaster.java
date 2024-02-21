@@ -39,12 +39,8 @@ public class GameMaster extends Game {
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 
-		// Create respective managers
+		// Create EntityManager
 		entityManager = new EntityManager();
-
-		//Initialize IOManager
-		ioManager = new IOManager(entityManager,5, soundManager);
-		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Create PlayerControlManager and HealthBar instances
 		playerControlManager = new PlayerControlManager(entityManager);
@@ -54,11 +50,14 @@ public class GameMaster extends Game {
 
 		// Set up single player mode with default Up down left right key controls
 		playerControlManager.createPlayers(1);
-		playerControlManager.setPlayerControl(0, "UDLR");
+		playerControlManager.setPlayerControl(0, "UDLR"); // udlr or wasd
+
+		//Initialize IOManager
+		ioManager = new IOManager(5, soundManager, playerControlManager);
+		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
-
 
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
