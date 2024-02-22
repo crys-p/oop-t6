@@ -53,8 +53,8 @@ public class GameScene extends Scene {
 
         // Create other entities
         Random random = new Random();
-        entityManager.createCollectibleRandom(10, random, 0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -10, 10, -10, 10);
-        entityManager.createEnemyRandomY(10, random, 0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -10, 10, -10, 10);
+        entityManager.createCollectibleRandom(10, random, 10,10 );
+        entityManager.createEnemyRandom(10, random,10,10);
         entityManager.logAll(); // for debugging
     }
 
