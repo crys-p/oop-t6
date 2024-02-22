@@ -12,9 +12,9 @@ public class CollisionManager {
     private final EntityManager entityManager;
     private final SoundManager soundManager;
     private final PlayerControlManager playerControlManager;
-    private HashMap<Rectangle, Integer> characterMap;
-    private HashMap<Rectangle, Integer> enemyMap;
-    private HashMap<Rectangle, Integer> collectibleMap;
+    private final HashMap<Rectangle, Integer> characterMap;
+    private final HashMap<Rectangle, Integer> enemyMap;
+    private final HashMap<Rectangle, Integer> collectibleMap;
 
 
     public CollisionManager(EntityManager entityManager, SoundManager soundManager, PlayerControlManager playerControlManager) {
@@ -43,41 +43,8 @@ public class CollisionManager {
     public void detectCollisions() {
         // Loop through different maps to detect collision
         // If collision is being detected, handle collision reaction using handleCharacterCollectibleCollision etc.
-        for (Rectangle enemyRect : enemyMap.keySet()) {
-            for (Rectangle charRect : characterMap.keySet()) {
-                if (charRect.overlaps(enemyRect)) {
-                    int charID = characterMap.get(charRect);
-                    int enemyID = enemyMap.get(enemyRect);
-                    handleCharacterEnemyCollision(charID, enemyID);
-                }
-            }
-        }
-        for (Rectangle collectibleRect : collectibleMap.keySet()) {
-            for (Rectangle charRect : characterMap.keySet()) {
-                if (charRect.overlaps(collectibleRect)) {
-                    int charID = characterMap.get(charRect);
-                    int collectibleID = collectibleMap.get(collectibleRect);
-                    handleCharacterCollectibleCollision(charID, collectibleID);
-                }
-            }
-        }
+        CollisionDetection collisionDetection = new CollisionDetection(entityManager, soundManager, playerControlManager);
+        collisionDetection.detectCollisions(characterMap, enemyMap,collectibleMap);
     }
 
-    private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
-        // Remove the collectible from the entity manager
-        entityManager.removeEntity(collectibleID);
-        // Add the collided collectible to the player's inventory
-        playerControlManager.addItemToInventory(characterID);
-        // Play collected sound
-        soundManager.playSoundEffect(SoundEffectType.COLLECT);
-    }
-
-    private void handleCharacterEnemyCollision(int characterID, int enemyID) {
-        // Remove the collectible from the entity manager
-        entityManager.removeEntity(enemyID);
-        // Reduce health of player based on enemy damage
-        playerControlManager.takeDamage(characterID, enemyID);
-        // Play hit sound
-        soundManager.playSoundEffect(SoundEffectType.HIT);
-    }
 }
