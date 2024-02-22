@@ -12,13 +12,13 @@ import com.mygdx.game.IOManager.IOManager;
 
 import java.util.Random;
 
-public class MenuScene extends Scene {
+class MenuScene extends Scene {
 
-    private TextButton button1;
-    private TextButton button2;
-    private TextButton button3;
+    protected TextButton button1;
+    protected TextButton button2;
+    protected TextButton button3;
 
-    public MenuScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
+    protected MenuScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.YELLOW); // setting of background color for end scene
 
@@ -33,7 +33,7 @@ public class MenuScene extends Scene {
     }
 
     @Override
-    public void createEntities() {
+    protected void createEntities() {
 
     }
 
@@ -43,29 +43,13 @@ public class MenuScene extends Scene {
     }
 
     @Override
-    public void render(float delta) {
-        clearScreen();
-        batch.begin();
-        button1.draw(batch, 1); // Adjust parameters as needed
-        button2.draw(batch, 1);
-        button3.draw(batch, 1);
-        batch.end();
-        // Rendering logic for the game scene
-
-        // Process input events
-        ioManager.processInput();
-        //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-    }
-
-    @Override
     public void resize(int width, int height) {
         // Update the viewport
         viewport.update(width, height);
 
     }
 
-    private void createButtons() {
+    protected void createButtons() {
         // Define width and height for the buttons (you can adjust these values as needed)
         float buttonWidth = 200f;
         float buttonHeight = 50f;
@@ -122,6 +106,22 @@ public class MenuScene extends Scene {
     public void resume() {
         super.resume();
         // Additional logic to resume the game scene
+    }
+
+    @Override
+    public void render(float delta) {
+        clearScreen();
+        batch.begin();
+        button1.draw(batch, 1); // Adjust parameters as needed
+        button2.draw(batch, 1);
+        button3.draw(batch, 1);
+        batch.end();
+        // Rendering logic for the game scene
+
+        // Process input events
+        ioManager.processInput();
+        //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
+        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
 

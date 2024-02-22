@@ -23,19 +23,19 @@ import java.util.Random;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
-public class GameScene extends Scene {
+class GameScene extends Scene {
 
     private final int numberOfEnemy = 25;
     private final int numberOfCollectibles = 5;
     private PlayerControlManager playerControlManager;
 
-    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
+    protected GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         this.playerControlManager = playerControlManager;
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
-    private TextButton gameSceneButton;
-    private TextButton gameSceneButton1;
+    protected TextButton gameSceneButton;
+    protected TextButton gameSceneButton1;
 
     @Override
     public void show() {
@@ -46,7 +46,7 @@ public class GameScene extends Scene {
     }
 
     @Override
-    public void createEntities() {
+    protected void createEntities() {
         // Create enemy and collectible entities
         Random random = new Random();
         entityManager.createCollectibleRandom(numberOfCollectibles, random);
@@ -64,7 +64,7 @@ public class GameScene extends Scene {
         }
     }
 
-    private void createButtons() {
+    protected void createButtons() {
         // Define width and height for the buttons (you can adjust these values as needed)
         float buttonWidth = 200f;
         float buttonHeight = 100f;
@@ -139,6 +139,26 @@ public class GameScene extends Scene {
         //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         ioManager.updateMovement();
+
+// Add click listeners to the buttons
+        gameSceneButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Handle click for button 3
+                int buttonIndex = 3; // Assuming button 1 is at index 3
+                ioManager.handleButtonClick(buttonIndex);
+            }
+        });
+
+        gameSceneButton1.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Handle click for button 2
+                int buttonIndex = 4; // Assuming button 2 is at index 1
+                ioManager.handleButtonClick(buttonIndex);
+            }
+        });
+
 
     }
 

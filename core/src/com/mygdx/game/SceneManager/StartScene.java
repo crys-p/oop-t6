@@ -18,11 +18,11 @@ import java.util.Random;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
-public class StartScene extends Scene {
+class StartScene extends Scene {
 
-    private TextButton countdownButton;
+    protected TextButton countdownButton;
 
-    public StartScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch,ShapeRenderer shape, IOManager ioManager) {
+    protected StartScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch,ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.GRAY); // Set background color for start scene
         this.entityManager = entityManager;
@@ -48,7 +48,7 @@ public class StartScene extends Scene {
         entityManager.createCharacter(1, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 20, null);
     }
 
-    private void createCountdownButton() {
+    protected void createCountdownButton() {
         countdownButton = ioManager.createCountdownButton("Start Countdown", 0, IOManager.SCREEN_WIDTH / 2 - 100, IOManager.SCREEN_HEIGHT / 2 - 25, 200, 50, "countdownButtonStyle", 5); // Set the countdown duration to 10 seconds
     }
 
