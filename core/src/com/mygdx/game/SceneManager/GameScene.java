@@ -20,6 +20,9 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.Random;
 
+import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
+import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
+
 public class GameScene extends Scene {
 
     public GameScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
@@ -43,8 +46,8 @@ public class GameScene extends Scene {
     public void createEntities() {
         // Create enemy and collectible entities
         Random random = new Random();
-        entityManager.createCollectibleRandom(10, random, 0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -10, 10, -10, 10);
-        entityManager.createEnemyRandomY(10, random, 0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -10, 10, -10, 10);
+        entityManager.createCollectibleRandom(10, random, SCREEN_WIDTH, SCREEN_HEIGHT);
+        entityManager.createEnemyRandom(10, random, SCREEN_WIDTH, SCREEN_HEIGHT);
         entityManager.logAll(); // for debugging
 
         // Create main player entity based on the number of players existing
@@ -64,7 +67,7 @@ public class GameScene extends Scene {
         float buttonHeight = 100f;
 
         // Position the button at the top right corner
-        float buttonX = IOManager.SCREEN_WIDTH - buttonWidth - 20; // 20 is the padding from the right edge
+        float buttonX = SCREEN_WIDTH - buttonWidth - 20; // 20 is the padding from the right edge
         float buttonY = IOManager.SCREEN_HEIGHT - buttonHeight - 20; // 20 is the padding from the top edge
 
         // Create buttons using the IOManager
