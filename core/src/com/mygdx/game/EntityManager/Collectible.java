@@ -10,10 +10,6 @@ class Collectible extends Entity implements AIControlled {
     }
 
 
-    protected void draw(ShapeRenderer shape) {
-//        shape.rect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
-    }
-
     protected void logConsole() {
         System.out.printf("I am item at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.entityID);
     }
