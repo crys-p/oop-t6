@@ -20,6 +20,9 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.Random;
 
+import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
+import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
+
 public class GameScene extends Scene {
 
     public GameScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
@@ -43,8 +46,8 @@ public class GameScene extends Scene {
     public void createEntities() {
         // Create enemy and collectible entities
         Random random = new Random();
-        entityManager.createCollectibleRandom(20, random, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        entityManager.createEnemyRandom(10, random, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        entityManager.createCollectibleRandom(10, random, SCREEN_WIDTH, SCREEN_HEIGHT);
+        entityManager.createEnemyRandom(10, random, SCREEN_WIDTH, SCREEN_HEIGHT);
         entityManager.logAll(); // for debugging
 
         // Create main player entity based on the number of players existing
@@ -64,7 +67,7 @@ public class GameScene extends Scene {
         float buttonHeight = 100f;
 
         // Position the button at the top right corner
-        float buttonX = IOManager.SCREEN_WIDTH - buttonWidth - 20; // 20 is the padding from the right edge
+        float buttonX = SCREEN_WIDTH - buttonWidth - 20; // 20 is the padding from the right edge
         float buttonY = IOManager.SCREEN_HEIGHT - buttonHeight - 20; // 20 is the padding from the top edge
 
         // Create buttons using the IOManager
@@ -94,15 +97,15 @@ public class GameScene extends Scene {
         // Rendering logic for the game scene
         clearScreen();
         batch.begin();
-            gameSceneButton.draw(batch, 1); // Adjust parameters as needed
-            entityManager.drawAllEntities(batch);
-            ioManager.displayPlayerInventory(batch);
+        gameSceneButton.draw(batch, 1); // Adjust parameters as needed
+        entityManager.drawAllEntities(batch);
+        ioManager.displayPlayerInventory(batch);
         batch.end();
 
         // This has to be rendered outside of normal batch as it requires shape which cannot overlap with SpriteBatch
         ioManager.displayPlayerHealth(new SpriteBatch(), new ShapeRenderer());
 
-            // Process input events
+        // Process input events
         ioManager.processInput();
         //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

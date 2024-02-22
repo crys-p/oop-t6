@@ -158,7 +158,7 @@ public class IOManager implements InputProcessor {
 
 	public void updateMouse() {
 		updateMousePosition(mouseX, mouseY);
-		processInput();
+		//processInput();
 	}
 
 	public void displayPlayerInventory(SpriteBatch batch) {
@@ -173,6 +173,12 @@ public class IOManager implements InputProcessor {
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
 		return output.createButton(text, index, x, y, width, height, styleName);
 	}
+
+	// creation of timer button
+	public TextButton createCountdownButton(String text, int index, float x, float y, float width, float height, String styleName, int countdownSeconds) {
+		return output.createCountdownButton(text, index, x, y, width, height, styleName, countdownSeconds);
+	}
+
 
 	// Method to handle button clicks
 	// Method to handle button clicks

@@ -10,10 +10,6 @@ class Enemy extends Entity implements AIControlled {
         super(x, y, velocityX, velocityY, image);
     }
 
-    protected void setDamage(float dmg) {
-        this.damage = dmg;
-    }
-
     protected float getDamage() {
         return this.damage;
     }

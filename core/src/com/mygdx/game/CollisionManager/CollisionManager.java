@@ -66,8 +66,6 @@ public class CollisionManager {
     }
 
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
-        System.out.println("Character Item collide");
-
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectibleID);
 

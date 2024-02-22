@@ -36,7 +36,7 @@ public class EntityManager implements EntityLifeCycle {
     @Override
     public void createEnemyRandom(int quantity, Random random, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Enemy(random.nextFloat() * 1280, random.nextFloat() * 720, velocityX, velocityY, "knight.png"));
+            this.setUpEntityAttributes(new Enemy(random.nextFloat() * 1280, random.nextFloat() * 720, velocityX, velocityY, "fire.png"));
         }
     }
     @Override

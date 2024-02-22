@@ -45,9 +45,9 @@ public class MenuScene extends Scene {
     public void render(float delta) {
         clearScreen();
         batch.begin();
-            button1.draw(batch, 1); // Adjust parameters as needed
-            button2.draw(batch, 1);
-            button3.draw(batch, 1);
+        button1.draw(batch, 1); // Adjust parameters as needed
+        button2.draw(batch, 1);
+        button3.draw(batch, 1);
         batch.end();
         // Rendering logic for the game scene
 
@@ -122,6 +122,8 @@ public class MenuScene extends Scene {
         super.resume();
         // Additional logic to resume the game scene
     }
+
+
 
 
 }
