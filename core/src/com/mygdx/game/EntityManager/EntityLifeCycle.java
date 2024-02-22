@@ -10,7 +10,6 @@ import java.util.Random;
 public interface EntityLifeCycle {
     // Create character at defined position
     void createCharacter(int quantity, float x, float y, float speed, String controls);
-
     // Create enemies at random positions
     void createEnemyRandom(int quantity, Random random);
 

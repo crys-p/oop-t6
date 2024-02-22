@@ -49,7 +49,6 @@ public class SceneManager {
 
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("SceneManager initialized"); // Log initialization message
-        //soundManager = new SoundManager("background_music.mp3", "background_music_2.mp3", "sound_effect.mp3");
     }
 
     private void initializeScenes() {
