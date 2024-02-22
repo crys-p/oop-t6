@@ -46,8 +46,8 @@ public class GameScene extends Scene {
     public void createEntities() {
         // Create enemy and collectible entities
         Random random = new Random();
-        entityManager.createCollectibleRandom(10, random, SCREEN_WIDTH, SCREEN_HEIGHT);
-        entityManager.createEnemyRandom(10, random, SCREEN_WIDTH, SCREEN_HEIGHT);
+        entityManager.createCollectibleRandom(25, random);
+        entityManager.createEnemyRandom(25, random);
         entityManager.logAll(); // for debugging
 
         // Create main player entity based on the number of players existing
@@ -56,7 +56,7 @@ public class GameScene extends Scene {
         for (int i = 0; i < totalPlayers; i++) {
             // If there are multiple players, set them 100px apart
             x += 100;
-            entityManager.createCharacter(1, x, 0, 400, 400, playerControlManager.getPlayerControls(i));
+            entityManager.createCharacter(1, x, 0, 400, playerControlManager.getPlayerControls(i));
             playerControlManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
         }
     }

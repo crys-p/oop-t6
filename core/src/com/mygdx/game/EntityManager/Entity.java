@@ -12,16 +12,12 @@ abstract class Entity {
     protected int entityID;
     protected float x;
     protected float y;
-    protected float speed; // Speed
-    protected float velocityY; // Vertical velocity (for gravity)
     protected Rectangle boundingBox;
 
     // Constructor for entities that start at fixed positions
-    protected Entity(float x, float y, float speed, float velocityY, String image) {
+    protected Entity(float x, float y, String image) {
         this.x = x;
         this.y = y;
-        this.speed = speed;
-        this.velocityY = velocityY;
         this.texture = new Texture(Gdx.files.internal(image));
         boundingBox = new Rectangle(this.x, this.y, this.getWidth() * 3/4, this.getHeight() * 3/4 );
     }
@@ -69,29 +65,6 @@ abstract class Entity {
         this.boundingBox.setY(this.y);
     }
 
-    protected void jump() { //shermaine
-        velocityY = 500; // Adjust jump velocity as needed
-    }
-
-    protected float getSpeed() {
-        return this.speed;
-    }
-
-    protected float getVelocityY() {
-        return this.velocityY;
-    }
-
-    protected void incrementSpeed(float value) {
-        this.speed += value;
-    }
-
-    protected void setSpeed(float value) {
-        this.speed = value;
-    }
-
-    protected void setVelocityY(float value) {
-        this.velocityY = value;
-    }
 
     protected float getHeight() {
         return this.texture.getHeight();

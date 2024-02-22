@@ -1,23 +1,12 @@
 package com.mygdx.game.PlayerControlManager;
-
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Inventory {
-    private final BitmapFont font;
     private final Map<Item, Integer> items;
 
     protected Inventory() {
         items = new HashMap<>();
-        this.font = new BitmapFont();
-
     }
 
     protected void addItem(Item item, int quantity) {

@@ -66,23 +66,20 @@ public class CollisionManager {
     }
 
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
-        System.out.println("Character Item collide");
-
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectibleID);
 
         // Add the collided collectible to the player's inventory
         playerControlManager.addItemToInventory(characterID);
 
-
-        // Here you can play sound effects or increase points
+        // Play collected sound
+        soundManager.playSoundEffect(1);
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         entityManager.removeEntity(enemyID);
         playerControlManager.takeDamage(characterID, enemyID);
-
-        // soundmanager.playsfx (if have idk)
+        soundManager.playSoundEffect(2);
         // playercontrol.decreasehealth
     }
 
