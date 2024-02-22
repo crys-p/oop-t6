@@ -5,8 +5,8 @@ import com.badlogic.gdx.Gdx;
 import java.util.Random;
 
 public class AIControlManager {
-    private final Random random = new Random();
-    public float[] moveLR(float entityX, float entityY) {
+    private static final Random random = new Random();
+    public static float[] moveLR(float entityX, float entityY) {
         float movementSpeed = 5; // Initial movement speed
         float direction = 1; // Initial direction: right
 
@@ -30,7 +30,7 @@ public class AIControlManager {
         return new float[] {newX, entityY};
     }
 
-    public float[] moveUD(float entityX, float entityY) {
+    public static float[] moveUD(float entityX, float entityY) {
         float movementSpeed = 5; // Initial movement speed
         float direction = 1; // Initial direction: up
 
