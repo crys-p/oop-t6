@@ -70,7 +70,7 @@ public class GameMaster extends Game {
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
 		ioManager.setSceneMgr(sceneManager);
-		sceneManager.showGameScene();
+		sceneManager.showScene(SceneManager.SceneType.START);
 
 		// Initialize SoundManager with background music and sound effect files
 		// Initialize SoundManager with background music file

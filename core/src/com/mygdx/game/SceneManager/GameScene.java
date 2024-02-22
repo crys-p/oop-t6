@@ -113,10 +113,10 @@ public class GameScene extends Scene {
 
         if (playerControlManager.getNumDeadPlayers() > 0) {
             // Detect player death to call endscene
-            this.sceneManager.showLoseScene();
+            this.sceneManager.showScene(SceneManager.SceneType.LOSE);
         }
         if (playerControlManager.getAllCollectibles() == numberOfCollectibles) {
-            this.sceneManager.showVictoryScene();
+            this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }
         //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);

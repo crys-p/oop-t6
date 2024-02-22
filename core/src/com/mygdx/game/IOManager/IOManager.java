@@ -195,7 +195,7 @@ public class IOManager implements InputProcessor {
 				// Example: Change to another scene
 				//game.setScreen(new AnotherScene(game));
 				System.out.println("Button clicked: " + buttonIndex);
-				sceneManager.showGameScene();
+				sceneManager.showScene(SceneManager.SceneType.GAME);
 				break;
 			case 1:
 				// Handle button 2 clickound
@@ -217,7 +217,7 @@ public class IOManager implements InputProcessor {
 				System.out.println("Button clicked: " + buttonIndex);
 				//Gdx.app.exit();
 				//sceneManager.pauseGameSceneAndSwitchToMenu();
-				sceneManager.showMenuScene();
+				sceneManager.showScene(SceneManager.SceneType.MENU);
 				break;
 			// Add cases for other buttons as needed
 		}

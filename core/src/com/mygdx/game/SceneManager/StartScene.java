@@ -32,6 +32,14 @@ public class StartScene extends Scene {
     public void show() {
         //createEntities();
         createCountdownButton();
+        // After 10 seconds, switch to the GameScene
+        Timer.schedule(new Timer.Task() {
+            @Override
+            public void run() {
+                Gdx.app.log("Timer", "Switching to GameScene after 5 seconds");
+                sceneManager.showScene(SceneManager.SceneType.GAME);
+            }
+        }, 5); // Delay of 10 seconds
     }
 
     @Override
@@ -56,9 +64,10 @@ public class StartScene extends Scene {
         // Clear the screen
         clearScreen();
         batch.begin();
-        countdownButton.draw(batch, 1);
-        entityManager.drawAllEntities(batch);
+            countdownButton.draw(batch, 1);
+            entityManager.drawAllEntities(batch);
         batch.end();
+
         // Update the camera and viewport
         //camera.update();
     }

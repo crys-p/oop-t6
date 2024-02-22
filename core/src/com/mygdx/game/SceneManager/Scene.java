@@ -96,10 +96,7 @@ public abstract class Scene extends ScreenAdapter {
 
 
     protected void clearScreen() {
-//        Gdx.gl.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         ScreenUtils.clear(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
-
     }
 
     public void setBackgroundColor(Color color) {

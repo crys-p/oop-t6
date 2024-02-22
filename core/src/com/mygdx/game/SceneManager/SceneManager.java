@@ -12,9 +12,11 @@ import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
+import java.util.HashMap;
+
 public class SceneManager {
     public enum SceneType {
-        START, GAME, MENU, END_WIN, END_LOSE
+        START, GAME, MENU, VICTORY, LOSE
     }
 
     private final Game game;
@@ -34,7 +36,8 @@ public class SceneManager {
 
     private PlayerControlManager playerControlManager;
 
-    private CollisionManager collisionManager;
+    protected HashMap<SceneType, Scene> allScenesMap;
+
 //    public SceneManager(Game game) {
 //        this.game = game;
 //        initializeScenes();
@@ -54,10 +57,8 @@ public class SceneManager {
         this.ioManager = ioManager;
         this.soundManager = soundManager; // Use the provided SoundManager instance
         this.playerControlManager = playerControlManager;
+        allScenesMap = new HashMap<>();
         initializeScenes();
-
-        //this.simulationManager = SimulationManager.getInstance();
-        //simulationManager.logInfo("SceneManager initialized");
 
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("SceneManager initialized"); // Log initialization message
@@ -65,12 +66,25 @@ public class SceneManager {
     }
 
     private void initializeScenes() {
-        startScene = new StartScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
-        gameScene = new GameScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager, playerControlManager); // Ensure gameScene is initialized correctly
-        menuScene = new MenuScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager); // Ensure gameScene is initialized correctly
-        loseScene = new LoseScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
-        victoryScene = new VictoryScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
+        allScenesMap.put(SceneType.START,
+                new StartScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
+        allScenesMap.put(SceneType.GAME,
+                new GameScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager, playerControlManager));
+        allScenesMap.put(SceneType.MENU,
+                new MenuScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
+        allScenesMap.put(SceneType.LOSE,
+                new LoseScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
+        allScenesMap.put(SceneType.VICTORY,
+                new VictoryScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
+
         currentScene = null;
+    }
+
+    public void showScene(SceneType sceneType) {
+        Scene scene = allScenesMap.get(sceneType);
+        changeScene(scene);
+        soundManager.playMusic(sceneType);
+        simulationManager.logInfo(sceneType + "initialised");
     }
 
     public void showStartScene() {
@@ -80,49 +94,42 @@ public class SceneManager {
         // Log initialization message
         //simulationManager.logInfo("StartScene initialized");
 
-        // After 10 seconds, switch to the GameScene
-        Timer.schedule(new Timer.Task() {
-            @Override
-            public void run() {
-                Gdx.app.log("Timer", "Switching to GameScene after 2 seconds");
-                showGameScene();
-            }
-        }, 5); // Delay of 10 seconds
+
     }
 
-    public void showGameScene() {
-        //changeScene(menuScene);
-        changeScene(gameScene);
-        // play the GameScene Song
-        soundManager.playMusic(SceneType.GAME);
-        // Log initialization message
-        simulationManager.logInfo("GameScene initialized");
-    }
-
-    public void showMenuScene() {
-        changeScene(menuScene);
-        // play the GameScene Song
-        soundManager.playMusic(SceneType.MENU);
-        // Log initialization message
-        simulationManager.logInfo("MenuScene initialized");
-    }
-
-
-    public void showLoseScene() {
-        changeScene(loseScene);
-        // play the GameScene Song
-        soundManager.playMusic(SceneType.START);
-        // Log initialization message
-        simulationManager.logInfo("loseScene initialized");
-    }
-
-    public void showVictoryScene() {
-        changeScene(victoryScene);
-        // play the GameScene Song
-        soundManager.playMusic(SceneType.START);
-        // Log initialization message
-        simulationManager.logInfo("Victory initialized");
-    }
+//    public void showGameScene() {
+//        //changeScene(menuScene);
+//        changeScene(gameScene);
+//        // play the GameScene Song
+//        soundManager.playMusic(SceneType.GAME);
+//        // Log initialization message
+//        simulationManager.logInfo("GameScene initialized");
+//    }
+//
+//    public void showMenuScene() {
+//        changeScene(menuScene);
+//        // play the GameScene Song
+//        soundManager.playMusic(SceneType.MENU);
+//        // Log initialization message
+//        simulationManager.logInfo("MenuScene initialized");
+//    }
+//
+//
+//    public void showLoseScene() {
+//        changeScene(loseScene);
+//        // play the GameScene Song
+//        soundManager.playMusic(SceneType.START);
+//        // Log initialization message
+//        simulationManager.logInfo("loseScene initialized");
+//    }
+//
+//    public void showVictoryScene() {
+//        changeScene(victoryScene);
+//        // play the GameScene Song
+//        soundManager.playMusic(SceneType.START);
+//        // Log initialization message
+//        simulationManager.logInfo("Victory initialized");
+//    }
 
 
     private void changeScene(Scene newScene) {

@@ -45,10 +45,10 @@ public class SoundManager {
 				case MENU:
 					backgroundMusicMap.get(SceneManager.SceneType.MENU).play();
 					break;
-				case END_WIN:
+				case VICTORY:
 					System.out.println("play end win music");
 					break;
-				case END_LOSE:
+				case LOSE:
 					System.out.println("play end lose music");
 			}
 		}
