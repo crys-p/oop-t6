@@ -5,8 +5,8 @@ import com.mygdx.game.AIControlManager.AIControlled;
 
 class Collectible extends Entity implements AIControlled {
 
-    protected Collectible(float x, float y, float velocityX, float velocityY, String image) {
-        super(x, y, velocityX, velocityY, image);
+    protected Collectible(float x, float y, String image) {
+        super(x, y, image);
     }
 
 

@@ -6,8 +6,8 @@ import com.mygdx.game.AIControlManager.AIControlled;
 class Enemy extends Entity implements AIControlled {
     protected float damage = 5; // default damage is 5
 
-    Enemy(float x, float y, float velocityX, float velocityY, String image) {
-        super(x, y, velocityX, velocityY, image);
+    Enemy(float x, float y, String image) {
+        super(x, y, image);
     }
 
     protected float getDamage() {

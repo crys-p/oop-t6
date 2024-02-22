@@ -1,6 +1,5 @@
 package com.mygdx.game.EntityManager;
 
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.PlayerControlManager.PlayerInstructions;
@@ -26,33 +25,25 @@ public class EntityManager implements EntityLifeCycle {
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public void createCharacter(int quantity, float x, float y, float speed, float velocityY, String controls) {
+    public void createCharacter(int quantity, float x, float y, float speed, String controls) {
         for (int i = 0; i < quantity; i++) {
-            Character character = new Character(x, y, speed, velocityY, "player.png", controls);
+            Character character = new Character(x, y, speed, "player.png", controls);
             this.setUpEntityAttributes(character);
         }
     }
 
     @Override
-    public void createEnemyRandom(int quantity, Random random, float velocityX, float velocityY) {
+    public void createEnemyRandom(int quantity, Random random) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Enemy(random.nextFloat() * 1280, random.nextFloat() * 720, velocityX, velocityY, "fire.png"));
+            this.setUpEntityAttributes(new Enemy(random.nextFloat() * 1280, random.nextFloat() * 720 - 50, "fire.png"));
         }
     }
     @Override
     // Create item at random x positions
-    public void createCollectibleRandom(int quantity, Random random, float velocityX, float velocityY) {
+    public void createCollectibleRandom(int quantity, Random random) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Collectible(random.nextFloat() * 1280, random.nextFloat() * 720, velocityX, velocityY, "star.png"));
+            this.setUpEntityAttributes(new Collectible(random.nextFloat() * 1280 - 50, random.nextFloat() * 720, "star.png"));
         } // 1280 as screen width --> use constant variable instead?
-    }
-
-    @Override
-    // Create item at specific location
-    public void createCollectible(int quantity, float x, float y, float velocityX, float velocityY) {
-        for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Collectible(x, y, velocityX, velocityY, "droplet.png"));
-        }
     }
 
     @Override

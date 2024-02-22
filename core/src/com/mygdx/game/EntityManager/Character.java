@@ -11,35 +11,25 @@ import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
 class Character extends Entity {
-    protected String inputControls;
+    private float speed;
+    private String inputControls;
 
-    protected Character(float x, float y, float velocityX, float velocityY, String image, String controls) {
-        super(x, y, velocityX, velocityY, image);
+    protected Character(float x, float y, float speed, String image, String controls) {
+        super(x, y, image);
         this.inputControls = controls;
-    }
-
-    protected void draw(ShapeRenderer shape) {
-//        shape.rect(boundingBox.x, boundingBox.y, boundingBox.width, boundingBox.height);
+        this.speed = speed;
     }
 
     protected void movement() {
-//        //shermaine
-//        float deltaTime = Gdx.graphics.getDeltaTime();
-//        // Update player's position based on velocity
-//        this.y += velocityY * deltaTime;
-//        // Simulate gravity
-//        velocityY -= 500 * deltaTime; // Adjust gravity as needed
-
+        // Prevent player from moving beyond screen bounds
         if (x < 0) {
             x = 0;
         }
         if (x > SCREEN_WIDTH - this.getWidth()) {
             x = SCREEN_WIDTH - this.getWidth();
         }
-        // Prevent player from falling through the ground
         if (y < 0) {
             y = 0;
-            // velocityY = 0;
         }
         if (y > SCREEN_HEIGHT - this.getHeight()) {
             y = SCREEN_HEIGHT - this.getHeight();
@@ -65,8 +55,27 @@ class Character extends Entity {
         updateBoundingBox();
     }
 
-
     protected void logConsole() {
         System.out.printf("I am a character at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.entityID);
+    }
+
+    public String getInputControls() {
+        return inputControls;
+    }
+
+    public void setInputControls(String inputControls) {
+        this.inputControls = inputControls;
+    }
+
+    protected float getSpeed() {
+        return this.speed;
+    }
+
+    protected void incrementSpeed(float value) {
+        this.speed += value;
+    }
+
+    protected void setSpeed(float value) {
+        this.speed = value;
     }
 }
