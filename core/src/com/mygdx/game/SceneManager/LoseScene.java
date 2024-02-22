@@ -21,7 +21,7 @@ public class LoseScene extends Scene{
     }
 
     private void createButtonNoIndex() {
-        createButtonNoIndex = ioManager.createButtonNoIndex("", IOManager.SCREEN_WIDTH / 2 - 100, IOManager.SCREEN_HEIGHT / 2 - 25, 400, 400, "loseButtonStyle"); // Set the countdown duration to 10 seconds
+        createButtonNoIndex = ioManager.createButtonNoIndex("", IOManager.SCREEN_WIDTH / 2 - 250, IOManager.SCREEN_HEIGHT / 2 - 250, 400, 400, "loseButtonStyle"); // Set the countdown duration to 10 seconds
     }
 
     @Override
