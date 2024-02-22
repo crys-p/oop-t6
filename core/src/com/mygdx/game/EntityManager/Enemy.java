@@ -1,9 +1,8 @@
 package com.mygdx.game.EntityManager;
 
+import com.mygdx.game.AIControlManager.AIControlManager;
 
-import com.mygdx.game.AIControlManager.AIControlled;
-
-class Enemy extends Entity implements AIControlled {
+class Enemy extends Entity {
     protected float damage = 5; // default damage is 5
 
     Enemy(float x, float y, String image) {
@@ -22,7 +21,7 @@ class Enemy extends Entity implements AIControlled {
     @Override
     protected void movement() {
         // Call moveLR to get the new positions
-        float[] newPosition = aiControlManager.moveLR(this.getX(), this.getY());
+        float[] newPosition = AIControlManager.moveLR(this.getX(), this.getY());
 
         // Update the X position
         this.setX(newPosition[0]);

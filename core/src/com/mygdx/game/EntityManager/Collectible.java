@@ -1,9 +1,9 @@
 package com.mygdx.game.EntityManager;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.AIControlManager.AIControlled;
 
-class Collectible extends Entity implements AIControlled {
+import com.mygdx.game.AIControlManager.AIControlManager;
+
+class Collectible extends Entity {
 
     protected Collectible(float x, float y, String image) {
         super(x, y, image);
@@ -17,7 +17,7 @@ class Collectible extends Entity implements AIControlled {
     @Override
     protected void movement() {
         // Call moveLR to get the new positions
-        float[] newPosition = aiControlManager.moveUD(this.getX(), this.getY());
+        float[] newPosition = AIControlManager.moveUD(this.getX(), this.getY());
 
         // Update the X position
         this.setX(newPosition[0]);
