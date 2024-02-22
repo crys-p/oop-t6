@@ -13,6 +13,7 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class SceneManager {
     public enum SceneType {
@@ -37,6 +38,22 @@ public class SceneManager {
     private PlayerControlManager playerControlManager;
 
     protected HashMap<SceneType, Scene> allScenesMap;
+
+    private SceneType currentSceneType;
+
+//    public SceneManager(Game game) {
+//        this.game = game;
+//        initializeScenes();
+//        //Initialize SimulationManager
+//        //this.simulationManager = SimulationManager.getInstance(); // this is to log the Scene change
+//        //simulationManager.logInfo("SceneManager initialized"); // This to log the Scene change
+//
+//        simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+//        simulationManager.logInfo("SceneManager initialized"); // Log initialization message
+//
+//    }
+
+
 
     public SceneManager(Game game, EntityManager entityManager, IOManager ioManager, SoundManager soundManager, PlayerControlManager playerControlManager){
         this.game = game;
@@ -73,13 +90,69 @@ public class SceneManager {
         simulationManager.logInfo(sceneType + " SCENE initialised");
     }
 
+
+    public void showStartScene() {
+        changeScene(startScene);
+        // play StartScene Song
+        soundManager.playMusic(SceneType.START);
+        // Log initialization message
+        //simulationManager.logInfo("StartScene initialized");
+
+
+    }
+
+    public void showGameScene() {
+        //changeScene(menuScene);
+        changeScene(gameScene);
+        // play the GameScene Song
+        soundManager.playMusic(SceneType.GAME);
+        // Log initialization message
+        simulationManager.logInfo("GameScene initialized");
+    }
+
+    public void showMenuScene() {
+        changeScene(menuScene);
+        // play the GameScene Song
+        soundManager.playMusic(SceneType.MENU);
+        // Log initialization message
+        simulationManager.logInfo("MenuScene initialized");
+    }
+
+
+    public void showLoseScene() {
+        changeScene(loseScene);
+        // play the GameScene Song
+        soundManager.playMusic(SceneType.START);
+        // Log initialization message
+        simulationManager.logInfo("loseScene initialized");
+    }
+
+    public void showVictoryScene() {
+        changeScene(victoryScene);
+        // play the GameScene Song
+        soundManager.playMusic(SceneType.START);
+        // Log initialization message
+        simulationManager.logInfo("Victory initialized");
+    }
+
     private void changeScene(Scene newScene) {
         // stop all music before changing the scene
         soundManager.stopAllMusic();
         disposeCurrentScene();
         currentScene = newScene;
         game.setScreen(currentScene);
+        // set the current scene type when changing the scene
+        setCurrentSceneType(getSceneType(newScene));
         System.out.println("Scene changed to: " + newScene.getClass().getSimpleName());
+    }
+
+    private SceneType getSceneType(Scene scene) {
+        for (Map.Entry<SceneType, Scene> entry : allScenesMap.entrySet()) {
+            if (entry.getValue() == scene) {
+                return entry.getKey();
+            }
+        }
+        return null;
     }
 
     private void disposeCurrentScene() {
@@ -104,13 +177,14 @@ public class SceneManager {
 //        }
 //    }
 
-    public Scene getCurrentScene() {
-        return currentScene;
+
+
+    public void setCurrentSceneType(SceneType sceneType) {
+        this.currentSceneType = sceneType;
     }
 
-    public void setScene(Scene scene) {
-        currentScene = scene;
-        game.setScreen(currentScene);
+    public SceneType getCurrentSceneType() {
+        return currentSceneType;
     }
 
 }

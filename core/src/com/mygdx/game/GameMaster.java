@@ -59,6 +59,7 @@ public class GameMaster extends Game {
 
 
 		// Initialize IOManager
+
 		ioManager = new IOManager(5, soundManager, playerControlManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
 

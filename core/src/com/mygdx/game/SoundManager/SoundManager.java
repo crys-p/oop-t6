@@ -47,15 +47,33 @@ public class SoundManager {
 		}
 	}
 
-
-	public void toggleMusic() {
+	public void toggleMusic(SceneManager.SceneType currentScene) {
 		musicOn = !musicOn;
 		if (!musicOn) {
 			stopAllMusic();
 			System.out.println("Music turned off");
 		} else {
-			backgroundMusicMap.get(SceneManager.SceneType.GAME).play();
-			System.out.println("Music turned on");
+
+			switch (currentScene) {
+				case GAME:
+					backgroundMusicMap.get(SceneManager.SceneType.GAME).play();
+					break;
+				case START:
+					backgroundMusicMap.get(SceneManager.SceneType.START).play();
+					break;
+				case MENU:
+					backgroundMusicMap.get(SceneManager.SceneType.MENU).play();
+					break;
+				case VICTORY:
+					backgroundMusicMap.get(SceneManager.SceneType.VICTORY).play();
+					break;
+				case LOSE:
+					backgroundMusicMap.get(SceneManager.SceneType.LOSE).play();
+					break;
+				default:
+					System.out.println("No music for the current scene.");
+					break;
+			}
 		}
 	}
 
