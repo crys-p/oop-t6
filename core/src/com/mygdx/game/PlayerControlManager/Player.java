@@ -5,12 +5,15 @@ public class Player {
     private final int maxHealth = 100;
     private int health;
     protected Inventory inventory;
+
     private String keyControls = "UDLR"; // default key controls if not set
 
     protected Player() {
         this.health = maxHealth;
         this.inventory = new Inventory();
     }
+
+
     //not in used yet
 //    protected void heal(int amount) {
 //        health = Math.min(health + amount, maxHealth);

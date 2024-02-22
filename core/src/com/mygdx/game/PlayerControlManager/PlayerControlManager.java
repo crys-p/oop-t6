@@ -154,4 +154,25 @@ public class PlayerControlManager {
         return allInventory;
     }
 
+
+    // method to reset damage taken by players
+    public void resetDamageTaken() {
+        // loop through all players and reset their health to maximum
+        for (Player player : allPlayers) {
+            player.setHealth(player.getMaxHealth());
+        }
+    }
+
+
+    // method to reset player inventories
+    public void resetPlayerInventories() {
+        // NOTHING TO RESET MAN
+    }
+
+    // method to reset all player-related data
+    public void reset() {
+        resetDamageTaken(); // reset damage taken by players
+        //resetPlayerInventories();
+    }
+
 }

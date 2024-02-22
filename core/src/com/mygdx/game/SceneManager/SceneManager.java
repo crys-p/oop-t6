@@ -91,6 +91,7 @@ public class SceneManager {
     }
 
     public void showGameScene() {
+        playerControlManager.reset();
         //changeScene(menuScene);
         changeScene(gameScene);
         // play the GameScene Song
