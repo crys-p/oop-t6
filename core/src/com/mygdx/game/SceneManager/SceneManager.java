@@ -13,6 +13,10 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
 public class SceneManager {
+    public enum SceneType {
+        START, GAME, MENU, END_WIN, END_LOSE
+    }
+
     private final Game game;
     private StartScene startScene;
     private GameScene gameScene;
@@ -68,7 +72,7 @@ public class SceneManager {
     public void showStartScene() {
         changeScene(startScene);
         // play StartScene Song
-        soundManager.playStartSceneMusic();
+        soundManager.playMusic(SceneType.START);
         // Log initialization message
         //simulationManager.logInfo("StartScene initialized");
 
@@ -88,7 +92,7 @@ public class SceneManager {
         changeScene(gameScene);
 
         // play the GameScene Song
-        soundManager.playGameSceneMusic();
+        soundManager.playMusic(SceneType.GAME);
         // Log initialization message
         simulationManager.logInfo("GameScene initialized");
     }
@@ -96,7 +100,7 @@ public class SceneManager {
     public void showMenuScene() {
         changeScene(menuScene);
         // play the GameScene Song
-        soundManager.playMenuSceneMusic();
+        soundManager.playMusic(SceneType.MENU);
         // Log initialization message
         simulationManager.logInfo("MenuScene initialized");
     }
