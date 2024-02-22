@@ -17,6 +17,7 @@ public class Inventory {
         }
     }
 
+    // Remove particular item
     protected void removeItem(Item item, int quantity) {
         if (items.containsKey(item)) {
             int currentQuantity = items.get(item);
@@ -28,6 +29,7 @@ public class Inventory {
         }
     }
 
+    // Get total amount of items
     protected int getTotalItems() {
         int total = 0;
         for (int quantity : items.values()) {
@@ -36,8 +38,9 @@ public class Inventory {
         return total;
     }
 
-
-    public boolean contains(Item item) {
-        return items.containsKey(item);
+    // Clear all items in inventory
+    protected void clear() {
+        items.clear();
     }
+
 }

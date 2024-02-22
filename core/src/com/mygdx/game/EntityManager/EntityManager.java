@@ -6,25 +6,23 @@ import com.mygdx.game.PlayerControlManager.PlayerInstructions;
 
 import java.util.*;
 
+import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
+import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
+
 public class EntityManager implements EntityLifeCycle {
     private List<Entity> entityList;
-    private List<Character> characterList;
-    private List<Enemy> enemyList;
-    private List<Collectible> collectibleList;
+    private Map<Class<? extends Entity>, List<Entity>> entitySpecificMap;
     private Map<Integer, Entity> entityIDMap;
     private int entityCount;
 
-//    private boolean movingRight = true;
     // Constructor
     public EntityManager() {
-        entityList = new ArrayList<>();
-        characterList = new ArrayList<>();
-        enemyList = new ArrayList<>();
-        collectibleList = new ArrayList<>();
         entityIDMap = new HashMap<>();
+        entitySpecificMap = new HashMap<>();
+        entityList = new ArrayList<>();
     }
 
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void createCharacter(int quantity, float x, float y, float speed, String controls) {
         for (int i = 0; i < quantity; i++) {
             Character character = new Character(x, y, speed, "player.png", controls);
@@ -32,18 +30,20 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
+    // Create enemies at random positions
     @Override
     public void createEnemyRandom(int quantity, Random random) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Enemy(random.nextFloat() * 1280, random.nextFloat() * 720 - 50, "fire.png"));
+            this.setUpEntityAttributes(new Enemy(random.nextFloat() * SCREEN_WIDTH, random.nextFloat() * SCREEN_HEIGHT - 50, "fire.png"));
         }
     }
+
     @Override
-    // Create item at random x positions
+    // Create collectibles at random positions
     public void createCollectibleRandom(int quantity, Random random) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Collectible(random.nextFloat() * 1280 - 50, random.nextFloat() * 720, "star.png"));
-        } // 1280 as screen width --> use constant variable instead?
+            this.setUpEntityAttributes(new Collectible(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT, "star.png"));
+        }
     }
 
     @Override
@@ -58,43 +58,13 @@ public class EntityManager implements EntityLifeCycle {
         entityList.clear();
         entityIDMap.clear();
         entityCount = 0;
-        characterList.clear();
-        enemyList.clear();
-        collectibleList.clear();
     }
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR PlayerControl~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-//    public int getPlayerEntityID() {
-//        // Iterate over the entityList
-//        for (Entity entity : entityList) {
-//            // Check if the entity is an instance of Character
-//            if (entity instanceof Character) {
-//                // If it is, return its entity ID
-//                return entity.getEntityID();
-//            }
-//        }
-//        // Return -1 if no player character is found
-//        return -1;
-//    }
-//
-//    public List<Integer> getCollectibleEntityIDs() {
-//        List<Integer> collectibleEntityIDs = new ArrayList<>();
-//
-//        // Iterate through all entities in the EntityManager
-//        for (Entity entity : entityList) {
-//            // Check if the entity is a collectible
-//            if (entity instanceof Collectible) {
-//                // If it is, add its entity ID to the list
-//                collectibleEntityIDs.add(entity.getEntityID());
-//            }
-//        }
-//        return collectibleEntityIDs;
-//    }
 
     public int getLastEntityID() {
         return this.entityCount - 1;
     }
-    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR AI/IO MOVEMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR MOVEMENT/PLAYERMOVEMENT~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public void movement() {
         for (Entity entity : entityList) {
             entity.movement();
@@ -102,7 +72,7 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
-    //updated so that io can call
+    // For Player Controls
     public void inputMovement(int entityID, PlayerInstructions control) {
         if (entityIDMap.containsKey(entityID)) {
             entityIDMap.get(entityID).inputMovement(control);
@@ -112,24 +82,33 @@ public class EntityManager implements EntityLifeCycle {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     public HashMap<Rectangle, Integer> getCharacterBoundingBoxes() {
         HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
-        for (Character character: characterList) {
-            boundingBoxes.put(character.boundingBox, character.entityID);
+        List<Entity> listOfCharacters = entitySpecificMap.get(Character.class);
+        if (listOfCharacters != null) {
+            for (Entity entity: listOfCharacters) {
+                boundingBoxes.put(entity.boundingBox, entity.entityID);
+            }
         }
         return boundingBoxes;
     }
 
     public HashMap<Rectangle, Integer> getEnemyBoundingBoxes() {
         HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
-        for (Enemy enemy: enemyList) {
-            boundingBoxes.put(enemy.boundingBox, enemy.entityID);
+        List<Entity> listOfEnemies = entitySpecificMap.get(Enemy.class);
+        if (listOfEnemies != null) {
+            for (Entity entity: listOfEnemies) {
+                boundingBoxes.put(entity.boundingBox, entity.entityID);
+            }
         }
         return boundingBoxes;
     }
 
     public HashMap<Rectangle, Integer> getCollectibleBoundingBoxes() {
         HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
-        for (Collectible collectible: collectibleList) {
-            boundingBoxes.put(collectible.boundingBox, collectible.entityID);
+        List<Entity> listOfCollectibles = entitySpecificMap.get(Collectible.class);
+        if (listOfCollectibles != null) {
+            for (Entity entity: listOfCollectibles) {
+                boundingBoxes.put(entity.boundingBox, entity.entityID);
+            }
         }
         return boundingBoxes;
     }
@@ -156,8 +135,7 @@ public class EntityManager implements EntityLifeCycle {
         // Set Entity ID, create bounding box
         int id = this.entityCount++;
         entity.setEntityID(id);
-
-        this.addToList(entity, id);
+        addToList(entity, id);
     }
 
     // Add entity to correct entity list/groups
@@ -165,32 +143,20 @@ public class EntityManager implements EntityLifeCycle {
         // Add entity to entityList and ID Map
         entityList.add(entity);
         entityIDMap.put(id, entity);
-
-        // Add entity to its respective list
-        if (entity instanceof Character) {
-            characterList.add((Character) entity);
-        } else if (entity instanceof Enemy) {
-            enemyList.add((Enemy) entity);
-        } else if (entity instanceof Collectible) {
-            collectibleList.add((Collectible) entity);
-        }
+        // Add entity to its entity specific list
+        Class<? extends Entity> entityClass = entity.getClass();
+        List<Entity> chosenList = entitySpecificMap.getOrDefault(entityClass, new ArrayList<>());
+        entitySpecificMap.put(entityClass, chosenList);
+        chosenList.add(entity);
     }
 
     private void removeFromList(Entity entity) {
+        // Remove entity from entityList and ID Map and its entity specific list
         entityList.remove(entity);
-        System.out.println("Removing entityID: " + entity.entityID);
-
-        // Add entity to its respective list
-        if (entity instanceof Character) {
-            characterList.remove((Character) entity);
-        } else if (entity instanceof Enemy) {
-            enemyList.remove((Enemy) entity);
-        } else if (entity instanceof Collectible) {
-            collectibleList.remove((Collectible) entity);
-        }
+        Class<? extends Entity> entityClass = entity.getClass();
+        List<Entity> chosenList = entitySpecificMap.getOrDefault(entityClass, new ArrayList<>());
+        chosenList.remove(entity);
     }
-
-
 
     public void logAll() {
         for (Entity e: entityList) {

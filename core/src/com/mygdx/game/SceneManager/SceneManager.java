@@ -54,6 +54,7 @@ public class SceneManager {
 //    }
 
 
+
     public SceneManager(Game game, EntityManager entityManager, IOManager ioManager, SoundManager soundManager, PlayerControlManager playerControlManager){
         this.game = game;
         this.entityManager = entityManager;
@@ -90,6 +91,7 @@ public class SceneManager {
         simulationManager.logInfo(sceneType + " SCENE initialised");
     }
 
+
     public void showStartScene() {
         changeScene(startScene);
         // play StartScene Song
@@ -101,7 +103,6 @@ public class SceneManager {
     }
 
     public void showGameScene() {
-        playerControlManager.reset();
         //changeScene(menuScene);
         changeScene(gameScene);
         // play the GameScene Song

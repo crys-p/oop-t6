@@ -42,7 +42,7 @@ class GameScene extends Scene {
         // Logic when the game scene is shown
         createButtons();
         createEntities();
-        playerControlManager.reset();
+        playerControlManager.resetAllPlayerStats();
     }
 
     @Override
@@ -123,21 +123,20 @@ class GameScene extends Scene {
         gameSceneButton1.draw(batch, 1); // Adjust parameters as needed
         batch.end();
 
-        // This has to be rendered outside of normal batch as it requires shape which cannot overlap with SpriteBatch
+        // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
         ioManager.displayPlayerHealth(new SpriteBatch(), new ShapeRenderer());
 
         // Process input events
         ioManager.processInput();
 
         if (playerControlManager.getNumDeadPlayers() > 0) {
-            // Detect player death to call endscene
+            // Detect player death to call end scene
             this.sceneManager.showScene(SceneManager.SceneType.LOSE);
         }
         if (playerControlManager.getAllCollectibles() == numberOfCollectibles) {
+            // Detect total collectibles to call victory scene
             this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }
-        //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         ioManager.updateMovement();
 
 
