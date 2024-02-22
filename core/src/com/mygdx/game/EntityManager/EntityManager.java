@@ -191,7 +191,6 @@ public class EntityManager implements EntityLifeCycle {
         entity.setEntityID(id);
 
         this.addToList(entity, id);
-        this.createBoundingBox(entity);
     }
 
     // Add entity to correct entity list/groups
@@ -225,9 +224,6 @@ public class EntityManager implements EntityLifeCycle {
     }
 
 
-    private void createBoundingBox(Entity e) {
-        e.boundingBox = new Rectangle(e.x, e.y, e.getWidth(), e.getHeight());
-    }
 
     public void logAll() {
         for (Entity e: entityList) {
