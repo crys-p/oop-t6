@@ -20,8 +20,13 @@ class Collectible extends Entity implements AIControlled {
 
     @Override
     protected void movement() {
-        float newY = aiControlManager.moveUD(this.getY());
-        this.setY(newY);
+        // Call moveLR to get the new positions
+        float[] newPosition = aiControlManager.moveUD(this.getX(), this.getY());
+
+        // Update the X position
+        this.setX(newPosition[0]);
+        // Update the Y position
+        this.setY(newPosition[1]);
         updateBoundingBox();
     }
 

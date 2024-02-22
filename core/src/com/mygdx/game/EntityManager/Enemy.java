@@ -21,7 +21,14 @@ class Enemy extends Entity implements AIControlled {
 
     @Override
     protected void movement() {
-        float newX = aiControlManager.moveLR(this.getX());
-        this.setX(newX);
+        // Call moveLR to get the new positions
+        float[] newPosition = aiControlManager.moveLR(this.getX(), this.getY());
+
+        // Update the X position
+        this.setX(newPosition[0]);
+        // Update the Y position
+        this.setY(newPosition[1]);
+        updateBoundingBox();
     }
+
 }

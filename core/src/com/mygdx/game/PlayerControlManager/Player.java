@@ -2,7 +2,7 @@ package com.mygdx.game.PlayerControlManager;
 
 public class Player {
     private int playerControlledEntityID = -1;
-    private int maxHealth = 100;
+    private final int maxHealth = 100;
     private int health;
     protected Inventory inventory;
     private String keyControls = "UDLR"; // default key controls if not set
@@ -11,7 +11,7 @@ public class Player {
         this.health = maxHealth;
         this.inventory = new Inventory();
     }
-//
+    //not in used yet
 //    protected void heal(int amount) {
 //        health = Math.min(health + amount, maxHealth);
 //    }
@@ -27,13 +27,14 @@ public class Player {
         inventory.addItem(item, quantity);
     }
 
-    protected void removeItemFromInventory(Item item, int quantity) {
-        inventory.removeItem(item, quantity);
-    }
-
-    public int getTotalItems() {
-        return inventory.getTotalItems();
-    }
+    //not in used yet
+//    protected void removeItemFromInventory(Item item, int quantity) {
+//        inventory.removeItem(item, quantity);
+//    }
+//
+//    public int getTotalItems() {
+//        return inventory.getTotalItems();
+//    }
 
     protected int getHealth() {
         return this.health;
@@ -44,10 +45,6 @@ public class Player {
     protected int getMaxHealth() {
         return this.maxHealth;
     }
-//    public Vector2 getPosition() {
-//        return position;
-//    }
-
     public void setPlayerKeyControls(String playerControl) {
         this.keyControls = playerControl;
     }
@@ -65,4 +62,3 @@ public class Player {
         return inventory.getTotalItems();
     }
 }
-
