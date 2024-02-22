@@ -17,12 +17,10 @@ public class AIControlManager {
         if (newX <= 0 || newX >= (float) Gdx.graphics.getWidth()) {
             // Reverse the direction
             direction *= -1;
-
-            // Adjust the position to keep the AI within screen bounds
-            newX = Math.max(0, Math.min((float) Gdx.graphics.getWidth(), newX)) * direction; // Keep AI within screen bounds
-
             // Randomize Y position
-            entityY = random.nextFloat() * Gdx.graphics.getHeight();
+            entityY = random.nextFloat() * (Gdx.graphics.getHeight() - 100);
+            // Adjust the position to keep the AI within screen bounds
+            newX = Math.max(0, Math.min((float) Gdx.graphics.getWidth(), newX)) * direction;
         }
 
         // Debug statement to print the new X position and updated speed
@@ -43,9 +41,9 @@ public class AIControlManager {
         if (newY <= 0 || newY >= (float) Gdx.graphics.getHeight()) {
             // Reverse the direction if the edge is reached
             direction *= -1;
-
+            // Randomize X position
+            entityX = random.nextFloat() * (Gdx.graphics.getWidth() - 100);
             // Adjust the position to keep the AI within screen bounds
-            entityX = random.nextFloat() * Gdx.graphics.getWidth(); // Randomize X position
             newY = Math.max(0, Math.min((float) Gdx.graphics.getHeight(), newY)) * direction;
         }
 
