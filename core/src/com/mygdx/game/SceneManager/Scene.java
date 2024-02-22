@@ -36,7 +36,7 @@ public abstract class Scene extends ScreenAdapter {
 
     private boolean paused = false;
 
-    public Scene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
+    protected Scene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         this.game = game;
         this.backgroundColor = Color.BLACK; // Default background color
         this.entityManager = entityManager;
@@ -70,7 +70,7 @@ public abstract class Scene extends ScreenAdapter {
         // Additional logic to resume the scene
     }
 
-    public boolean isPaused() {
+    protected boolean isPaused() {
         return paused;
     }
 
@@ -97,12 +97,12 @@ public abstract class Scene extends ScreenAdapter {
         ScreenUtils.clear(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
     }
 
-    public void setBackgroundColor(Color color) {
+    protected void setBackgroundColor(Color color) {
         this.backgroundColor = color;
         Gdx.app.log("Scene", "Background color set to: " + color.toString());
     }
 
-    public Color getBackgroundColor() {
+    protected Color getBackgroundColor() {
         return backgroundColor;
     }
 

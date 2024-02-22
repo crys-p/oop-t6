@@ -11,16 +11,16 @@ import com.mygdx.game.IOManager.IOManager;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
-public class LoseScene extends Scene{
+class LoseScene extends Scene{
 
-    private TextButton createButtonNoIndex;
+    protected TextButton createButtonNoIndex;
     public LoseScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
 
         setBackgroundColor(Color.RED); // setting of background color for end scene
     }
 
-    private void createButtonNoIndex() {
+    protected void createButtonNoIndex() {
         createButtonNoIndex = ioManager.createButtonNoIndex("", IOManager.SCREEN_WIDTH / 2 - 250, IOManager.SCREEN_HEIGHT / 2 - 250, 400, 400, "loseButtonStyle"); // Set the countdown duration to 10 seconds
     }
 

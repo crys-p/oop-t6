@@ -183,10 +183,6 @@ public class IOManager implements InputProcessor {
 		return output.createButtonNoIndex(text, x, y, width, height, styleName);
 	}
 
-
-
-
-	// Method to handle button clicks
 	// Method to handle button clicks
 	public void handleButtonClick(int buttonIndex) {
 		switch (buttonIndex) {

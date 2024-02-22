@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CollisionManager {
-    private EntityManager entityManager;
-    private SoundManager soundManager;
-    private PlayerControlManager playerControlManager;
+    private final EntityManager entityManager;
+    private final SoundManager soundManager;
+    private final PlayerControlManager playerControlManager;
     private HashMap<Rectangle, Integer> characterMap;
     private HashMap<Rectangle, Integer> enemyMap;
     private HashMap<Rectangle, Integer> collectibleMap;

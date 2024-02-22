@@ -12,13 +12,13 @@ import com.mygdx.game.IOManager.IOManager;
 
 import java.util.Random;
 
-public class MenuScene extends Scene {
+class MenuScene extends Scene {
 
-    private TextButton button1;
-    private TextButton button2;
-    private TextButton button3;
+    protected TextButton button1;
+    protected TextButton button2;
+    protected TextButton button3;
 
-    public MenuScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
+    protected MenuScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.YELLOW); // setting of background color for end scene
 
@@ -33,7 +33,7 @@ public class MenuScene extends Scene {
     }
 
     @Override
-    public void createEntities() {
+    protected void createEntities() {
 
     }
 
@@ -42,18 +42,6 @@ public class MenuScene extends Scene {
         // Logic when the game scene is hidden
     }
 
-    @Override
-    public void render(float delta) {
-        clearScreen();
-        batch.begin();
-            button1.draw(batch, 1); // Adjust parameters as needed
-            button2.draw(batch, 1);
-            button3.draw(batch, 1);
-        batch.end();
-
-        // Process input events
-        ioManager.processInput();
-    }
 
     @Override
     public void resize(int width, int height) {
@@ -62,7 +50,7 @@ public class MenuScene extends Scene {
 
     }
 
-    private void createButtons() {
+    protected void createButtons() {
         // Define width and height for the buttons (you can adjust these values as needed)
         float buttonWidth = 200f;
         float buttonHeight = 50f;
@@ -121,7 +109,18 @@ public class MenuScene extends Scene {
         // Additional logic to resume the game scene
     }
 
+    @Override
+    public void render(float delta) {
+        clearScreen();
+        batch.begin();
+            button1.draw(batch, 1); // Adjust parameters as needed
+            button2.draw(batch, 1);
+            button3.draw(batch, 1);
+        batch.end();
 
+        // Process input events
+        ioManager.processInput();
+    }
 
 
 }

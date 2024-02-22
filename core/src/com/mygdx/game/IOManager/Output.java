@@ -9,17 +9,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 
-public class Output {
-	private TextButton[] buttons;
-	private Skin skin;
+class Output {
+	protected TextButton[] buttons;
+	protected Skin skin;
 
-	public Output(int numButtons) {
+	protected Output(int numButtons) {
 		buttons = new TextButton[numButtons];
 		skin = new Skin();
 		createSkin();
 	}
 
-	private void createSkin() {
+	protected void createSkin() {
 		// Load button textures
 		Texture buttonMenu = new Texture("menubutton.png");
 		Texture buttonGame = new Texture("gamebutton.png");
@@ -72,14 +72,14 @@ public class Output {
 		skin.add("loseButtonStyle", buttonStyleLose);
 		skin.add("victoryButtonStyle", buttonStyleVictory);
 	}
-	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
+	protected TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
 		buttons[index] = new TextButton(text, skin, styleName);
 		buttons[index].setPosition(x, y);
 		buttons[index].setSize(width, height);
 		return buttons[index];
 	}
 
-	public TextButton createButtonNoIndex(String text, float x, float y, float width, float height, String styleName) {
+	protected TextButton createButtonNoIndex(String text, float x, float y, float width, float height, String styleName) {
 		TextButton button = new TextButton(text, skin, styleName);
 		button.setPosition(x, y);
 		button.setSize(width, height);
@@ -87,7 +87,7 @@ public class Output {
 	}
 
 
-	public TextButton createCountdownButton(String text, int index, float x, float y, float width, float height, String styleName, int countdownSeconds) {
+	protected TextButton createCountdownButton(String text, int index, float x, float y, float width, float height, String styleName, int countdownSeconds) {
 		// Create the button
 		TextButton countdownButton = new TextButton(text, skin, styleName);
 
@@ -100,7 +100,7 @@ public class Output {
 
 		return countdownButton;
 	}
-	private void startCountdown(TextButton countdownButton, int countdownSeconds) {
+	protected void startCountdown(TextButton countdownButton, int countdownSeconds) {
 		Thread countdownThread = new Thread(() -> {
 			try {
 				for (int i = countdownSeconds; i >= 0; i--) {
@@ -114,12 +114,12 @@ public class Output {
 		countdownThread.start();
 	}
 
-	private void updateButtonText(TextButton button, int secondsLeft) {
+	protected void updateButtonText(TextButton button, int secondsLeft) {
 		button.setText("Countdown: " + secondsLeft);
 	}
 
 
-	public TextButton getButton(int index) {
+	protected TextButton getButton(int index) {
 		return buttons[index];
 	}
 

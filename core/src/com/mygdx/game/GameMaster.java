@@ -40,27 +40,25 @@ public class GameMaster extends Game {
 //	}
 
 	public void create() {
-		// Initialize SoundManager with background music and sound effect files
-
-		soundManager = new SoundManager();
-		soundManager.createSounds();
-
 		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 
-		// Create EntityManager
+		// Initialise EntityManager
 		entityManager = new EntityManager();
 
-		// Create PlayerControlManager and HealthBar instances
+		// Initialise SoundManager with background music and sound effect files
+		soundManager = new SoundManager();
+		soundManager.createSounds();
+
+		// Initialise PlayerControlManager
 		playerControlManager = new PlayerControlManager(entityManager);
-
-		// Set up single player mode with default Up down left right key controls
+		// Set up single player mode with default UDLR key controls
 		playerControlManager.createPlayers(1);
-		playerControlManager.setPlayerControl(0, "UDLR"); // udlr or wasd
+		playerControlManager.setPlayerControl(0, "UDLR"); // UDLR or WASD accepted
 
 
-		//Initialize IOManager
+		// Initialize IOManager
 		ioManager = new IOManager(5, soundManager, playerControlManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
 
@@ -92,24 +90,11 @@ public class GameMaster extends Game {
 	public void render() {
 		super.render();
 
-		//System.out.println("Current scene: " + sceneManager.getCurrentScene().getClass().getSimpleName());
-		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
 		entityManager.movement();
 		ioManager.updateMouse();
-
-		// Keep the player within the screen bounds
-//		if(player.getX() > Gdx.graphics.getWidth())
-//			player.setX(Gdx.graphics.getWidth());
-//		if(player.getY() > Gdx.graphics.getHeight())
-//			player.setY(Gdx.graphics.getHeight());
-
 		collisionManager.setCollidables();
 		collisionManager.detectCollisions();
 
-		// Should be wrapped inside output(?)
-		// Render the health bar on top of the player
-//		healthBar.render(shape, batch);
-//		inventory.render(batch);
 	}
 
 
@@ -118,10 +103,6 @@ public class GameMaster extends Game {
 	@Override
 	public void dispose() {
 		batch.dispose();
-//		for (TextureObject drop: droplets) {
-//			drop.getTexture().dispose();
-//		}
-//		bucket.getTexture().dispose();
 		shape.dispose();
 		super.dispose();
 	}
