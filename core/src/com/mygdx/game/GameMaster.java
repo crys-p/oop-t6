@@ -1,24 +1,19 @@
 package com.mygdx.game;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
-import com.mygdx.game.PlayerControlManager.HealthBar;
+import com.mygdx.game.IOManager.HealthBar;
 import com.mygdx.game.PlayerControlManager.Inventory;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
-import com.mygdx.game.SceneManager.StartScene; // Adjust the package name as needed edmund scene
-import com.badlogic.gdx.utils.ScreenUtils; // edmund scene
 import com.mygdx.game.SoundManager.SoundManager; // sound manager
 
-import com.badlogic.gdx.graphics.Color; // background color
 import com.mygdx.game.SimulationManager.SimulationManager;
 
 //public class GameMaster extends ApplicationAdapter
@@ -34,48 +29,45 @@ public class GameMaster extends Game {
 	private PlayerControlManager playerControlManager;
 	private HealthBar healthBar;
 	private Inventory inventory;
-    private CollisionManager collisionManager;
+	private CollisionManager collisionManager;
 
-	private IOManager getIOManager() {
-		if (ioManager == null) {
-			ioManager = new IOManager(entityManager, 5, soundManager, sceneManager);
-			ioManager.setWindowedMode();
-		}
-		return ioManager;
-	}
+//	private IOManager getIOManager() {
+//		if (ioManager == null) {
+//			ioManager = new IOManager( 5, soundManager, playerControlManager, sceneManager);
+//			ioManager.setWindowedMode();
+//		}
+//		return ioManager;
+//	}
 
 	public void create() {
 		// Initialize SoundManager with background music and sound effect files
 
 		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","menu_music.mp3","sound_effect.mp3");
 
-
 		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 
-		// Create respective managers
+		// Create EntityManager
 		entityManager = new EntityManager();
-
-
-//Initialize IOManager
-		ioManager = new IOManager(entityManager,5, soundManager,sceneManager);
-		ioManager.setWindowedMode(); // Setting the initial size of the window
-
-
 
 		// Create PlayerControlManager and HealthBar instances
 		playerControlManager = new PlayerControlManager(entityManager);
-		healthBar = new HealthBar(playerControlManager);
-		inventory = new Inventory(playerControlManager);
 
+		// Set up single player mode with default Up down left right key controls
+		playerControlManager.createPlayers(1);
+		playerControlManager.setPlayerControl(0, "UDLR"); // udlr or wasd
+
+		//Initialize IOManager
+		ioManager = new IOManager(5, soundManager, playerControlManager, null);
+		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
 
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager);
-
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
+		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
@@ -90,9 +82,6 @@ public class GameMaster extends Game {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
-		// Set up single player mode with default Up down left right key controls
-		playerControlManager.createPlayers(1);
-		playerControlManager.setPlayerControl(0, "UDLR");
 	}
 	// Method to switch to another scene
 
@@ -100,7 +89,7 @@ public class GameMaster extends Game {
 		super.render();
 
 		//System.out.println("Current scene: " + sceneManager.getCurrentScene().getClass().getSimpleName());
-	// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
+		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
 		entityManager.movement();
 
 		//entityMgr.setUpMovement();
@@ -117,11 +106,10 @@ public class GameMaster extends Game {
 		collisionManager.setCollidables();
 		collisionManager.detectCollisions();
 
-		shape.begin(ShapeRenderer.ShapeType.Filled);
+		// Should be wrapped inside output(?)
 		// Render the health bar on top of the player
-		healthBar.render(shape, batch); // comment out for compile testing - crystal
-		inventory.render(batch);
-		shape.end();
+//		healthBar.render(shape, batch);
+//		inventory.render(batch);
 	}
 
 

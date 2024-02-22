@@ -3,10 +3,14 @@ package com.mygdx.game.IOManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.game.EntityManager.EntityManager;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
+
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
@@ -18,6 +22,7 @@ public class IOManager implements InputProcessor {
 	private Output output;
 	private Input input;
 	private SoundManager soundManager; // Reference to SoundManager
+	private PlayerControlManager playerControlManager;
 	private SceneManager sceneManager;
 
 	//Setting initial size of window
@@ -25,7 +30,8 @@ public class IOManager implements InputProcessor {
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
-	private EntityManager entityManager; //Reference to EntityManager
+	private InventoryDisplay inventoryDisplay;
+	private HealthBar healthBar;
 	private boolean leftKeyPressed = false;
 	private boolean rightKeyPressed = false;
 	private boolean upKeyPressed = false;
@@ -35,20 +41,43 @@ public class IOManager implements InputProcessor {
 	private boolean leftButtonPressed;
 	private boolean rightButtonPressed;
 
-	public IOManager(EntityManager entityManager, int numButtons, SoundManager soundManager, SceneManager sceneManager) {
+	private Map<Integer, Boolean> keyStates = new HashMap<>();
 
-		this.entityManager = entityManager;
-		this.soundManager = soundManager;
-		this.sceneManager = sceneManager;
+	Set<Integer> keysAccepted = new HashSet<>(Arrays.asList(
+			Input.Keys.LEFT,
+			Input.Keys.RIGHT,
+			Input.Keys.UP,
+			Input.Keys.DOWN,
+			Input.Keys.A,
+			Input.Keys.D,
+			Input.Keys.W,
+			Input.Keys.S
+	));
+
+
+	public IOManager (int numButtons, SoundManager soundManager, PlayerControlManager playerControlManager, SceneManager sceneManager) {
 		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
 		output = new Output(numButtons);
+		this.soundManager = soundManager;
+		this.playerControlManager = playerControlManager;
+		this.sceneManager = sceneManager;
+		this.inventoryDisplay = new InventoryDisplay(playerControlManager);
+		this.healthBar = new HealthBar(playerControlManager);
+		setUpKeyStates();
+	}
 
+	private void setUpKeyStates() {
+		for (int keycode : keysAccepted) {
+			keyStates.put(keycode, false);
+		}
 	}
 
 	// Keys
 	@Override
 	public boolean keyDown(int keycode) {
-		handleKeyPress(keycode, true);
+		if (keysAccepted.contains(keycode)) {
+			handleKeyPress(keycode, true);
+		}
 		return true; // To indicate event was handled
 	}
 
@@ -63,33 +92,23 @@ public class IOManager implements InputProcessor {
 		return false;
 	}
 
+
+	// Set key states based on pressed keys
 	public void handleKeyPress(int keycode, boolean isPressed) {
-		switch (keycode) {
-			case Input.Keys.LEFT:
-				leftKeyPressed = isPressed;
-				break;
-			case Input.Keys.RIGHT:
-				rightKeyPressed = isPressed;
-				break;
-			case Input.Keys.UP:
-				upKeyPressed = isPressed;
-				break;
-			case Input.Keys.DOWN:
-				downKeyPressed = isPressed;
-				break;
-		}
+		keyStates.put(keycode, isPressed);
 		updateMovement();
 	}
 
+	// Activate player control when movement is updated
 	public void updateMovement() {
 		List<Integer> keys = new ArrayList<>();
-		if (leftKeyPressed) keys.add(Input.Keys.LEFT);
-		if (rightKeyPressed) keys.add(Input.Keys.RIGHT);
-		if (upKeyPressed) keys.add(Input.Keys.UP);
-		if (downKeyPressed) keys.add(Input.Keys.DOWN);
-
+		for (Map.Entry<Integer, Boolean> entry : keyStates.entrySet()) {
+			if (entry.getValue()) {
+				keys.add(entry.getKey());
+			}
+		}
 		if (!keys.isEmpty()) {
-			entityManager.inputMovement(keys);
+			playerControlManager.handlePressedKeys(keys);
 		}
 	}
 
@@ -140,6 +159,15 @@ public class IOManager implements InputProcessor {
 	public void updateMouse() {
 		updateMousePosition(mouseX, mouseY);
 		processInput();
+	}
+
+	public void displayPlayerInventory(SpriteBatch batch) {
+		InventoryDisplay inventoryDisplay = new InventoryDisplay(playerControlManager);
+		inventoryDisplay.render(batch);
+	}
+
+	public void displayPlayerHealth(SpriteBatch batch, ShapeRenderer shape) {
+		healthBar.render(shape, batch);
 	}
 
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
@@ -227,4 +255,7 @@ public class IOManager implements InputProcessor {
 		return buttonIndex;
 	}
 
+	public void setSceneMgr(SceneManager sceneManager) {
+		this.sceneManager = sceneManager;
+	}
 }

@@ -8,6 +8,7 @@ import com.badlogic.gdx.utils.Timer;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
+import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
@@ -25,6 +26,7 @@ public class SceneManager {
     private SoundManager soundManager;
     private IOManager ioManager;
 
+    private PlayerControlManager playerControlManager;
 
     private CollisionManager collisionManager;
 //    public SceneManager(Game game) {
@@ -40,11 +42,12 @@ public class SceneManager {
 //    }
 
 
-    public SceneManager(Game game, EntityManager entityManager, IOManager ioManager, SoundManager soundManager ){
+    public SceneManager(Game game, EntityManager entityManager, IOManager ioManager, SoundManager soundManager, PlayerControlManager playerControlManager){
         this.game = game;
         this.entityManager = entityManager;
         this.ioManager = ioManager;
         this.soundManager = soundManager; // Use the provided SoundManager instance
+        this.playerControlManager = playerControlManager;
         initializeScenes();
 
         //this.simulationManager = SimulationManager.getInstance();
@@ -57,7 +60,7 @@ public class SceneManager {
 
     private void initializeScenes() {
         startScene = new StartScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
-        gameScene = new GameScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager); // Ensure gameScene is initialized correctly
+        gameScene = new GameScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager, playerControlManager); // Ensure gameScene is initialized correctly
         menuScene = new MenuScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager); // Ensure gameScene is initialized correctly
         currentScene = null;
     }
@@ -77,7 +80,6 @@ public class SceneManager {
                 showGameScene();
             }
         }, 2); // Delay of 10 seconds
-
     }
 
     public void showGameScene() {
@@ -99,9 +101,7 @@ public class SceneManager {
         simulationManager.logInfo("MenuScene initialized");
     }
 
-    public void setIOManager(IOManager ioManager) {
-        this.ioManager = ioManager;
-    }
+
     private void changeScene(Scene newScene) {
         // stop all music before changing the scene
         soundManager.stopAllMusic();
@@ -113,8 +113,6 @@ public class SceneManager {
 
     private void disposeCurrentScene() {
         if (currentScene != null) {
-            currentScene.batch.dispose();
-            currentScene.shape.dispose();
             currentScene.dispose();
             entityManager.deleteAllEntities();
             System.out.println("Disposed of previous scene: " + currentScene.getClass().getSimpleName());
