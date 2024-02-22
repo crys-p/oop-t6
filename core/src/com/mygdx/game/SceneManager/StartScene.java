@@ -13,6 +13,9 @@ import com.mygdx.game.IOManager.IOManager;
 
 import java.util.Random;
 
+import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
+import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
+
 public class StartScene extends Scene {
 
     public StartScene(Game game, EntityManager entityManager, SpriteBatch batch,ShapeRenderer shape, IOManager ioManager) {
@@ -29,7 +32,7 @@ public class StartScene extends Scene {
     @Override
     protected void createEntities() {
         // Create entities specific to the start scenex
-        entityManager.createCharacter(1, 100, 0, 20, 0, null);
+        entityManager.createCharacter(1, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 20, 0, null);
     }
 
     @Override

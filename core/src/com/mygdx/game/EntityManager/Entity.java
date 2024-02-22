@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.PlayerControlManager.PlayerInstructions;
 
 abstract class Entity {
     protected Texture texture;
@@ -120,7 +121,7 @@ abstract class Entity {
 
     protected abstract void movement();
 
-    protected void inputMovement(int keyMovement) {}
+    protected void inputMovement(PlayerInstructions instructions) {}
 
 
 }

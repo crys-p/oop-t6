@@ -71,25 +71,16 @@ public class CollisionManager {
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectibleID);
 
-//        // Retrieve the player object
-//        Player player = playerControlManager.getPlayer(characterID);
-//
-//        // Add the collided collectible to the player's inventory
-//        Item collidedItem = new Item(collectibleID); // Assuming Item constructor takes the collectible ID
-//        player.addItemToInventory(collidedItem, 1);
-//
-//        // Retrieve the total number of collectibles collected from the player's inventory
-//        int totalCollectibles = player.getTotalItems();
-//
-//        // Print the total number of collectibles collected
-//        System.out.println("Total collectibles collected: " + totalCollectibles);
+        // Add the collided collectible to the player's inventory
+        playerControlManager.addItemToInventory(characterID);
+
 
         // Here you can play sound effects or increase points
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
         entityManager.removeEntity(enemyID);
-        playerControlManager.takeDamage(characterID, 20);
+        playerControlManager.takeDamage(characterID, enemyID);
 
         // soundmanager.playsfx (if have idk)
         // playercontrol.decreasehealth

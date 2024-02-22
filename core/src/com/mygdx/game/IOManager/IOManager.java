@@ -158,7 +158,7 @@ public class IOManager implements InputProcessor {
 
 	public void updateMouse() {
 		updateMousePosition(mouseX, mouseY);
-		processInput();
+		//processInput();
 	}
 
 	public void displayPlayerInventory(SpriteBatch batch) {
