@@ -111,7 +111,7 @@ public class SceneManager {
     public void showLoseScene() {
         changeScene(loseScene);
         // play the GameScene Song
-        soundManager.playStartSceneMusic();
+        soundManager.playMusic(SceneType.START);
         // Log initialization message
         simulationManager.logInfo("loseScene initialized");
     }
@@ -119,7 +119,7 @@ public class SceneManager {
     public void showVictoryScene() {
         changeScene(victoryScene);
         // play the GameScene Song
-        soundManager.playStartSceneMusic();
+        soundManager.playMusic(SceneType.START);
         // Log initialization message
         simulationManager.logInfo("Victory initialized");
     }
