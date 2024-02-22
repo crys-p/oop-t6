@@ -11,6 +11,7 @@ import java.util.*;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.SceneManager.Scene;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
@@ -18,6 +19,7 @@ public class IOManager implements InputProcessor {
 	//initialize from GameMaster?
 	public static final int SCREEN_WIDTH = 1280;
 	public static final int SCREEN_HEIGHT = 720;
+	private Scene currentScene; // Field to store the current scene type
 
 	private Output output;
 	private Input input;
@@ -202,7 +204,8 @@ public class IOManager implements InputProcessor {
 				//				soundManager.toggleS
 				// Example: Toggle sound();
 				System.out.println("Button clicked: " + buttonIndex);
-				soundManager.toggleMusic();
+				SceneManager.SceneType currentSceneType = sceneManager.getCurrentSceneType();
+				soundManager.toggleMusic(currentSceneType);
 				break;
 			case 2:
 				// Handle button 3 click
@@ -224,7 +227,8 @@ public class IOManager implements InputProcessor {
 				//				soundManager.toggleS
 				// Example: Toggle sound();
 				System.out.println("Button clicked: " + buttonIndex);
-				soundManager.toggleMusic();
+				SceneManager.SceneType currentSceneType1 = sceneManager.getCurrentSceneType();
+				soundManager.toggleMusic(currentSceneType1);
 				break;
 			// Add cases for other buttons as needed
 		}

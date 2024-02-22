@@ -140,25 +140,6 @@ class GameScene extends Scene {
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         ioManager.updateMovement();
 
-// Add click listeners to the buttons
-        gameSceneButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Handle click for button 3
-                int buttonIndex = 3; // Assuming button 1 is at index 3
-                ioManager.handleButtonClick(buttonIndex);
-            }
-        });
-
-        gameSceneButton1.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                // Handle click for button 2
-                int buttonIndex = 4; // Assuming button 2 is at index 1
-                ioManager.handleButtonClick(buttonIndex);
-            }
-        });
-
 
     }
 
