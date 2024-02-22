@@ -38,8 +38,9 @@ public class GameScene extends Scene {
     @Override
     public void show() {
         // Logic when the game scene is shown
-        createEntities();
         createButtons();
+        createEntities();
+
     }
 
     @Override
@@ -97,9 +98,10 @@ public class GameScene extends Scene {
         // Rendering logic for the game scene
         clearScreen();
         batch.begin();
-        gameSceneButton.draw(batch, 1); // Adjust parameters as needed
+
         entityManager.drawAllEntities(batch);
         ioManager.displayPlayerInventory(batch);
+        gameSceneButton.draw(batch, 1); // Adjust parameters as needed
         batch.end();
 
         // This has to be rendered outside of normal batch as it requires shape which cannot overlap with SpriteBatch

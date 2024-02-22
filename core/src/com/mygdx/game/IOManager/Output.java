@@ -27,6 +27,7 @@ public class Output {
 		// Load button texture
 		Texture buttonTexture = new Texture("menuButton.png");
 		Texture buttonLose = new Texture("losebutton.png");
+		Texture buttonVictory = new Texture("victorybutton.png");
 
 		// Define button styles for each scene
 		TextButtonStyle buttonStyleMenu = new TextButtonStyle();
@@ -50,11 +51,17 @@ public class Output {
 		buttonStyleTimer.fontColor = Color.WHITE;
 		buttonStyleTimer.up = new TextureRegionDrawable(new TextureRegion(buttonTexture));
 
-		// Define button style
+		// Define button style on tje LoseScene
 		TextButtonStyle buttonStyleLose = new TextButtonStyle();
 		buttonStyleLose.font = new BitmapFont();
 		buttonStyleLose.fontColor = Color.WHITE;
 		buttonStyleLose.up = new TextureRegionDrawable(new TextureRegion(buttonLose));
+
+		// Define button style in the VictoryScene
+		TextButtonStyle buttonStyleVictory = new TextButtonStyle();
+		buttonStyleVictory.font = new BitmapFont();
+		buttonStyleVictory.fontColor = Color.WHITE;
+		buttonStyleVictory.up = new TextureRegionDrawable(new TextureRegion(buttonVictory));
 
 		// Add button styles to the skin with unique names
 		skin.add("buttonMenuStyle", buttonStyleMenu);
@@ -63,6 +70,7 @@ public class Output {
 		// Add button style to the skin
 		skin.add("countdownButtonStyle", buttonStyleTimer);
 		skin.add("loseButtonStyle", buttonStyleLose);
+		skin.add("victoryButtonStyle", buttonStyleVictory);
 	}
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
 		buttons[index] = new TextButton(text, skin, styleName);
