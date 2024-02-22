@@ -33,45 +33,19 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
-    public void createEnemyRandomY(int quantity, Random random, float minX, float maxX, float minY, float maxY,
-                                   float minVelocityX, float maxVelocityX, float minVelocityY, float maxVelocityY) {
-        for (int i = 0; i < quantity; i++) {
-            float x = minX + random.nextFloat() * (maxX - minX); // Random X position within range
-            float y = minY + random.nextFloat() * (maxY - minY); // Random Y position within range
-            // Randomize the velocity within the specified range
-            float velocityX = random.nextFloat() * (maxVelocityX - minVelocityX) + minVelocityX; // Random X velocity within range
-            float velocityY = random.nextFloat() * (maxVelocityY - minVelocityY) + minVelocityY; // Random Y velocity within range
-            this.setUpEntityAttributes(new Enemy(x, y, velocityX, velocityY, "knight.png"));
-        }
-    }
-
     @Override
-    public void createCollectibleRandom(int quantity, Random random, float minX, float maxX, float minY, float maxY,
-                                        float minVelocityX, float maxVelocityX, float minVelocityY, float maxVelocityY) {
+    public void createEnemyRandom(int quantity, Random random, float velocityX, float velocityY) {
         for (int i = 0; i < quantity; i++) {
-            float x = minX + random.nextFloat() * (maxX - minX); // Random X position within range
-            float y = minY + random.nextFloat() * (maxY - minY); // Random Y position within range
-            // Randomize the velocity within the specified range
-            float velocityX = random.nextFloat() * (maxVelocityX - minVelocityX) + minVelocityX; // Random X velocity within range
-            float velocityY = random.nextFloat() * (maxVelocityY - minVelocityY) + minVelocityY; // Random Y velocity within range
-            this.setUpEntityAttributes(new Collectible(x, y, velocityX, velocityY, "star.png"));
+            this.setUpEntityAttributes(new Enemy(random.nextFloat() * 1280, random.nextFloat() * 720, velocityX, velocityY, "knight.png"));
         }
     }
-
-
-//    public void createEnemyRandomY(int quantity, float x, Random random, float velocityX, float velocityY) {
-//        for (int i = 0; i < quantity; i++) {
-//            this.setUpEntityAttributes(new Enemy(x, random.nextFloat() * 720, velocityX, velocityY, "knight.png"));
-//        }
-//    }
-//
-//    @Override
-//    // Create item at random x positions
-//    public void createCollectibleRandom(int quantity, Random random, float velocityX, float velocityY) {
-//        for (int i = 0; i < quantity; i++) {
-//            this.setUpEntityAttributes(new Collectible(random.nextFloat() * 1280, random.nextFloat() * 720, velocityX, velocityY, "star.png"));
-//        } // 1280 as screen width --> use constant variable instead?
-//    }
+    @Override
+    // Create item at random x positions
+    public void createCollectibleRandom(int quantity, Random random, float velocityX, float velocityY) {
+        for (int i = 0; i < quantity; i++) {
+            this.setUpEntityAttributes(new Collectible(random.nextFloat() * 1280, random.nextFloat() * 720, velocityX, velocityY, "star.png"));
+        } // 1280 as screen width --> use constant variable instead?
+    }
 
     @Override
     // Create item at specific location

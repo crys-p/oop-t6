@@ -24,6 +24,8 @@ public class Output {
 		Texture buttonMenu = new Texture("menubutton.png");
 		Texture buttonGame = new Texture("gamebutton.png");
 		Texture buttonStart = new Texture("menuButton.png"); // Ensure this is the correct texture
+		// Load button texture
+		Texture buttonTexture = new Texture("menuButton.png");
 
 		// Define button styles for each scene
 		TextButtonStyle buttonStyleMenu = new TextButtonStyle();
@@ -41,10 +43,18 @@ public class Output {
 		buttonStyleStart.fontColor = Color.WHITE;
 		buttonStyleStart.up = new TextureRegionDrawable(new TextureRegion(buttonStart));
 
+		// Define button style
+		TextButtonStyle buttonStyleTimer = new TextButtonStyle();
+		buttonStyleTimer.font = new BitmapFont();
+		buttonStyleTimer.fontColor = Color.WHITE;
+		buttonStyleTimer.up = new TextureRegionDrawable(new TextureRegion(buttonTexture));
+
 		// Add button styles to the skin with unique names
 		skin.add("buttonMenuStyle", buttonStyleMenu);
 		skin.add("buttonGameStyle", buttonStyleGame);
 		skin.add("buttonStartStyle", buttonStyleStart);
+		// Add button style to the skin
+		skin.add("countdownButtonStyle", buttonStyleTimer);
 	}
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
 		buttons[index] = new TextButton(text, skin, styleName);
@@ -53,6 +63,37 @@ public class Output {
 		return buttons[index];
 	}
 
+
+	public TextButton createCountdownButton(String text, int index, float x, float y, float width, float height, String styleName, int countdownSeconds) {
+		// Create the button
+		TextButton countdownButton = new TextButton(text, skin, styleName);
+
+		// Set the position and size of the button
+		countdownButton.setPosition(x, y);
+		countdownButton.setSize(width, height);
+
+		// Start countdown timer
+		startCountdown(countdownButton, countdownSeconds);
+
+		return countdownButton;
+	}
+	private void startCountdown(TextButton countdownButton, int countdownSeconds) {
+		Thread countdownThread = new Thread(() -> {
+			try {
+				for (int i = countdownSeconds; i >= 0; i--) {
+					updateButtonText(countdownButton, i);
+					Thread.sleep(1000); // Sleep for one second
+				}
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+		countdownThread.start();
+	}
+
+	private void updateButtonText(TextButton button, int secondsLeft) {
+		button.setText("Countdown: " + secondsLeft);
+	}
 
 
 	public TextButton getButton(int index) {

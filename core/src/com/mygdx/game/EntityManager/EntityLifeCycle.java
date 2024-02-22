@@ -10,13 +10,13 @@ import java.util.Random;
 public interface EntityLifeCycle {
     void createCharacter(int quantity, float x, float y, float speed, float velocityY, String controls);
 
-    void createEnemyRandomY(int quantity, Random random, float minX, float maxX, float minY, float maxY, float minVelocityX, float maxVelocityX, float minVelocityY, float maxVelocityY);
+    void createEnemyRandom(int quantity, Random random, float velocityX, float VelocityY);
 
     // Create item at specific location
     void createCollectible(int quantity, float x, float y, float speed, float velocityY);
 
     // Create item at random x positions
-    void createCollectibleRandom(int quantity, Random random, float minX, float maxX, float minY, float maxY, float minVelocityX, float maxVelocityX, float minVelocityY, float maxVelocityY);
+    void createCollectibleRandom(int quantity, Random random, float velocityX, float velocityY);
 
     // Draw all Sprite in entity list
     void drawAllEntities(SpriteBatch batch);

@@ -29,7 +29,7 @@ public class GameMaster extends Game {
 	private PlayerControlManager playerControlManager;
 	private HealthBar healthBar;
 	private Inventory inventory;
-    private CollisionManager collisionManager;
+	private CollisionManager collisionManager;
 
 //	private IOManager getIOManager() {
 //		if (ioManager == null) {
@@ -90,7 +90,7 @@ public class GameMaster extends Game {
 		super.render();
 
 		//System.out.println("Current scene: " + sceneManager.getCurrentScene().getClass().getSimpleName());
-	// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
+		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
 		entityManager.movement();
 		ioManager.updateMovement();
 		ioManager.updateMouse();
