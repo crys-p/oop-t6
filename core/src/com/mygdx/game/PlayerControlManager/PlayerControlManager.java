@@ -114,11 +114,15 @@ public class PlayerControlManager {
         // For each key pressed
         for (Integer key: keys) {
             for (Player player : allPlayers) {
-                // Check which player it belongs to
+                // Check each player's key config to see if it matches
                 String keyConfigs = player.getPlayerKeyControls();
                 if (keyMaps.get(keyConfigs).contains(key)) {
-                    PlayerInstructions instr = getDirectionFromKey(key);
-                    entityManager.inputMovement(player.getPlayerControlledEntityID(), instr);
+                    // If player entity id exists, send instruction to player
+                    int playerEntityID = player.getPlayerControlledEntityID();
+                    if (playerEntityID != -1) {
+                        PlayerInstructions instr = getDirectionFromKey(key);
+                        entityManager.inputMovement(player.getPlayerControlledEntityID(), instr);
+                    }
                 }
             }
         }

@@ -16,14 +16,6 @@ abstract class Entity {
     protected float velocityY; // Vertical velocity (for gravity)
     protected Rectangle boundingBox;
 
-    // Default constructor
-    protected Entity(float x, float y, float speed) {
-        this.x = 0;
-        this.y = 0;
-        this.speed = 0;
-        this.velocityY = 0;
-    }
-
     // Constructor for entities that start at fixed positions
     protected Entity(float x, float y, float speed, float velocityY, String image) {
         this.x = x;
@@ -31,6 +23,7 @@ abstract class Entity {
         this.speed = speed;
         this.velocityY = velocityY;
         this.texture = new Texture(Gdx.files.internal(image));
+        boundingBox = new Rectangle(this.x, this.y, this.getWidth() * 3/4, this.getHeight() * 3/4 );
     }
 
     protected float getX() {

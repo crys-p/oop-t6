@@ -41,21 +41,21 @@ public class GameScene extends Scene {
 
     @Override
     public void createEntities() {
+        // Create enemy and collectible entities
+        Random random = new Random();
+        entityManager.createCollectibleRandom(10, random, 0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -10, 10, -10, 10);
+        entityManager.createEnemyRandomY(10, random, 0, Gdx.graphics.getWidth(), 0, Gdx.graphics.getHeight(), -10, 10, -10, 10);
+        entityManager.logAll(); // for debugging
+
         // Create main player entity based on the number of players existing
         int totalPlayers = playerControlManager.getTotalNumberOfPlayers();
         int x = 0;
         for (int i = 0; i < totalPlayers; i++) {
             // If there are multiple players, set them 100px apart
             x += 100;
-            entityManager.createCharacter(1, x, 0, 400, 20, playerControlManager.getPlayerControls(i));
+            entityManager.createCharacter(1, x, 0, 400, 400, playerControlManager.getPlayerControls(i));
             playerControlManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
         }
-
-        // Create other entities
-        Random random = new Random();
-        entityManager.createCollectibleRandom(10, random, 10,10 );
-        entityManager.createEnemyRandom(10, random,10,10);
-        entityManager.logAll(); // for debugging
     }
 
     private void createButtons() {
