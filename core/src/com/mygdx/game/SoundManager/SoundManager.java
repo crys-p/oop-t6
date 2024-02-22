@@ -7,9 +7,6 @@ import java.util.HashMap;
 public class SoundManager {
 	HashMap<SceneManager.SceneType, BackgroundMusic> backgroundMusicMap;
 	HashMap<SoundEffectType, SoundEffect> soundEffectMap;
-	private SoundEffect soundEffectGain;
-	private SoundEffect soundEffectHit;
-
 	private boolean musicOn = true; // Initially music is on
 
 	public SoundManager() {

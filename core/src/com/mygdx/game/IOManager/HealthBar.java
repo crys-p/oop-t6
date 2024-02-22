@@ -25,13 +25,6 @@ public class HealthBar {
     }
 
     public void render(ShapeRenderer shape, SpriteBatch batch) {
-//        int playerEntityID = playerControlManager.getPlayerEntityID(); // Get the player entity ID from PlayerControlManager
-//        Player player = playerControlManager.getPlayer(playerEntityID); // Get the player using the entity ID
-//        if (player == null) {
-//            System.out.println("Player not found");
-//            return; // Player not found with the provided entity ID
-//        }
-
         // Define the position of the health bar
         float healthBarX = SCREEN_WIDTH * 0.01f; // Distance from the left edge of the screen
         float healthBarY = SCREEN_HEIGHT * 0.9f; // Distance from the top edge of the screen

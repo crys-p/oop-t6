@@ -90,8 +90,6 @@ public abstract class Scene extends ScreenAdapter {
     @Override
     public abstract void render(float delta);
 
-    // Other abstract methods for resize, pause, resume, and dispose if needed
-
 
     protected void clearScreen() {
         ScreenUtils.clear(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
