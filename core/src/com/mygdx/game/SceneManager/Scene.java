@@ -15,8 +15,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.EntityManager.EntityLifeCycle;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
-import com.mygdx.game.PlayerControlManager.Player;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 
 // implements Screen
 // usage of ScreenAdapter over Screen as promote code reuse and maintains consistency

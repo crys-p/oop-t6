@@ -46,16 +46,13 @@ public class MenuScene extends Scene {
     public void render(float delta) {
         clearScreen();
         batch.begin();
-        button1.draw(batch, 1); // Adjust parameters as needed
-        button2.draw(batch, 1);
-        button3.draw(batch, 1);
+            button1.draw(batch, 1); // Adjust parameters as needed
+            button2.draw(batch, 1);
+            button3.draw(batch, 1);
         batch.end();
-        // Rendering logic for the game scene
 
         // Process input events
         ioManager.processInput();
-        //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
-        //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
     }
 
     @Override

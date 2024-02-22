@@ -1,6 +1,6 @@
 package com.mygdx.game.PlayerControlManager;
 
-public class Player {
+class Player {
     private int playerControlledEntityID = -1;
     private final int maxHealth = 100;
     private int health;
@@ -22,9 +22,7 @@ public class Player {
     protected void setPlayerControlledEntityID(int entityID) {
         this.playerControlledEntityID = entityID;
     }
-//    protected void move(Vector2 direction) {
-//        position.add(direction);
-//    }
+
 
     public void addToInventory(Item item, int quantity) {
         inventory.addItem(item, quantity);
@@ -63,5 +61,9 @@ public class Player {
     // Getter for the inventory
     protected int getInventoryCount() {
         return inventory.getTotalItems();
+    }
+
+    protected void clearInventory() {
+        inventory.clear();
     }
 }

@@ -11,13 +11,6 @@ public class SoundManager {
 
 	private boolean musicOn = true; // Initially music is on
 
-//	public SoundManager(String startSceneMusicFile, String gameSceneMusicFile,String menuSceneMusicFile, String soundEffectFile) {
-//		startSceneMusic = new BackgroundMusic(startSceneMusicFile);
-//		gameSceneMusic = new BackgroundMusic(gameSceneMusicFile);
-//		menuSceneMusic = new BackgroundMusic(menuSceneMusicFile);
-//		soundEffect = new SoundEffect(soundEffectFile);
-//	}
-
 	public SoundManager() {
 		backgroundMusicMap = new HashMap<>();
 	}
