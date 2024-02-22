@@ -1,7 +1,7 @@
 package com.mygdx.game.PlayerControlManager;
 
 public class Player {
-    private int playerControlledEntityID;
+    private int playerControlledEntityID = -1;
     private int maxHealth = 100;
     private int health;
     protected Inventory inventory;
