@@ -85,7 +85,9 @@ public class IOManager implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		handleKeyPress(keycode, false);
+		if (keysAccepted.contains(keycode)) {
+			handleKeyPress(keycode, false);
+		}
 		return true;
 	}
 

@@ -57,6 +57,9 @@ public class EntityManager implements EntityLifeCycle {
     public void deleteAllEntities() {
         entityList.clear();
         entityIDMap.clear();
+        for (Class cls : entitySpecificMap.keySet()) {
+            entitySpecificMap.get(cls).clear();
+        }
         entityCount = 0;
     }
 
@@ -132,7 +135,7 @@ public class EntityManager implements EntityLifeCycle {
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~INTERNAL/TESTING CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set up Required Entity attributes
     private void setUpEntityAttributes(Entity entity) {
-        // Set Entity ID, create bounding box
+        // Set Entity ID and add to list
         int id = this.entityCount++;
         entity.setEntityID(id);
         addToList(entity, id);

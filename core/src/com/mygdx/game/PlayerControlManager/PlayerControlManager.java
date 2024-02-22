@@ -28,7 +28,6 @@ public class PlayerControlManager {
         }
     }
 
-
     // Method to remove a player from the manager
     public void removePlayer(int index) {
         allPlayers.remove(index);
