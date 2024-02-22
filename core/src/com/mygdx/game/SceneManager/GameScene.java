@@ -35,6 +35,7 @@ public class GameScene extends Scene {
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
     private TextButton gameSceneButton;
+    private TextButton gameSceneButton1;
 
     @Override
     public void show() {
@@ -65,15 +66,21 @@ public class GameScene extends Scene {
 
     private void createButtons() {
         // Define width and height for the buttons (you can adjust these values as needed)
-        float buttonWidth = 300f;
+        float buttonWidth = 200f;
         float buttonHeight = 100f;
 
         // Position the button at the top right corner
         float buttonX = SCREEN_WIDTH - buttonWidth - 20; // 20 is the padding from the right edge
         float buttonY = IOManager.SCREEN_HEIGHT - buttonHeight - 20; // 20 is the padding from the top edge
 
+        // Position the button at the top right corner
+        float soundbuttonX = SCREEN_WIDTH - buttonWidth - 10; // 20 is the padding from the right edge
+        float soundbuttonY = SCREEN_HEIGHT - buttonHeight - 600; // 20 is the padding from the top edge
+
         // Create buttons using the IOManager
         gameSceneButton = ioManager.createButton("MENU", 3, buttonX, buttonY, buttonWidth, buttonHeight, "buttonGameStyle");
+        gameSceneButton1 = ioManager.createButton("Toggle Sound", 4, soundbuttonX, soundbuttonY, buttonWidth, buttonHeight, "buttonGameStyle");
+
 
 
         // Add click listeners to the buttons
@@ -85,6 +92,16 @@ public class GameScene extends Scene {
                 ioManager.handleButtonClick(buttonIndex);
             }
         });
+
+        gameSceneButton1.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Handle click for button 2
+                int buttonIndex = 4; // Assuming button 2 is at index 1
+                ioManager.handleButtonClick(buttonIndex);
+            }
+        });
+
         // Set button positions and add listeners if needed
     }
 
@@ -103,6 +120,7 @@ public class GameScene extends Scene {
         entityManager.drawAllEntities(batch);
         ioManager.displayPlayerInventory(batch);
         gameSceneButton.draw(batch, 1); // Adjust parameters as needed
+        gameSceneButton1.draw(batch, 1); // Adjust parameters as needed
         batch.end();
 
         // This has to be rendered outside of normal batch as it requires shape which cannot overlap with SpriteBatch

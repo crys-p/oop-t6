@@ -77,7 +77,7 @@ public class MenuScene extends Scene {
         float buttonY3 = buttonY2 - 100; // Adjust this value for the third button's vertical position
 
         // Create buttons using the IOManager
-        button1 = ioManager.createButton("Resume", 0, buttonX, buttonY1, buttonWidth, buttonHeight, "buttonMenuStyle");
+        button1 = ioManager.createButton("Restart", 0, buttonX, buttonY1, buttonWidth, buttonHeight, "buttonMenuStyle");
         button2 = ioManager.createButton("Toogle Sound", 1, buttonX, buttonY2, buttonWidth, buttonHeight, "buttonMenuStyle");
         button3 = ioManager.createButton("EXIT GAME", 2, buttonX, buttonY3, buttonWidth, buttonHeight, "buttonMenuStyle");
 

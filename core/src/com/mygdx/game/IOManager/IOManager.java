@@ -219,6 +219,13 @@ public class IOManager implements InputProcessor {
 				//sceneManager.pauseGameSceneAndSwitchToMenu();
 				sceneManager.showScene(SceneManager.SceneType.MENU);
 				break;
+			case 4:
+				// Handle button 2 clickound
+				//				soundManager.toggleS
+				// Example: Toggle sound();
+				System.out.println("Button clicked: " + buttonIndex);
+				soundManager.toggleMusic();
+				break;
 			// Add cases for other buttons as needed
 		}
 	}
@@ -244,7 +251,7 @@ public class IOManager implements InputProcessor {
 		float buttonHeight = 50f; // Height of each button
 		float buttonYDiff = 100f; // Difference in y-coordinate between buttons
 
-		float buttonGameWidth = 300f; // Width of each button
+		float buttonGameWidth = 200f; // Width of each button
 		float buttonGameHeight = 100f; // Height of each button
 
 		// Adjust the x and y coordinates based on the button index
@@ -261,6 +268,8 @@ public class IOManager implements InputProcessor {
 			buttonIndex = 2;
 		} else if (touchX >= buttonX && touchX <= buttonX + buttonGameWidth && touchY >= buttonY && touchY <= buttonY + buttonGameHeight) {
 			buttonIndex = 3;
+		} else if (touchX >= buttonX && touchX <= buttonX + buttonGameWidth && touchY >= SCREEN_HEIGHT - buttonGameHeight - 20 && touchY <= SCREEN_HEIGHT - 20) {
+			buttonIndex = 4;
 		}
 
 
