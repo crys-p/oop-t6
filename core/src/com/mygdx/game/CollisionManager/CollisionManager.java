@@ -1,9 +1,8 @@
 package com.mygdx.game.CollisionManager;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.EntityManager.EntityManager;
-import com.mygdx.game.PlayerControlManager.Item;
-import com.mygdx.game.PlayerControlManager.Player;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.SoundManager.SoundEffectType;
 import com.mygdx.game.SoundManager.SoundManager;
 
 import java.util.HashMap;
@@ -18,8 +17,7 @@ public class CollisionManager {
     private HashMap<Rectangle, Integer> collectibleMap;
 
 
-    public CollisionManager(EntityManager entityManager, SoundManager soundManager, PlayerControlManager playerControlManager)
-    {
+    public CollisionManager(EntityManager entityManager, SoundManager soundManager, PlayerControlManager playerControlManager) {
         this.entityManager = entityManager;
         this.soundManager = soundManager;
         this.playerControlManager = playerControlManager;
@@ -68,16 +66,18 @@ public class CollisionManager {
     private void handleCharacterCollectibleCollision(int characterID, int collectibleID) {
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectibleID);
-
         // Add the collided collectible to the player's inventory
         playerControlManager.addItemToInventory(characterID);
-
         // Play collected sound
-        soundManager.playSoundEffect(1);
+        soundManager.playSoundEffect(SoundEffectType.COLLECT);
     }
 
     private void handleCharacterEnemyCollision(int characterID, int enemyID) {
+        // Remove the collectible from the entity manager
         entityManager.removeEntity(enemyID);
+        // Reduce health of player based on enemy damage
         playerControlManager.takeDamage(characterID, enemyID);
-        soundManager.playSoundEffect(2);
+        // Play hit sound
+        soundManager.playSoundEffect(SoundEffectType.HIT);
     }
+}
