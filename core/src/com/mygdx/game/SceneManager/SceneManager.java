@@ -17,6 +17,8 @@ public class SceneManager {
     private StartScene startScene;
     private GameScene gameScene;
     private MenuScene menuScene;
+    private LoseScene loseScene;
+    private VictoryScene victoryScene;
     private Scene currentScene;
 
     private SimulationManager simulationManager;
@@ -62,6 +64,8 @@ public class SceneManager {
         startScene = new StartScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
         gameScene = new GameScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager, playerControlManager); // Ensure gameScene is initialized correctly
         menuScene = new MenuScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager); // Ensure gameScene is initialized correctly
+        loseScene = new LoseScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
+        victoryScene = new VictoryScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
         currentScene = null;
     }
 
@@ -79,14 +83,12 @@ public class SceneManager {
                 Gdx.app.log("Timer", "Switching to GameScene after 2 seconds");
                 showGameScene();
             }
-        }, 4); // Delay of 10 seconds
+        }, 5); // Delay of 10 seconds
     }
 
     public void showGameScene() {
-
         //changeScene(menuScene);
         changeScene(gameScene);
-
         // play the GameScene Song
         soundManager.playGameSceneMusic();
         // Log initialization message
@@ -99,6 +101,23 @@ public class SceneManager {
         soundManager.playMenuSceneMusic();
         // Log initialization message
         simulationManager.logInfo("MenuScene initialized");
+    }
+
+
+    public void showLoseScene() {
+        changeScene(loseScene);
+        // play the GameScene Song
+        soundManager.playStartSceneMusic();
+        // Log initialization message
+        simulationManager.logInfo("loseScene initialized");
+    }
+
+    public void showVictoryScene() {
+        changeScene(victoryScene);
+        // play the GameScene Song
+        soundManager.playStartSceneMusic();
+        // Log initialization message
+        simulationManager.logInfo("Victory initialized");
     }
 
 
