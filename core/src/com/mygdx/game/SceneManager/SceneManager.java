@@ -80,7 +80,6 @@ public class SceneManager {
                 showGameScene();
             }
         }, 2); // Delay of 10 seconds
-
     }
 
     public void showGameScene() {
@@ -102,9 +101,7 @@ public class SceneManager {
         simulationManager.logInfo("MenuScene initialized");
     }
 
-    public void setIOManager(IOManager ioManager) {
-        this.ioManager = ioManager;
-    }
+
     private void changeScene(Scene newScene) {
         // stop all music before changing the scene
         soundManager.stopAllMusic();
@@ -116,8 +113,6 @@ public class SceneManager {
 
     private void disposeCurrentScene() {
         if (currentScene != null) {
-            currentScene.batch.dispose();
-            currentScene.shape.dispose();
             currentScene.dispose();
             entityManager.deleteAllEntities();
             System.out.println("Disposed of previous scene: " + currentScene.getClass().getSimpleName());

@@ -255,4 +255,7 @@ public class IOManager implements InputProcessor {
 		return buttonIndex;
 	}
 
+	public void setSceneMgr(SceneManager sceneManager) {
+		this.sceneManager = sceneManager;
+	}
 }

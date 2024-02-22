@@ -51,8 +51,6 @@ public class GameMaster extends Game {
 		// Create EntityManager
 		entityManager = new EntityManager();
 
-
-
 		// Create PlayerControlManager and HealthBar instances
 		playerControlManager = new PlayerControlManager(entityManager);
 
@@ -61,7 +59,7 @@ public class GameMaster extends Game {
 		playerControlManager.setPlayerControl(0, "UDLR"); // udlr or wasd
 
 		//Initialize IOManager
-		ioManager = new IOManager(5, soundManager, playerControlManager, sceneManager);
+		ioManager = new IOManager(5, soundManager, playerControlManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Initialize Collision Manager for all collision detection and handling
@@ -69,7 +67,7 @@ public class GameMaster extends Game {
 
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
-
+		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showStartScene();
 
 		// Initialize SoundManager with background music and sound effect files
