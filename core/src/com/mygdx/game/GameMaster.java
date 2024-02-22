@@ -58,6 +58,7 @@ public class GameMaster extends Game {
 		playerControlManager.createPlayers(1);
 		playerControlManager.setPlayerControl(0, "UDLR"); // udlr or wasd
 
+
 		//Initialize IOManager
 		ioManager = new IOManager(5, soundManager, playerControlManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
