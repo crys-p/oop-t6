@@ -84,7 +84,7 @@ public class SceneManager {
         Scene scene = allScenesMap.get(sceneType);
         changeScene(scene);
         soundManager.playMusic(sceneType);
-        simulationManager.logInfo(sceneType + "initialised");
+        simulationManager.logInfo(sceneType + " SCENE initialised");
     }
 
     public void showStartScene() {
