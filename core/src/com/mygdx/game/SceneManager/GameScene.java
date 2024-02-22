@@ -25,15 +25,16 @@ import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
 public class GameScene extends Scene {
 
-    public GameScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
-        super(game, entityManager, batch, shape, ioManager, playerControlManager);
+    private final int numberOfEnemy = 25;
+    private final int numberOfCollectibles = 5;
+    private PlayerControlManager playerControlManager;
+
+    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
+        super(game, sceneManager, entityManager, batch, shape, ioManager);
+        this.playerControlManager = playerControlManager;
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
     private TextButton gameSceneButton;
-
-    public GameScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
-        super(game, entityManager, batch, shape, ioManager);
-    }
 
     @Override
     public void show() {
@@ -46,8 +47,8 @@ public class GameScene extends Scene {
     public void createEntities() {
         // Create enemy and collectible entities
         Random random = new Random();
-        entityManager.createCollectibleRandom(25, random);
-        entityManager.createEnemyRandom(25, random);
+        entityManager.createCollectibleRandom(numberOfCollectibles, random);
+        entityManager.createEnemyRandom(numberOfEnemy, random);
         entityManager.logAll(); // for debugging
 
         // Create main player entity based on the number of players existing
@@ -107,8 +108,18 @@ public class GameScene extends Scene {
 
         // Process input events
         ioManager.processInput();
+
+        if (playerControlManager.getNumDeadPlayers() > 0) {
+            // Detect player death to call endscene
+            this.sceneManager.showLoseScene();
+        }
+        if (playerControlManager.getAllCollectibles() == numberOfCollectibles) {
+            this.sceneManager.showVictoryScene();
+        }
         //Gdx.gl.glClearColor(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
         //Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        ioManager.updateMovement();
+
     }
 
     @Override

@@ -93,7 +93,6 @@ public class GameMaster extends Game {
 		//System.out.println("Current scene: " + sceneManager.getCurrentScene().getClass().getSimpleName());
 		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
 		entityManager.movement();
-		ioManager.updateMovement();
 		ioManager.updateMouse();
 
 		// Keep the player within the screen bounds

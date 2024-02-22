@@ -53,6 +53,5 @@ public class AIControlManager {
         // Return the new position
         return new float[] {entityX, newY};
     }
-    //not in used yet
-//    public void chasePlayer() {}
+
 }

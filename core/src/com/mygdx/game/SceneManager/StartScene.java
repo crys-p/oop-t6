@@ -22,8 +22,8 @@ public class StartScene extends Scene {
 
     private TextButton countdownButton;
 
-    public StartScene(Game game, EntityManager entityManager, SpriteBatch batch,ShapeRenderer shape, IOManager ioManager) {
-        super(game, entityManager, batch, shape, ioManager);
+    public StartScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch,ShapeRenderer shape, IOManager ioManager) {
+        super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.GRAY); // Set background color for start scene
         this.entityManager = entityManager;
     }

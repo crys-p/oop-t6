@@ -18,8 +18,8 @@ public class MenuScene extends Scene {
     private TextButton button2;
     private TextButton button3;
 
-    public MenuScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
-        super(game, entityManager, batch, shape, ioManager);
+    public MenuScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
+        super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.YELLOW); // setting of background color for end scene
 
         //createButtons();

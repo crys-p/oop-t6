@@ -14,8 +14,8 @@ import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 public class LoseScene extends Scene{
 
     private TextButton createButtonNoIndex;
-    public LoseScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
-        super(game, entityManager, batch, shape, ioManager);
+    public LoseScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
+        super(game, sceneManager, entityManager, batch, shape, ioManager);
 
         setBackgroundColor(Color.RED); // setting of background color for end scene
     }

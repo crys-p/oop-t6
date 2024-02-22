@@ -65,11 +65,11 @@ public class SceneManager {
     }
 
     private void initializeScenes() {
-        startScene = new StartScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
-        gameScene = new GameScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager, playerControlManager); // Ensure gameScene is initialized correctly
-        menuScene = new MenuScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager); // Ensure gameScene is initialized correctly
-        loseScene = new LoseScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
-        victoryScene = new VictoryScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
+        startScene = new StartScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
+        gameScene = new GameScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager, playerControlManager); // Ensure gameScene is initialized correctly
+        menuScene = new MenuScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager); // Ensure gameScene is initialized correctly
+        loseScene = new LoseScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
+        victoryScene = new VictoryScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
         currentScene = null;
     }
 
@@ -142,19 +142,19 @@ public class SceneManager {
         }
     }
 
-    public void pauseGameSceneAndSwitchToMenu() {
-        // Check if the current scene is an instance of GameScene
-        if (currentScene instanceof GameScene) {
-            // Pause the game scene
-            currentScene.pause();
-
-            // Create and set the menu scene
-            MenuScene menuScene = new MenuScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
-            changeScene(menuScene);
-        } else {
-            System.out.println("Error: Current scene is not a GameScene.");
-        }
-    }
+//    public void pauseGameSceneAndSwitchToMenu() {
+//        // Check if the current scene is an instance of GameScene
+//        if (currentScene instanceof GameScene) {
+//            // Pause the game scene
+//            currentScene.pause();
+//
+//            // Create and set the menu scene
+//            MenuScene menuScene = new MenuScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
+//            changeScene(menuScene);
+//        } else {
+//            System.out.println("Error: Current scene is not a GameScene.");
+//        }
+//    }
 
     public Scene getCurrentScene() {
         return currentScene;

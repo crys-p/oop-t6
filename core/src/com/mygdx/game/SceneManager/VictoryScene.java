@@ -8,8 +8,8 @@ import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
 
 public class VictoryScene extends Scene {
-    public VictoryScene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
-        super(game, entityManager, batch, shape, ioManager);
+    public VictoryScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
+        super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.CYAN); // setting of background color for end scene
     }
 
@@ -25,6 +25,6 @@ public class VictoryScene extends Scene {
 
     @Override
     public void render(float delta) {
-
+        clearScreen();
     }
 }
