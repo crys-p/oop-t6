@@ -30,20 +30,22 @@ public abstract class Scene extends ScreenAdapter {
     protected ShapeRenderer shape;
     protected EntityManager entityManager;
     protected IOManager ioManager;
-    protected PlayerControlManager playerControlManager;
+    protected SceneManager sceneManager;
+
     // Set the desired viewport size
     private final int VIEWPORT_WIDTH = 1280;
     private final int VIEWPORT_HEIGHT = 720;
 
     private boolean paused = false;
 
-    public Scene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
+    public Scene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         this.game = game;
         this.backgroundColor = Color.BLACK; // Default background color
         this.entityManager = entityManager;
         this.batch = batch;
         this.shape = shape;
         this.ioManager = ioManager;
+        this.sceneManager = sceneManager;
         // Create a camera and viewport
         //camera = new OrthographicCamera();
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);
@@ -52,22 +54,6 @@ public abstract class Scene extends ScreenAdapter {
         viewport.apply();
     }
 
-    // Scene constructor for scenes that need to handle playerControl
-    public Scene(Game game, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
-        this.game = game;
-        this.backgroundColor = Color.BLACK; // Default background color
-        this.entityManager = entityManager;
-        this.batch = batch;
-        this.shape = shape;
-        this.ioManager = ioManager;
-        this.playerControlManager = playerControlManager;
-        // Create a camera and viewport
-        //camera = new OrthographicCamera();
-        //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, camera);
-        //viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
-        viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-        viewport.apply();
-    }
 
     @Override
     public void show() {
@@ -110,10 +96,7 @@ public abstract class Scene extends ScreenAdapter {
 
 
     protected void clearScreen() {
-//        Gdx.gl.glClearColor(backgroundColor.r, backgroundColor.g, backgroundColor.b, backgroundColor.a);
-//        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         ScreenUtils.clear(getBackgroundColor().r, getBackgroundColor().g, getBackgroundColor().b, getBackgroundColor().a);
-
     }
 
     public void setBackgroundColor(Color color) {

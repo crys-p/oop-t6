@@ -70,7 +70,9 @@ public class GameMaster extends Game {
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
 		ioManager.setSceneMgr(sceneManager);
-		sceneManager.showStartScene();
+
+		sceneManager.showScene(SceneManager.SceneType.START);
+
 
 		// Initialize SoundManager with background music and sound effect files
 		// Initialize SoundManager with background music file
@@ -93,7 +95,6 @@ public class GameMaster extends Game {
 		//System.out.println("Current scene: " + sceneManager.getCurrentScene().getClass().getSimpleName());
 		// Call the movement method of the EntityManager to simulate random movement for entity with ID 11 //for testing
 		entityManager.movement();
-		ioManager.updateMovement();
 		ioManager.updateMouse();
 
 		// Keep the player within the screen bounds

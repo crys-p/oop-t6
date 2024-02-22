@@ -80,7 +80,6 @@ public class CollisionManager {
         entityManager.removeEntity(enemyID);
         playerControlManager.takeDamage(characterID, enemyID);
         soundManager.playSoundEffect(2);
-        // playercontrol.decreasehealth
     }
 
 

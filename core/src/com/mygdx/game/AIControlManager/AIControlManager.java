@@ -23,9 +23,6 @@ public class AIControlManager {
             newX = Math.max(0, Math.min((float) Gdx.graphics.getWidth(), newX)) * direction;
         }
 
-        // Debug statement to print the new X position and updated speed
-        System.out.println("New X Position: " + newX);
-
         // Return the new position
         return new float[] {newX, entityY};
     }
@@ -47,12 +44,8 @@ public class AIControlManager {
             newY = Math.max(0, Math.min((float) Gdx.graphics.getHeight(), newY)) * direction;
         }
 
-        // Debug statement to print the new Y position and updated speed
-        System.out.println("New Y Position: " + newY);
-
         // Return the new position
         return new float[] {entityX, newY};
     }
-    //not in used yet
-//    public void chasePlayer() {}
+
 }

@@ -63,32 +63,32 @@ public class EntityManager implements EntityLifeCycle {
         collectibleList.clear();
     }
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR PlayerControl~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public int getPlayerEntityID() {
-        // Iterate over the entityList
-        for (Entity entity : entityList) {
-            // Check if the entity is an instance of Character
-            if (entity instanceof Character) {
-                // If it is, return its entity ID
-                return entity.getEntityID();
-            }
-        }
-        // Return -1 if no player character is found
-        return -1;
-    }
-
-    public List<Integer> getCollectibleEntityIDs() {
-        List<Integer> collectibleEntityIDs = new ArrayList<>();
-
-        // Iterate through all entities in the EntityManager
-        for (Entity entity : entityList) {
-            // Check if the entity is a collectible
-            if (entity instanceof Collectible) {
-                // If it is, add its entity ID to the list
-                collectibleEntityIDs.add(entity.getEntityID());
-            }
-        }
-        return collectibleEntityIDs;
-    }
+//    public int getPlayerEntityID() {
+//        // Iterate over the entityList
+//        for (Entity entity : entityList) {
+//            // Check if the entity is an instance of Character
+//            if (entity instanceof Character) {
+//                // If it is, return its entity ID
+//                return entity.getEntityID();
+//            }
+//        }
+//        // Return -1 if no player character is found
+//        return -1;
+//    }
+//
+//    public List<Integer> getCollectibleEntityIDs() {
+//        List<Integer> collectibleEntityIDs = new ArrayList<>();
+//
+//        // Iterate through all entities in the EntityManager
+//        for (Entity entity : entityList) {
+//            // Check if the entity is a collectible
+//            if (entity instanceof Collectible) {
+//                // If it is, add its entity ID to the list
+//                collectibleEntityIDs.add(entity.getEntityID());
+//            }
+//        }
+//        return collectibleEntityIDs;
+//    }
 
     public int getLastEntityID() {
         return this.entityCount - 1;
@@ -104,7 +104,9 @@ public class EntityManager implements EntityLifeCycle {
 
     //updated so that io can call
     public void inputMovement(int entityID, PlayerInstructions control) {
+        if (entityIDMap.containsKey(entityID)) {
             entityIDMap.get(entityID).inputMovement(control);
+        }
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

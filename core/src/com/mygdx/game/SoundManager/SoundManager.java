@@ -27,6 +27,9 @@ public class SoundManager {
 		backgroundMusicMap.put(SceneManager.SceneType.START, new BackgroundMusic("background_music.mp3"));
 		backgroundMusicMap.put(SceneManager.SceneType.GAME, new BackgroundMusic("background_music_3.mp3"));
 		backgroundMusicMap.put(SceneManager.SceneType.MENU, new BackgroundMusic("menu_music.mp3"));
+		backgroundMusicMap.put(SceneManager.SceneType.VICTORY, new BackgroundMusic("win_music.mp3"));
+		backgroundMusicMap.put(SceneManager.SceneType.LOSE, new BackgroundMusic("lose_music.mp3"));
+
 
 		// Create Sound Effects
 		this.soundEffectGain = new SoundEffect("collect_sfx.mp3");
@@ -45,11 +48,11 @@ public class SoundManager {
 				case MENU:
 					backgroundMusicMap.get(SceneManager.SceneType.MENU).play();
 					break;
-				case END_WIN:
-					System.out.println("play end win music");
+				case VICTORY:
+					backgroundMusicMap.get(SceneManager.SceneType.VICTORY).play();
 					break;
-				case END_LOSE:
-					System.out.println("play end lose music");
+				case LOSE:
+					backgroundMusicMap.get(SceneManager.SceneType.LOSE).play();
 			}
 		}
 	}

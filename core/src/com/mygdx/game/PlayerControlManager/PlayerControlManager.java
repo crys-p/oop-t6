@@ -7,10 +7,12 @@ import com.mygdx.game.EntityManager.EntityManager;
 import java.util.*;
 
 public class PlayerControlManager {
-    protected final ArrayList<Player> allPlayers;
+    private final ArrayList<Player> allPlayers;
     private final Map<Player, Integer> playerEntityMap; // Map to store Player instances and corresponding entity being controlled
-    private final EntityManager entityManager; // Assume you have a reference to EntityManager
     private final HashMap<String, List<Integer>> keyMaps =  new HashMap<>();
+    private int numDeadPlayers = 0;
+    private int allPlayerInventoryCount = 0;
+    private final EntityManager entityManager; // Assume you have a reference to EntityManager
     public PlayerControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
         playerEntityMap = new HashMap<>();
@@ -26,11 +28,6 @@ public class PlayerControlManager {
         }
     }
 
-
-//    // Set player Entity ID when entity is created
-//    public int getPlayerEntityID() {
-//        return entityManager.getPlayerEntityID();
-//    }
 
     // Method to remove a player from the manager
     public void removePlayer(int index) {
@@ -59,7 +56,8 @@ public class PlayerControlManager {
                 int newHealth = player.getHealth() - (int) damage;
 
                 // Ensure health never goes below 0
-                if (newHealth < 0) {
+                if (newHealth <= 0) {
+                    numDeadPlayers++;
                     newHealth = 0;
                 }
                 // Update the player's health
@@ -72,6 +70,7 @@ public class PlayerControlManager {
         for (Player player: allPlayers) {
              if (playerEntityMap.get(player) == characterID) {
                  player.addToInventory(new Item(), 1);
+                 allPlayerInventoryCount++;
              }
         }
     }
@@ -93,10 +92,6 @@ public class PlayerControlManager {
         return allPlayers.get(playerNumber).getPlayerKeyControls();
     }
 
-    public int getPlayerHealth(int playerNumber) {
-        return allPlayers.get(playerNumber).getHealth();
-    }
-
 
     public HashMap<Integer, List<Integer>> getAllPlayerHealthStats() {
         HashMap<Integer, List<Integer>> allPlayerHealthStats = new HashMap<>();
@@ -108,6 +103,14 @@ public class PlayerControlManager {
             counter++;
         }
         return allPlayerHealthStats;
+    }
+
+    public List<Integer> getAllPlayerInventory() {
+        List <Integer> allInventory = new ArrayList<>();
+        for (Player player : allPlayers) {
+            allInventory.add(player.getInventoryCount());
+        }
+        return allInventory;
     }
 
     public void handlePressedKeys(List<Integer> keys) {
@@ -146,12 +149,9 @@ public class PlayerControlManager {
         keyMaps.put("WASD", Arrays.asList(Input.Keys.A, Input.Keys.D, Input.Keys.W, Input.Keys.S));
     }
 
-    public List<Integer> getAllPlayerInventory() {
-        List <Integer> allInventory = new ArrayList<>();
-        for (Player player : allPlayers) {
-            allInventory.add(player.getInventoryCount());
-        }
-        return allInventory;
+
+    public int getNumDeadPlayers() {
+        return numDeadPlayers;
     }
 
 
@@ -162,8 +162,6 @@ public class PlayerControlManager {
             player.setHealth(player.getMaxHealth());
         }
     }
-
-
     // method to reset player inventories
     public void resetPlayerInventories() {
         // NOTHING TO RESET MAN
@@ -173,6 +171,10 @@ public class PlayerControlManager {
     public void reset() {
         resetDamageTaken(); // reset damage taken by players
         //resetPlayerInventories();
+    }
+
+    public int getAllCollectibles() {
+        return allPlayerInventoryCount;
     }
 
 }
