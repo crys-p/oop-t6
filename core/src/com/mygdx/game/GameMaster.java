@@ -42,7 +42,8 @@ public class GameMaster extends Game {
 	public void create() {
 		// Initialize SoundManager with background music and sound effect files
 
-		soundManager = new SoundManager("background_music.mp3", "background_music_3.mp3","menu_music.mp3","sound_effect.mp3");
+		soundManager = new SoundManager();
+		soundManager.createSounds();
 
 		// Creating renderers
 		batch = new SpriteBatch();
