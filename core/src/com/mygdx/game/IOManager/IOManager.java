@@ -179,6 +179,12 @@ public class IOManager implements InputProcessor {
 		return output.createCountdownButton(text, index, x, y, width, height, styleName, countdownSeconds);
 	}
 
+	public TextButton createButtonNoIndex(String text, float x, float y, float width, float height, String styleName) {
+		return output.createButtonNoIndex(text, x, y, width, height, styleName);
+	}
+
+
+
 
 	// Method to handle button clicks
 	// Method to handle button clicks

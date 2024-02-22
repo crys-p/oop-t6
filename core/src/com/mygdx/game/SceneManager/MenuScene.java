@@ -29,6 +29,7 @@ public class MenuScene extends Scene {
     public void show() {
         // Logic when the game scene is shown
         createButtons();
+        createEntities();
     }
 
     @Override

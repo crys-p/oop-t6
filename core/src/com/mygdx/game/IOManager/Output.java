@@ -26,6 +26,7 @@ public class Output {
 		Texture buttonStart = new Texture("menuButton.png"); // Ensure this is the correct texture
 		// Load button texture
 		Texture buttonTexture = new Texture("menuButton.png");
+		Texture buttonLose = new Texture("losebutton.png");
 
 		// Define button styles for each scene
 		TextButtonStyle buttonStyleMenu = new TextButtonStyle();
@@ -49,18 +50,32 @@ public class Output {
 		buttonStyleTimer.fontColor = Color.WHITE;
 		buttonStyleTimer.up = new TextureRegionDrawable(new TextureRegion(buttonTexture));
 
+		// Define button style
+		TextButtonStyle buttonStyleLose = new TextButtonStyle();
+		buttonStyleLose.font = new BitmapFont();
+		buttonStyleLose.fontColor = Color.WHITE;
+		buttonStyleLose.up = new TextureRegionDrawable(new TextureRegion(buttonLose));
+
 		// Add button styles to the skin with unique names
 		skin.add("buttonMenuStyle", buttonStyleMenu);
 		skin.add("buttonGameStyle", buttonStyleGame);
 		skin.add("buttonStartStyle", buttonStyleStart);
 		// Add button style to the skin
 		skin.add("countdownButtonStyle", buttonStyleTimer);
+		skin.add("loseButtonStyle", buttonStyleLose);
 	}
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
 		buttons[index] = new TextButton(text, skin, styleName);
 		buttons[index].setPosition(x, y);
 		buttons[index].setSize(width, height);
 		return buttons[index];
+	}
+
+	public TextButton createButtonNoIndex(String text, float x, float y, float width, float height, String styleName) {
+		TextButton button = new TextButton(text, skin, styleName);
+		button.setPosition(x, y);
+		button.setSize(width, height);
+		return button;
 	}
 
 
