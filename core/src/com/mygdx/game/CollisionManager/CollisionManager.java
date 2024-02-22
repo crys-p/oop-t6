@@ -11,7 +11,7 @@ import java.util.List;
 public class CollisionManager {
 
     private final CollisionHandler collisionHandler;
-    private  final CollisionDetection collisionDetection;
+    private final CollisionDetection collisionDetection;
 
     public CollisionManager(EntityManager entityManager, SoundManager soundManager, PlayerControlManager playerControlManager) {
         this.collisionDetection = new CollisionDetection(entityManager);

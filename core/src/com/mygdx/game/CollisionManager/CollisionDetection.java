@@ -53,7 +53,6 @@ public class CollisionDetection {
                     int charID = characterMap.get(charRect);
                     int collectibleID = collectibleMap.get(collectibleRect);
                     collisionHandler.handleCharacterCollectibleCollision(charID, collectibleID);
-                    System.out.println("THERE");
                 }
             }
         }
