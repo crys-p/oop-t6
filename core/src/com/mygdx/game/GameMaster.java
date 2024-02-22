@@ -70,8 +70,7 @@ public class GameMaster extends Game {
 		super.render();
 		entityManager.movement();
 		ioManager.updateMouse();
-		collisionManager.setCollidables();
-		collisionManager.detectCollisions();
+		collisionManager.startCollisionDetection();
 	}
 
 	@Override

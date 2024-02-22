@@ -9,20 +9,33 @@ import java.util.HashMap;
 
 public class CollisionDetection {
     private final EntityManager entityManager;
-    private final SoundManager soundManager;
-    private final PlayerControlManager playerControlManager;
 
+    private final HashMap<Rectangle, Integer> characterMap;
+    private final HashMap<Rectangle, Integer> enemyMap;
+    private final HashMap<Rectangle, Integer> collectibleMap;
 
-    public CollisionDetection(EntityManager entityManager, SoundManager soundManager, PlayerControlManager playerControlManager) {
+    public CollisionDetection(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.soundManager = soundManager;
-        this.playerControlManager = playerControlManager;
+        this.characterMap = new HashMap<>();
+        this.enemyMap = new HashMap<>();
+        this.collectibleMap = new HashMap<>();
     }
 
-    public void detectCollisions(HashMap<Rectangle, Integer> characterMap, HashMap<Rectangle, Integer> enemyMap, HashMap<Rectangle, Integer> collectibleMap) {
+    public void setCollidables() {
+        // Clear existing maps if any
+        characterMap.clear();
+        enemyMap.clear();
+        collectibleMap.clear();
+        // Add latest items to map
+        HashMap<Rectangle, Integer> allCharacters = entityManager.getCharacterBoundingBoxes();
+        characterMap.putAll(allCharacters);
+        HashMap<Rectangle, Integer> allEnemies = entityManager.getEnemyBoundingBoxes();
+        enemyMap.putAll(allEnemies);
+        HashMap<Rectangle, Integer> allCollectibles = entityManager.getCollectibleBoundingBoxes();
+        collectibleMap.putAll(allCollectibles);
+    }
 
-        CollisionHandler collisionHandler = new CollisionHandler(entityManager, soundManager, playerControlManager);
-
+    public void detectCollisions(CollisionHandler collisionHandler) {
         // Loop through different maps to detect collision
         // If collision is being detected, handle collision reaction using handleCharacterCollectibleCollision etc.
         for (Rectangle enemyRect : enemyMap.keySet()) {
