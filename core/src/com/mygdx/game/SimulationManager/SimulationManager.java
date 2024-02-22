@@ -1,19 +1,47 @@
 package com.mygdx.game.SimulationManager;
 
+import java.io.File;
 import java.util.logging.*;
-
+import java.io.IOException;
+import java.util.logging.FileHandler;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 public class SimulationManager {
     private static final Logger logger = Logger.getLogger(SimulationManager.class.getName());
 
     static {
-        logger.setLevel(Level.INFO); // Set logger level to INFO
+        try {
+            // Storing of log files
+            String logFolderPath = "errorlogs/";
+            // will create folder when it does not exisit
+            new File(logFolderPath).mkdirs();
+
+            // creation with the desired log file name and path
+            FileHandler fileHandler = new FileHandler(logFolderPath + "simulation.log");
+
+            // set the log format
+            fileHandler.setFormatter(new SimpleFormatter());
+
+            // add FileHandler to the logger
+            logger.addHandler(fileHandler);
+
+            // set logger level to INFO
+            logger.setLevel(Level.INFO);
+        } catch (IOException e) {
+            // when there's an error creating the FileHandler, will log it
+            logger.log(Level.SEVERE, "Error creating log file", e);
+        }
     }
 
     private static SimulationManager instance;
 
     private SimulationManager() {
-        // Initialization logic
+
         logger.info("SimulationManager initialized");
+
+        // will intentionally throw an exception for testing error logging
+        // throw new RuntimeException("There is error occurred during initialization");
     }
 
     public static SimulationManager getInstance() {
@@ -24,9 +52,7 @@ public class SimulationManager {
     }
 
     public void logInfo(String message) {
-        // 2 different way to show the log
-        //logger.info(message);
-        System.out.println("[INFO] " + message);
+        logger.info(message);
     }
 
     public void logWarning(String message) {
@@ -36,4 +62,6 @@ public class SimulationManager {
     public void logError(String message) {
         logger.severe(message);
     }
+
+
 }
