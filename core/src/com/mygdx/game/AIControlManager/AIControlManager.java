@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 
 import java.util.Random;
 
+import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
+import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
+
 public class AIControlManager {
     private boolean movingRight = true;
     private boolean movingDown = true;
@@ -22,9 +25,9 @@ public class AIControlManager {
         float newX = entityX + (movementSpeed * direction);
 
         // Check if AI has reached the edge of the screen
-        if (newX <= 0 || newX >= (float) Gdx.graphics.getWidth()) {
+        if (newX <= 0 || newX >= SCREEN_WIDTH) {
             direction *= -1; // Reverse the direction
-            newX = Math.max(0, Math.min((float) Gdx.graphics.getWidth(), newX)) * direction; // Keep AI within screen bounds
+            newX = Math.max(0, Math.min(SCREEN_WIDTH, newX)) * direction; // Keep AI within screen bounds
         }
 
         // Debug statement to print the new X position and updated speed
@@ -42,12 +45,12 @@ public class AIControlManager {
         float newY = entityY + (movementSpeed * direction);
 
         // Check if AI has reached the edge of the screen
-        if (newY <= 0 || newY >= (float) Gdx.graphics.getHeight()) {
+        if (newY <= 0 || newY >= SCREEN_HEIGHT) {
             // Reverse the direction if the edge is reached
             direction *= -1;
 
             // Adjust the position to keep the AI within screen bounds
-            newY = Math.max(0, Math.min((float) Gdx.graphics.getHeight(), newY)) * direction;
+            newY = Math.max(0, Math.min(SCREEN_HEIGHT, newY)) * direction;
         }
 
         // Debug statement to print the new Y position and updated speed
