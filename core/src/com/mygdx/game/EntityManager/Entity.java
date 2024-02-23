@@ -79,10 +79,6 @@ abstract class Entity {
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
     }
 
-    protected void draw(ShapeRenderer shape) {
-        // Method override for Shapes (For bounding box testing SHOULD BE REMOVED)
-    }
-
     protected abstract void logConsole();
 
     protected abstract void movement();
