@@ -13,7 +13,7 @@ public class PlayerControlManager {
     private final HashMap<String, List<Integer>> keyMaps =  new HashMap<>();
     private int numDeadPlayers = 0;
     private int allPlayerInventoryCount = 0;
-    private final EntityManager entityManager; // Assume you have a reference to EntityManager
+    private final EntityManager entityManager;
     private SimulationManager simulationManager;
     public PlayerControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -148,7 +148,6 @@ public class PlayerControlManager {
         keyMaps.put("UDLR", Arrays.asList(Input.Keys.LEFT, Input.Keys.RIGHT, Input.Keys.UP, Input.Keys.DOWN));
         keyMaps.put("WASD", Arrays.asList(Input.Keys.A, Input.Keys.D, Input.Keys.W, Input.Keys.S));
     }
-
 
     public int getNumDeadPlayers() {
         return numDeadPlayers;
