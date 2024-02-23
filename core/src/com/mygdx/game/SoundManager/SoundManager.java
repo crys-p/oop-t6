@@ -1,6 +1,7 @@
 package com.mygdx.game.SoundManager;
 
 import com.mygdx.game.SceneManager.SceneManager;
+import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.HashMap;
 
@@ -8,10 +9,14 @@ public class SoundManager {
 	HashMap<SceneManager.SceneType, BackgroundMusic> backgroundMusicMap;
 	HashMap<SoundEffectType, SoundEffect> soundEffectMap;
 	private boolean musicOn = true; // Initially music is on
-
+	private SimulationManager simulationManager;
 	public SoundManager() {
 		backgroundMusicMap = new HashMap<>();
 		soundEffectMap = new HashMap<>();
+
+
+		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+		simulationManager.logInfo("SoundManager initialized"); // Log initialization message
 	}
 
 	public void createSounds() {

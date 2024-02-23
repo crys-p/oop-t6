@@ -19,7 +19,7 @@ import com.mygdx.game.IOManager.IOManager;
 // implements Screen
 // usage of ScreenAdapter over Screen as promote code reuse and maintains consistency
 // accross screen and also without needing to apply all lifecycle Method
-public abstract class Scene extends ScreenAdapter {
+abstract class Scene extends ScreenAdapter {
     protected final Game game;
     protected Color backgroundColor; // Background color for the scene
     //protected OrthographicCamera camera;

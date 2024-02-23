@@ -11,15 +11,14 @@ import java.util.*;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
-import com.mygdx.game.SceneManager.Scene;
 import com.mygdx.game.SceneManager.SceneManager;
+import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
 public class IOManager implements InputProcessor {
 	//initialize from GameMaster?
 	public static final int SCREEN_WIDTH = 1280;
 	public static final int SCREEN_HEIGHT = 720;
-	private Scene currentScene; // Field to store the current scene type
 
 	private Output output;
 	private Input input;
@@ -36,6 +35,7 @@ public class IOManager implements InputProcessor {
 	private float mouseY;
 	private boolean leftButtonPressed;
 	private boolean rightButtonPressed;
+	private SimulationManager simulationManager;
 
 	private Map<Integer, Boolean> keyStates = new HashMap<>();
 
@@ -58,6 +58,10 @@ public class IOManager implements InputProcessor {
 		this.playerControlManager = playerControlManager;
 		this.sceneManager = sceneManager;
 		setUpKeyStates();
+
+
+		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+		simulationManager.logInfo("IOManager initialized"); // Log initialization message
 	}
 
 	private void setUpKeyStates() {

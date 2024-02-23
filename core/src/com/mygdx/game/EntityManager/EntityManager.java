@@ -3,6 +3,7 @@ package com.mygdx.game.EntityManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.PlayerControlManager.PlayerInstructions;
+import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.*;
 
@@ -15,11 +16,16 @@ public class EntityManager implements EntityLifeCycle {
     private Map<Integer, Entity> entityIDMap;
     private int entityCount;
 
+    private SimulationManager simulationManager;
+
     // Constructor
     public EntityManager() {
         entityIDMap = new HashMap<>();
         entitySpecificMap = new HashMap<>();
         entityList = new ArrayList<>();
+
+        simulationManager = SimulationManager.getInstance();
+        simulationManager.logInfo("EntityManager initialized");
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

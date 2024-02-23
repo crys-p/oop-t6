@@ -3,6 +3,7 @@ package com.mygdx.game.PlayerControlManager;
 
 import com.badlogic.gdx.Input;
 import com.mygdx.game.EntityManager.EntityManager;
+import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.*;
 
@@ -13,11 +14,15 @@ public class PlayerControlManager {
     private int numDeadPlayers = 0;
     private int allPlayerInventoryCount = 0;
     private final EntityManager entityManager; // Assume you have a reference to EntityManager
+    private SimulationManager simulationManager;
     public PlayerControlManager(EntityManager entityManager) {
         this.entityManager = entityManager;
         playerEntityMap = new HashMap<>();
         allPlayers = new ArrayList<>();
         this.setKeyMaps();
+
+        simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+        simulationManager.logInfo("PlayerControlManager initialized"); // Log initialization message
     }
 
     // Method to create players

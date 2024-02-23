@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.AIControlManager.AIControlManager;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
@@ -11,7 +12,6 @@ import com.mygdx.game.IOManager.HealthBar;
 import com.mygdx.game.PlayerControlManager.Inventory;
 import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 import com.mygdx.game.SceneManager.SceneManager;
-import com.mygdx.game.SceneManager.Scene; // Adjust the package name as needed edmund scene
 import com.mygdx.game.SoundManager.SoundManager; // sound manager
 
 import com.mygdx.game.SimulationManager.SimulationManager;
@@ -27,10 +27,13 @@ public class GameMaster extends Game {
 	private IOManager ioManager;
 	private PlayerControlManager playerControlManager;
 	private CollisionManager collisionManager;
-
+	private AIControlManager aiControlManager;
 
 	public void create() {
 		// Creating renderers
+		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
+
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 
@@ -59,8 +62,9 @@ public class GameMaster extends Game {
 		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showScene(SceneManager.SceneType.START);
 
-		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
-		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
+
+
+		aiControlManager = new AIControlManager();
 
 	}
 

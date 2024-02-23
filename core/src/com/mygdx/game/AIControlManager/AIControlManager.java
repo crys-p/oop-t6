@@ -1,11 +1,20 @@
 package com.mygdx.game.AIControlManager;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.Random;
 
 public class AIControlManager {
+
+
+
     private static final Random random = new Random();
+    private SimulationManager simulationManager;
+    public AIControlManager(){
+        simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+        simulationManager.logInfo("AIControlManager initialized"); // Log initialization message
+    }
     public static float[] moveLR(float entityX, float entityY) {
         float movementSpeed = 5; // Initial movement speed
         float direction = 1; // Initial direction: right
