@@ -41,7 +41,7 @@ public class SimulationManager {
         logger.info("SimulationManager initialized");
 
         // will intentionally throw an exception for testing error logging
-        // throw new RuntimeException("There is error occurred during initialization");
+//         throw new RuntimeException("There is error occurred during initialization");
     }
 
     public static SimulationManager getInstance() {

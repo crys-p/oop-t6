@@ -25,8 +25,8 @@ import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
 class GameScene extends Scene {
 
-    private int numberOfEnemy = 15;
-    private int numberOfCollectibles = 15;
+    private int numberOfEnemy = 10;
+    private int numberOfCollectibles = 20;
     private PlayerControlManager playerControlManager;
 
     protected GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {

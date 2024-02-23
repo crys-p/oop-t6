@@ -151,7 +151,6 @@ public class EntityManager implements EntityLifeCycle {
         if (entity != null) {
             removeFromList(entity);
         }
-        System.out.println("No. of entities: " + entityList.size());
     }
 
     public float getDamage(int entityID) {
