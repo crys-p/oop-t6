@@ -132,11 +132,11 @@ class Output {
 	}
 
 
-	public void displayHealthBar(ShapeRenderer shape, SpriteBatch batch) {
+	protected void displayHealthBar(ShapeRenderer shape, SpriteBatch batch) {
 		healthBar.render(shape, batch);
 	}
 
-	public void displayInventory(SpriteBatch batch) {
+	protected void displayInventory(SpriteBatch batch) {
 		inventoryDisplay.render(batch);
 	}
 }
