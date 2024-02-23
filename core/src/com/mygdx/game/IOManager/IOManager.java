@@ -32,12 +32,6 @@ public class IOManager implements InputProcessor {
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
-	private InventoryDisplay inventoryDisplay;
-	private HealthBar healthBar;
-	private boolean leftKeyPressed = false;
-	private boolean rightKeyPressed = false;
-	private boolean upKeyPressed = false;
-	private boolean downKeyPressed = false;
 	private float mouseX;
 	private float mouseY;
 	private boolean leftButtonPressed;
@@ -59,12 +53,10 @@ public class IOManager implements InputProcessor {
 
 	public IOManager (int numButtons, SoundManager soundManager, PlayerControlManager playerControlManager, SceneManager sceneManager) {
 		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
-		output = new Output(numButtons);
+		output = new Output(numButtons, playerControlManager);
 		this.soundManager = soundManager;
 		this.playerControlManager = playerControlManager;
 		this.sceneManager = sceneManager;
-		this.inventoryDisplay = new InventoryDisplay(playerControlManager);
-		this.healthBar = new HealthBar(playerControlManager);
 		setUpKeyStates();
 	}
 
@@ -85,7 +77,9 @@ public class IOManager implements InputProcessor {
 
 	@Override
 	public boolean keyUp(int keycode) {
-		handleKeyPress(keycode, false);
+		if (keysAccepted.contains(keycode)) {
+			handleKeyPress(keycode, false);
+		}
 		return true;
 	}
 
@@ -163,13 +157,10 @@ public class IOManager implements InputProcessor {
 		//processInput();
 	}
 
-	public void displayPlayerInventory(SpriteBatch batch) {
-		InventoryDisplay inventoryDisplay = new InventoryDisplay(playerControlManager);
-		inventoryDisplay.render(batch);
-	}
 
-	public void displayPlayerHealth(SpriteBatch batch, ShapeRenderer shape) {
-		healthBar.render(shape, batch);
+	public void displayPlayerInformation(SpriteBatch batch, ShapeRenderer shape) {
+		output.displayHealthBar(shape, batch);
+		output.displayInventory(batch);
 	}
 
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {

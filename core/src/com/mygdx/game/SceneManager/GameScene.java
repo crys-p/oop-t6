@@ -25,8 +25,8 @@ import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
 class GameScene extends Scene {
 
-    private final int numberOfEnemy = 25;
-    private final int numberOfCollectibles = 5;
+    private int numberOfEnemy = 15;
+    private int numberOfCollectibles = 15;
     private PlayerControlManager playerControlManager;
 
     protected GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
@@ -47,14 +47,17 @@ class GameScene extends Scene {
 
     @Override
     protected void createEntities() {
-        // Create enemy and collectible entities
+        // Create entities based on the number of players existing
+        int totalPlayers = playerControlManager.getTotalNumberOfPlayers();
+        numberOfCollectibles = numberOfCollectibles * totalPlayers;
+        numberOfEnemy = numberOfEnemy * totalPlayers;
+
+        // Create enemy and collectible entities based on number of players
         Random random = new Random();
         entityManager.createCollectibleRandom(numberOfCollectibles, random);
         entityManager.createEnemyRandom(numberOfEnemy, random);
-        entityManager.logAll(); // for debugging
 
-        // Create main player entity based on the number of players existing
-        int totalPlayers = playerControlManager.getTotalNumberOfPlayers();
+        // Create same amt of characters as players
         int x = 0;
         for (int i = 0; i < totalPlayers; i++) {
             // If there are multiple players, set them 100px apart
@@ -80,7 +83,6 @@ class GameScene extends Scene {
         // Create buttons using the IOManager
         gameSceneButton = ioManager.createButton("MENU", 3, buttonX, buttonY, buttonWidth, buttonHeight, "buttonGameStyle");
         gameSceneButton1 = ioManager.createButton("Toggle Sound", 4, soundbuttonX, soundbuttonY, buttonWidth, buttonHeight, "buttonGameStyle");
-
 
 
         // Add click listeners to the buttons
@@ -116,16 +118,13 @@ class GameScene extends Scene {
         // Rendering logic for the game scene
         clearScreen();
         batch.begin();
-
-        entityManager.drawAllEntities(batch);
-        ioManager.displayPlayerInventory(batch);
-        gameSceneButton.draw(batch, 1); // Adjust parameters as needed
-        gameSceneButton1.draw(batch, 1); // Adjust parameters as needed
+            entityManager.drawAllEntities(batch);
+            gameSceneButton.draw(batch, 1); // Adjust parameters as needed
+            gameSceneButton1.draw(batch, 1); // Adjust parameters as needed
         batch.end();
 
         // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
-        ioManager.displayPlayerHealth(new SpriteBatch(), new ShapeRenderer());
-
+        ioManager.displayPlayerInformation(new SpriteBatch(), new ShapeRenderer());
         // Process input events
         ioManager.processInput();
 
@@ -133,12 +132,11 @@ class GameScene extends Scene {
             // Detect player death to call end scene
             this.sceneManager.showScene(SceneManager.SceneType.LOSE);
         }
-        if (playerControlManager.getAllCollectibles() == numberOfCollectibles) {
+        if (playerControlManager.getNumAllCollectibles() == numberOfCollectibles) {
             // Detect total collectibles to call victory scene
             this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }
         ioManager.updateMovement();
-
 
     }
 

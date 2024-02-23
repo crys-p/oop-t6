@@ -28,10 +28,12 @@ public class InventoryDisplay {
         float posY = SCREEN_HEIGHT * 0.9f - 10; // Distance from the top edge of the screen
 
         for (int numPlayerCollectibles: allPlayerInventory) {
-            // Draw text showing total number of collectibles collected // CRYSTAL COME BACK
+            // Draw text showing total number of collectibles collected
             String collectiblesText = "Stars: " + numPlayerCollectibles;
-            font.setColor(Color.WHITE);
-            font.draw(batch, collectiblesText, posX, posY);
+            batch.begin();
+                font.setColor(Color.WHITE);
+                font.draw(batch, collectiblesText, posX, posY);
+            batch.end();
             posY -= 65;
         }
     }

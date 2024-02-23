@@ -28,7 +28,6 @@ public class PlayerControlManager {
         }
     }
 
-
     // Method to remove a player from the manager
     public void removePlayer(int index) {
         allPlayers.remove(index);
@@ -41,10 +40,6 @@ public class PlayerControlManager {
         player.setPlayerControlledEntityID(entityID);
     }
 
-    // Method to get entity ID from player instance
-    public int getPlayerControlledEntityID(Player player) {
-        return playerEntityMap.get(player);
-    }
 
     // Method to handle taking damage
     public void takeDamage(int characterID, int enemyID) {
@@ -167,7 +162,7 @@ public class PlayerControlManager {
     }
 
 
-    public int getAllCollectibles() {
+    public int getNumAllCollectibles() {
         return allPlayerInventoryCount;
     }
 

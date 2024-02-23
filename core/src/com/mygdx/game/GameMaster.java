@@ -22,22 +22,12 @@ public class GameMaster extends Game {
 	private ShapeRenderer shape;
 	private EntityManager entityManager;
 	private SceneManager sceneManager;
-	private Scene currentScene; // storing of the current scene reference
 	private SimulationManager simulationManager; // Add SimulationManager reference
 	private SoundManager soundManager;
 	private IOManager ioManager;
 	private PlayerControlManager playerControlManager;
-	private HealthBar healthBar;
-	private Inventory inventory;
 	private CollisionManager collisionManager;
 
-//	private IOManager getIOManager() {
-//		if (ioManager == null) {
-//			ioManager = new IOManager( 5, soundManager, playerControlManager, sceneManager);
-//			ioManager.setWindowedMode();
-//		}
-//		return ioManager;
-//	}
 
 	public void create() {
 		// Creating renderers
@@ -57,9 +47,7 @@ public class GameMaster extends Game {
 		playerControlManager.createPlayers(1);
 		playerControlManager.setPlayerControl(0, "UDLR"); // UDLR or WASD accepted
 
-
 		// Initialize IOManager
-
 		ioManager = new IOManager(5, soundManager, playerControlManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
 
@@ -69,37 +57,20 @@ public class GameMaster extends Game {
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
 		ioManager.setSceneMgr(sceneManager);
-
 		sceneManager.showScene(SceneManager.SceneType.START);
-
-
-		// Initialize SoundManager with background music and sound effect files
-		// Initialize SoundManager with background music file
-
-		// 2 different way to show log 2nd way might be better as log will go to every manager
-		// the first code consume unnecessary memory and resources as "this.simulationManager" is only use in logging
-		// Initialize SimulationManager
-		//this.simulationManager = SimulationManager.getInstance();
-		//simulationManager.logInfo("GameMaster initialized");
 
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
 	}
-	// Method to switch to another scene
 
+	// Method to switch to another scene
 	public void render() {
 		super.render();
-
 		entityManager.movement();
 		ioManager.updateMouse();
-		collisionManager.setCollidables();
-		collisionManager.detectCollisions();
-
+		collisionManager.startCollisionDetection();
 	}
-
-
-
 
 	@Override
 	public void dispose() {

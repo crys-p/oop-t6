@@ -21,11 +21,6 @@ public class SceneManager {
     }
 
     private final Game game;
-    private StartScene startScene;
-    private GameScene gameScene;
-    private MenuScene menuScene;
-    private LoseScene loseScene;
-    private VictoryScene victoryScene;
     private Scene currentScene;
 
     private SimulationManager simulationManager;
@@ -40,20 +35,6 @@ public class SceneManager {
     protected HashMap<SceneType, Scene> allScenesMap;
 
     private SceneType currentSceneType;
-
-//    public SceneManager(Game game) {
-//        this.game = game;
-//        initializeScenes();
-//        //Initialize SimulationManager
-//        //this.simulationManager = SimulationManager.getInstance(); // this is to log the Scene change
-//        //simulationManager.logInfo("SceneManager initialized"); // This to log the Scene change
-//
-//        simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
-//        simulationManager.logInfo("SceneManager initialized"); // Log initialization message
-//
-//    }
-
-
 
     public SceneManager(Game game, EntityManager entityManager, IOManager ioManager, SoundManager soundManager, PlayerControlManager playerControlManager){
         this.game = game;
@@ -90,50 +71,6 @@ public class SceneManager {
         simulationManager.logInfo(sceneType + " SCENE initialised");
     }
 
-
-    public void showStartScene() {
-        changeScene(startScene);
-        // play StartScene Song
-        soundManager.playMusic(SceneType.START);
-        // Log initialization message
-        //simulationManager.logInfo("StartScene initialized");
-
-
-    }
-
-    public void showGameScene() {
-        //changeScene(menuScene);
-        changeScene(gameScene);
-        // play the GameScene Song
-        soundManager.playMusic(SceneType.GAME);
-        // Log initialization message
-        simulationManager.logInfo("GameScene initialized");
-    }
-
-    public void showMenuScene() {
-        changeScene(menuScene);
-        // play the GameScene Song
-        soundManager.playMusic(SceneType.MENU);
-        // Log initialization message
-        simulationManager.logInfo("MenuScene initialized");
-    }
-
-
-    public void showLoseScene() {
-        changeScene(loseScene);
-        // play the GameScene Song
-        soundManager.playMusic(SceneType.START);
-        // Log initialization message
-        simulationManager.logInfo("loseScene initialized");
-    }
-
-    public void showVictoryScene() {
-        changeScene(victoryScene);
-        // play the GameScene Song
-        soundManager.playMusic(SceneType.START);
-        // Log initialization message
-        simulationManager.logInfo("Victory initialized");
-    }
 
     private void changeScene(Scene newScene) {
         // stop all music before changing the scene
