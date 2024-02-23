@@ -53,9 +53,11 @@ abstract class Entity {
     protected void moveRight(float value) {
         this.x += value;
     }
-    public int getEntityID() {
+
+    protected int getEntityID() {
         return this.entityID;
     }
+
     protected void setEntityID(int id) {
         this.entityID = id;
     }
@@ -64,7 +66,6 @@ abstract class Entity {
         this.boundingBox.setX(this.x);
         this.boundingBox.setY(this.y);
     }
-
 
     protected float getHeight() {
         return this.texture.getHeight();
@@ -77,10 +78,6 @@ abstract class Entity {
     protected void draw(SpriteBatch batch) {
         // Method that can be overridden for Sprites
         batch.draw(this.texture, this.getX(), this.getY(), this.texture.getWidth(), this.texture.getHeight());
-    }
-
-    protected void draw(ShapeRenderer shape) {
-        // Method override for Shapes (For bounding box testing SHOULD BE REMOVED)
     }
 
     protected abstract void logConsole();

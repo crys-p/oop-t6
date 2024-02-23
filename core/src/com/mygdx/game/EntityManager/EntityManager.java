@@ -29,6 +29,7 @@ public class EntityManager implements EntityLifeCycle {
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    @Override
     public void createCharacter(int quantity, float x, float y, float speed, String controls) {
         for (int i = 0; i < quantity; i++) {
             Character character = new Character(x, y, speed, "player.png", controls);
@@ -36,17 +37,40 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
+    @Override
+    public void createCharacter(int quantity, Random random, float speed, String controls) {
+        for (int i = 0; i < quantity; i++) {
+            Character character = new Character(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT - 50, speed, "player.png", controls);
+            this.setUpEntityAttributes(character);
+        }
+    }
+
+    // Create enemies at specified positions
+    @Override
+    public void createEnemy(int quantity, float x, float y) {
+        for (int i = 0; i < quantity; i++) {
+            this.setUpEntityAttributes(new Enemy(x, y, "fire.png"));
+        }
+    }
+
     // Create enemies at random positions
     @Override
-    public void createEnemyRandom(int quantity, Random random) {
+    public void createEnemy(int quantity, Random random) {
         for (int i = 0; i < quantity; i++) {
             this.setUpEntityAttributes(new Enemy(random.nextFloat() * SCREEN_WIDTH, random.nextFloat() * SCREEN_HEIGHT - 50, "fire.png"));
         }
     }
 
     @Override
+    public void createCollectible(int quantity, float x, float y) {
+        for (int i = 0; i < quantity; i++) {
+            this.setUpEntityAttributes(new Collectible(x, y, "star.png"));
+        }
+    }
+
+    @Override
     // Create collectibles at random positions
-    public void createCollectibleRandom(int quantity, Random random) {
+    public void createCollectible(int quantity, Random random) {
         for (int i = 0; i < quantity; i++) {
             this.setUpEntityAttributes(new Collectible(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT, "star.png"));
         }

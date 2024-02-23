@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Feb 23, 2024 3:43:41 PM com.mygdx.game.SimulationManager.SimulationManager <init>
 INFO: SimulationManager initialized
 Feb 23, 2024 3:43:41 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
@@ -30,3 +31,17 @@ Feb 23, 2024 3:43:53 PM com.mygdx.game.SimulationManager.SimulationManager logIn
 INFO: GAME SCENE initialised
 Feb 23, 2024 3:43:54 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: MENU SCENE initialised
+=======
+Feb 23, 2024 3:32:14 PM com.mygdx.game.SimulationManager.SimulationManager <init>
+INFO: SimulationManager initialized
+Feb 23, 2024 3:32:14 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+INFO: SceneManager initialized
+Feb 23, 2024 3:32:14 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+INFO: START SCENE initialised
+Feb 23, 2024 3:32:14 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+INFO: GameMaster initialized
+Feb 23, 2024 3:32:19 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+INFO: GAME SCENE initialised
+Feb 23, 2024 3:32:31 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+INFO: LOSE SCENE initialised
+>>>>>>> b3c0e9e1a69a99d9ff4fd7ec4dda410ccab32d70
