@@ -14,14 +14,14 @@ public class CollisionDetection {
     private final HashMap<Rectangle, Integer> enemyMap;
     private final HashMap<Rectangle, Integer> collectibleMap;
 
-    public CollisionDetection(EntityManager entityManager) {
+    protected CollisionDetection(EntityManager entityManager) {
         this.entityManager = entityManager;
         this.characterMap = new HashMap<>();
         this.enemyMap = new HashMap<>();
         this.collectibleMap = new HashMap<>();
     }
 
-    public void setCollidables() {
+    protected void setCollidables() {
         // Clear existing maps if any
         characterMap.clear();
         enemyMap.clear();
@@ -35,7 +35,7 @@ public class CollisionDetection {
         collectibleMap.putAll(allCollectibles);
     }
 
-    public void detectCollisions(CollisionHandler collisionHandler) {
+    protected void detectCollisions(CollisionHandler collisionHandler) {
         // Loop through different maps to detect collision
         // If collision is being detected, handle collision reaction using handleCharacterCollectibleCollision etc.
         for (Rectangle enemyRect : enemyMap.keySet()) {
