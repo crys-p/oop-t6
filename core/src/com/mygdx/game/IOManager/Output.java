@@ -2,21 +2,29 @@ package com.mygdx.game.IOManager;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
+import com.mygdx.game.PlayerControlManager.PlayerControlManager;
 
 class Output {
 	protected TextButton[] buttons;
 	protected Skin skin;
 
-	protected Output(int numButtons) {
+	private HealthBar healthBar;
+	private InventoryDisplay inventoryDisplay;
+
+	protected Output(int numButtons, PlayerControlManager playerControlManager) {
 		buttons = new TextButton[numButtons];
 		skin = new Skin();
 		createSkin();
+		healthBar = new HealthBar(playerControlManager);
+		inventoryDisplay = new InventoryDisplay(playerControlManager);
 	}
 
 	protected void createSkin() {
@@ -123,5 +131,12 @@ class Output {
 		return buttons[index];
 	}
 
-	// Other methods for managing buttons
+
+	public void displayHealthBar(ShapeRenderer shape, SpriteBatch batch) {
+		healthBar.render(shape, batch);
+	}
+
+	public void displayInventory(SpriteBatch batch) {
+		inventoryDisplay.render(batch);
+	}
 }

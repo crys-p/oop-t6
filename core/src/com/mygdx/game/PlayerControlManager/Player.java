@@ -13,7 +13,6 @@ class Player {
         this.inventory = new Inventory();
     }
 
-
     //not in used yet
 //    protected void heal(int amount) {
 //        health = Math.min(health + amount, maxHealth);

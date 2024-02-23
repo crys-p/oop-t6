@@ -21,11 +21,6 @@ public class SceneManager {
     }
 
     private final Game game;
-    private StartScene startScene;
-    private GameScene gameScene;
-    private MenuScene menuScene;
-    private LoseScene loseScene;
-    private VictoryScene victoryScene;
     private Scene currentScene;
 
     private SimulationManager simulationManager;

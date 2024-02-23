@@ -1,12 +1,12 @@
-Feb 23, 2024 3:08:12 AM com.mygdx.game.SimulationManager.SimulationManager <init>
+Feb 23, 2024 1:00:14 PM com.mygdx.game.SimulationManager.SimulationManager <init>
 INFO: SimulationManager initialized
-Feb 23, 2024 3:08:12 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Feb 23, 2024 1:00:15 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: SceneManager initialized
-Feb 23, 2024 3:08:12 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Feb 23, 2024 1:00:15 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: START SCENE initialised
-Feb 23, 2024 3:08:12 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Feb 23, 2024 1:00:15 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: GameMaster initialized
-Feb 23, 2024 3:08:17 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Feb 23, 2024 1:00:20 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: GAME SCENE initialised
-Feb 23, 2024 3:08:33 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
-INFO: VICTORY SCENE initialised
+Feb 23, 2024 1:00:27 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+INFO: LOSE SCENE initialised
