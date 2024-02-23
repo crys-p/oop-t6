@@ -53,7 +53,7 @@ public class IOManager implements InputProcessor {
 
 	public IOManager (int numButtons, SoundManager soundManager, PlayerControlManager playerControlManager, SceneManager sceneManager) {
 		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
-		output = new Output(numButtons, playerControlManager);
+		this.output = new Output(numButtons, playerControlManager);
 		this.soundManager = soundManager;
 		this.playerControlManager = playerControlManager;
 		this.sceneManager = sceneManager;

@@ -54,8 +54,8 @@ class GameScene extends Scene {
 
         // Create enemy and collectible entities based on number of players
         Random random = new Random();
-        entityManager.createCollectibleRandom(numberOfCollectibles, random);
-        entityManager.createEnemyRandom(numberOfEnemy, random);
+        entityManager.createCollectible(numberOfCollectibles, random);
+        entityManager.createEnemy(numberOfEnemy, random);
 
         // Create same amt of characters as players
         int x = 0;
