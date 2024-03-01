@@ -23,7 +23,7 @@ import java.util.Random;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
-class GameScene extends Scene {
+class   GameScene extends Scene {
 
     private int numberOfEnemy = 10;
     private int numberOfCollectibles = 20;
