@@ -79,7 +79,7 @@ public class SceneManager {
         currentScene = newScene;
         game.setScreen(currentScene);
         // set the current scene type when changing the scene
-        setCurrentSceneType(getSceneType(newScene));
+            setCurrentSceneType(getSceneType(newScene));
         System.out.println("Scene changed to: " + newScene.getClass().getSimpleName());
     }
 

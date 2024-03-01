@@ -48,8 +48,7 @@ public class GameMaster extends Game {
 		playerControlManager = new PlayerControlManager(entityManager);
 		// Set up single player mode with default UDLR key controls
 		playerControlManager.createPlayers(1);
-		playerControlManager.setPlayerControl(0, "UDLR"); // UDLR or WASD accepted
-
+		playerControlManager.setPlayerControl(0, "WASD"); // UDLR or WASD accepted
 		// Initialize IOManager
 		ioManager = new IOManager(5, soundManager, playerControlManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window

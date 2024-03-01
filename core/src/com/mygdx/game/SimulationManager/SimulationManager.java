@@ -27,7 +27,7 @@ public class SimulationManager {
             logger.addHandler(fileHandler);
 
             // set logger level to INFO
-            logger.setLevel(Level.INFO);
+            logger.setLevel(Level.WARNING);
         } catch (IOException e) {
             // when there's an error creating the FileHandler, will log it
             logger.log(Level.SEVERE, "Error creating log file", e);
@@ -38,10 +38,10 @@ public class SimulationManager {
 
     private SimulationManager() {
 
-        logger.info("SimulationManager initialized");
+        logger.warning("SimulationManager initialized");
 
         // will intentionally throw an exception for testing error logging
-        // throw new RuntimeException("There is error occurred during initialization");
+        //throw new RuntimeException("There is error occurred during initialization");
     }
 
     public static SimulationManager getInstance() {
