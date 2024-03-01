@@ -7,15 +7,15 @@ import com.badlogic.gdx.audio.Sound;
 public class SoundEffect {
 	private Sound sound;
 
-	public SoundEffect(String filename) {
+	protected SoundEffect(String filename) {
 		sound = Gdx.audio.newSound(Gdx.files.internal(filename));
 	}
 
-	public void play() {
+	protected void play() {
 		sound.play();
 	}
 
-	public void dispose() {
+	protected void dispose() {
 		sound.dispose();
 	}
 }

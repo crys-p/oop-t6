@@ -3,9 +3,9 @@ package com.mygdx.game.EntityManager;
 import com.mygdx.game.AIControlManager.AIControlManager;
 
 class Enemy extends Entity {
-    protected float damage = 10; // default damage is 10
+    private float damage = 10; // default damage is 10
 
-    Enemy(float x, float y, String image) {
+    protected Enemy(float x, float y, String image) {
         super(x, y, image);
     }
 

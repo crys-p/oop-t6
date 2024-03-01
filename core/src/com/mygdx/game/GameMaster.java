@@ -49,6 +49,7 @@ public class GameMaster extends Game {
 		// Set up single player mode with default UDLR key controls
 		playerControlManager.createPlayers(1);
 		playerControlManager.setPlayerControl(0, "WASD"); // UDLR or WASD accepted
+
 		// Initialize IOManager
 		ioManager = new IOManager(5, soundManager, playerControlManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
@@ -60,7 +61,6 @@ public class GameMaster extends Game {
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
 		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showScene(SceneManager.SceneType.START);
-
 
 
 		aiControlManager = new AIControlManager();

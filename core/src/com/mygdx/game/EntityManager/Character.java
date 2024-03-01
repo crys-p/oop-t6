@@ -55,11 +55,11 @@ class Character extends Entity {
         System.out.printf("I am a character at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.entityID);
     }
 
-    public String getInputControls() {
+    protected String getInputControls() {
         return inputControls;
     }
 
-    public void setInputControls(String inputControls) {
+    protected void setInputControls(String inputControls) {
         this.inputControls = inputControls;
     }
 

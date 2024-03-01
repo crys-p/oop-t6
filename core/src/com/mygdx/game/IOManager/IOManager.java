@@ -187,28 +187,24 @@ public class IOManager implements InputProcessor {
 				// Handle button 1 click
 				// Example: Change to another scene
 				//game.setScreen(new AnotherScene(game));
-				System.out.println("Button clicked: " + buttonIndex);
 				sceneManager.showScene(SceneManager.SceneType.GAME);
 				break;
 			case 1:
 				// Handle button 2 clickound
 				//				soundManager.toggleS
 				// Example: Toggle sound();
-				System.out.println("Button clicked: " + buttonIndex);
 				SceneManager.SceneType currentSceneType = sceneManager.getCurrentSceneType();
 				soundManager.toggleMusic(currentSceneType);
 				break;
 			case 2:
 				// Handle button 3 click
 				// Example: Exit the game
-				System.out.println("Button clicked: " + buttonIndex);
 				Gdx.app.exit();
 				break;
 			// Add cases for other buttons as needed
 			case 3:
 				// Handle button 3 click
 				// Example: Exit the game
-				System.out.println("Button clicked: " + buttonIndex);
 				//Gdx.app.exit();
 				//sceneManager.pauseGameSceneAndSwitchToMenu();
 				sceneManager.showScene(SceneManager.SceneType.MENU);
@@ -217,7 +213,6 @@ public class IOManager implements InputProcessor {
 				// Handle button 2 clickound
 				//				soundManager.toggleS
 				// Example: Toggle sound();
-				System.out.println("Button clicked: " + buttonIndex);
 				SceneManager.SceneType currentSceneType1 = sceneManager.getCurrentSceneType();
 				soundManager.toggleMusic(currentSceneType1);
 				break;
