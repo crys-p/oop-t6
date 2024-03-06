@@ -1,31 +1,19 @@
 package com.mygdx.game.IOManager;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input.Keys;
-
-import java.util.Map;
+import java.util.*;
 
 class Keyboard{
-	protected Map<Integer, Boolean> keys;
-	private Input input;
+	protected Map<Integer, Boolean> keyStates = new HashMap<>();
 
-	protected Keyboard(Input input) {
-        this.input = input;
-	}
-
-	protected void processInput() {
-		if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-			input.receiveInput(Keys.LEFT);
-		}
-		if (Gdx.input.isKeyPressed(Keys.RIGHT)) {
-			input.receiveInput(Keys.RIGHT);
-		}
-		if (Gdx.input.isKeyPressed(Keys.UP)) {
-			input.receiveInput(Keys.UP);
-		}
-		if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-			input.receiveInput(Keys.DOWN);
-		}
-	}
+	Set<Integer> keysAccepted = new HashSet<>(Arrays.asList(
+			com.badlogic.gdx.Input.Keys.LEFT,
+			com.badlogic.gdx.Input.Keys.RIGHT,
+			com.badlogic.gdx.Input.Keys.UP,
+			com.badlogic.gdx.Input.Keys.DOWN,
+			com.badlogic.gdx.Input.Keys.A,
+			com.badlogic.gdx.Input.Keys.D,
+			com.badlogic.gdx.Input.Keys.W,
+			com.badlogic.gdx.Input.Keys.S
+	));
 
 }

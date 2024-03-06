@@ -1,7 +1,6 @@
 package com.mygdx.game.IOManager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -15,7 +14,7 @@ import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
-public class IOManager implements InputProcessor {
+public class IOManager{
 	//initialize from GameMaster?
 	public static final int SCREEN_WIDTH = 1280;
 	public static final int SCREEN_HEIGHT = 720;
@@ -25,84 +24,31 @@ public class IOManager implements InputProcessor {
 	private SoundManager soundManager; // Reference to SoundManager
 	private PlayerControlManager playerControlManager;
 	private SceneManager sceneManager;
+	protected Map<Integer, Boolean> keyStates = new HashMap<>();
 
 	//Setting initial size of window
 	public void setWindowedMode() {
 		Gdx.graphics.setWindowedMode(SCREEN_WIDTH, SCREEN_HEIGHT);
 	}
 
-	private float mouseX;
-	private float mouseY;
-	private boolean leftButtonPressed;
-	private boolean rightButtonPressed;
 	private SimulationManager simulationManager;
 
-	private Map<Integer, Boolean> keyStates = new HashMap<>();
-
-	Set<Integer> keysAccepted = new HashSet<>(Arrays.asList(
-			Input.Keys.LEFT,
-			Input.Keys.RIGHT,
-			Input.Keys.UP,
-			Input.Keys.DOWN,
-			Input.Keys.A,
-			Input.Keys.D,
-			Input.Keys.W,
-			Input.Keys.S
-	));
-
-
 	public IOManager (int numButtons, SoundManager soundManager, PlayerControlManager playerControlManager, SceneManager sceneManager) {
-		Gdx.input.setInputProcessor(this); // Set IOManager as Input Processor
+		this.input = new Input();
 		this.output = new Output(numButtons, playerControlManager);
 		this.soundManager = soundManager;
 		this.playerControlManager = playerControlManager;
 		this.sceneManager = sceneManager;
-		setUpKeyStates();
-
+		input.setUpKeyStates();
 
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("IOManager initialized"); // Log initialization message
 	}
 
-	private void setUpKeyStates() {
-		for (int keycode : keysAccepted) {
-			keyStates.put(keycode, false);
-		}
-	}
-
-	// Keys
-	@Override
-	public boolean keyDown(int keycode) {
-		if (keysAccepted.contains(keycode)) {
-			handleKeyPress(keycode, true);
-		}
-		return true; // To indicate event was handled
-	}
-
-	@Override
-	public boolean keyUp(int keycode) {
-		if (keysAccepted.contains(keycode)) {
-			handleKeyPress(keycode, false);
-		}
-		return true;
-	}
-
-	@Override
-	public boolean keyTyped(char character) {
-		return false;
-	}
-
-
-	// Set key states based on pressed keys
-	public void handleKeyPress(int keycode, boolean isPressed) {
-		keyStates.put(keycode, isPressed);
-		updateMovement();
-	}
-
 	// Activate player control when movement is updated
 	public void updateMovement() {
 		List<Integer> keys = new ArrayList<>();
-		for (Map.Entry<Integer, Boolean> entry : keyStates.entrySet()) {
+		for (Map.Entry<Integer, Boolean> entry : input.keyboard.keyStates.entrySet()) {
 			if (entry.getValue()) {
 				keys.add(entry.getKey());
 			}
@@ -112,55 +58,9 @@ public class IOManager implements InputProcessor {
 		}
 	}
 
-	// Mouse
-	public boolean isLeftButtonPressed() {
-		return leftButtonPressed;
-	}
-
-	public boolean isRightButtonPressed() {
-		return rightButtonPressed;
-	}
-	@Override
-	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchCancelled(int screenX, int screenY, int pointer, int button) {
-		return false;
-	}
-
-	@Override
-	public boolean touchDragged(int screenX, int screenY, int pointer) {
-		return false;
-	}
-
-	@Override
-	public boolean mouseMoved(int screenX, int screenY) {
-		return false;
-	}
-
-	@Override
-	public boolean scrolled(float amountX, float amountY) {
-		return false;
-	}
-
-	public void updateMousePosition(float mouseX, float mouseY) {
-		this.mouseX = mouseX;
-		this.mouseY = mouseY;
-		//System.out.println("Mouse position: (" + mouseX + ", " + mouseY + ")");
-	}
-
 	public void updateMouse() {
-		updateMousePosition(mouseX, mouseY);
-		//processInput();
+		input.updateMouse();
 	}
-
 
 	public void displayPlayerInformation(SpriteBatch batch, ShapeRenderer shape) {
 		output.displayHealthBar(shape, batch);
