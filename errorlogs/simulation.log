@@ -1,32 +1,22 @@
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager <init>
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager <init>
 WARNING: SimulationManager initialized
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: GameMaster initialized
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: EntityManager initialized
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: SoundManager initialized
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: PlayerControlManager initialized
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: IOManager initialized
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: CollisionManager initialized
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: SceneManager initialized
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:01 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: START SCENE initialised
-Mar 08, 2024 1:13:27 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
-INFO: AIControlManager initialized
-Mar 08, 2024 1:13:32 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:06 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: GAME SCENE initialised
-Mar 08, 2024 1:13:35 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
-INFO: MENU SCENE initialised
-Mar 08, 2024 1:13:36 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
-INFO: GAME SCENE initialised
-Mar 08, 2024 1:13:37 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
-INFO: MENU SCENE initialised
-Mar 08, 2024 1:13:40 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
-INFO: GAME SCENE initialised
-Mar 08, 2024 1:13:44 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 2:15:10 AM com.mygdx.game.SimulationManager.SimulationManager logInfo
 INFO: MENU SCENE initialised

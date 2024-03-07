@@ -27,7 +27,6 @@ public class GameMaster extends Game {
 	private IOManager ioManager;
 	private PlayerControlManager playerControlManager;
 	private CollisionManager collisionManager;
-	private AIControlManager aiControlManager;
 
 	public void create() {
 		// Creating renderers
@@ -48,7 +47,7 @@ public class GameMaster extends Game {
 		playerControlManager = new PlayerControlManager(entityManager);
 		// Set up single player mode with default UDLR key controls
 		playerControlManager.createPlayers(1);
-		playerControlManager.setPlayerControl(0, "WASD"); // UDLR or WASD accepted
+		playerControlManager.setPlayerControl(0, "UDLR"); // UDLR or WASD accepted
 
 		// Initialize IOManager
 		ioManager = new IOManager(5, soundManager, playerControlManager, null);
@@ -62,16 +61,12 @@ public class GameMaster extends Game {
 		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showScene(SceneManager.SceneType.START);
 
-
-		aiControlManager = new AIControlManager();
-
 	}
 
 	// Method to switch to another scene
 	public void render() {
 		super.render();
 		entityManager.movement();
-		ioManager.updateMouse();
 		collisionManager.startCollisionDetection();
 	}
 
