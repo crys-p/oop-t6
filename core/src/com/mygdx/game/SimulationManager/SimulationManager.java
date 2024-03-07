@@ -27,10 +27,13 @@ public class SimulationManager {
             logger.addHandler(fileHandler);
 
             // set logger level to INFO
-            logger.setLevel(Level.WARNING);
+            //logger.setLevel(Level.WARNING);
+            logger.setLevel(Level.INFO);
         } catch (IOException e) {
             // when there's an error creating the FileHandler, will log it
             logger.log(Level.SEVERE, "Error creating log file", e);
+
+
         }
     }
 

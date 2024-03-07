@@ -28,58 +28,33 @@ class Output {
 	}
 
 	protected void createSkin() {
-		// Load button textures
-		Texture buttonMenu = new Texture("menubutton.png");
-		Texture buttonGame = new Texture("gamebutton.png");
-		Texture buttonStart = new Texture("menuButton.png"); // Ensure this is the correct texture
-		// Load button texture
-		Texture buttonTexture = new Texture("menuButton.png");
-		Texture buttonLose = new Texture("losebutton.png");
-		Texture buttonVictory = new Texture("victorybutton.png");
+		// to define the properties for each button style in a structure
+		String[][] buttonProperties = {
+				{"menubutton.png", "buttonMenuStyle"},
+				{"gamebutton.png", "buttonGameStyle"},
+				{"menuButton.png", "buttonStartStyle"},
+				{"menuButton.png", "countdownButtonStyle"},
+				{"losebutton.png", "loseButtonStyle"},
+				{"victorybutton.png", "victoryButtonStyle"}
+		};
 
-		// Define button styles for each scene
-		TextButtonStyle buttonStyleMenu = new TextButtonStyle();
-		buttonStyleMenu.font = new BitmapFont();
-		buttonStyleMenu.fontColor = Color.WHITE;
-		buttonStyleMenu.up = new TextureRegionDrawable(new TextureRegion(buttonMenu));
+		// create and add each button style to the skin
+		for (String[] properties : buttonProperties) {
+			String textureFile = properties[0];
+			String styleName = properties[1];
 
-		TextButtonStyle buttonStyleGame = new TextButtonStyle();
-		buttonStyleGame.font = new BitmapFont();
-		buttonStyleGame.fontColor = Color.WHITE;
-		buttonStyleGame.up = new TextureRegionDrawable(new TextureRegion(buttonGame));
+			// Loading of texture and create style
+			Texture buttonTexture = new Texture(textureFile);
+			TextButtonStyle buttonStyle = new TextButtonStyle();
+			buttonStyle.font = new BitmapFont();
+			buttonStyle.fontColor = Color.WHITE;
+			buttonStyle.up = new TextureRegionDrawable(new TextureRegion(buttonTexture));
 
-		TextButtonStyle buttonStyleStart = new TextButtonStyle();
-		buttonStyleStart.font = new BitmapFont();
-		buttonStyleStart.fontColor = Color.WHITE;
-		buttonStyleStart.up = new TextureRegionDrawable(new TextureRegion(buttonStart));
-
-		// Define button style
-		TextButtonStyle buttonStyleTimer = new TextButtonStyle();
-		buttonStyleTimer.font = new BitmapFont();
-		buttonStyleTimer.fontColor = Color.WHITE;
-		buttonStyleTimer.up = new TextureRegionDrawable(new TextureRegion(buttonTexture));
-
-		// Define button style on tje LoseScene
-		TextButtonStyle buttonStyleLose = new TextButtonStyle();
-		buttonStyleLose.font = new BitmapFont();
-		buttonStyleLose.fontColor = Color.WHITE;
-		buttonStyleLose.up = new TextureRegionDrawable(new TextureRegion(buttonLose));
-
-		// Define button style in the VictoryScene
-		TextButtonStyle buttonStyleVictory = new TextButtonStyle();
-		buttonStyleVictory.font = new BitmapFont();
-		buttonStyleVictory.fontColor = Color.WHITE;
-		buttonStyleVictory.up = new TextureRegionDrawable(new TextureRegion(buttonVictory));
-
-		// Add button styles to the skin with unique names
-		skin.add("buttonMenuStyle", buttonStyleMenu);
-		skin.add("buttonGameStyle", buttonStyleGame);
-		skin.add("buttonStartStyle", buttonStyleStart);
-		// Add button style to the skin
-		skin.add("countdownButtonStyle", buttonStyleTimer);
-		skin.add("loseButtonStyle", buttonStyleLose);
-		skin.add("victoryButtonStyle", buttonStyleVictory);
+			// Add style to skin
+			skin.add(styleName, buttonStyle);
+		}
 	}
+
 	protected TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
 		buttons[index] = new TextButton(text, skin, styleName);
 		buttons[index].setPosition(x, y);
