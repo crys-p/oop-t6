@@ -84,11 +84,8 @@ public class Input implements InputProcessor {
 	}
 
 	protected void updateMousePosition(float screenX, float screenY) {
-		mouse.getMouseX();
-		mouse.getMouseY();
-
 		mouse.mouseX = screenX;
-		mouse.mouseY = Gdx.graphics.getHeight() - screenY; // Invert Y-axis
+		mouse.mouseY = screenY;
 	}
 
 	protected void handleMouseButtonPress(int button, boolean isPressed) {
@@ -100,21 +97,6 @@ public class Input implements InputProcessor {
 				mouse.rightButtonPressed = isPressed;
 				break;
 			// Add cases for other mouse buttons as needed
-		}
-	}
-	protected void updateMouse() {
-		int screenX = Gdx.input.getX();
-		int screenY = Gdx.graphics.getHeight() - Gdx.input.getY(); // Invert Y-axis
-
-		updateMousePosition(screenX, screenY);
-
-		// Handle mouse button press
-		if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.LEFT)) {
-			handleMouseButtonPress(com.badlogic.gdx.Input.Buttons.LEFT, true);
-		} else if (Gdx.input.isButtonPressed(com.badlogic.gdx.Input.Buttons.RIGHT)) {
-			handleMouseButtonPress(com.badlogic.gdx.Input.Buttons.RIGHT, true);
-		} else {
-
 		}
 	}
 }

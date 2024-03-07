@@ -1,10 +1,8 @@
 package com.mygdx.game.IOManager;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.EntityManager.EntityManager;
 
 import java.util.*;
 
@@ -24,7 +22,6 @@ public class IOManager{
 	private SoundManager soundManager; // Reference to SoundManager
 	private PlayerControlManager playerControlManager;
 	private SceneManager sceneManager;
-	protected Map<Integer, Boolean> keyStates = new HashMap<>();
 
 	//Setting initial size of window
 	public void setWindowedMode() {
@@ -56,10 +53,6 @@ public class IOManager{
 		if (!keys.isEmpty()) {
 			playerControlManager.handlePressedKeys(keys);
 		}
-	}
-
-	public void updateMouse() {
-		input.updateMouse();
 	}
 
 	public void displayPlayerInformation(SpriteBatch batch, ShapeRenderer shape) {
@@ -124,8 +117,8 @@ public class IOManager{
 	public void processInput() {
 		// Example: Check for touch events and detect button clicks
 		if (Gdx.input.justTouched()) {
-			float touchX = Gdx.input.getX();
-			float touchY = Gdx.input.getY();
+			float touchX = input.mouse.getMouseX();
+			float touchY = input.mouse.getMouseY();
 			int buttonIndex = detectClickedButton(touchX, touchY);
 			if (buttonIndex != -1) {
 				handleButtonClick(buttonIndex);

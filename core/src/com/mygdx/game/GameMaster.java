@@ -67,7 +67,6 @@ public class GameMaster extends Game {
 	public void render() {
 		super.render();
 		entityManager.movement();
-		ioManager.updateMouse();
 		collisionManager.startCollisionDetection();
 	}
 
