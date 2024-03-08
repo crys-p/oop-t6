@@ -12,6 +12,7 @@ import com.mygdx.engine.SceneManager.SceneManager;
 import com.mygdx.engine.SoundManager.SoundManager; // sound manager
 
 import com.mygdx.engine.SimulationManager.SimulationManager;
+import com.mygdx.game.PlayerControlConfigs;
 
 //public class GameMaster extends ApplicationAdapter
 public class GameMaster extends Game {
@@ -44,7 +45,7 @@ public class GameMaster extends Game {
 		playerManager = new PlayerManager(entityManager);
 		// Set up single player mode with default UDLR key controls
 		playerManager.createPlayers(1);
-		playerManager.setPlayerControl(0, "UDLR"); // UDLR or WASD accepted
+		playerManager.setPlayerControl(0, PlayerControlConfigs.UDLR); // UDLR or WASD accepted
 
 		// Initialize IOManager
 		ioManager = new IOManager(5, soundManager, playerManager, null);

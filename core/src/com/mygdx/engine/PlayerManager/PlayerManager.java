@@ -4,13 +4,13 @@ package com.mygdx.engine.PlayerManager;
 import com.badlogic.gdx.Input;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
+import com.mygdx.game.PlayerControlConfigs;
 
 import java.util.*;
 
 public class PlayerManager {
     private final ArrayList<Player> allPlayers;
     private final Map<Player, Integer> playerEntityMap; // Map to store Player instances and corresponding entity being controlled
-    private final HashMap<String, List<Integer>> keyMaps =  new HashMap<>();
     private int numDeadPlayers = 0;
     private int allPlayerInventoryCount = 0;
     private final EntityManager entityManager;
@@ -19,7 +19,6 @@ public class PlayerManager {
         this.entityManager = entityManager;
         playerEntityMap = new HashMap<>();
         allPlayers = new ArrayList<>();
-        this.setKeyMaps();
 
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("PlayerManager initialized"); // Log initialization message
@@ -45,6 +44,19 @@ public class PlayerManager {
         player.setPlayerControlledEntityID(entityID);
     }
 
+    public void handlePressedKeys(List<Integer> keys) {
+        // For each key pressed
+        for (Integer key: keys) {
+            for (Player player : allPlayers) {
+                // Check if current player is controlling any entity
+                if (player.getPlayerControlledEntityID() != -1)
+                {
+                    // Send this key for to player to handle
+                    player.move(key, entityManager);
+                }
+            }
+        }
+    }
 
     // Method to handle taking damage
     public void takeDamage(int characterID, int enemyID) {
@@ -79,17 +91,17 @@ public class PlayerManager {
         return allPlayers.size();
     }
 
-    public void setPlayerControl(int playerNumber, String playerControl) {
+    public void setPlayerControl(int playerNumber, PlayerControlConfigs playerControl) {
         try {
             Player player = allPlayers.get(playerNumber);
-            player.setPlayerKeyControls(playerControl);
+            player.setPlayerKeyConfigs(playerControl);
         } catch (Exception IndexOutOfBoundsException) {
             System.out.println("Error: Player does not exist.");
         }
     }
 
-    public String getPlayerControls(int playerNumber) {
-        return allPlayers.get(playerNumber).getPlayerKeyControls();
+    public PlayerControlConfigs getPlayerControls(int playerNumber) {
+        return allPlayers.get(playerNumber).getPlayerKeyConfigs();
     }
 
 
@@ -113,41 +125,6 @@ public class PlayerManager {
         return allInventory;
     }
 
-    public void handlePressedKeys(List<Integer> keys) {
-        // For each key pressed
-        for (Integer key: keys) {
-            for (Player player : allPlayers) {
-                // Check each player's key config to see if it matches
-                String keyConfigs = player.getPlayerKeyControls();
-                if (keyMaps.get(keyConfigs).contains(key)) {
-                    // If player entity id exists, send instruction to player
-                    int playerEntityID = player.getPlayerControlledEntityID();
-                    if (playerEntityID != -1) {
-                        PlayerInstructions instr = getDirectionFromKey(key);
-                        entityManager.inputMovement(player.getPlayerControlledEntityID(), instr);
-                    }
-                }
-            }
-        }
-    }
-
-    private PlayerInstructions getDirectionFromKey(int key) {
-            if (key == Input.Keys.LEFT || key == Input.Keys.A) {
-                return PlayerInstructions.LEFT;
-            } else if (key == Input.Keys.RIGHT || key == Input.Keys.D) {
-                return PlayerInstructions.RIGHT;
-            } else if (key == Input.Keys.UP || key == Input.Keys.W) {
-                return PlayerInstructions.UP;
-            } else if (key == Input.Keys.DOWN || key == Input.Keys.S) {
-                return PlayerInstructions.DOWN;
-            }
-        return null; // No direction found for the given key in the control configuration
-    }
-
-    private void setKeyMaps() {
-        keyMaps.put("UDLR", Arrays.asList(Input.Keys.LEFT, Input.Keys.RIGHT, Input.Keys.UP, Input.Keys.DOWN));
-        keyMaps.put("WASD", Arrays.asList(Input.Keys.A, Input.Keys.D, Input.Keys.W, Input.Keys.S));
-    }
 
     public int getNumDeadPlayers() {
         return numDeadPlayers;

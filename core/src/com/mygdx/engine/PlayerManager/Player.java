@@ -1,16 +1,19 @@
 package com.mygdx.engine.PlayerManager;
 
+import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.game.PlayerControlConfigs;
+
 class Player {
     private int playerControlledEntityID = -1;
     private final int maxHealth = 100;
     private int health;
+    private PlayerController playerController;
     protected Inventory inventory;
-
-    private String keyControls = "UDLR"; // default key controls if not set
 
     protected Player() {
         this.health = maxHealth;
         this.inventory = new Inventory();
+        this.playerController = new PlayerController();
     }
 
     //not in used yet
@@ -23,7 +26,7 @@ class Player {
     }
 
 
-    public void addToInventory(Item item, int quantity) {
+    protected void addToInventory(Item item, int quantity) {
         inventory.addItem(item, quantity);
     }
 
@@ -45,12 +48,12 @@ class Player {
     protected int getMaxHealth() {
         return this.maxHealth;
     }
-    public void setPlayerKeyControls(String playerControl) {
-        this.keyControls = playerControl;
+    protected void setPlayerKeyConfigs(PlayerControlConfigs control) {
+        this.playerController.setKeyConfigs(control);
     }
 
-    public String getPlayerKeyControls() {
-        return this.keyControls;
+    protected PlayerControlConfigs getPlayerKeyConfigs() {
+        return this.playerController.getKeyConfigs();
     }
 
     protected int getPlayerControlledEntityID() {
@@ -64,5 +67,13 @@ class Player {
 
     protected void clearInventory() {
         inventory.clear();
+    }
+
+    // Moves the player if the key is part of player's control
+    protected void move(Integer key, EntityManager entityManager) {
+        PlayerInstructions instr = this.playerController.getPlayerMovement(key);
+        if (instr != null) {
+            entityManager.inputMovement(this.playerControlledEntityID, instr);
+        }
     }
 }

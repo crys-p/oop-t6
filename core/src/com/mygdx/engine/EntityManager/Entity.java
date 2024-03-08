@@ -85,5 +85,6 @@ public abstract class Entity {
 
     protected void inputMovement(PlayerInstructions instructions) {}
 
+    // Im not sure what to do here yet haha
     protected void aiMovement() {}
 }

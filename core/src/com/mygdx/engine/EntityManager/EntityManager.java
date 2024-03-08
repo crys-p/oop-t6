@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.engine.SimulationManager.SimulationManager;
+import com.mygdx.game.PlayerControlConfigs;
 import com.mygdx.game.entities.Collectible;
 import com.mygdx.game.entities.Enemy;
 import com.mygdx.game.entities.Character;
@@ -33,17 +34,17 @@ public class EntityManager implements EntityLifeCycle {
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @Override
-    public void createCharacter(int quantity, float x, float y, float speed, String controls) {
+    public void createCharacter(int quantity, float x, float y, float speed, PlayerControlConfigs controls) {
         for (int i = 0; i < quantity; i++) {
-            com.mygdx.game.entities.Character character = new Character(x, y, speed, "player.png", controls);
+            Character character = new Character(x, y, speed, "player.png", controls);
             this.setUpEntityAttributes(character);
         }
     }
 
     @Override
-    public void createCharacter(int quantity, Random random, float speed, String controls) {
+    public void createCharacter(int quantity, Random random, float speed, PlayerControlConfigs controls) {
         for (int i = 0; i < quantity; i++) {
-            com.mygdx.game.entities.Character character = new Character(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT - 50, speed, "player.png", controls);
+            Character character = new Character(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT - 50, speed, "player.png", controls);
             this.setUpEntityAttributes(character);
         }
     }

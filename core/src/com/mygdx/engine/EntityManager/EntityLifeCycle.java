@@ -1,16 +1,16 @@
 package com.mygdx.engine.EntityManager;
 
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.game.PlayerControlConfigs;
 
 import java.util.Random;
 
 // This interface is implemented by EntityManager for the creation, drawing and deleting in SceneManager
 public interface EntityLifeCycle {
     // Create character at different position
-    void createCharacter(int quantity, float x, float y, float speed, String controls);
-    void createCharacter(int quantity, Random random, float speed, String controls);
+    void createCharacter(int quantity, float x, float y, float speed, PlayerControlConfigs controls);
+
+    void createCharacter(int quantity, Random random, float speed, PlayerControlConfigs controls);
 
     // Create enemies at different positions
     void createEnemy(int quantity, float x, float y);

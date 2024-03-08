@@ -3,15 +3,16 @@ package com.mygdx.game.entities;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
+import com.mygdx.game.PlayerControlConfigs;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 public class Character extends Entity {
     private float speed;
-    private String inputControls;
+    private PlayerControlConfigs inputControls;
 
-    public Character(float x, float y, float speed, String image, String controls) {
+    public Character(float x, float y, float speed, String image, PlayerControlConfigs controls) {
         super(x, y, image);
         this.inputControls = controls;
         this.speed = speed;
@@ -56,11 +57,11 @@ public class Character extends Entity {
         System.out.printf("I am a character at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.entityID);
     }
 
-    protected String getInputControls() {
+    protected PlayerControlConfigs getInputControls() {
         return inputControls;
     }
 
-    protected void setInputControls(String inputControls) {
+    protected void setInputControls(PlayerControlConfigs inputControls) {
         this.inputControls = inputControls;
     }
 
