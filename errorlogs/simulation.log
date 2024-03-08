@@ -1,22 +1,22 @@
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager <init>
+Mar 08, 2024 9:29:03 PM com.mygdx.engine.SimulationManager.SimulationManager <init>
 WARNING: SimulationManager initialized
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:04 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: GameMaster initialized
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:04 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: EntityManager initialized
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:04 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: SoundManager initialized
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:04 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: PlayerManager initialized
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:04 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: IOManager initialized
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:04 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: CollisionManager initialized
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:04 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: SceneManager initialized
-Mar 08, 2024 2:40:34 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:04 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: START SCENE initialised
-Mar 08, 2024 2:40:40 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
+Mar 08, 2024 9:29:09 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: GAME SCENE initialised
-Mar 08, 2024 2:41:01 PM com.mygdx.game.SimulationManager.SimulationManager logInfo
-INFO: VICTORY SCENE initialised
+Mar 08, 2024 9:29:32 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+INFO: LOSE SCENE initialised

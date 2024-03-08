@@ -1,4 +1,6 @@
 package com.mygdx.game;
+import com.mygdx.engine.GameMaster;
+
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
