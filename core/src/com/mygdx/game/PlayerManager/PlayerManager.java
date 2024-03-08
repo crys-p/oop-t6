@@ -1,5 +1,5 @@
-// PlayerControlManager.java
-package com.mygdx.game.PlayerControlManager;
+// PlayerManager.java
+package com.mygdx.game.PlayerManager;
 
 import com.badlogic.gdx.Input;
 import com.mygdx.game.EntityManager.EntityManager;
@@ -7,7 +7,7 @@ import com.mygdx.game.SimulationManager.SimulationManager;
 
 import java.util.*;
 
-public class PlayerControlManager {
+public class PlayerManager {
     private final ArrayList<Player> allPlayers;
     private final Map<Player, Integer> playerEntityMap; // Map to store Player instances and corresponding entity being controlled
     private final HashMap<String, List<Integer>> keyMaps =  new HashMap<>();
@@ -15,14 +15,14 @@ public class PlayerControlManager {
     private int allPlayerInventoryCount = 0;
     private final EntityManager entityManager;
     private SimulationManager simulationManager;
-    public PlayerControlManager(EntityManager entityManager) {
+    public PlayerManager(EntityManager entityManager) {
         this.entityManager = entityManager;
         playerEntityMap = new HashMap<>();
         allPlayers = new ArrayList<>();
         this.setKeyMaps();
 
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
-        simulationManager.logInfo("PlayerControlManager initialized"); // Log initialization message
+        simulationManager.logInfo("PlayerManager initialized"); // Log initialization message
     }
 
     // Method to create players

@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import java.util.*;
 
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.PlayerManager.PlayerManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
@@ -20,7 +20,7 @@ public class IOManager{
 	private Output output;
 	private Input input;
 	private SoundManager soundManager; // Reference to SoundManager
-	private PlayerControlManager playerControlManager;
+	private PlayerManager playerManager;
 	private SceneManager sceneManager;
 
 	//Setting initial size of window
@@ -30,11 +30,11 @@ public class IOManager{
 
 	private SimulationManager simulationManager;
 
-	public IOManager (int numButtons, SoundManager soundManager, PlayerControlManager playerControlManager, SceneManager sceneManager) {
+	public IOManager (int numButtons, SoundManager soundManager, PlayerManager playerManager, SceneManager sceneManager) {
 		this.input = new Input();
-		this.output = new Output(numButtons, playerControlManager);
+		this.output = new Output(numButtons, playerManager);
 		this.soundManager = soundManager;
-		this.playerControlManager = playerControlManager;
+		this.playerManager = playerManager;
 		this.sceneManager = sceneManager;
 		input.setUpKeyStates();
 
@@ -51,7 +51,7 @@ public class IOManager{
 			}
 		}
 		if (!keys.isEmpty()) {
-			playerControlManager.handlePressedKeys(keys);
+			playerManager.handlePressedKeys(keys);
 		}
 	}
 

@@ -1,4 +1,4 @@
-package com.mygdx.game.PlayerControlManager;
+package com.mygdx.game.PlayerManager;
 
 public class Item {
     private int itemID;

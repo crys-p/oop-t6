@@ -4,13 +4,10 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.AIControlManager.AIControlManager;
 import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
-import com.mygdx.game.IOManager.HealthBar;
-import com.mygdx.game.PlayerControlManager.Inventory;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.PlayerManager.PlayerManager;
 import com.mygdx.game.SceneManager.SceneManager;
 import com.mygdx.game.SoundManager.SoundManager; // sound manager
 
@@ -25,7 +22,7 @@ public class GameMaster extends Game {
 	private SimulationManager simulationManager; // Add SimulationManager reference
 	private SoundManager soundManager;
 	private IOManager ioManager;
-	private PlayerControlManager playerControlManager;
+	private PlayerManager playerManager;
 	private CollisionManager collisionManager;
 
 	public void create() {
@@ -43,21 +40,21 @@ public class GameMaster extends Game {
 		soundManager = new SoundManager();
 		soundManager.createSounds();
 
-		// Initialise PlayerControlManager
-		playerControlManager = new PlayerControlManager(entityManager);
+		// Initialise PlayerManager
+		playerManager = new PlayerManager(entityManager);
 		// Set up single player mode with default UDLR key controls
-		playerControlManager.createPlayers(1);
-		playerControlManager.setPlayerControl(0, "UDLR"); // UDLR or WASD accepted
+		playerManager.createPlayers(1);
+		playerManager.setPlayerControl(0, "UDLR"); // UDLR or WASD accepted
 
 		// Initialize IOManager
-		ioManager = new IOManager(5, soundManager, playerControlManager, null);
+		ioManager = new IOManager(5, soundManager, playerManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Initialize Collision Manager for all collision detection and handling
-		collisionManager = new CollisionManager(entityManager, soundManager, playerControlManager);
+		collisionManager = new CollisionManager(entityManager, soundManager, playerManager);
 
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerControlManager);
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerManager);
 		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showScene(SceneManager.SceneType.START);
 

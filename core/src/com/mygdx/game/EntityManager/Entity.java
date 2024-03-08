@@ -3,9 +3,8 @@ package com.mygdx.game.EntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.PlayerControlManager.PlayerInstructions;
+import com.mygdx.game.PlayerManager.PlayerInstructions;
 
 abstract class Entity {
     protected Texture texture;

@@ -1,22 +1,15 @@
 package com.mygdx.game.SceneManager;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
-import com.mygdx.game.GameMaster;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.IOManager.IOManager;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
-import com.mygdx.game.SimulationManager.SimulationManager;
+import com.mygdx.game.PlayerManager.PlayerManager;
 
 import java.util.Random;
 
@@ -27,11 +20,11 @@ class   GameScene extends Scene {
 
     private int numberOfEnemy = 10;
     private int numberOfCollectibles = 20;
-    private PlayerControlManager playerControlManager;
+    private PlayerManager playerManager;
 
-    protected GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerControlManager playerControlManager) {
+    protected GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
-        this.playerControlManager = playerControlManager;
+        this.playerManager = playerManager;
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
     protected TextButton gameSceneButton;
@@ -42,13 +35,13 @@ class   GameScene extends Scene {
         // Logic when the game scene is shown
         createButtons();
         createEntities();
-        playerControlManager.resetAllPlayerStats();
+        playerManager.resetAllPlayerStats();
     }
 
     @Override
     protected void createEntities() {
         // Create entities based on the number of players existing
-        int totalPlayers = playerControlManager.getTotalNumberOfPlayers();
+        int totalPlayers = playerManager.getTotalNumberOfPlayers();
         numberOfCollectibles = numberOfCollectibles * totalPlayers;
         numberOfEnemy = numberOfEnemy * totalPlayers;
 
@@ -62,8 +55,8 @@ class   GameScene extends Scene {
         for (int i = 0; i < totalPlayers; i++) {
             // If there are multiple players, set them 100px apart
             x += 100;
-            entityManager.createCharacter(1, x, 0, 400, playerControlManager.getPlayerControls(i));
-            playerControlManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
+            entityManager.createCharacter(1, x, 0, 400, playerManager.getPlayerControls(i));
+            playerManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
         }
     }
 
@@ -128,11 +121,11 @@ class   GameScene extends Scene {
         // Process input events
         ioManager.processInput();
 
-        if (playerControlManager.getNumDeadPlayers() > 0) {
+        if (playerManager.getNumDeadPlayers() > 0) {
             // Detect player death to call end scene
             this.sceneManager.showScene(SceneManager.SceneType.LOSE);
         }
-        if (playerControlManager.getNumAllCollectibles() == numberOfCollectibles) {
+        if (playerManager.getNumAllCollectibles() == numberOfCollectibles) {
             // Detect total collectibles to call victory scene
             this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }

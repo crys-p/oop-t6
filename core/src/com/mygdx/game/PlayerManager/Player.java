@@ -1,4 +1,4 @@
-package com.mygdx.game.PlayerControlManager;
+package com.mygdx.game.PlayerManager;
 
 class Player {
     private int playerControlledEntityID = -1;

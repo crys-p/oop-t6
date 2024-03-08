@@ -1,4 +1,4 @@
-package com.mygdx.game.PlayerControlManager;
+package com.mygdx.game.PlayerManager;
 import java.util.HashMap;
 import java.util.Map;
 

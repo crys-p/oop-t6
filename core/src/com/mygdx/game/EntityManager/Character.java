@@ -1,7 +1,7 @@
 package com.mygdx.game.EntityManager;
 
 import com.badlogic.gdx.Gdx;
-import com.mygdx.game.PlayerControlManager.PlayerInstructions;
+import com.mygdx.game.PlayerManager.PlayerInstructions;
 
 import static com.mygdx.game.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;

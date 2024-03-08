@@ -10,7 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.PlayerManager.PlayerManager;
 
 class Output {
 	protected TextButton[] buttons;
@@ -19,12 +19,12 @@ class Output {
 	private HealthBar healthBar;
 	private InventoryDisplay inventoryDisplay;
 
-	protected Output(int numButtons, PlayerControlManager playerControlManager) {
+	protected Output(int numButtons, PlayerManager playerManager) {
 		buttons = new TextButton[numButtons];
 		skin = new Skin();
 		createSkin();
-		healthBar = new HealthBar(playerControlManager);
-		inventoryDisplay = new InventoryDisplay(playerControlManager);
+		healthBar = new HealthBar(playerManager);
+		inventoryDisplay = new InventoryDisplay(playerManager);
 	}
 
 	protected void createSkin() {

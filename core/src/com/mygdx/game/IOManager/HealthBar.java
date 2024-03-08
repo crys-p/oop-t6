@@ -1,11 +1,10 @@
 package com.mygdx.game.IOManager;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.PlayerManager.PlayerManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,10 +16,10 @@ public class HealthBar {
     protected static final float BAR_WIDTH = (float) SCREEN_WIDTH / 2;
     protected static final float BAR_HEIGHT = 15;
     protected final BitmapFont font;
-    protected final PlayerControlManager playerControlManager;
+    protected final PlayerManager playerManager;
 
-    protected HealthBar(PlayerControlManager playerControlManager) {
-        this.playerControlManager = playerControlManager;
+    protected HealthBar(PlayerManager playerManager) {
+        this.playerManager = playerManager;
         this.font = new BitmapFont();
     }
 
@@ -30,7 +29,7 @@ public class HealthBar {
         float healthBarY = SCREEN_HEIGHT * 0.9f; // Distance from the top edge of the screen
 
         // Health Stats are defined as: currentHealth, maxHealth
-        HashMap<Integer, List<Integer>> allPlayerHealthStats = playerControlManager.getAllPlayerHealthStats();
+        HashMap<Integer, List<Integer>> allPlayerHealthStats = playerManager.getAllPlayerHealthStats();
         int numPlayers = allPlayerHealthStats.size();
 
         // Draw Health bar for the number of players

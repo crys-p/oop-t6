@@ -1,10 +1,9 @@
 package com.mygdx.game.IOManager;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.PlayerManager.PlayerManager;
 
 import java.util.List;
 
@@ -13,15 +12,15 @@ import static com.mygdx.game.IOManager.IOManager.SCREEN_WIDTH;
 
 public class InventoryDisplay {
 
-    private PlayerControlManager playerControlManager;
+    private PlayerManager playerManager;
     protected final BitmapFont font;
 
-    protected InventoryDisplay(PlayerControlManager playerControlManager) {
-        this.playerControlManager = playerControlManager;
+    protected InventoryDisplay(PlayerManager playerManager) {
+        this.playerManager = playerManager;
         this.font = new BitmapFont();
     }
     protected void render(SpriteBatch batch) {
-        List<Integer> allPlayerInventory = playerControlManager.getAllPlayerInventory();
+        List<Integer> allPlayerInventory = playerManager.getAllPlayerInventory();
 
         // Define the position of the inventory
         float posX = SCREEN_WIDTH * 0.01f + 130; // Distance from the left edge of the screen

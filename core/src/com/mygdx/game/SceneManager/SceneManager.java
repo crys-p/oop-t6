@@ -1,14 +1,11 @@
 package com.mygdx.game.SceneManager;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.badlogic.gdx.utils.Timer;
-import com.mygdx.game.CollisionManager.CollisionManager;
 import com.mygdx.game.EntityManager.EntityManager;
 import com.mygdx.game.IOManager.IOManager;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
+import com.mygdx.game.PlayerManager.PlayerManager;
 import com.mygdx.game.SimulationManager.SimulationManager;
 import com.mygdx.game.SoundManager.SoundManager;
 
@@ -30,18 +27,18 @@ public class SceneManager {
     private SoundManager soundManager;
     private IOManager ioManager;
 
-    private PlayerControlManager playerControlManager;
+    private PlayerManager playerManager;
 
     protected HashMap<SceneType, Scene> allScenesMap;
 
     private SceneType currentSceneType;
 
-    public SceneManager(Game game, EntityManager entityManager, IOManager ioManager, SoundManager soundManager, PlayerControlManager playerControlManager){
+    public SceneManager(Game game, EntityManager entityManager, IOManager ioManager, SoundManager soundManager, PlayerManager playerManager){
         this.game = game;
         this.entityManager = entityManager;
         this.ioManager = ioManager;
         this.soundManager = soundManager; // Use the provided SoundManager instance
-        this.playerControlManager = playerControlManager;
+        this.playerManager = playerManager;
         allScenesMap = new HashMap<>();
         initializeScenes();
 
@@ -53,7 +50,7 @@ public class SceneManager {
         allScenesMap.put(SceneType.START,
                 new StartScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
         allScenesMap.put(SceneType.GAME,
-                new GameScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager, playerControlManager));
+                new GameScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager, playerManager));
         allScenesMap.put(SceneType.MENU,
                 new MenuScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
         allScenesMap.put(SceneType.LOSE,

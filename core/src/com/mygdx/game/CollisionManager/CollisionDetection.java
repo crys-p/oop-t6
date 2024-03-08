@@ -2,8 +2,6 @@ package com.mygdx.game.CollisionManager;
 
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.game.EntityManager.EntityManager;
-import com.mygdx.game.PlayerControlManager.PlayerControlManager;
-import com.mygdx.game.SoundManager.SoundManager;
 
 import java.util.HashMap;
 
