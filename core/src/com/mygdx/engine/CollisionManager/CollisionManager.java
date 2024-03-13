@@ -3,6 +3,7 @@ import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.engine.SoundManager.SoundManager;
+import com.mygdx.game.Collision.CollisionHandler;
 
 
 public class CollisionManager {

@@ -1,20 +1,20 @@
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.EntityManager.Entity;
+import com.mygdx.engine.EntityManager.iCollidable;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.game.PlayerControlConfigs;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
-public class Character extends Entity {
+public class Character extends Entity implements iCollidable {
     private float speed;
-    private PlayerControlConfigs inputControls;
 
-    public Character(float x, float y, float speed, String image, PlayerControlConfigs controls) {
+    public Character(float x, float y, float speed, String image) {
         super(x, y, image);
-        this.inputControls = controls;
         this.speed = speed;
     }
 
@@ -57,14 +57,6 @@ public class Character extends Entity {
         System.out.printf("I am a character at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.entityID);
     }
 
-    protected PlayerControlConfigs getInputControls() {
-        return inputControls;
-    }
-
-    protected void setInputControls(PlayerControlConfigs inputControls) {
-        this.inputControls = inputControls;
-    }
-
     protected float getSpeed() {
         return this.speed;
     }
@@ -75,5 +67,10 @@ public class Character extends Entity {
 
     protected void setSpeed(float value) {
         this.speed = value;
+    }
+
+    @Override
+    public Rectangle getBoundingBox() {
+        return super.getBoundingBox();
     }
 }

@@ -11,7 +11,7 @@ public abstract class Entity {
     protected int entityID;
     protected float x;
     protected float y;
-    protected Rectangle boundingBox;
+    private Rectangle boundingBox;
 
     // Constructor for entities that start at fixed positions
     protected Entity(float x, float y, String image) {
@@ -87,4 +87,8 @@ public abstract class Entity {
 
     // Im not sure what to do here yet haha
     protected void aiMovement() {}
+
+    public Rectangle getBoundingBox() {
+        return this.boundingBox;
+    }
 }

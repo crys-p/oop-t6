@@ -1,56 +1,35 @@
 package com.mygdx.engine.CollisionManager;
 
-import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.game.Collision.CollisionHandler;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class CollisionDetection {
     private final EntityManager entityManager;
 
-    private final HashMap<Rectangle, Integer> characterMap;
-    private final HashMap<Rectangle, Integer> enemyMap;
-    private final HashMap<Rectangle, Integer> collectibleMap;
+    private final ArrayList<Entity> collidableEntityList;
 
     protected CollisionDetection(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.characterMap = new HashMap<>();
-        this.enemyMap = new HashMap<>();
-        this.collectibleMap = new HashMap<>();
+        this.collidableEntityList = new ArrayList<>();
     }
 
     protected void setCollidables() {
         // Clear existing maps if any
-        characterMap.clear();
-        enemyMap.clear();
-        collectibleMap.clear();
+        collidableEntityList.clear();
         // Add latest items to map
-        HashMap<Rectangle, Integer> allCharacters = entityManager.getCharacterBoundingBoxes();
-        characterMap.putAll(allCharacters);
-        HashMap<Rectangle, Integer> allEnemies = entityManager.getEnemyBoundingBoxes();
-        enemyMap.putAll(allEnemies);
-        HashMap<Rectangle, Integer> allCollectibles = entityManager.getCollectibleBoundingBoxes();
-        collectibleMap.putAll(allCollectibles);
+        collidableEntityList.addAll(entityManager.getCollidableEntities());
     }
 
     protected void detectCollisions(CollisionHandler collisionHandler) {
-        // Loop through different maps to detect collision
-        // If collision is being detected, handle collision reaction using handleCharacterCollectibleCollision etc.
-        for (Rectangle enemyRect : enemyMap.keySet()) {
-            for (Rectangle charRect : characterMap.keySet()) {
-                if (charRect.overlaps(enemyRect)) {
-                    int charID = characterMap.get(charRect);
-                    int enemyID = enemyMap.get(enemyRect);
-                    collisionHandler.handleCharacterEnemyCollision(charID, enemyID);
-                }
-            }
-        }
-        for (Rectangle collectibleRect : collectibleMap.keySet()) {
-            for (Rectangle charRect : characterMap.keySet()) {
-                if (charRect.overlaps(collectibleRect)) {
-                    int charID = characterMap.get(charRect);
-                    int collectibleID = collectibleMap.get(collectibleRect);
-                    collisionHandler.handleCharacterCollectibleCollision(charID, collectibleID);
+        for (int i = 0; i < collidableEntityList.size(); i++) {
+            Entity entityA = collidableEntityList.get(i);
+            for (int j = i + 1; j < collidableEntityList.size(); j++) {
+                Entity entityB = collidableEntityList.get(j);
+                if (entityA.getBoundingBox().overlaps(entityB.getBoundingBox())) {
+                    collisionHandler.handleCollision(entityA, entityB);
                 }
             }
         }

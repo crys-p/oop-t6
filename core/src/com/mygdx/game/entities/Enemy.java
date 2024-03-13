@@ -1,9 +1,11 @@
 package com.mygdx.game.entities;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.AIControlManager.AIControlManager;
 import com.mygdx.engine.EntityManager.Entity;
+import com.mygdx.engine.EntityManager.iCollidable;
 
-public class Enemy extends Entity {
+public class Enemy extends Entity implements iCollidable {
     private float damage = 10; // default damage is 10
 
     public Enemy(float x, float y, String image) {
@@ -35,4 +37,8 @@ public class Enemy extends Entity {
         updateBoundingBox();
     }
 
+    @Override
+    public Rectangle getBoundingBox() {
+        return super.getBoundingBox();
+    }
 }

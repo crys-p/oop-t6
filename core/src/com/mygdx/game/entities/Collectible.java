@@ -1,10 +1,12 @@
 package com.mygdx.game.entities;
 
 
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.AIControlManager.AIControlManager;
 import com.mygdx.engine.EntityManager.Entity;
+import com.mygdx.engine.EntityManager.iCollidable;
 
-public class Collectible extends Entity {
+public class Collectible extends Entity implements iCollidable {
 
     public Collectible(float x, float y, String image) {
         super(x, y, image);
@@ -27,4 +29,8 @@ public class Collectible extends Entity {
         updateBoundingBox();
     }
 
+    @Override
+    public Rectangle getBoundingBox() {
+        return super.getBoundingBox();
+    }
 }
