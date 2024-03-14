@@ -22,7 +22,7 @@ public class Enemy extends Entity implements iCollidable {
 
     @Override
     protected void logConsole() {
-        System.out.printf("In an Enemy at %f,%f position. My EntityID is %d\n",this.getX(), this.getY(), this.entityID);
+        System.out.printf("In an Enemy at %f,%f position. My EntityID is %d\n",this.getX(), this.getY(), this.getEntityID());
     }
 
     @Override
@@ -37,8 +37,4 @@ public class Enemy extends Entity implements iCollidable {
         updateBoundingBox();
     }
 
-    @Override
-    public Rectangle getBoundingBox() {
-        return super.getBoundingBox();
-    }
 }

@@ -20,16 +20,16 @@ class PlayerController {
         keyMaps.put(PlayerControlConfigs.WASD, Arrays.asList(Input.Keys.A, Input.Keys.D, Input.Keys.W, Input.Keys.S));
     }
 
-    // Check if this key is used for this player and returns predefined player instruction
     protected PlayerInstructions getPlayerMovement(Integer key) {
+        // Check if this key is used for this player and returns predefined player instruction
         if (keyMaps.get(keyConfigs).contains(key)) {
-            return getDirectionFromKey(key);
+            return getMovementFromKey(key);
         }
         return null;
     }
 
     // Get instruction based on key
-    private PlayerInstructions getDirectionFromKey(int key) {
+    private PlayerInstructions getMovementFromKey(int key) {
         if (key == Input.Keys.LEFT || key == Input.Keys.A) {
             return PlayerInstructions.LEFT;
         } else if (key == Input.Keys.RIGHT || key == Input.Keys.D) {

@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.engine.SimulationManager.SimulationManager;
+import com.mygdx.game.Player1Behaviour;
 import com.mygdx.game.entities.Collectible;
 import com.mygdx.game.entities.Enemy;
 import com.mygdx.game.entities.Character;
@@ -37,6 +38,14 @@ public class EntityManager implements EntityLifeCycle {
     public void createCharacter(int quantity, float x, float y, float speed) {
         for (int i = 0; i < quantity; i++) {
             Character character = new Character(x, y, speed, "player.png");
+            this.setUpEntityAttributes(character);
+        }
+    }
+
+
+    public void createCharacter(int quantity, float x, float y, float speed, Player1Behaviour playerBehaviour) {
+        for (int i = 0; i < quantity; i++) {
+            Character character = new Character(x, y, speed, "player.png", playerBehaviour);
             this.setUpEntityAttributes(character);
         }
     }
@@ -112,7 +121,7 @@ public class EntityManager implements EntityLifeCycle {
     // For Player Controls
     public void inputMovement(int entityID, PlayerInstructions control) {
         if (entityIDMap.containsKey(entityID)) {
-            entityIDMap.get(entityID).inputMovement(control);
+            entityIDMap.get(entityID).setPlayerInstructions(control);
         }
     }
 
@@ -174,7 +183,7 @@ public class EntityManager implements EntityLifeCycle {
     }
 
     public int getEntityID(Entity entity) {
-        return entity.entityID;
+        return entity.getEntityID();
     }
 
 }

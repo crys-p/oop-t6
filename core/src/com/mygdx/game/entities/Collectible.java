@@ -14,7 +14,7 @@ public class Collectible extends Entity implements iCollidable {
 
 
     protected void logConsole() {
-        System.out.printf("I am item at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.entityID);
+        System.out.printf("I am item at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.getEntityID());
     }
 
     @Override
@@ -29,8 +29,4 @@ public class Collectible extends Entity implements iCollidable {
         updateBoundingBox();
     }
 
-    @Override
-    public Rectangle getBoundingBox() {
-        return super.getBoundingBox();
-    }
 }

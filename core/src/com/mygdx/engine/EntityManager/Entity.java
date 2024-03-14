@@ -8,9 +8,9 @@ import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
 public abstract class Entity {
     protected Texture texture;
-    protected int entityID;
-    protected float x;
-    protected float y;
+    private int entityID;
+    private float x;
+    private float y;
     private Rectangle boundingBox;
 
     // Constructor for entities that start at fixed positions
@@ -18,7 +18,7 @@ public abstract class Entity {
         this.x = x;
         this.y = y;
         this.texture = new Texture(Gdx.files.internal(image));
-        boundingBox = new Rectangle(this.x, this.y, this.getWidth() * 3/4, this.getHeight() * 3/4 );
+        this.boundingBox = new Rectangle(this.x, this.y, this.getWidth() * 3/4, this.getHeight() * 3/4 );
     }
 
     protected float getX() {
@@ -83,7 +83,7 @@ public abstract class Entity {
 
     protected abstract void movement();
 
-    protected void inputMovement(PlayerInstructions instructions) {}
+    protected void setPlayerInstructions(PlayerInstructions instructions) {};
 
     // Im not sure what to do here yet haha
     protected void aiMovement() {}
@@ -91,4 +91,5 @@ public abstract class Entity {
     public Rectangle getBoundingBox() {
         return this.boundingBox;
     }
+
 }
