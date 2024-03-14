@@ -9,11 +9,6 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 public class Player1Behaviour extends PlayerBehaviour {
     @Override
-    public float[] calculateMovement(float x, float y, float speed) {
-        return new float[] {x,y};
-    }
-
-    @Override
     public float[] calculateMovement(PlayerInstructions instructions, float x, float y, float speed) {
         if (instructions == PlayerInstructions.UP) {
             return moveUp(x, y, speed);
