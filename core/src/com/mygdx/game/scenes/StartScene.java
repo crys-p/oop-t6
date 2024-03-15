@@ -46,8 +46,7 @@ public class StartScene extends Scene {
 
     @Override
     protected void createEntities() {
-        // Create entities specific to the start scenex
-        entityManager.createCharacter(1, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, 20);
+        // Create entities specific to the start scene
     }
 
     protected void createCountdownButton() {

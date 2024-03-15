@@ -1,7 +1,6 @@
 package com.mygdx.game.entities;
 
-import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.engine.AIControlManager.AIControlManager;
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.engine.AIControlManager.AIMovement;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.iCollidable;
@@ -10,10 +9,11 @@ public class Enemy extends Entity implements iCollidable {
     private float damage = 10; // default damage is 10
     private AIMovement movement;
 
-    public Enemy(float x, float y, String image, AIMovement movement) {
-        super(x, y, image);
+    public Enemy(float x, float y, float speed, Texture texture, AIMovement movement) {
+        super(x, y, speed, texture);
         this.movement = movement;
     }
+
 
     public float getDamage() {
         return this.damage;

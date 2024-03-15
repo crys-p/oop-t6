@@ -6,13 +6,18 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.engine.AIControlManager.AIMovement;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.engine.Factory.EntityFactoryOwner;
+import com.mygdx.engine.Factory.NonPlayableEntityFactory;
+import com.mygdx.engine.Factory.PlayableEntityFactory;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;
-import com.mygdx.game.Player1Behaviour;
+import com.mygdx.game.Player1Movement;
+import com.mygdx.game.entities.EntityType;
 
 import java.util.Random;
 
@@ -24,10 +29,12 @@ public class GameScene extends Scene {
     private int numberOfEnemy = 10;
     private int numberOfCollectibles = 20;
     private PlayerManager playerManager;
+    private EntityFactoryOwner entityFactoryOwner;
 
-    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager) {
+    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryOwner entityFactoryOwner, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         this.playerManager = playerManager;
+        this.entityFactoryOwner = entityFactoryOwner;
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
     protected TextButton gameSceneButton;
@@ -50,15 +57,21 @@ public class GameScene extends Scene {
 
         // Create enemy and collectible entities based on number of players
         Random random = new Random();
-        entityManager.createCollectible(numberOfCollectibles, random);
-        entityManager.createEnemy(numberOfEnemy, random);
+        NonPlayableEntityFactory nonPlayableFactory = entityFactoryOwner.getNonPlayableEntityFactory();
+        // TODO: !!important - AI Movement Object should get from AIControlManager, e.g. AIControlManager.getLRMovement()
+        nonPlayableFactory.create(EntityType.COLLECTIBLE, numberOfCollectibles, random, 0, new AIMovement(null));
+        nonPlayableFactory.create(EntityType.ENEMY, numberOfEnemy, random, 0, new AIMovement(null));
+//        entityManager.createCollectible(numberOfCollectibles, random);
+//        entityManager.createEnemy(numberOfEnemy, random);
 
+        PlayableEntityFactory playableEntityFactory = entityFactoryOwner.getPlayableEntityFactory();
         // Create same amt of characters as players
         int x = 0;
         for (int i = 0; i < totalPlayers; i++) {
             // If there are multiple players, set them 100px apart
             x += 100;
-            entityManager.createCharacter(1, x, 0, 400, new Player1Behaviour());
+            playableEntityFactory.create(EntityType.CHARACTER, 1, x, 0, 400, new Player1Movement());
+//            entityManager.createCharacter(1, x, 0, 400, new Player1Movement());
             playerManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
         }
     }

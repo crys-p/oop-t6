@@ -11,13 +11,15 @@ public abstract class Entity {
     private int entityID;
     private float x;
     private float y;
+    private float speed;
     protected Rectangle boundingBox;
 
     // Constructor for entities that start at fixed positions
-    protected Entity(float x, float y, String image) {
+    protected Entity(float x, float y, float speed, Texture texture) {
         this.x = x;
         this.y = y;
-        this.texture = new Texture(Gdx.files.internal(image));
+        this.speed = speed;
+        this.texture = texture;
         this.boundingBox = new Rectangle(this.x, this.y, this.getWidth() * 3/4, this.getHeight() * 3/4 );
     }
 
@@ -37,6 +39,17 @@ public abstract class Entity {
         this.y = y;
     }
 
+    protected float getSpeed() {
+        return this.speed;
+    }
+
+    protected void incrementSpeed(float value) {
+        this.speed += value;
+    }
+
+    protected void setSpeed(float value) {
+        this.speed = value;
+    }
     protected int getEntityID() {
         return this.entityID;
     }

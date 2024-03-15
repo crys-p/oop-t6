@@ -2,10 +2,12 @@ package com.mygdx.engine.AIControlManager;
 
 import com.badlogic.gdx.Gdx;
 import com.mygdx.engine.EntityManager.Entity;
+import com.mygdx.engine.Movement.Movement;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
-public class AIMovement {
+// !!important - SET THIS AS AN ABSTRACT CLASS & METHOD AND CREATE SUBCLASSES FOR SPECIFIC MOVEMENTS
+public class AIMovement extends Movement {
     protected Entity entity;
     public AIMovement(Entity entity) {
     this.entity = entity;
@@ -59,4 +61,11 @@ public class AIMovement {
     public float[] update() {
         return new float[0];
     };
+
+
+    // !!importantbelow - SET THIS AS AN ABSTRACT CLASS & METHOD AND CREATE SUBCLASSES FOR SPECIFIC MOVEMENTS
+    @Override
+    public float[] calculateMovement(float x, float y, float speed) {
+        return new float[0];
+    }
 }

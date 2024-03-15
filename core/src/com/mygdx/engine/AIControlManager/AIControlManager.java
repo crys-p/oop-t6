@@ -1,6 +1,5 @@
 package com.mygdx.engine.AIControlManager;
 
-import com.badlogic.gdx.Gdx;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 

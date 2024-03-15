@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.engine.CollisionManager.CollisionManager;
 import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.engine.Factory.EntityFactoryOwner;
+import com.mygdx.engine.Factory.TextureFactory;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.SceneManager;
@@ -19,6 +21,7 @@ public class GameMaster extends Game {
 	private SpriteBatch batch;
 	private ShapeRenderer shape;
 	private EntityManager entityManager;
+	private EntityFactoryOwner entityFactoryOwner;
 	private SceneManager sceneManager;
 	private SimulationManager simulationManager; // Add SimulationManager reference
 	private SoundManager soundManager;
@@ -27,15 +30,20 @@ public class GameMaster extends Game {
 	private CollisionManager collisionManager;
 
 	public void create() {
-		// Creating renderers
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
 		simulationManager.logInfo("GameMaster initialized"); // Log initialization message
 
+		// Creating renderers
 		batch = new SpriteBatch();
 		shape = new ShapeRenderer();
 
+		// Create Texture factory
+		TextureFactory textureFactory = new TextureFactory();
+		textureFactory.create();
+
 		// Initialise EntityManager
 		entityManager = new EntityManager();
+		entityFactoryOwner = new EntityFactoryOwner(entityManager, textureFactory);
 
 		// Initialise SoundManager with background music and sound effect files
 		soundManager = new SoundManager();
@@ -55,7 +63,7 @@ public class GameMaster extends Game {
 		collisionManager = new CollisionManager(entityManager, soundManager, playerManager);
 
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, ioManager, soundManager, playerManager);
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, entityFactoryOwner, ioManager, soundManager, playerManager);
 		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showScene(SceneManager.SceneType.START);
 

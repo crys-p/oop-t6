@@ -1,13 +1,12 @@
 package com.mygdx.game;
 
-import com.mygdx.engine.EntityManager.Entity;
-import com.mygdx.engine.Movement.PlayerBehaviour;
+import com.mygdx.engine.Movement.PlayerMovement;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
-public class Player1Behaviour extends PlayerBehaviour {
+public class Player1Movement extends PlayerMovement {
 
     @Override
     public float[] calculateMovement(float x, float y, float speed) {
@@ -24,7 +23,6 @@ public class Player1Behaviour extends PlayerBehaviour {
             return moveRight(x,y, speed);
         }
 
-        this.playerInstructions = null;
         return new float[] {x,y};
 
         // Add more depending on instructions
