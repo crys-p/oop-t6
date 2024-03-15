@@ -71,7 +71,7 @@ public class GameMaster extends Game {
 		sceneManager.showScene(SceneManager.SceneType.START);
 
 		// Initialize CameraManager
-		cameraManager = new CameraManager(entityManager);
+		cameraManager = new CameraManager(playerManager);
 	}
 
 	// Method to switch to another scene

@@ -8,13 +8,10 @@ import com.mygdx.engine.EntityManager.EntityManager;
 import java.util.ArrayList;
 
 public class Camera {
-    private final EntityManager entityManager;
     public OrthographicCamera camera = null;
     private final float SCALE = 1.0f;
 
-    protected Camera(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+    protected Camera(){}
 
     protected void Camera(float width, float height)
     {

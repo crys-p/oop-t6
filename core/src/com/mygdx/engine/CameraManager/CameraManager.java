@@ -14,11 +14,13 @@ import java.util.ArrayList;
 public class CameraManager {
     private final Camera camera;
     private SimulationManager simulationManager;
+    private PlayerManager playerManager;
     private Vector3 position = new Vector3();
 
 
-    public CameraManager(EntityManager entityManager) {
-        this.camera = new Camera(entityManager);
+    public CameraManager(PlayerManager playerManager) {
+        this.camera = new Camera();
+        this.playerManager = playerManager;
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("CameraManager initialized"); // Log initialization message
     }
@@ -26,8 +28,14 @@ public class CameraManager {
     public void startCamera(float delta, SpriteBatch batch) {
         //Entity player = getEntity(1);  //Need a way to get player x and y values
         camera.Camera(SCREEN_WIDTH, SCREEN_HEIGHT);
-        //position.x = player.getX();
-        //position.y = player.getY();
+        float[] playerPosition = playerManager.getPlayerPosition(0);
+        try {
+            position.x = playerPosition[0];
+            position.y = playerPosition[1];
+        } catch (Exception e) {
+            System.out.println("Player has no entity");
+        }
+
         //camera.cameraUpdate(delta,position);
         batch.setProjectionMatrix(camera.camera.combined);
     }

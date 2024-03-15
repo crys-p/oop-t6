@@ -149,4 +149,12 @@ public class PlayerManager {
         return allPlayerInventoryCount;
     }
 
+    public float[] getPlayerPosition(int playerNumber) {
+        int entityID = allPlayers.get(playerNumber).getPlayerControlledEntityID();
+        if (entityID != -1) {
+            return entityManager.getPosition(entityID);
+        } else {
+            return null;
+        }
+    }
 }
