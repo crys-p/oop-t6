@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.CollisionManager.CollisionManager;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.game.GameFactory.EntityFactoryManager;
@@ -28,6 +29,8 @@ public class GameMaster extends Game {
 	private IOManager ioManager;
 	private PlayerManager playerManager;
 	private CollisionManager collisionManager;
+	private CameraManager cameraManager;
+	private float delta;
 
 	public void create() {
 		simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
@@ -67,6 +70,8 @@ public class GameMaster extends Game {
 		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showScene(SceneManager.SceneType.START);
 
+		// Initialize CameraManager
+		cameraManager = new CameraManager(entityManager);
 	}
 
 	// Method to switch to another scene
@@ -74,6 +79,13 @@ public class GameMaster extends Game {
 		super.render();
 		entityManager.movement();
 		collisionManager.startCollisionDetection();
+
+		delta = Gdx.graphics.getDeltaTime();
+		update(delta);
+	}
+
+	public void update(float delta) { // anything that relies on time
+		cameraManager.startCamera(delta, batch);
 	}
 
 	@Override
