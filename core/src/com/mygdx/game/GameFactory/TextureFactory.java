@@ -1,4 +1,4 @@
-package com.mygdx.engine.Factory;
+package com.mygdx.game.GameFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;

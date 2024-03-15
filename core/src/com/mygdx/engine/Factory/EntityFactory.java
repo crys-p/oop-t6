@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.Movement.Movement;
-import com.mygdx.engine.Movement.PlayerMovement;
+import com.mygdx.game.GameFactory.TextureFactory;
 import com.mygdx.game.entities.EntityType;
 
 import java.util.Random;
