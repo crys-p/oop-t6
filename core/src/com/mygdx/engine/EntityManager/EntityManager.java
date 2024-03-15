@@ -6,11 +6,12 @@ import com.mygdx.engine.AIControlManager.AIControlManager;
 import com.mygdx.engine.AIControlManager.AIMovement;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.PlayerControlConfigs;
+import com.mygdx.game.Player1Behaviour;
 import com.mygdx.game.entities.Collectible;
 import com.mygdx.game.entities.Enemy;
 import com.mygdx.game.entities.Character;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
@@ -36,17 +37,25 @@ public class EntityManager implements EntityLifeCycle {
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~ENTITY LIFE CYCLE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     @Override
-    public void createCharacter(int quantity, float x, float y, float speed, PlayerControlConfigs controls) {
+    public void createCharacter(int quantity, float x, float y, float speed) {
         for (int i = 0; i < quantity; i++) {
-            Character character = new Character(x, y, speed, "player.png", controls);
+            Character character = new Character(x, y, speed, "player.png");
+            this.setUpEntityAttributes(character);
+        }
+    }
+
+
+    public void createCharacter(int quantity, float x, float y, float speed, Player1Behaviour playerBehaviour) {
+        for (int i = 0; i < quantity; i++) {
+            Character character = new Character(x, y, speed, "player.png", playerBehaviour);
             this.setUpEntityAttributes(character);
         }
     }
 
     @Override
-    public void createCharacter(int quantity, Random random, float speed, PlayerControlConfigs controls) {
+    public void createCharacter(int quantity, Random random, float speed) {
         for (int i = 0; i < quantity; i++) {
-            Character character = new Character(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT - 50, speed, "player.png", controls);
+            Character character = new Character(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT - 50, speed, "player.png");
             this.setUpEntityAttributes(character);
         }
     }
@@ -118,57 +127,30 @@ public class EntityManager implements EntityLifeCycle {
     // For Player Controls
     public void inputMovement(int entityID, PlayerInstructions control) {
         if (entityIDMap.containsKey(entityID)) {
-            entityIDMap.get(entityID).inputMovement(control);
+            entityIDMap.get(entityID).setPlayerInstructions(control);
         }
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public HashMap<Rectangle, Integer> getCharacterBoundingBoxes() {
-        HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
-        List<Entity> listOfCharacters = entitySpecificMap.get(com.mygdx.game.entities.Character.class);
-        if (listOfCharacters != null) {
-            for (Entity entity: listOfCharacters) {
-                boundingBoxes.put(entity.boundingBox, entity.entityID);
+    public ArrayList<Entity> getCollidableEntities() {
+        ArrayList<Entity> collidableEntities = new ArrayList<>();
+        for (Entity entity: entityList) {
+            if (entity instanceof iCollidable) {
+                collidableEntities.add(entity);
             }
         }
-        return boundingBoxes;
+        return collidableEntities;
     }
 
-    public HashMap<Rectangle, Integer> getEnemyBoundingBoxes() {
-        HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
-        List<Entity> listOfEnemies = entitySpecificMap.get(Enemy.class);
-        if (listOfEnemies != null) {
-            for (Entity entity: listOfEnemies) {
-                boundingBoxes.put(entity.boundingBox, entity.entityID);
-            }
-        }
-        return boundingBoxes;
-    }
 
-    public HashMap<Rectangle, Integer> getCollectibleBoundingBoxes() {
-        HashMap<Rectangle, Integer> boundingBoxes = new HashMap<>();
-        List<Entity> listOfCollectibles = entitySpecificMap.get(Collectible.class);
-        if (listOfCollectibles != null) {
-            for (Entity entity: listOfCollectibles) {
-                boundingBoxes.put(entity.boundingBox, entity.entityID);
-            }
-        }
-        return boundingBoxes;
-    }
-
-    public void removeEntity(int entityID) {
-        Entity entity = entityIDMap.get(entityID);
+    public void removeEntity(Entity entity) {
         if (entity != null) {
             removeFromList(entity);
         }
     }
 
-    public float getDamage(int entityID) {
-        if (entityIDMap.get(entityID) instanceof Enemy) {
-            return ((Enemy) entityIDMap.get(entityID)).getDamage();
-        } else {
-            return 0;
-        }
+    public float getDamage(Enemy entity) {
+        return entity.getDamage();
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~INTERNAL/TESTING CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -204,6 +186,10 @@ public class EntityManager implements EntityLifeCycle {
         for (Entity e: entityList) {
             e.logConsole();
         }
+    }
+
+    public int getEntityID(Entity entity) {
+        return entity.getEntityID();
     }
 
 }

@@ -12,6 +12,7 @@ import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;
+import com.mygdx.game.Player1Behaviour;
 
 import java.util.Random;
 
@@ -57,7 +58,7 @@ public class GameScene extends Scene {
         for (int i = 0; i < totalPlayers; i++) {
             // If there are multiple players, set them 100px apart
             x += 100;
-            entityManager.createCharacter(1, x, 0, 400, playerManager.getPlayerControls(i));
+            entityManager.createCharacter(1, x, 0, 400, new Player1Behaviour());
             playerManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
         }
     }

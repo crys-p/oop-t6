@@ -1,10 +1,11 @@
 // PlayerManager.java
 package com.mygdx.engine.PlayerManager;
 
-import com.badlogic.gdx.Input;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.PlayerControlConfigs;
+import com.mygdx.game.entities.Character;
+import com.mygdx.game.entities.Enemy;
 
 import java.util.*;
 
@@ -59,8 +60,9 @@ public class PlayerManager {
     }
 
     // Method to handle taking damage
-    public void takeDamage(int characterID, int enemyID) {
-        float damage = entityManager.getDamage(enemyID);
+    public void takeDamage(Character character, Enemy enemy) {
+        int characterID = entityManager.getEntityID(character);
+        float damage = entityManager.getDamage(enemy);
         // Loop through all players and apply damage
         for (Player player : allPlayers) {
             if (playerEntityMap.get(player) == characterID) {

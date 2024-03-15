@@ -1,10 +1,12 @@
 package com.mygdx.game.entities;
 
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.AIControlManager.AIControlManager;
 import com.mygdx.engine.AIControlManager.AIMovement;
 import com.mygdx.engine.EntityManager.Entity;
+import com.mygdx.engine.EntityManager.iCollidable;
 
-public class Enemy extends Entity {
+public class Enemy extends Entity implements iCollidable {
     private float damage = 10; // default damage is 10
     private AIMovement movement;
 
@@ -23,7 +25,7 @@ public class Enemy extends Entity {
 
     @Override
     protected void logConsole() {
-        System.out.printf("In an Enemy at %f,%f position. My EntityID is %d\n",this.getX(), this.getY(), this.entityID);
+        System.out.printf("In an Enemy at %f,%f position. My EntityID is %d\n",this.getX(), this.getY(), this.getEntityID());
     }
 
     @Override

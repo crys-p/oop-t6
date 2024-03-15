@@ -1,11 +1,13 @@
 package com.mygdx.game.entities;
 
 
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.AIControlManager.AIControlManager;
 import com.mygdx.engine.AIControlManager.AIMovement;
 import com.mygdx.engine.EntityManager.Entity;
+import com.mygdx.engine.EntityManager.iCollidable;
 
-public class Collectible extends Entity {
+public class Collectible extends Entity implements iCollidable {
 
     private AIMovement movement;
     public Collectible(float x, float y, String image, AIMovement movement) {
@@ -15,7 +17,7 @@ public class Collectible extends Entity {
 
 
     protected void logConsole() {
-        System.out.printf("I am item at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.entityID);
+        System.out.printf("I am item at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.getEntityID());
     }
 
     @Override
