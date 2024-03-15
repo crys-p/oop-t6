@@ -1,6 +1,7 @@
 package com.mygdx.game.entities;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.iCollidable;
 import com.mygdx.engine.Movement.Behaviour;
@@ -12,9 +13,7 @@ import com.mygdx.game.Player1Behaviour;
 public class Character extends Entity implements iCollidable {
     private float speed;
 
-    private PlayerInstructions playerInstructions;
-
-    private Behaviour behaviour;
+    private PlayerBehaviour behaviour;
 
     public Character(float x, float y, float speed, String image) {
         super(x, y, image);
@@ -28,15 +27,15 @@ public class Character extends Entity implements iCollidable {
     }
 
     protected void movement() {
-        float[] newPosition = behaviour.calculateMovement(playerInstructions, this.getX(), this.getY(), this.getSpeed() * Gdx.graphics.getDeltaTime());
+        float[] newPosition = behaviour.calculateMovement(this.getX(), this.getY(), this.getSpeed() * Gdx.graphics.getDeltaTime());
         this.setX(newPosition[0]);
         this.setY(newPosition[1]);
+        behaviour.setPlayerInstructions(null);
         updateBoundingBox();
-        playerInstructions = null;
     }
 
     protected void setPlayerInstructions(PlayerInstructions instructions) {
-        this.playerInstructions = instructions;
+        this.behaviour.setPlayerInstructions(instructions);
     }
 
     protected void logConsole() {
@@ -54,9 +53,5 @@ public class Character extends Entity implements iCollidable {
 
     protected void setSpeed(float value) {
         this.speed = value;
-    }
-
-    public PlayerInstructions getPlayerInstruction() {
-        return playerInstructions;
     }
 }

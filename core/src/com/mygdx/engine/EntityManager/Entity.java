@@ -11,7 +11,7 @@ public abstract class Entity {
     private int entityID;
     private float x;
     private float y;
-    private Rectangle boundingBox;
+    protected Rectangle boundingBox;
 
     // Constructor for entities that start at fixed positions
     protected Entity(float x, float y, String image) {
@@ -35,22 +35,6 @@ public abstract class Entity {
 
     protected void setY(float y) {
         this.y = y;
-    }
-
-    protected void moveUp(float value) {
-        this.y += value;
-    }
-
-    protected void moveDown(float value) {
-        this.y -= value;
-    }
-
-    protected void moveLeft(float value) {
-        this.x -= value;
-    }
-
-    protected void moveRight(float value) {
-        this.x += value;
     }
 
     protected int getEntityID() {
@@ -91,5 +75,4 @@ public abstract class Entity {
     public Rectangle getBoundingBox() {
         return this.boundingBox;
     }
-
 }

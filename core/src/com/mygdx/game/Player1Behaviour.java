@@ -8,20 +8,23 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 public class Player1Behaviour extends PlayerBehaviour {
+
     @Override
-    public float[] calculateMovement(PlayerInstructions instructions, float x, float y, float speed) {
-        if (instructions == PlayerInstructions.UP) {
+    public float[] calculateMovement(float x, float y, float speed) {
+        if (playerInstructions == PlayerInstructions.UP) {
             return moveUp(x, y, speed);
         }
-        if (instructions == PlayerInstructions.DOWN) {
+        if (playerInstructions == PlayerInstructions.DOWN) {
             return moveDown(x, y, speed);
         }
-        if (instructions == PlayerInstructions.LEFT) {
+        if (playerInstructions == PlayerInstructions.LEFT) {
             return moveLeft(x, y, speed);
         }
-        if (instructions == PlayerInstructions.RIGHT) {
+        if (playerInstructions == PlayerInstructions.RIGHT) {
             return moveRight(x,y, speed);
         }
+
+        this.playerInstructions = null;
         return new float[] {x,y};
 
         // Add more depending on instructions
