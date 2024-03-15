@@ -28,11 +28,12 @@ public class NonPlayableEntityFactory extends EntityFactory {
                     return new Enemy(x, y, speed, texture, aiMovement);
                 case COLLECTIBLE:
                     return new Collectible(x, y, speed, texture, aiMovement);
+                // add other nonplayable entities
                 default:
                     SimulationManager.getInstance().logError("Creating unknown entity type: " + type);
             }
         } catch (ClassCastException e) {
-            throw new IllegalArgumentException("Movement is not an instance of PlayerMovement.", e);
+            throw new IllegalArgumentException("Movement is not an instance of AIMovement.", e);
         }
         return null;
     }
