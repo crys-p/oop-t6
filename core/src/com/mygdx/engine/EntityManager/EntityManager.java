@@ -2,6 +2,8 @@ package com.mygdx.engine.EntityManager;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.engine.AIControlManager.AIControlManager;
+import com.mygdx.engine.AIControlManager.AIMovement;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.Player1Behaviour;
@@ -62,7 +64,10 @@ public class EntityManager implements EntityLifeCycle {
     @Override
     public void createEnemy(int quantity, float x, float y) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Enemy(x, y, "fire.png"));
+            AIMovement movement = new AIMovement(null); // Initialize with null entity for now
+            Enemy enemy = new Enemy(x, y, "fire.png", movement);
+            movement.setEntity(enemy); // Set the entity for the AIMovement instance
+            this.setUpEntityAttributes(enemy);
         }
     }
 
@@ -70,24 +75,38 @@ public class EntityManager implements EntityLifeCycle {
     @Override
     public void createEnemy(int quantity, Random random) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Enemy(random.nextFloat() * SCREEN_WIDTH, random.nextFloat() * SCREEN_HEIGHT - 50, "fire.png"));
+            float randomX = random.nextFloat() * SCREEN_WIDTH;
+            float randomY = random.nextFloat() * SCREEN_HEIGHT - 50;
+            AIMovement movement = new AIMovement(null); // Initialize with null entity for now
+            Enemy enemy = new Enemy(randomX, randomY, "fire.png", movement);
+            movement.setEntity(enemy); // Set the entity for the AIMovement instance
+            this.setUpEntityAttributes(enemy);
         }
     }
 
     @Override
     public void createCollectible(int quantity, float x, float y) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Collectible(x, y, "star.png"));
+            AIMovement movement = new AIMovement(null); // Initialize with null entity for now
+            Collectible collectible = new Collectible(x, y, "star.png", movement);
+            movement.setEntity(collectible); // Set the entity for the AIMovement instance
+            this.setUpEntityAttributes(collectible);
         }
     }
 
     @Override
-    // Create collectibles at random positions
+// Create collectibles at random positions
     public void createCollectible(int quantity, Random random) {
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Collectible(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT, "star.png"));
+            float randomX = random.nextFloat() * SCREEN_WIDTH - 50;
+            float randomY = random.nextFloat() * SCREEN_HEIGHT;
+            AIMovement movement = new AIMovement(null); // Initialize with null entity for now
+            Collectible collectible = new Collectible(randomX, randomY, "star.png", movement);
+            movement.setEntity(collectible); // Set the entity for the AIMovement instance
+            this.setUpEntityAttributes(collectible);
         }
     }
+
 
     @Override
     public void drawAllEntities(SpriteBatch batch) {

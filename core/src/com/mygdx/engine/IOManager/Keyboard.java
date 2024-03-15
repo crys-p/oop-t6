@@ -1,5 +1,7 @@
 package com.mygdx.engine.IOManager;
 
+import com.badlogic.gdx.Input;
+
 import java.util.*;
 
 class Keyboard{
@@ -10,6 +12,7 @@ class Keyboard{
 			com.badlogic.gdx.Input.Keys.RIGHT,
 			com.badlogic.gdx.Input.Keys.UP,
 			com.badlogic.gdx.Input.Keys.DOWN,
+			com.badlogic.gdx.Input.Keys.SPACE,
 			com.badlogic.gdx.Input.Keys.A,
 			com.badlogic.gdx.Input.Keys.D,
 			com.badlogic.gdx.Input.Keys.W,
