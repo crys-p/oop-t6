@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.engine.AIControlManager.AIMovement;
+import com.mygdx.engine.CameraManager.Camera;
+import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.GameFactory.EntityFactoryManager;
@@ -30,11 +32,13 @@ public class GameScene extends Scene {
     private int numberOfCollectibles = 20;
     private PlayerManager playerManager;
     private EntityFactoryManager entityFactoryManager;
+    private CameraManager cameraManager;
 
-    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager) {
+    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager, CameraManager cameraManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         this.playerManager = playerManager;
         this.entityFactoryManager = entityFactoryManager;
+        this.cameraManager = cameraManager;
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
     protected TextButton gameSceneButton;
@@ -143,6 +147,8 @@ public class GameScene extends Scene {
             this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }
         ioManager.updateMovement();
+
+        cameraManager.startCamera(delta, batch);
 
     }
 

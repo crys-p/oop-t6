@@ -2,10 +2,6 @@ package com.mygdx.engine.CameraManager;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.engine.EntityManager.Entity;
-import com.mygdx.engine.EntityManager.EntityManager;
-
-import java.util.ArrayList;
 
 public class Camera {
     public OrthographicCamera camera = null;

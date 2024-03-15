@@ -1,26 +1,24 @@
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager <init>
+Mar 15, 2024 11:54:45 PM com.mygdx.engine.SimulationManager.SimulationManager <init>
 WARNING: SimulationManager initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:45 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: GameMaster initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:45 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: Texture Manager initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:45 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: EntityManager initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:45 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: SoundManager initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:45 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: PlayerManager initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:46 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: IOManager initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:46 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: CollisionManager initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
-INFO: SceneManager initialized
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
-INFO: START SCENE initialised
-Mar 15, 2024 10:50:57 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:46 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: CameraManager initialized
-Mar 15, 2024 10:51:02 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+Mar 15, 2024 11:54:46 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+INFO: SceneManager initialized
+Mar 15, 2024 11:54:46 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
+INFO: START SCENE initialised
+Mar 15, 2024 11:54:51 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
 INFO: GAME SCENE initialised
-Mar 15, 2024 10:51:20 PM com.mygdx.engine.SimulationManager.SimulationManager logInfo
-INFO: VICTORY SCENE initialised

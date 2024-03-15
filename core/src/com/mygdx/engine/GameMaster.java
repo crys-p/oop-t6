@@ -65,13 +65,13 @@ public class GameMaster extends Game {
 		// Initialize Collision Manager for all collision detection and handling
 		collisionManager = new CollisionManager(entityManager, soundManager, playerManager);
 
-		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, entityFactoryManager, ioManager, soundManager, playerManager);
-		ioManager.setSceneMgr(sceneManager);
-		sceneManager.showScene(SceneManager.SceneType.START);
-
 		// Initialize CameraManager
 		cameraManager = new CameraManager(playerManager);
+
+		// Pass the game instance to SceneManager
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, entityFactoryManager, ioManager, soundManager, playerManager, cameraManager);
+		ioManager.setSceneMgr(sceneManager);
+		sceneManager.showScene(SceneManager.SceneType.START);
 	}
 
 	// Method to switch to another scene
@@ -79,14 +79,8 @@ public class GameMaster extends Game {
 		super.render();
 		entityManager.movement();
 		collisionManager.startCollisionDetection();
-
-		delta = Gdx.graphics.getDeltaTime();
-		update(delta);
 	}
 
-	public void update(float delta) { // anything that relies on time
-		cameraManager.startCamera(delta, batch);
-	}
 
 	@Override
 	public void dispose() {
