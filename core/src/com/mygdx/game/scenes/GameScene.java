@@ -33,12 +33,14 @@ public class GameScene extends Scene {
     private PlayerManager playerManager;
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
+    private SpriteBatch uiBatch;
 
     public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager, CameraManager cameraManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         this.playerManager = playerManager;
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
+        uiBatch = new SpriteBatch();
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
     protected TextButton gameSceneButton;
@@ -129,9 +131,11 @@ public class GameScene extends Scene {
         clearScreen();
         batch.begin();
             entityManager.drawAllEntities(batch);
-            gameSceneButton.draw(batch, 1); // Adjust parameters as needed
-            gameSceneButton1.draw(batch, 1); // Adjust parameters as needed
         batch.end();
+        uiBatch.begin();
+            gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
+            gameSceneButton1.draw(uiBatch, 1); // Adjust parameters as needed
+        uiBatch.end();
 
         // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
         ioManager.displayPlayerInformation(new SpriteBatch(), new ShapeRenderer());
