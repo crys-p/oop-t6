@@ -52,6 +52,9 @@ public abstract class Entity {
     protected void moveRight(float value) {
         this.x += value;
     }
+    protected void jump(float value, float deltaTime) { //not working
+        this.y += value * deltaTime;
+    }
 
     protected int getEntityID() {
         return this.entityID;

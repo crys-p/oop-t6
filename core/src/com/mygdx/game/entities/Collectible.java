@@ -2,12 +2,15 @@ package com.mygdx.game.entities;
 
 
 import com.mygdx.engine.AIControlManager.AIControlManager;
+import com.mygdx.engine.AIControlManager.AIMovement;
 import com.mygdx.engine.EntityManager.Entity;
 
 public class Collectible extends Entity {
 
-    public Collectible(float x, float y, String image) {
+    private AIMovement movement;
+    public Collectible(float x, float y, String image, AIMovement movement) {
         super(x, y, image);
+        this.movement = movement;
     }
 
 
@@ -18,7 +21,7 @@ public class Collectible extends Entity {
     @Override
     protected void movement() {
         // Call moveLR to get the new positions
-        float[] newPosition = AIControlManager.moveUD(this.getX(), this.getY());
+        float[] newPosition = movement.moveUD(this.getX(), this.getY());
 
         // Update the X position
         this.setX(newPosition[0]);

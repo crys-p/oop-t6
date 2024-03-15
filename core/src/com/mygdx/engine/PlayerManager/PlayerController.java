@@ -38,7 +38,9 @@ class PlayerController {
             return PlayerInstructions.UP;
         } else if (key == Input.Keys.DOWN || key == Input.Keys.S) {
             return PlayerInstructions.DOWN;
-        }
+        } else if (key == Input.Keys.SPACE) {
+        return PlayerInstructions.JUMP;
+    }
         return null; // No direction found for the given key in the control configuration
     }
 

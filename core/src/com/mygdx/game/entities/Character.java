@@ -49,6 +49,10 @@ public class Character extends Entity {
                 break;
             case DOWN:
                 this.moveDown(movementAmount);
+                break;
+            case JUMP:
+                this.jump(movementAmount, Gdx.graphics.getDeltaTime());
+                break;
         }
         updateBoundingBox();
     }

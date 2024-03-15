@@ -2,6 +2,8 @@ package com.mygdx.engine.EntityManager;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.engine.AIControlManager.AIControlManager;
+import com.mygdx.engine.AIControlManager.AIMovement;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.PlayerControlConfigs;
@@ -52,31 +54,35 @@ public class EntityManager implements EntityLifeCycle {
     // Create enemies at specified positions
     @Override
     public void createEnemy(int quantity, float x, float y) {
+        AIMovement movement = new AIMovement(entity);
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Enemy(x, y, "fire.png"));
+            this.setUpEntityAttributes(new Enemy(x, y, "fire.png", movement));
         }
     }
 
     // Create enemies at random positions
     @Override
     public void createEnemy(int quantity, Random random) {
+        AIMovement movement = new AIMovement(entity);
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Enemy(random.nextFloat() * SCREEN_WIDTH, random.nextFloat() * SCREEN_HEIGHT - 50, "fire.png"));
+            this.setUpEntityAttributes(new Enemy(random.nextFloat() * SCREEN_WIDTH, random.nextFloat() * SCREEN_HEIGHT - 50, "fire.png",movement));
         }
     }
 
     @Override
     public void createCollectible(int quantity, float x, float y) {
+        AIMovement movement = new AIMovement(entity);
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Collectible(x, y, "star.png"));
+            this.setUpEntityAttributes(new Collectible(x, y, "star.png", movement));
         }
     }
 
     @Override
     // Create collectibles at random positions
     public void createCollectible(int quantity, Random random) {
+        AIMovement movement = new AIMovement(entity);
         for (int i = 0; i < quantity; i++) {
-            this.setUpEntityAttributes(new Collectible(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT, "star.png"));
+            this.setUpEntityAttributes(new Collectible(random.nextFloat() * SCREEN_WIDTH - 50, random.nextFloat() * SCREEN_HEIGHT, "star.png",movement));
         }
     }
 
