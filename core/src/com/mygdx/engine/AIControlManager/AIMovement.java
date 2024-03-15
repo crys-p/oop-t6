@@ -5,7 +5,7 @@ import com.mygdx.engine.EntityManager.Entity;
 
 import static com.badlogic.gdx.math.MathUtils.random;
 
-public abstract class AIMovement {
+public class AIMovement {
     protected Entity entity;
     public AIMovement(Entity entity) {
     this.entity = entity;
@@ -51,6 +51,10 @@ public abstract class AIMovement {
 
         // Return the new position
         return new float[] {entityX, newY};
+    }
+
+    public void setEntity(Entity entity) {
+        this.entity = entity;
     }
     public float[] update() {
         return new float[0];
