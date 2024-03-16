@@ -19,9 +19,10 @@ public class NonPlayableEntityFactory extends EntityFactory {
 
 
     @Override
-    protected Entity createSpecifiedEntity(EntityType type, float x, float y, float speed, Texture texture, Movement movement) {
+    protected Entity createSpecifiedEntity(EntityType type, float x, float y, float speed, Movement movement) {
         try {
             AIMovement aiMovement = (AIMovement) movement;
+            Texture texture = textureFactory.getTexture(type);
             switch (type) {
                 case ENEMY:
                     return new Enemy(x, y, speed, texture, aiMovement);

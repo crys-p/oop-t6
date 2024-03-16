@@ -18,9 +18,10 @@ public class PlayableEntityFactory extends EntityFactory {
 
 
     @Override
-    protected Entity createSpecifiedEntity(EntityType type, float x, float y, float speed, Texture texture, Movement movement) {
+    protected Entity createSpecifiedEntity(EntityType type, float x, float y, float speed, Movement movement) {
         try {
             PlayerMovement playerMovement = (PlayerMovement) movement;
+            Texture texture = textureFactory.getTexture(type);
             switch (type) {
                 case CHARACTER:
                     return new Character(x, y, speed, texture, playerMovement);

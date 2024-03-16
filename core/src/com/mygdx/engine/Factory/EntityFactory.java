@@ -23,30 +23,29 @@ public abstract class EntityFactory {
         this.textureFactory = textureFactory;
     }
 
+    // Create entities at fixed position
     public void create(EntityType type, int quantity, float x, float y, float speed, Movement movement) {
-        Entity entity = null;
+        Entity entity;
         for (int i = 0; i < quantity; i++) {
-            Texture texture = textureFactory.getTexture(type);
-            entity = createSpecifiedEntity(type, x, y, speed, texture, movement);
+            entity = createSpecifiedEntity(type, x, y, speed, movement);
             if (entity != null) {
                 entityManager.addEntity(entity);
             }
         }
     }
 
+    // Create entities at random position
     public void create(EntityType type, int quantity, Random random, float speed, Movement movement) {
-        Entity entity = null;
+        Entity entity;
         for (int i = 0; i < quantity; i++) {
-            Texture texture = textureFactory.getTexture(type);
             float randomX = random.nextFloat() * SCREEN_WIDTH - 50;
             float randomY = random.nextFloat() * SCREEN_HEIGHT;
-            System.out.println("Creating Entity: " + type + "at position: " + randomX + "," + randomY);
-            entity = createSpecifiedEntity(type, randomX, randomY, speed, texture, movement);
+            entity = createSpecifiedEntity(type, randomX, randomY, speed, movement);
             if (entity != null) {
                 entityManager.addEntity(entity);
             }
         }
     }
 
-    protected abstract Entity createSpecifiedEntity(EntityType type, float x, float y, float speed, Texture texture, Movement movement);
+    protected abstract Entity createSpecifiedEntity(EntityType type, float x, float y, float speed, Movement movement);
 }
