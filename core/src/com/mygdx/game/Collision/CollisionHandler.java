@@ -2,6 +2,7 @@ package com.mygdx.game.Collision;
 
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.engine.EntityManager.iCollidable;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SoundManager.SoundManager;
 import com.mygdx.engine.SoundManager.SoundEffectType;
@@ -22,7 +23,7 @@ public class CollisionHandler {
     }
 
 
-    public void handleCollision(Entity entityA, Entity entityB) {
+    public void handleCollision(iCollidable entityA, iCollidable entityB) {
         if ((entityA instanceof Character && entityB instanceof Enemy) || (entityB instanceof Character && entityA instanceof Enemy)) {
             characterEnemyCollision(entityA, entityB);
         }
@@ -33,7 +34,7 @@ public class CollisionHandler {
     }
 
     // Handler methods
-    private void characterEnemyCollision(Entity entityA, Entity entityB) {
+    private void characterEnemyCollision(iCollidable entityA, iCollidable entityB) {
         Enemy enemy;
         Character character;
         if (entityA instanceof Enemy) {
@@ -51,7 +52,7 @@ public class CollisionHandler {
         soundManager.playSoundEffect(SoundEffectType.HIT);
     }
 
-    private void characterCollectibleCollision(Entity entityA, Entity entityB) {
+    private void characterCollectibleCollision(iCollidable entityA, iCollidable entityB) {
         Collectible collectible;
         Character character;
         int characterID;

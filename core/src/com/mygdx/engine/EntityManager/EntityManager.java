@@ -66,11 +66,11 @@ public class EntityManager implements EntityLifeCycle {
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    public ArrayList<Entity> getCollidableEntities() {
-        ArrayList<Entity> collidableEntities = new ArrayList<>();
+    public ArrayList<iCollidable> getCollidableEntities() {
+        ArrayList<iCollidable> collidableEntities = new ArrayList<>();
         for (Entity entity: entityList) {
             if (entity instanceof iCollidable) {
-                collidableEntities.add(entity);
+                collidableEntities.add((iCollidable) entity);
             }
         }
         return collidableEntities;
