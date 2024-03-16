@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.engine.AIControlManager.AIMovement;
+import com.mygdx.engine.CameraManager.Camera;
+import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.GameFactory.EntityFactoryManager;
@@ -30,11 +32,15 @@ public class GameScene extends Scene {
     private int numberOfCollectibles = 20;
     private PlayerManager playerManager;
     private EntityFactoryManager entityFactoryManager;
+    private CameraManager cameraManager;
+    private SpriteBatch uiBatch;
 
-    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager) {
+    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager, CameraManager cameraManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         this.playerManager = playerManager;
         this.entityFactoryManager = entityFactoryManager;
+        this.cameraManager = cameraManager;
+        uiBatch = new SpriteBatch();
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
     }
     protected TextButton gameSceneButton;
@@ -125,9 +131,11 @@ public class GameScene extends Scene {
         clearScreen();
         batch.begin();
             entityManager.drawAllEntities(batch);
-            gameSceneButton.draw(batch, 1); // Adjust parameters as needed
-            gameSceneButton1.draw(batch, 1); // Adjust parameters as needed
         batch.end();
+        uiBatch.begin();
+            gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
+            gameSceneButton1.draw(uiBatch, 1); // Adjust parameters as needed
+        uiBatch.end();
 
         // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
         ioManager.displayPlayerInformation(new SpriteBatch(), new ShapeRenderer());
@@ -143,6 +151,8 @@ public class GameScene extends Scene {
             this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }
         ioManager.updateMovement();
+
+        cameraManager.startCamera(delta, batch);
 
     }
 

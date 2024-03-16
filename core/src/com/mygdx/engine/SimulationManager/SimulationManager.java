@@ -24,7 +24,7 @@ public class SimulationManager {
             fileHandler.setFormatter(new SimpleFormatter());
 
             // add FileHandler to the logger
-            logger.addHandler(fileHandler);
+//            logger.addHandler(fileHandler);
 
             // set logger level to INFO
             //logger.setLevel(Level.WARNING);
