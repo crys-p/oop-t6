@@ -6,7 +6,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.mygdx.engine.AIControlManager.AIControlManager;
 import com.mygdx.engine.AIControlManager.AIMovement;
+import com.mygdx.engine.AIControlManager.LRMovement;
+import com.mygdx.engine.AIControlManager.UDMovement;
 import com.mygdx.engine.CameraManager.Camera;
 import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.EntityManager.EntityManager;
@@ -65,8 +68,13 @@ public class GameScene extends Scene {
         Random random = new Random();
         NonPlayableEntityFactory nonPlayableFactory = entityFactoryManager.getNonPlayableEntityFactory();
         // TODO: !!important - AI Movement Object should get from AIControlManager, e.g. AIControlManager.getLRMovement()
-        nonPlayableFactory.create(EntityType.COLLECTIBLE, numberOfCollectibles, random, 0, new AIMovement(null));
-        nonPlayableFactory.create(EntityType.ENEMY, numberOfEnemy, random, 0, new AIMovement(null));
+
+        // Retrieve AI movement objects from AIControlManager
+        AIMovement lrmovement = AIControlManager.getLRMovement();
+        AIMovement udmovement = AIControlManager.getUDMovement();
+
+        nonPlayableFactory.create(EntityType.COLLECTIBLE, numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.ENEMY, numberOfEnemy, random, 0, udmovement);
 
         PlayableEntityFactory playableEntityFactory = entityFactoryManager.getPlayableEntityFactory();
         // Create same amt of characters as players
