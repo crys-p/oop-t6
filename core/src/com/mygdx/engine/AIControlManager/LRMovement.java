@@ -12,8 +12,8 @@
         }
 
         @Override
-        public float[] calculateMovement(float entityX, float entityY,float speed) {
-            float movementSpeed = speed; // Initial movement speed
+        public float[] calculateMovement(float entityX, float entityY, float speed) {
+            float movementSpeed = 5; // Initial movement speed
             float direction = 1; // Initial direction: right
 
             // Update position based on movement speed and direction
