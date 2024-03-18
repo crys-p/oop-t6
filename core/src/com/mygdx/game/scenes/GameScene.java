@@ -7,21 +7,17 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.engine.AIControlManager.AIControlManager;
-import com.mygdx.engine.AIControlManager.AIMovement;
-import com.mygdx.engine.AIControlManager.LRMovement;
-import com.mygdx.engine.AIControlManager.UDMovement;
-import com.mygdx.engine.CameraManager.Camera;
+import com.mygdx.engine.MovementStrategy.AIMovement;
 import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.badlogic.gdx.graphics.Color;
-import com.mygdx.game.GameFactory.EntityFactoryManager;
-import com.mygdx.game.GameFactory.NonPlayableEntityFactory;
-import com.mygdx.game.GameFactory.PlayableEntityFactory;
+import com.mygdx.game.GameFactories.EntityFactoryManager;
+import com.mygdx.game.GameFactories.NonPlayableEntityFactory;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;
-import com.mygdx.game.Player1Movement;
+import com.mygdx.game.GameMovementStrategy.Player1Movement;
 import com.mygdx.game.entities.EntityType;
 
 import java.util.Random;
@@ -66,23 +62,23 @@ public class GameScene extends Scene {
 
         // Create enemy and collectible entities based on number of players
         Random random = new Random();
-        NonPlayableEntityFactory nonPlayableFactory = entityFactoryManager.getNonPlayableEntityFactory();
-        // TODO: !!important - AI Movement Object should get from AIControlManager, e.g. AIControlManager.getLRMovement()
+        NonPlayableEntityFactory nonPlayableFactory = entityFactoryManager.getNonPlayable();
 
         // Retrieve AI movement objects from AIControlManager
         AIMovement lrmovement = AIControlManager.getLRMovement();
         AIMovement udmovement = AIControlManager.getUDMovement();
 
-        nonPlayableFactory.create(EntityType.COLLECTIBLE, numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.ENEMY, numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.DRUMSTICK, numberOfEnemy, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.ICECREAM, numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.COOKIE, numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.BROCCOLI, numberOfCollectibles, random, 0, lrmovement);
 
-        PlayableEntityFactory playableEntityFactory = entityFactoryManager.getPlayableEntityFactory();
         // Create same amt of characters as players
         int x = 0;
         for (int i = 0; i < totalPlayers; i++) {
             // If there are multiple players, set them 100px apart
             x += 100;
-            playableEntityFactory.create(EntityType.CHARACTER, 1, x, 0, 400, new Player1Movement());
+            entityFactoryManager.getPlayable().create(EntityType.BOY, 1, x, 0, 400, new Player1Movement());
             playerManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
         }
     }

@@ -1,7 +1,10 @@
 package com.mygdx.engine.AIControlManager;
 
 import com.mygdx.engine.EntityManager.Entity;
+import com.mygdx.engine.MovementStrategy.AIMovement;
 import com.mygdx.engine.SimulationManager.SimulationManager;
+import com.mygdx.game.GameMovementStrategy.LRMovement;
+import com.mygdx.game.GameMovementStrategy.UDMovement;
 
 import java.util.HashMap;
 import java.util.Map;

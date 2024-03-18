@@ -1,6 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.GameMovementStrategy;
 
-import com.mygdx.engine.Movement.PlayerMovement;
+import com.mygdx.engine.MovementStrategy.PlayerMovement;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;

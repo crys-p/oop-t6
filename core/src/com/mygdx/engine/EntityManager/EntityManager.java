@@ -132,7 +132,7 @@ public class EntityManager implements EntityLifeCycle {
             float y = entityIDMap.get(entityID).getY();
             return new float[]{x,y};
         } catch (Exception e) {
-            System.out.println("ENTITYMANAGER: there was an error: " + e);
+            SimulationManager.getInstance().logError("Entity Manager: " + e);
         }
         return null;
     }

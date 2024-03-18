@@ -41,7 +41,7 @@ public class StartScene extends Scene {
                 Gdx.app.log("Timer", "Switching to GameScene after 5 seconds");
                 sceneManager.showScene(SceneManager.SceneType.GAME);
             }
-        }, 5); // Delay of 10 seconds
+        }, 2); // Delay of 10 seconds
     }
 
     @Override
@@ -50,7 +50,7 @@ public class StartScene extends Scene {
     }
 
     protected void createCountdownButton() {
-        countdownButton = ioManager.createCountdownButton("Start Countdown", 0, IOManager.SCREEN_WIDTH / 2 - 100, IOManager.SCREEN_HEIGHT / 2 - 25, 200, 50, "countdownButtonStyle", 5); // Set the countdown duration to 10 seconds
+        countdownButton = ioManager.createCountdownButton("Start Countdown", 0, IOManager.SCREEN_WIDTH / 2 - 100, IOManager.SCREEN_HEIGHT / 2 - 25, 200, 50, "countdownButtonStyle", 2); // Set the countdown duration to 10 seconds
     }
 
 

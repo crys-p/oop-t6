@@ -7,8 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.CollisionManager.CollisionManager;
 import com.mygdx.engine.EntityManager.EntityManager;
-import com.mygdx.game.GameFactory.EntityFactoryManager;
-import com.mygdx.game.GameFactory.TextureFactory;
+import com.mygdx.game.GameFactories.EntityFactoryManager;
+import com.mygdx.game.GameFactories.GameTextureFactory;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.SceneManager;
@@ -41,12 +41,12 @@ public class GameMaster extends Game {
 		shape = new ShapeRenderer();
 
 		// Create Texture factory
-		TextureFactory textureFactory = new TextureFactory();
-		textureFactory.create();
+		GameTextureFactory gameTextureFactory = new GameTextureFactory();
+		gameTextureFactory.create();
 
 		// Initialise EntityManager
 		entityManager = new EntityManager();
-		entityFactoryManager = new EntityFactoryManager(entityManager, textureFactory);
+		entityFactoryManager = new EntityFactoryManager(entityManager, gameTextureFactory);
 
 		// Initialise SoundManager with background music and sound effect files
 		soundManager = new SoundManager();

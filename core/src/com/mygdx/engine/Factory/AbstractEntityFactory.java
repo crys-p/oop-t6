@@ -1,10 +1,8 @@
 package com.mygdx.engine.Factory;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.EntityManager;
-import com.mygdx.engine.Movement.Movement;
-import com.mygdx.game.GameFactory.TextureFactory;
+import com.mygdx.engine.MovementStrategy.Movement;
 import com.mygdx.game.entities.EntityType;
 
 import java.util.Random;
@@ -13,14 +11,12 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 
-public abstract class EntityFactory {
+public abstract class AbstractEntityFactory {
 
     protected EntityManager entityManager;
-    protected TextureFactory textureFactory;
 
-    public EntityFactory(EntityManager entityManager, TextureFactory textureFactory) {
+    public AbstractEntityFactory(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.textureFactory = textureFactory;
     }
 
     // Create entities at fixed position
@@ -34,7 +30,7 @@ public abstract class EntityFactory {
         }
     }
 
-    // Create entities at random position
+    // Create entities at random position within screen width
     public void create(EntityType type, int quantity, Random random, float speed, Movement movement) {
         Entity entity;
         for (int i = 0; i < quantity; i++) {

@@ -1,8 +1,8 @@
-    package com.mygdx.engine.AIControlManager;
+    package com.mygdx.game.GameMovementStrategy;
 
     import com.badlogic.gdx.Gdx;
+    import com.mygdx.engine.MovementStrategy.AIMovement;
     import com.mygdx.engine.EntityManager.Entity;
-    import com.mygdx.engine.Movement.Movement;
 
     import static com.badlogic.gdx.math.MathUtils.random;
 

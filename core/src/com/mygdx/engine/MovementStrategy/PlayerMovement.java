@@ -1,4 +1,4 @@
-package com.mygdx.engine.Movement;
+package com.mygdx.engine.MovementStrategy;
 
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
@@ -7,5 +7,9 @@ public abstract class PlayerMovement extends Movement {
 
     public void setPlayerInstructions(PlayerInstructions instructions) {
         this.playerInstructions = instructions;
+    }
+
+    public PlayerInstructions getPlayerInstructions() {
+        return this.playerInstructions;
     }
 }

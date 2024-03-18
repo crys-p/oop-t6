@@ -1,7 +1,6 @@
-package com.mygdx.engine.AIControlManager;
+package com.mygdx.engine.MovementStrategy;
 
 import com.mygdx.engine.EntityManager.Entity;
-import com.mygdx.engine.Movement.Movement;
 
 public abstract class AIMovement extends Movement {
     protected Entity entity;

@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.EntityManager.EntityManager;
-import com.mygdx.game.GameFactory.EntityFactoryManager;
+import com.mygdx.game.GameFactories.EntityFactoryManager;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
@@ -64,7 +64,6 @@ public class SceneManager {
                 new LoseScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
         allScenesMap.put(SceneType.VICTORY,
                 new VictoryScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
-
         currentScene = null;
     }
 
@@ -83,7 +82,7 @@ public class SceneManager {
         currentScene = newScene;
         game.setScreen(currentScene);
         // set the current scene type when changing the scene
-            setCurrentSceneType(getSceneType(newScene));
+        setCurrentSceneType(getSceneType(newScene));
         System.out.println("Scene changed to: " + newScene.getClass().getSimpleName());
     }
 

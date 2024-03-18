@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
 public abstract class Entity {
-    protected Texture texture;
+    private Texture texture;
     private int entityID;
     private float x;
     private float y;
@@ -85,7 +85,11 @@ public abstract class Entity {
     // Im not sure what to do here yet haha
     protected void aiMovement() {}
 
-    public Rectangle getBoundingBox() {
-        return this.boundingBox;
+    protected Texture getTexture() {
+        return this.texture;
+    }
+
+    protected void setTexture(Texture texture) {
+        this.texture = texture;
     }
 }

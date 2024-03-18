@@ -1,12 +1,11 @@
 package com.mygdx.game.Collision;
 
-import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.EntityManager.iCollidable;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SoundManager.SoundManager;
 import com.mygdx.engine.SoundManager.SoundEffectType;
-import com.mygdx.game.entities.Character;
+import com.mygdx.engine.EntityManager.PlayableCharacter;
 import com.mygdx.game.entities.Collectible;
 import com.mygdx.game.entities.Enemy;
 
@@ -24,10 +23,10 @@ public class CollisionHandler {
 
 
     public void handleCollision(iCollidable entityA, iCollidable entityB) {
-        if ((entityA instanceof Character && entityB instanceof Enemy) || (entityB instanceof Character && entityA instanceof Enemy)) {
+        if ((entityA instanceof PlayableCharacter && entityB instanceof Enemy) || (entityB instanceof PlayableCharacter && entityA instanceof Enemy)) {
             characterEnemyCollision(entityA, entityB);
         }
-        if ((entityA instanceof Character && entityB instanceof Collectible) || (entityB instanceof Character && entityA instanceof Collectible)) {
+        if ((entityA instanceof PlayableCharacter && entityB instanceof Collectible) || (entityB instanceof PlayableCharacter && entityA instanceof Collectible)) {
             characterCollectibleCollision(entityA, entityB);
         }
         // Add other pairs
@@ -36,34 +35,34 @@ public class CollisionHandler {
     // Handler methods
     private void characterEnemyCollision(iCollidable entityA, iCollidable entityB) {
         Enemy enemy;
-        Character character;
+        PlayableCharacter playableCharacter;
         if (entityA instanceof Enemy) {
             enemy = (Enemy) entityA;
-            character = (Character) entityB;
+            playableCharacter = (PlayableCharacter) entityB;
         } else {
             enemy = (Enemy) entityB;
-            character = (Character) entityA;
+            playableCharacter = (PlayableCharacter) entityA;
         }
         // Remove the collectible from the entity manager
         entityManager.removeEntity(enemy);
         // Reduce health of player based on enemy damage
-        playerManager.takeDamage(character, enemy);
+        playerManager.takeDamage(playableCharacter, enemy);
         // Play hit sound
         soundManager.playSoundEffect(SoundEffectType.HIT);
     }
 
     private void characterCollectibleCollision(iCollidable entityA, iCollidable entityB) {
         Collectible collectible;
-        Character character;
+        PlayableCharacter playableCharacter;
         int characterID;
         if (entityA instanceof Collectible) {
             collectible = (Collectible) entityA;
-            character = (Character) entityB;
+            playableCharacter = (PlayableCharacter) entityB;
         } else {
             collectible = (Collectible) entityB;
-            character = (Character) entityA;
+            playableCharacter = (PlayableCharacter) entityA;
         }
-        characterID = entityManager.getEntityID(character);
+        characterID = entityManager.getEntityID(playableCharacter);
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectible);
         // Add the collided collectible to the player's inventory

@@ -2,37 +2,34 @@ package com.mygdx.game.entities;
 
 
 import com.badlogic.gdx.graphics.Texture;
-import com.mygdx.engine.AIControlManager.AIControlManager;
-import com.mygdx.engine.AIControlManager.AIMovement;
-import com.mygdx.engine.EntityManager.Entity;
+import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.engine.MovementStrategy.AIMovement;
+import com.mygdx.engine.EntityManager.NonPlayableCharacter;
 import com.mygdx.engine.EntityManager.iCollidable;
 
-public class Collectible extends Entity implements iCollidable {
+public abstract class Collectible extends NonPlayableCharacter implements iCollidable {
 
-    private AIMovement movement;
+    private float points = 10; // default points is 10
 
     public Collectible(float x, float y, float speed, Texture texture, AIMovement movement) {
-        super(x, y, speed, texture);
-        this.movement = movement;
+        super(x, y, speed, texture, movement);
     }
-
 
     protected void logConsole() {
         System.out.printf("I am item at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.getEntityID());
     }
 
+    public float getPoints() {
+        return this.points;
+    }
+
+    public void setPoints(float dmg) {
+        this.points = dmg;
+    }
+
+
     @Override
-    protected void movement() {
-        // Assuming you want to move left-right, you can get an instance of LRMovement
-        AIMovement udMovement = AIControlManager.getUDMovement();
-
-        // Call moveLR to get the new positions
-        float[] newPosition = udMovement.calculateMovement(this.getX(), this.getY(), this.getSpeed()); // Pass entity speed if needed
-
-        // Update the X position
-        this.setX(newPosition[0]);
-        // Update the Y position
-        this.setY(newPosition[1]);
-        updateBoundingBox();
+    public Rectangle getBoundingBox() {
+        return this.boundingBox;
     }
 }
