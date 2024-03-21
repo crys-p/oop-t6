@@ -1,7 +1,7 @@
-package com.mygdx.engine.IOManager;
+package com.mygdx.game.IO;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.engine.PlayerManager.PlayerManager;
@@ -18,7 +18,7 @@ public class HealthBar {
     protected final BitmapFont font;
     protected final PlayerManager playerManager;
 
-    protected HealthBar(PlayerManager playerManager) {
+    public HealthBar(PlayerManager playerManager) {
         this.playerManager = playerManager;
         this.font = new BitmapFont();
     }

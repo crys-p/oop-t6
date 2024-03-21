@@ -6,12 +6,13 @@ import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.PlayerControlConfigs;
 import com.mygdx.engine.EntityManager.PlayableCharacter;
 import com.mygdx.game.entities.Enemy;
+import com.mygdx.game.player.GamePlayer;
 
 import java.util.*;
 
 public class PlayerManager {
-    private final ArrayList<Player> allPlayers;
-    private final Map<Player, Integer> playerEntityMap; // Map to store Player instances and corresponding entity being controlled
+    private final ArrayList<GamePlayer> allPlayers;
+    private final Map<GamePlayer, Integer> playerEntityMap; // Map to store GamePlayer instances and corresponding entity being controlled
     private int numDeadPlayers = 0;
     private int allPlayerInventoryCount = 0;
     private final EntityManager entityManager;
@@ -28,7 +29,7 @@ public class PlayerManager {
     // Method to create players
     public void createPlayers(int qty) {
         for (int i = 0; i < qty; i++) {
-            Player player = new Player();
+            GamePlayer player = new GamePlayer();
             allPlayers.add(player);
         }
     }
@@ -40,7 +41,7 @@ public class PlayerManager {
 
     // Method to get entity ID from player instance
     public void setPlayerControlledEntityID(int playerNumber, int entityID) {
-        Player player = allPlayers.get(playerNumber);
+        GamePlayer player = allPlayers.get(playerNumber);
         playerEntityMap.put(player, entityID);
         player.setPlayerControlledEntityID(entityID);
     }
@@ -48,7 +49,7 @@ public class PlayerManager {
     public void handlePressedKeys(List<Integer> keys) {
         // For each key pressed
         for (Integer key: keys) {
-            for (Player player : allPlayers) {
+            for (GamePlayer player : allPlayers) {
                 // Check if current player is controlling any entity
                 if (player.getPlayerControlledEntityID() != -1)
                 {
@@ -64,7 +65,7 @@ public class PlayerManager {
         int characterID = entityManager.getEntityID(playableCharacter);
         float damage = entityManager.getDamage(enemy);
         // Loop through all players and apply damage
-        for (Player player : allPlayers) {
+        for (GamePlayer player : allPlayers) {
             if (playerEntityMap.get(player) == characterID) {
                 // Calculate the new health after taking damage
                 int newHealth = player.getHealth() - (int) damage;
@@ -81,7 +82,7 @@ public class PlayerManager {
     }
 
     public void addItemToInventory(int characterID) {
-        for (Player player: allPlayers) {
+        for (GamePlayer player: allPlayers) {
              if (playerEntityMap.get(player) == characterID) {
                  player.addToInventory(new Item(), 1);
                  allPlayerInventoryCount++;
@@ -95,10 +96,10 @@ public class PlayerManager {
 
     public void setPlayerControl(int playerNumber, PlayerControlConfigs playerControl) {
         try {
-            Player player = allPlayers.get(playerNumber);
+            GamePlayer player = allPlayers.get(playerNumber);
             player.setPlayerKeyConfigs(playerControl);
         } catch (Exception IndexOutOfBoundsException) {
-            System.out.println("Error: Player does not exist.");
+            System.out.println("Error: GamePlayer does not exist.");
         }
     }
 
@@ -110,7 +111,7 @@ public class PlayerManager {
     public HashMap<Integer, List<Integer>> getAllPlayerHealthStats() {
         HashMap<Integer, List<Integer>> allPlayerHealthStats = new HashMap<>();
         int counter = 0;
-        for (Player player : allPlayers) {
+        for (GamePlayer player : allPlayers) {
             allPlayerHealthStats.put(counter, new ArrayList<Integer>());
             allPlayerHealthStats.get(counter).add(player.getHealth());
             allPlayerHealthStats.get(counter).add(player.getMaxHealth());
@@ -121,7 +122,7 @@ public class PlayerManager {
 
     public List<Integer> getAllPlayerInventory() {
         List <Integer> allInventory = new ArrayList<>();
-        for (Player player : allPlayers) {
+        for (GamePlayer player : allPlayers) {
             allInventory.add(player.getInventoryCount());
         }
         return allInventory;
@@ -136,7 +137,7 @@ public class PlayerManager {
     // method to reset damage taken by players
     public void resetAllPlayerStats() {
         // loop through all players and reset their health to maximum
-        for (Player player : allPlayers) {
+        for (GamePlayer player : allPlayers) {
             player.setHealth(player.getMaxHealth());
             player.clearInventory();
         }

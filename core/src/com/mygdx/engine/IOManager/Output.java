@@ -11,6 +11,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.mygdx.engine.PlayerManager.PlayerManager;
+import com.mygdx.game.IO.HealthBar;
 
 class Output {
 	protected TextButton[] buttons;

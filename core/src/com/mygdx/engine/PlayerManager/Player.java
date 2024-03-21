@@ -2,12 +2,13 @@ package com.mygdx.engine.PlayerManager;
 
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.game.PlayerControlConfigs;
+import com.mygdx.game.player.Inventory;
 
-class Player {
-    private int playerControlledEntityID = -1;
-    private final int maxHealth = 100;
-    private int health;
-    private PlayerController playerController;
+public abstract class Player {
+    protected int playerControlledEntityID = -1;
+    protected final int maxHealth = 100;
+    protected int health;
+    protected PlayerController playerController;
     protected Inventory inventory;
 
     protected Player() {
@@ -16,64 +17,25 @@ class Player {
         this.playerController = new PlayerController();
     }
 
-    //not in used yet
-//    protected void heal(int amount) {
-//        health = Math.min(health + amount, maxHealth);
-//    }
+    protected abstract void setPlayerControlledEntityID(int entityID);
 
-    protected void setPlayerControlledEntityID(int entityID) {
-        this.playerControlledEntityID = entityID;
-    }
+    protected abstract void addToInventory(Item item, int quantity);
 
+    protected abstract int getHealth();
 
-    protected void addToInventory(Item item, int quantity) {
-        inventory.addItem(item, quantity);
-    }
+    protected abstract void setHealth(int health);
 
-    //not in used yet
-//    protected void removeItemFromInventory(Item item, int quantity) {
-//        inventory.removeItem(item, quantity);
-//    }
-//
-//    public int getTotalItems() {
-//        return inventory.getTotalItems();
-//    }
+    protected abstract int getMaxHealth();
 
-    protected int getHealth() {
-        return this.health;
-    }
-    protected void setHealth(int health) {
-        this.health = health;
-    }
-    protected int getMaxHealth() {
-        return this.maxHealth;
-    }
-    protected void setPlayerKeyConfigs(PlayerControlConfigs control) {
-        this.playerController.setKeyConfigs(control);
-    }
+    protected abstract void setPlayerKeyConfigs(PlayerControlConfigs control);
 
-    protected PlayerControlConfigs getPlayerKeyConfigs() {
-        return this.playerController.getKeyConfigs();
-    }
+    protected abstract PlayerControlConfigs getPlayerKeyConfigs();
 
-    protected int getPlayerControlledEntityID() {
-        return this.playerControlledEntityID;
-    }
+    protected abstract int getPlayerControlledEntityID();
 
-    // Getter for the inventory
-    protected int getInventoryCount() {
-        return inventory.getTotalItems();
-    }
+    protected abstract int getInventoryCount();
 
-    protected void clearInventory() {
-        inventory.clear();
-    }
+    protected abstract void clearInventory();
 
-    // Moves the player if the key is part of player's control
-    protected void move(Integer key, EntityManager entityManager) {
-        PlayerInstructions instr = this.playerController.getPlayerMovement(key);
-        if (instr != null) {
-            entityManager.inputMovement(this.playerControlledEntityID, instr);
-        }
-    }
+    protected abstract void move(Integer key, EntityManager entityManager);
 }
