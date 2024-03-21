@@ -2,7 +2,7 @@ package com.mygdx.engine.MovementStrategy;
 
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
-public abstract class PlayerMovement extends Movement {
+public abstract class PlayerMovement implements Movement {
     protected PlayerInstructions playerInstructions;
 
     public void setPlayerInstructions(PlayerInstructions instructions) {

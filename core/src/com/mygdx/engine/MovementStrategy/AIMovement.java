@@ -2,7 +2,7 @@ package com.mygdx.engine.MovementStrategy;
 
 import com.mygdx.engine.EntityManager.Entity;
 
-public abstract class AIMovement extends Movement {
+public abstract class AIMovement implements Movement {
     protected Entity entity;
 
     public AIMovement(Entity entity) {
