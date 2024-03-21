@@ -20,10 +20,11 @@ public class PlayableEntityFactory extends AbstractEntityFactory {
 
 
     @Override
-    protected Entity createSpecifiedEntity(EntityType type, float x, float y, float speed, Movement movement) {
+    protected Entity createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
         try {
             PlayerMovement playerMovement = (PlayerMovement) movement;
-            Texture[] textures = gameTextureFactory.getTextures(type);
+            EntityType type = EntityType.getEntityType(typeId);
+            Texture[] textures = gameTextureFactory.getTextures(typeId);
             switch (type) {
                 case BOY:
                     return new Boy(x, y, speed, textures[1], textures, playerMovement);

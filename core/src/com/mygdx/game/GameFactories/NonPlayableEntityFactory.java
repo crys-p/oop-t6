@@ -20,10 +20,11 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
 
 
     @Override
-    protected Entity createSpecifiedEntity(EntityType type, float x, float y, float speed, Movement movement) {
+    protected Entity createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
         try {
             AIMovement aiMovement = (AIMovement) movement;
-            Texture texture = gameTextureFactory.getTexture(type);
+            EntityType type = EntityType.getEntityType(typeId);
+            Texture texture = gameTextureFactory.getTexture(typeId);
             switch (type) {
                 case BOKCHOY: case BROCCOLI: case CARROT: case CABBAGE:
                     return new Vegetable(x, y, speed, texture, aiMovement);

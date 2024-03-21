@@ -17,28 +17,28 @@ public class GameTextureFactory extends AbstractTextureFactory {
     protected void createSingleTextureEntity() {
         // Non-Playable
         // Vegetables
-        entityImageMap.put(EntityType.BROCCOLI, "sprites/vegetable/broccoli.png");
-        entityImageMap.put(EntityType.CABBAGE, "sprites/vegetable/cabbage.png");
-        entityImageMap.put(EntityType.CARROT, "sprites/vegetable/carrot.png");
-        entityImageMap.put(EntityType.BOKCHOY, "sprites/vegetable/bok_choy.png");
+        entityImageMap.put(EntityType.BROCCOLI.getId(), "sprites/vegetable/broccoli.png");
+        entityImageMap.put(EntityType.CABBAGE.getId(), "sprites/vegetable/cabbage.png");
+        entityImageMap.put(EntityType.CARROT.getId(), "sprites/vegetable/carrot.png");
+        entityImageMap.put(EntityType.BOKCHOY.getId(), "sprites/vegetable/bok_choy.png");
 
         // Fruits
-        entityImageMap.put(EntityType.APPLE, "sprites/fruit/apple.png");
-        entityImageMap.put(EntityType.BANANA, "sprites/fruit/banana.png");
-        entityImageMap.put(EntityType.WATERMELON, "sprites/fruit/watermelon_slice.png");
+        entityImageMap.put(EntityType.APPLE.getId(), "sprites/fruit/apple.png");
+        entityImageMap.put(EntityType.BANANA.getId(), "sprites/fruit/banana.png");
+        entityImageMap.put(EntityType.WATERMELON.getId(), "sprites/fruit/watermelon_slice.png");
 
         // Dessert
-        entityImageMap.put(EntityType.COOKIE, "sprites/dessert/cookie_chocolate_chip.png");
-        entityImageMap.put(EntityType.CUPCAKE, "sprites/dessert/cupcake.png");
-        entityImageMap.put(EntityType.DOUGHNUT, "sprites/dessert/doughnut.png");
-        entityImageMap.put(EntityType.ICECREAM, "sprites/dessert/ice_cream_bar_02.png");
-        entityImageMap.put(EntityType.SUNDAE, "sprites/dessert/ice_cream_sundae_01.png");
+        entityImageMap.put(EntityType.COOKIE.getId(), "sprites/dessert/cookie_chocolate_chip.png");
+        entityImageMap.put(EntityType.CUPCAKE.getId(), "sprites/dessert/cupcake.png");
+        entityImageMap.put(EntityType.DOUGHNUT.getId(), "sprites/dessert/doughnut.png");
+        entityImageMap.put(EntityType.ICECREAM.getId(), "sprites/dessert/ice_cream_bar_02.png");
+        entityImageMap.put(EntityType.SUNDAE.getId(), "sprites/dessert/ice_cream_sundae_01.png");
 
         // Fast Food
-        entityImageMap.put(EntityType.DRUMSTICK, "sprites/fastfood/chicken_drumstick_02.png");
-        entityImageMap.put(EntityType.FRIES, "sprites/fastfood/french_fries.png");
-        entityImageMap.put(EntityType.BURGER, "sprites/fastfood/sandwich_burger.png");
-        entityImageMap.put(EntityType.SODA, "sprites/fastfood/soda_glass.png");
+        entityImageMap.put(EntityType.DRUMSTICK.getId(), "sprites/fastfood/chicken_drumstick_02.png");
+        entityImageMap.put(EntityType.FRIES.getId(), "sprites/fastfood/french_fries.png");
+        entityImageMap.put(EntityType.BURGER.getId(), "sprites/fastfood/sandwich_burger.png");
+        entityImageMap.put(EntityType.SODA.getId(), "sprites/fastfood/soda_glass.png");
     }
 
     protected void createMultiTextureEntity() {
@@ -49,7 +49,7 @@ public class GameTextureFactory extends AbstractTextureFactory {
                 "sprites/character/elf_side02_idle.png", // left
                 "sprites/character/elf_side01_idle.png" // right
         };
-        entityMultiImageMap.put(EntityType.BOY, sprites);
+        entityMultiImageMap.put(EntityType.BOY.getId(), sprites);
     }
 
 }

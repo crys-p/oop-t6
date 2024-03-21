@@ -68,17 +68,17 @@ public class GameScene extends Scene {
         AIMovement lrmovement = AIControlManager.getLRMovement();
         AIMovement udmovement = AIControlManager.getUDMovement();
 
-        nonPlayableFactory.create(EntityType.DRUMSTICK, numberOfEnemy, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.ICECREAM, numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.COOKIE, numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.BROCCOLI, numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.DRUMSTICK.getId(), numberOfEnemy, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.COOKIE.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.BROCCOLI.getId(), numberOfCollectibles, random, 0, lrmovement);
 
         // Create same amt of characters as players
         int x = 0;
         for (int i = 0; i < totalPlayers; i++) {
             // If there are multiple players, set them 100px apart
             x += 100;
-            entityFactoryManager.getPlayable().create(EntityType.BOY, 1, x, 0, 400, new Player1Movement());
+            entityFactoryManager.getPlayable().create(EntityType.BOY.getId(), 1, x, 0, 400, new Player1Movement());
             playerManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
         }
     }
