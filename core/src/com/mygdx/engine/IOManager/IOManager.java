@@ -119,44 +119,11 @@ public class IOManager{
 		if (Gdx.input.justTouched()) {
 			float touchX = input.mouse.getMouseX();
 			float touchY = input.mouse.getMouseY();
-			int buttonIndex = detectClickedButton(touchX, touchY);
+			int buttonIndex = input.detectClickedButton(touchX, touchY);
 			if (buttonIndex != -1) {
 				handleButtonClick(buttonIndex);
 			}
 		}
-	}
-
-	// Method to detect which button was clicked based on touch coordinates
-	// Method to detect which button was clicked based on touch coordinates
-	private int detectClickedButton(float touchX, float touchY) {
-		int buttonIndex = -1;
-		float buttonWidth = 200f; // Width of each button
-		float buttonHeight = 50f; // Height of each button
-		float buttonYDiff = 100f; // Difference in y-coordinate between buttons
-
-		float buttonGameWidth = 200f; // Width of each button
-		float buttonGameHeight = 100f; // Height of each button
-
-		// Adjust the x and y coordinates based on the button index
-		float buttonX = SCREEN_WIDTH - buttonGameWidth - 20; // 20 is the padding from the right edge
-		float buttonY = 20; // 20 is the padding from the top edge
-
-		// Check if the touch coordinates are within the bounds of each button
-		// Adjust the y-coordinate bounds based on the button index
-		if (touchX >= 500 && touchX <= 550 + buttonWidth && touchY >= 300 + buttonIndex * buttonYDiff && touchY <= 300 + buttonIndex * buttonYDiff + buttonHeight) {
-			buttonIndex = 0;
-		} else if (touchX >= 500 && touchX <= 550 + buttonWidth && touchY >= 400 + buttonIndex * buttonYDiff && touchY <= 400 + buttonIndex * buttonYDiff + buttonHeight) {
-			buttonIndex = 1;
-		} else if (touchX >= 500 && touchX <= 550 + buttonWidth && touchY >= 500 + buttonIndex * buttonYDiff && touchY <= 500 + buttonIndex * buttonYDiff + buttonHeight) {
-			buttonIndex = 2;
-		} else if (touchX >= buttonX && touchX <= buttonX + buttonGameWidth && touchY >= buttonY && touchY <= buttonY + buttonGameHeight) {
-			buttonIndex = 3;
-		} else if (touchX >= buttonX && touchX <= buttonX + buttonGameWidth && touchY >= SCREEN_HEIGHT - buttonGameHeight - 20 && touchY <= SCREEN_HEIGHT - 20) {
-			buttonIndex = 4;
-		}
-
-
-		return buttonIndex;
 	}
 
 	public void setSceneMgr(SceneManager sceneManager) {

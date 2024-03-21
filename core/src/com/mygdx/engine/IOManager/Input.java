@@ -6,6 +6,7 @@ import com.badlogic.gdx.InputProcessor;
 public class Input implements InputProcessor {
 	protected Keyboard keyboard;
 	protected Mouse mouse;
+	private IOManager ioManager;
 
 	protected Input () {
 		this.keyboard = new Keyboard();
@@ -49,14 +50,12 @@ public class Input implements InputProcessor {
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		updateMousePosition(screenX, screenY);
-		handleMouseButtonPress(button, true);
 		return true;
 	}
 
 	@Override
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		updateMousePosition(screenX, screenY);
-		handleMouseButtonPress(button, false);
 		return true;
 	}
 
@@ -71,6 +70,7 @@ public class Input implements InputProcessor {
 		return true;
 	}
 
+	//Mouse
 	@Override
 	public boolean mouseMoved(int screenX, int screenY) {
 		updateMousePosition(screenX, screenY);
@@ -88,15 +88,35 @@ public class Input implements InputProcessor {
 		mouse.mouseY = screenY;
 	}
 
-	protected void handleMouseButtonPress(int button, boolean isPressed) {
-		switch (button) {
-			case com.badlogic.gdx.Input.Buttons.LEFT:
-				mouse.leftButtonPressed = isPressed;
-				break;
-			case com.badlogic.gdx.Input.Buttons.RIGHT:
-				mouse.rightButtonPressed = isPressed;
-				break;
-			// Add cases for other mouse buttons as needed
+	// Method to detect which button was clicked based on touch coordinates
+	// Method to detect which button was clicked based on touch coordinates
+	protected int detectClickedButton(float touchX, float touchY) {
+		int buttonIndex = -1;
+		float buttonWidth = 200f; // Width of each button
+		float buttonHeight = 50f; // Height of each button
+		float buttonYDiff = 100f; // Difference in y-coordinate between buttons
+
+		float buttonGameWidth = 200f; // Width of each button
+		float buttonGameHeight = 100f; // Height of each button
+
+		// Adjust the x and y coordinates based on the button index
+		float buttonX = ioManager.SCREEN_WIDTH - buttonGameWidth - 20; // 20 is the padding from the right edge
+		float buttonY = 20; // 20 is the padding from the top edge
+
+		// Check if the touch coordinates are within the bounds of each button
+		// Adjust the y-coordinate bounds based on the button index
+		if (touchX >= 500 && touchX <= 550 + buttonWidth && touchY >= 300 + buttonIndex * buttonYDiff && touchY <= 300 + buttonIndex * buttonYDiff + buttonHeight) {
+			buttonIndex = 0;
+		} else if (touchX >= 500 && touchX <= 550 + buttonWidth && touchY >= 400 + buttonIndex * buttonYDiff && touchY <= 400 + buttonIndex * buttonYDiff + buttonHeight) {
+			buttonIndex = 1;
+		} else if (touchX >= 500 && touchX <= 550 + buttonWidth && touchY >= 500 + buttonIndex * buttonYDiff && touchY <= 500 + buttonIndex * buttonYDiff + buttonHeight) {
+			buttonIndex = 2;
+		} else if (touchX >= buttonX && touchX <= buttonX + buttonGameWidth && touchY >= buttonY && touchY <= buttonY + buttonGameHeight) {
+			buttonIndex = 3;
+		} else if (touchX >= buttonX && touchX <= buttonX + buttonGameWidth && touchY >= ioManager.SCREEN_HEIGHT - buttonGameHeight - 20 && touchY <= ioManager.SCREEN_HEIGHT - 20) {
+			buttonIndex = 4;
 		}
+
+		return buttonIndex;
 	}
 }
