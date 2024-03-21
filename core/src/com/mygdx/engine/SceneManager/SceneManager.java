@@ -38,7 +38,7 @@ public class SceneManager {
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
 
-    protected HashMap<SceneType, Scene> allScenesMap;
+    protected HashMap<SceneType, Scene> allScenesMap; // factory replace it
     private iSceneFactory sceneFactory; // The scene factory instance
     private SceneType currentSceneType;
 
@@ -52,7 +52,7 @@ public class SceneManager {
         this.gameplayerManager = gameplayerManager;
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
-        allScenesMap = new HashMap<>();
+        // allScenesMap = new HashMap<>(); // factory replace it
         // initializeScenes();
         this.sceneFactory = new SceneFactory(); // Initialize the scene factory here
 
@@ -79,7 +79,7 @@ public class SceneManager {
 
     public void showScene(SceneType sceneType) {
 
-        // Set the current scene type for sound to work
+        // Set the current scene type also solve theg sound to work
         setCurrentSceneType(sceneType);
 
         Scene scene = sceneFactory.createScene(sceneType, game, this, entityManager, entityFactoryManager, ioManager, gameplayerManager, cameraManager);
