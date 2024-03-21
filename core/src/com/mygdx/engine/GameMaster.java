@@ -16,6 +16,7 @@ import com.mygdx.engine.SoundManager.SoundManager; // sound manager
 
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.PlayerControlConfigs;
+import com.mygdx.game.player.GamePlayerManager;
 
 //public class GameMaster extends ApplicationAdapter
 public class GameMaster extends Game {
@@ -27,7 +28,7 @@ public class GameMaster extends Game {
 	private SimulationManager simulationManager; // Add SimulationManager reference
 	private SoundManager soundManager;
 	private IOManager ioManager;
-	private PlayerManager playerManager;
+	private GamePlayerManager gameplayerManager;
 	private CollisionManager collisionManager;
 	private CameraManager cameraManager;
 	private float delta;
@@ -53,23 +54,23 @@ public class GameMaster extends Game {
 		soundManager.createSounds();
 
 		// Initialise PlayerManager
-		playerManager = new PlayerManager(entityManager);
+		gameplayerManager = new GamePlayerManager(entityManager);
 		// Set up single player mode with default UDLR key controls
-		playerManager.createPlayers(1);
-		playerManager.setPlayerControl(0, PlayerControlConfigs.UDLR); // UDLR or WASD accepted
+		gameplayerManager.createPlayers(1);
+		gameplayerManager.setPlayerControl(0, PlayerControlConfigs.UDLR); // UDLR or WASD accepted
 
 		// Initialize IOManager
-		ioManager = new IOManager(5, soundManager, playerManager, null);
+		ioManager = new IOManager(5, soundManager, gameplayerManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
 
 		// Initialize Collision Manager for all collision detection and handling
-		collisionManager = new CollisionManager(entityManager, soundManager, playerManager);
+		collisionManager = new CollisionManager(entityManager, soundManager, gameplayerManager);
 
 		// Initialize CameraManager
-		cameraManager = new CameraManager(playerManager);
+		cameraManager = new CameraManager(gameplayerManager);
 
 		// Pass the game instance to SceneManager
-		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, entityFactoryManager, ioManager, soundManager, playerManager, cameraManager);
+		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, entityFactoryManager, ioManager, soundManager, gameplayerManager, cameraManager);
 		ioManager.setSceneMgr(sceneManager);
 		sceneManager.showScene(SceneManager.SceneType.START);
 	}

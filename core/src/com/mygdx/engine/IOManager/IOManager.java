@@ -11,6 +11,7 @@ import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.SceneManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.engine.SoundManager.SoundManager;
+import com.mygdx.game.player.GamePlayerManager;
 
 public class IOManager{
 	//initialize from GameMaster?
@@ -20,7 +21,7 @@ public class IOManager{
 	private Output output;
 	private Input input;
 	private SoundManager soundManager; // Reference to SoundManager
-	private PlayerManager playerManager;
+	private final GamePlayerManager gameplayerManager;
 	private SceneManager sceneManager;
 
 	//Setting initial size of window
@@ -30,11 +31,11 @@ public class IOManager{
 
 	private SimulationManager simulationManager;
 
-	public IOManager (int numButtons, SoundManager soundManager, PlayerManager playerManager, SceneManager sceneManager) {
+	public IOManager (int numButtons, SoundManager soundManager, GamePlayerManager gameplayerManager, SceneManager sceneManager) {
 		this.input = new Input();
-		this.output = new Output(numButtons, playerManager);
+		this.output = new Output(numButtons, gameplayerManager);
 		this.soundManager = soundManager;
-		this.playerManager = playerManager;
+		this.gameplayerManager = gameplayerManager;
 		this.sceneManager = sceneManager;
 		input.setUpKeyStates();
 
@@ -51,7 +52,7 @@ public class IOManager{
 			}
 		}
 		if (!keys.isEmpty()) {
-			playerManager.handlePressedKeys(keys);
+			gameplayerManager.handlePressedKeys(keys);
 		}
 	}
 

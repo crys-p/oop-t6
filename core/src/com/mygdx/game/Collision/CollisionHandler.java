@@ -8,17 +8,18 @@ import com.mygdx.engine.SoundManager.SoundEffectType;
 import com.mygdx.engine.EntityManager.PlayableCharacter;
 import com.mygdx.game.entities.Collectible;
 import com.mygdx.game.entities.Enemy;
+import com.mygdx.game.player.GamePlayerManager;
 
 public class CollisionHandler {
 
     protected final EntityManager entityManager;
     protected final SoundManager soundManager;
-    protected final PlayerManager playerManager;
+    protected final GamePlayerManager gameplayerManager;
 
-    public CollisionHandler(EntityManager entityManager, SoundManager soundManager, PlayerManager playerManager) {
+    public CollisionHandler(EntityManager entityManager, SoundManager soundManager, GamePlayerManager gameplayerManager) {
         this.entityManager = entityManager;
         this.soundManager = soundManager;
-        this.playerManager = playerManager;
+        this.gameplayerManager = gameplayerManager;
     }
 
 
@@ -46,7 +47,7 @@ public class CollisionHandler {
         // Remove the collectible from the entity manager
         entityManager.removeEntity(enemy);
         // Reduce health of player based on enemy damage
-        playerManager.takeDamage(playableCharacter, enemy);
+        gameplayerManager.takeDamage(playableCharacter, enemy);
         // Play hit sound
         soundManager.playSoundEffect(SoundEffectType.HIT);
     }
@@ -66,7 +67,7 @@ public class CollisionHandler {
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectible);
         // Add the collided collectible to the player's inventory
-        playerManager.addItemToInventory(characterID);
+        gameplayerManager.addItemToInventory(characterID);
         // Play collected sound
         soundManager.playSoundEffect(SoundEffectType.COLLECT);
     }

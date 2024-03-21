@@ -17,10 +17,6 @@ public abstract class Player {
         this.playerController = new PlayerController();
     }
 
-    protected abstract void setPlayerControlledEntityID(int entityID);
-
-    protected abstract void addToInventory(Item item, int quantity);
-
     protected abstract int getHealth();
 
     protected abstract void setHealth(int health);
@@ -30,12 +26,6 @@ public abstract class Player {
     protected abstract void setPlayerKeyConfigs(PlayerControlConfigs control);
 
     protected abstract PlayerControlConfigs getPlayerKeyConfigs();
-
-    protected abstract int getPlayerControlledEntityID();
-
-    protected abstract int getInventoryCount();
-
-    protected abstract void clearInventory();
 
     protected abstract void move(Integer key, EntityManager entityManager);
 }

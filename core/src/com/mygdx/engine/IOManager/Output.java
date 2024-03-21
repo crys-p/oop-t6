@@ -12,6 +12,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.game.IO.HealthBar;
+import com.mygdx.game.player.GamePlayerManager;
 
 class Output {
 	protected TextButton[] buttons;
@@ -20,12 +21,12 @@ class Output {
 	private HealthBar healthBar;
 	private InventoryDisplay inventoryDisplay;
 
-	protected Output(int numButtons, PlayerManager playerManager) {
+	protected Output(int numButtons, GamePlayerManager gameplayerManager) {
 		buttons = new TextButton[numButtons];
 		skin = new Skin();
 		createSkin();
-		healthBar = new HealthBar(playerManager);
-		inventoryDisplay = new InventoryDisplay(playerManager);
+		healthBar = new HealthBar(gameplayerManager);
+		inventoryDisplay = new InventoryDisplay(gameplayerManager);
 	}
 
 	protected void createSkin() {

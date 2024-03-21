@@ -19,6 +19,7 @@ import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;
 import com.mygdx.game.GameMovementStrategy.Player1Movement;
 import com.mygdx.game.entities.EntityType;
+import com.mygdx.game.player.GamePlayerManager;
 
 import java.util.Random;
 
@@ -29,14 +30,14 @@ public class GameScene extends Scene {
 
     private int numberOfEnemy = 10;
     private int numberOfCollectibles = 20;
-    private PlayerManager playerManager;
+    private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
     private SpriteBatch uiBatch;
 
-    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, PlayerManager playerManager, CameraManager cameraManager) {
+    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
-        this.playerManager = playerManager;
+        this.gameplayerManager = gameplayerManager;
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
         uiBatch = new SpriteBatch();
@@ -50,13 +51,13 @@ public class GameScene extends Scene {
         // Logic when the game scene is shown
         createButtons();
         createEntities();
-        playerManager.resetAllPlayerStats();
+        gameplayerManager.resetAllPlayerStats();
     }
 
     @Override
     protected void createEntities() {
         // Create entities based on the number of players existing
-        int totalPlayers = playerManager.getTotalNumberOfPlayers();
+        int totalPlayers = gameplayerManager.getTotalNumberOfPlayers();
         numberOfCollectibles = numberOfCollectibles * totalPlayers;
         numberOfEnemy = numberOfEnemy * totalPlayers;
 
@@ -79,7 +80,7 @@ public class GameScene extends Scene {
             // If there are multiple players, set them 100px apart
             x += 100;
             entityFactoryManager.getPlayable().create(EntityType.BOY.getId(), 1, x, 0, 400, new Player1Movement());
-            playerManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
+            gameplayerManager.setPlayerControlledEntityID(i, entityManager.getLastEntityID());
         }
     }
 
@@ -146,11 +147,11 @@ public class GameScene extends Scene {
         // Process input events
         ioManager.processInput();
 
-        if (playerManager.getNumDeadPlayers() > 0) {
+        if (gameplayerManager.getNumDeadPlayers() > 0) {
             // Detect player death to call end scene
             this.sceneManager.showScene(SceneManager.SceneType.LOSE);
         }
-        if (playerManager.getNumAllCollectibles() == numberOfCollectibles) {
+        if (gameplayerManager.getNumAllCollectibles() == numberOfCollectibles) {
             // Detect total collectibles to call victory scene
             this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }

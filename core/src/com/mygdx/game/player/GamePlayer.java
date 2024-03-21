@@ -20,12 +20,10 @@ public class GamePlayer extends Player {
         this.playerController = new PlayerController();
     }
 
-    @Override
     public void setPlayerControlledEntityID(int entityID) {
         this.playerControlledEntityID = entityID;
     }
 
-    @Override
     public void addToInventory(Item item, int quantity) {
         inventory.addItem(item, quantity);
     }
@@ -55,17 +53,14 @@ public class GamePlayer extends Player {
         return this.playerController.getKeyConfigs();
     }
 
-    @Override
     public int getPlayerControlledEntityID() {
         return this.playerControlledEntityID;
     }
 
-    @Override
     public int getInventoryCount() {
         return inventory.getTotalItems();
     }
 
-    @Override
     public void clearInventory() {
         inventory.clear();
     }
