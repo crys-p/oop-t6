@@ -13,8 +13,11 @@ import com.mygdx.engine.SoundManager.SoundManager;
 import com.mygdx.game.player.GamePlayerManager;
 import com.mygdx.game.scenes.*;
 
+
 import java.util.HashMap;
 import java.util.Map;
+
+
 
 public class SceneManager {
     public enum SceneType {
@@ -36,8 +39,10 @@ public class SceneManager {
     private CameraManager cameraManager;
 
     protected HashMap<SceneType, Scene> allScenesMap;
-
+    private iSceneFactory sceneFactory; // The scene factory instance
     private SceneType currentSceneType;
+
+
 
     public SceneManager(Game game, EntityManager entityManager, EntityFactoryManager entityFactoryManager, IOManager ioManager, SoundManager soundManager, GamePlayerManager gameplayerManager, CameraManager cameraManager){
         this.game = game;
@@ -48,12 +53,15 @@ public class SceneManager {
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
         allScenesMap = new HashMap<>();
-        initializeScenes();
+        // initializeScenes();
+        this.sceneFactory = new SceneFactory(); // Initialize the scene factory here
 
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("SceneManager initialized"); // Log initialization message
     }
 
+
+    /*
     private void initializeScenes() {
         allScenesMap.put(SceneType.START,
                 new StartScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
@@ -67,9 +75,15 @@ public class SceneManager {
                 new VictoryScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
         currentScene = null;
     }
+    */
 
     public void showScene(SceneType sceneType) {
-        Scene scene = allScenesMap.get(sceneType);
+
+        // Set the current scene type for sound to work
+        setCurrentSceneType(sceneType);
+
+        Scene scene = sceneFactory.createScene(sceneType, game, this, entityManager, entityFactoryManager, ioManager, gameplayerManager, cameraManager);
+        //Scene scene = allScenesMap.get(sceneType);
         changeScene(scene);
         soundManager.playMusic(sceneType);
         simulationManager.logInfo(sceneType + " SCENE initialised");
@@ -88,12 +102,15 @@ public class SceneManager {
     }
 
     private SceneType getSceneType(Scene scene) {
+        /*
         for (Map.Entry<SceneType, Scene> entry : allScenesMap.entrySet()) {
             if (entry.getValue() == scene) {
                 return entry.getKey();
             }
         }
         return null;
+        */
+        return currentSceneType; // Placeholder return, adjust based on your actual implementation
     }
 
     private void disposeCurrentScene() {
