@@ -1,15 +1,17 @@
-package com.mygdx.engine.PlayerManager;
+package com.mygdx.game.player;
+import com.mygdx.engine.PlayerManager.Item;
+
 import java.util.HashMap;
 import java.util.Map;
 
 public class Inventory {
     private final Map<Item, Integer> items;
 
-    protected Inventory() {
+    public Inventory() {
         items = new HashMap<>();
     }
 
-    protected void addItem(Item item, int quantity) {
+    public void addItem(Item item, int quantity) {
         if (items.containsKey(item)) {
             items.put(item, items.get(item) + quantity);
         } else {
@@ -30,7 +32,7 @@ public class Inventory {
     }
 
     // Get total amount of items
-    protected int getTotalItems() {
+    public int getTotalItems() {
         int total = 0;
         for (int quantity : items.values()) {
             total += quantity;
@@ -39,7 +41,7 @@ public class Inventory {
     }
 
     // Clear all items in inventory
-    protected void clear() {
+    public void clear() {
         items.clear();
     }
 

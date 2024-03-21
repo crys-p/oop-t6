@@ -7,11 +7,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-class PlayerController {
+public class PlayerController {
     private final HashMap<PlayerControlConfigs, List<Integer>> keyMaps = new HashMap<>(); // stores keys used for each config
     private PlayerControlConfigs keyConfigs = PlayerControlConfigs.UDLR; // default key controls if not set
 
-    PlayerController() {
+    public PlayerController() {
         this.setKeyMaps();
     }
     private void setKeyMaps() {
@@ -20,7 +20,7 @@ class PlayerController {
         keyMaps.put(PlayerControlConfigs.WASD, Arrays.asList(Input.Keys.A, Input.Keys.D, Input.Keys.W, Input.Keys.S));
     }
 
-    protected PlayerInstructions getPlayerMovement(Integer key) {
+    public PlayerInstructions getPlayerMovement(Integer key) {
         // Check if this key is used for this player and returns predefined player instruction
         if (keyMaps.get(keyConfigs).contains(key)) {
             return getMovementFromKey(key);
@@ -44,11 +44,11 @@ class PlayerController {
         return null; // No direction found for the given key in the control configuration
     }
 
-    protected PlayerControlConfigs getKeyConfigs() {
+    public PlayerControlConfigs getKeyConfigs() {
         return this.keyConfigs;
     }
 
-    protected void setKeyConfigs(PlayerControlConfigs control) {
+    public void setKeyConfigs(PlayerControlConfigs control) {
         this.keyConfigs = control;
     }
 
