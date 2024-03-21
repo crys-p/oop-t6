@@ -10,13 +10,14 @@ import com.mygdx.game.player.GamePlayer;
 
 import java.util.*;
 
-public class PlayerManager {
-    private final ArrayList<GamePlayer> allPlayers;
-    private final Map<GamePlayer, Integer> playerEntityMap; // Map to store GamePlayer instances and corresponding entity being controlled
-    private int numDeadPlayers = 0;
-    private int allPlayerInventoryCount = 0;
-    private final EntityManager entityManager;
-    private SimulationManager simulationManager;
+public abstract class PlayerManager {
+    protected final ArrayList<GamePlayer> allPlayers;
+    protected final Map<GamePlayer, Integer> playerEntityMap; // Map to store GamePlayer instances and corresponding entity being controlled
+    protected int numDeadPlayers = 0;
+    protected int allPlayerInventoryCount = 0;
+    protected final EntityManager entityManager;
+    protected SimulationManager simulationManager;
+
     public PlayerManager(EntityManager entityManager) {
         this.entityManager = entityManager;
         playerEntityMap = new HashMap<>();
@@ -26,136 +27,15 @@ public class PlayerManager {
         simulationManager.logInfo("PlayerManager initialized"); // Log initialization message
     }
 
-    // Method to create players
-    public void createPlayers(int qty) {
-        for (int i = 0; i < qty; i++) {
-            GamePlayer player = new GamePlayer();
-            allPlayers.add(player);
-        }
-    }
+    public abstract void createPlayers(int qty);
 
-    // Method to remove a player from the manager
-    public void removePlayer(int index) {
-        allPlayers.remove(index);
-    }
+    public abstract void removePlayer(int index);
 
-    // Method to get entity ID from player instance
-    public void setPlayerControlledEntityID(int playerNumber, int entityID) {
-        GamePlayer player = allPlayers.get(playerNumber);
-        playerEntityMap.put(player, entityID);
-        player.setPlayerControlledEntityID(entityID);
-    }
+    public abstract void handlePressedKeys(List<Integer> keys);
 
-    public void handlePressedKeys(List<Integer> keys) {
-        // For each key pressed
-        for (Integer key: keys) {
-            for (GamePlayer player : allPlayers) {
-                // Check if current player is controlling any entity
-                if (player.getPlayerControlledEntityID() != -1)
-                {
-                    // Send this key for to player to handle
-                    player.move(key, entityManager);
-                }
-            }
-        }
-    }
+    public abstract void setPlayerControl(int playerNumber, PlayerControlConfigs playerControl);
 
-    // Method to handle taking damage
-    public void takeDamage(PlayableCharacter playableCharacter, Enemy enemy) {
-        int characterID = entityManager.getEntityID(playableCharacter);
-        float damage = entityManager.getDamage(enemy);
-        // Loop through all players and apply damage
-        for (GamePlayer player : allPlayers) {
-            if (playerEntityMap.get(player) == characterID) {
-                // Calculate the new health after taking damage
-                int newHealth = player.getHealth() - (int) damage;
+    public abstract PlayerControlConfigs getPlayerControls(int playerNumber);
 
-                // Ensure health never goes below 0
-                if (newHealth <= 0) {
-                    numDeadPlayers++;
-                    newHealth = 0;
-                }
-                // Update the player's health
-                player.setHealth(newHealth);
-            }
-        }
-    }
-
-    public void addItemToInventory(int characterID) {
-        for (GamePlayer player: allPlayers) {
-             if (playerEntityMap.get(player) == characterID) {
-                 player.addToInventory(new Item(), 1);
-                 allPlayerInventoryCount++;
-             }
-        }
-    }
-
-    public int getTotalNumberOfPlayers() {
-        return allPlayers.size();
-    }
-
-    public void setPlayerControl(int playerNumber, PlayerControlConfigs playerControl) {
-        try {
-            GamePlayer player = allPlayers.get(playerNumber);
-            player.setPlayerKeyConfigs(playerControl);
-        } catch (Exception IndexOutOfBoundsException) {
-            System.out.println("Error: GamePlayer does not exist.");
-        }
-    }
-
-    public PlayerControlConfigs getPlayerControls(int playerNumber) {
-        return allPlayers.get(playerNumber).getPlayerKeyConfigs();
-    }
-
-
-    public HashMap<Integer, List<Integer>> getAllPlayerHealthStats() {
-        HashMap<Integer, List<Integer>> allPlayerHealthStats = new HashMap<>();
-        int counter = 0;
-        for (GamePlayer player : allPlayers) {
-            allPlayerHealthStats.put(counter, new ArrayList<Integer>());
-            allPlayerHealthStats.get(counter).add(player.getHealth());
-            allPlayerHealthStats.get(counter).add(player.getMaxHealth());
-            counter++;
-        }
-        return allPlayerHealthStats;
-    }
-
-    public List<Integer> getAllPlayerInventory() {
-        List <Integer> allInventory = new ArrayList<>();
-        for (GamePlayer player : allPlayers) {
-            allInventory.add(player.getInventoryCount());
-        }
-        return allInventory;
-    }
-
-
-    public int getNumDeadPlayers() {
-        return numDeadPlayers;
-    }
-
-
-    // method to reset damage taken by players
-    public void resetAllPlayerStats() {
-        // loop through all players and reset their health to maximum
-        for (GamePlayer player : allPlayers) {
-            player.setHealth(player.getMaxHealth());
-            player.clearInventory();
-        }
-        numDeadPlayers = 0;
-        allPlayerInventoryCount = 0;
-    }
-
-
-    public int getNumAllCollectibles() {
-        return allPlayerInventoryCount;
-    }
-
-    public float[] getPlayerPosition(int playerNumber) {
-        int entityID = allPlayers.get(playerNumber).getPlayerControlledEntityID();
-        if (entityID != -1) {
-            return entityManager.getPosition(entityID);
-        } else {
-            return null;
-        }
-    }
+    public abstract float[] getPlayerPosition(int playerNumber);
 }
