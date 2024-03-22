@@ -5,6 +5,7 @@
     import com.mygdx.engine.EntityManager.Entity;
 
     import static com.badlogic.gdx.math.MathUtils.random;
+    import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
     public class LRMovement extends AIMovement {
         public LRMovement(Entity entity) {
@@ -20,7 +21,7 @@
             float newX = entityX + (movementSpeed * direction);
 
             // Check if AI has reached the edge of the screen
-            if (newX <= 0 || newX >= (float) Gdx.graphics.getWidth()) {
+            if (newX <= 0 || newX >= SCENE_WIDTH - 40) {
                 // Reverse the direction
                 direction *= -1;
                 // Randomize Y position

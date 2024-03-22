@@ -28,6 +28,8 @@ import java.util.Random;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 public class GameScene extends Scene {
 
@@ -37,9 +39,8 @@ public class GameScene extends Scene {
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
     private SpriteBatch uiBatch;
-    private static final int VIEWPORT_WIDTH = 1280;
-    private static final int VIEWPORT_HEIGHT = 720;
-
+    //private static final int VIEWPORT_WIDTH = 1280;
+    //private static final int VIEWPORT_HEIGHT = 720;
     private Texture backgroundTexture;
 
 
@@ -67,7 +68,7 @@ public class GameScene extends Scene {
         createEntities();
         gameplayerManager.resetAllPlayerStats();
         // Apply the viewport
-        Gdx.graphics.setWindowedMode(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        //Gdx.graphics.setWindowedMode(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     }
 
     @Override
@@ -156,9 +157,8 @@ public class GameScene extends Scene {
         clearScreen();
         viewport.apply(true);
         batch.begin();
-        batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+            batch.draw(backgroundTexture, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
             entityManager.drawAllEntities(batch);
-
         batch.end();
         uiBatch.begin();
             gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
@@ -180,7 +180,7 @@ public class GameScene extends Scene {
         }
         ioManager.updateMovement();
 
-        //cameraManager.startCamera(delta, batch);
+        cameraManager.startCamera(delta, batch);
 
     }
 

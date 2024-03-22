@@ -3,6 +3,7 @@ package com.mygdx.game.scenes;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -28,6 +29,8 @@ import java.util.Random;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 public class GameSceneL2 extends Scene {
 
@@ -37,8 +40,9 @@ public class GameSceneL2 extends Scene {
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
     private SpriteBatch uiBatch;
-    private static final int VIEWPORT_WIDTH = 1280;
-    private static final int VIEWPORT_HEIGHT = 720;
+    //private static final int VIEWPORT_WIDTH = 1280;
+    //private static final int VIEWPORT_HEIGHT = 720;
+    private Texture backgroundTexture;
 
 
     public GameSceneL2(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
@@ -48,6 +52,7 @@ public class GameSceneL2 extends Scene {
         this.cameraManager = cameraManager;
         uiBatch = new SpriteBatch();
         setBackgroundColor(Color.PINK); // setting of background color for end scene
+        backgroundTexture = new Texture(Gdx.files.internal("assets/gamescene.png"));
 
         // Assuming you are using a FitViewport for example
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera());
@@ -64,7 +69,7 @@ public class GameSceneL2 extends Scene {
         createEntities();
         gameplayerManager.resetAllPlayerStats();
         // Apply the viewport
-        Gdx.graphics.setWindowedMode(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        //Gdx.graphics.setWindowedMode(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
     }
 
     @Override
@@ -151,11 +156,12 @@ public class GameSceneL2 extends Scene {
         clearScreen();
         viewport.apply(true);
         batch.begin();
-        entityManager.drawAllEntities(batch);
+            batch.draw(backgroundTexture, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
+            entityManager.drawAllEntities(batch);
         batch.end();
         uiBatch.begin();
-        gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
-        gameSceneButton1.draw(uiBatch, 1); // Adjust parameters as needed
+            gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
+            gameSceneButton1.draw(uiBatch, 1); // Adjust parameters as needed
         uiBatch.end();
 
         // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
@@ -173,7 +179,7 @@ public class GameSceneL2 extends Scene {
         }
         ioManager.updateMovement();
 
-        //cameraManager.startCamera(delta, batch);
+        cameraManager.startCamera(delta, batch);
 
     }
 

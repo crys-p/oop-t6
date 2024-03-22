@@ -5,6 +5,7 @@
     import com.mygdx.engine.EntityManager.Entity;
 
     import static com.badlogic.gdx.math.MathUtils.random;
+    import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
 
     public class UDMovement extends AIMovement {
         public UDMovement(Entity entity) {
@@ -20,7 +21,7 @@
             float newY = entityY + (movementSpeed * direction);
 
             // Check if AI has reached the edge of the screen
-            if (newY <= 0 || newY >= (float) Gdx.graphics.getHeight()) {
+            if (newY <= 0 || newY >= SCENE_HEIGHT - 40) {
                 // Reverse the direction if the edge is reached
                 direction *= -1;
                 // Randomize X position
