@@ -23,6 +23,10 @@ public class SceneFactory implements iSceneFactory {
                 return new StartScene(game, sceneManager, entityManager, batch, shape, ioManager);
             case GAME:
                 return new GameScene(game, sceneManager, entityManager, entityFactoryManager, batch, shape, ioManager, gameplayerManager, cameraManager);
+            case GAMEL1:
+                return new GameSceneL1(game, sceneManager, entityManager, entityFactoryManager, batch, shape, ioManager, gameplayerManager, cameraManager);
+            case GAMEL2:
+                return new GameSceneL2(game, sceneManager, entityManager, entityFactoryManager, batch, shape, ioManager, gameplayerManager, cameraManager);
             case MENU:
                 return new MenuScene(game, sceneManager, entityManager, batch, shape, ioManager);
             case VICTORY:

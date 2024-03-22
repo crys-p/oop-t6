@@ -1,7 +1,9 @@
 package com.mygdx.game.scenes;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -20,11 +22,14 @@ public class MenuScene extends Scene {
     protected TextButton button2;
     protected TextButton button3;
 
+    private Texture backgroundTexture;
+
     public MenuScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.YELLOW); // setting of background color for end scene
 
         //createButtons();
+        backgroundTexture = new Texture(Gdx.files.internal("assets/menuscene.png"));
     }
 
     @Override
@@ -115,6 +120,7 @@ public class MenuScene extends Scene {
     public void render(float delta) {
         clearScreen();
         batch.begin();
+        batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
             button1.draw(batch, 1); // Adjust parameters as needed
             button2.draw(batch, 1);
             button3.draw(batch, 1);

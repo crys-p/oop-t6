@@ -15,7 +15,7 @@ import com.mygdx.game.player.GamePlayerManager;
 
 public class IOManager{
 	//initialize from GameMaster?
-	public static final int SCREEN_WIDTH = 1280;
+	public static final int SCREEN_WIDTH = 1280; //1280
 	public static final int SCREEN_HEIGHT = 720;
 
 	private Output output;

@@ -1,7 +1,9 @@
 package com.mygdx.game.scenes;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -16,10 +18,12 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 public class LoseScene extends Scene {
 
     protected TextButton createButtonNoIndex;
+    private Texture backgroundTexture;
     public LoseScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
 
         setBackgroundColor(Color.RED); // setting of background color for end scene
+        backgroundTexture = new Texture(Gdx.files.internal("assets/losescene.png"));
     }
 
     protected void createButtonNoIndex() {
@@ -46,7 +50,8 @@ public class LoseScene extends Scene {
     public void render(float delta) {
         clearScreen();
         batch.begin();
-        createButtonNoIndex.draw(batch, 1);
+        batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+        //createButtonNoIndex.draw(batch, 1);
         batch.end();
     }
 }

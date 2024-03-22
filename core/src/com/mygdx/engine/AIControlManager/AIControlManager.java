@@ -4,6 +4,7 @@ import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.MovementStrategy.AIMovement;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.GameMovementStrategy.LRMovement;
+import com.mygdx.game.GameMovementStrategy.NoMovement;
 import com.mygdx.game.GameMovementStrategy.UDMovement;
 
 import java.util.HashMap;
@@ -17,6 +18,7 @@ public class AIControlManager {
 
     private static AIMovement lrMovement;
     private static AIMovement udMovement;
+    private static AIMovement noMovement;
 
     public AIControlManager() {
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
@@ -36,6 +38,13 @@ public class AIControlManager {
             udMovement = new UDMovement(null); // Pass appropriate entity or null depending on your design
         }
         return udMovement;
+    }
+
+    public static AIMovement getNoMovement() {
+        if (noMovement == null) {
+            noMovement = new NoMovement(null); // Pass appropriate entity or null depending on your design
+        }
+        return noMovement;
     }
 
     public void update() {

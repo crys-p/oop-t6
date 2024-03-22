@@ -1,7 +1,9 @@
 package com.mygdx.game.scenes;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -12,10 +14,13 @@ import com.mygdx.engine.SceneManager.SceneManager;
 
 public class VictoryScene extends Scene {
     protected TextButton createButtonNoIndex;
+    private Texture backgroundTexture;
 
     public VictoryScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.CYAN); // setting of background color for end scene
+
+        backgroundTexture = new Texture(Gdx.files.internal("assets/victoryscene.png"));
     }
 
     protected void createButtonNoIndex() {
@@ -42,7 +47,8 @@ public class VictoryScene extends Scene {
     public void render(float delta) {
         clearScreen();
         batch.begin();
-            createButtonNoIndex.draw(batch, 1);
+        batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
+            //createButtonNoIndex.draw(batch, 1);
         batch.end();
     }
 }

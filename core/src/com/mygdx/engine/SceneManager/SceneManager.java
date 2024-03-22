@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class SceneManager {
     public enum SceneType {
-        START, GAME, MENU, VICTORY, LOSE
+        START, GAME, GAMEL1 ,GAMEL2, MENU, VICTORY, LOSE
     }
 
     private final Game game;

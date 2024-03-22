@@ -3,7 +3,6 @@ package com.mygdx.game.scenes;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -18,10 +17,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.GameFactories.EntityFactoryManager;
 import com.mygdx.game.GameFactories.NonPlayableEntityFactory;
 import com.mygdx.engine.IOManager.IOManager;
+import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;
 import com.mygdx.game.GameMovementStrategy.Player1Movement;
-import com.mygdx.game.GameEntities.EntityType;
+import com.mygdx.game.entities.EntityType;
 import com.mygdx.game.player.GamePlayerManager;
 
 import java.util.Random;
@@ -29,9 +29,9 @@ import java.util.Random;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
-public class GameScene extends Scene {
+public class GameSceneL2 extends Scene {
 
-    private int numberOfEnemy = 1;
+    private int numberOfEnemy = 10;
     private int numberOfCollectibles = 2;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
@@ -40,17 +40,14 @@ public class GameScene extends Scene {
     private static final int VIEWPORT_WIDTH = 1280;
     private static final int VIEWPORT_HEIGHT = 720;
 
-    private Texture backgroundTexture;
 
-
-    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
+    public GameSceneL2(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         this.gameplayerManager = gameplayerManager;
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
         uiBatch = new SpriteBatch();
-        setBackgroundColor(Color.BLUE); // setting of background color for end scene
-        backgroundTexture = new Texture(Gdx.files.internal("assets/gamescene.png"));
+        setBackgroundColor(Color.PINK); // setting of background color for end scene
 
         // Assuming you are using a FitViewport for example
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera());
@@ -86,13 +83,11 @@ public class GameScene extends Scene {
         AIMovement udmovement = AIControlManager.getUDMovement();
         AIMovement nomovement = AIControlManager.getNoMovement();
 
-        nonPlayableFactory.create(EntityType.DRUMSTICK.getId(), numberOfEnemy, random, 0, lrmovement, -10);
-        nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.COOKIE.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.BROCCOLI.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.CABBAGE.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.BOKCHOY.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.FRIES.getId(), numberOfEnemy, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.BURGER.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.SODA.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, udmovement);
 
         // Create same amt of characters as players
         int x = 0;
@@ -156,13 +151,11 @@ public class GameScene extends Scene {
         clearScreen();
         viewport.apply(true);
         batch.begin();
-        batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
-            entityManager.drawAllEntities(batch);
-
+        entityManager.drawAllEntities(batch);
         batch.end();
         uiBatch.begin();
-            gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
-            gameSceneButton1.draw(uiBatch, 1); // Adjust parameters as needed
+        gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
+        gameSceneButton1.draw(uiBatch, 1); // Adjust parameters as needed
         uiBatch.end();
 
         // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
@@ -176,7 +169,7 @@ public class GameScene extends Scene {
         }
         if (gameplayerManager.getNumAllCollectibles() == numberOfCollectibles) {
             // Detect total collectibles to call victory scene
-            this.sceneManager.showScene(SceneManager.SceneType.GAMEL1);
+            this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }
         ioManager.updateMovement();
 
