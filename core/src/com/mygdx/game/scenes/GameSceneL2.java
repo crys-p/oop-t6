@@ -29,7 +29,7 @@ import java.util.Random;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
-public class GameScene extends Scene {
+public class GameSceneL2 extends Scene {
 
     private int numberOfEnemy = 1;
     private int numberOfCollectibles = 2;
@@ -41,13 +41,13 @@ public class GameScene extends Scene {
     private static final int VIEWPORT_HEIGHT = 720;
 
 
-    public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
+    public GameSceneL2(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         this.gameplayerManager = gameplayerManager;
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
         uiBatch = new SpriteBatch();
-        setBackgroundColor(Color.BLUE); // setting of background color for end scene
+        setBackgroundColor(Color.PINK); // setting of background color for end scene
 
         // Assuming you are using a FitViewport for example
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera());
@@ -149,11 +149,11 @@ public class GameScene extends Scene {
         clearScreen();
         viewport.apply(true);
         batch.begin();
-            entityManager.drawAllEntities(batch);
+        entityManager.drawAllEntities(batch);
         batch.end();
         uiBatch.begin();
-            gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
-            gameSceneButton1.draw(uiBatch, 1); // Adjust parameters as needed
+        gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed
+        gameSceneButton1.draw(uiBatch, 1); // Adjust parameters as needed
         uiBatch.end();
 
         // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
@@ -167,7 +167,7 @@ public class GameScene extends Scene {
         }
         if (gameplayerManager.getNumAllCollectibles() == numberOfCollectibles) {
             // Detect total collectibles to call victory scene
-            this.sceneManager.showScene(SceneManager.SceneType.GAMEL1);
+            this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
         }
         ioManager.updateMovement();
 
