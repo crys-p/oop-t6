@@ -3,18 +3,14 @@ package com.mygdx.engine.PlayerManager;
 
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.PlayerControlConfigs;
-import com.mygdx.engine.EntityManager.PlayableCharacter;
-import com.mygdx.game.entities.Enemy;
-import com.mygdx.game.player.GamePlayer;
+import com.mygdx.game.player.PlayerControlConfigs;
 
 import java.util.*;
 
 public abstract class PlayerManager {
-    protected final ArrayList<GamePlayer> allPlayers;
-    protected final Map<GamePlayer, Integer> playerEntityMap; // Map to store GamePlayer instances and corresponding entity being controlled
-    protected int numDeadPlayers = 0;
-    protected int allPlayerInventoryCount = 0;
+    protected final ArrayList<Player> allPlayers;
+    protected final Map<Player, Integer> playerEntityMap; // Map to store GamePlayer instances and corresponding entity being controlled
+
     protected final EntityManager entityManager;
     protected SimulationManager simulationManager;
 

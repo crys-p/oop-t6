@@ -10,12 +10,11 @@ import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.game.GameFactories.EntityFactoryManager;
 import com.mygdx.game.GameFactories.GameTextureFactory;
 import com.mygdx.engine.IOManager.IOManager;
-import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.SceneManager;
 import com.mygdx.engine.SoundManager.SoundManager; // sound manager
 
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.PlayerControlConfigs;
+import com.mygdx.game.player.PlayerControlConfigs;
 import com.mygdx.game.player.GamePlayerManager;
 
 //public class GameMaster extends ApplicationAdapter

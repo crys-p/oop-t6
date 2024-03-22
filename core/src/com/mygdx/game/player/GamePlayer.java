@@ -5,7 +5,6 @@ import com.mygdx.engine.PlayerManager.Item;
 import com.mygdx.engine.PlayerManager.Player;
 import com.mygdx.engine.PlayerManager.PlayerController;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
-import com.mygdx.game.PlayerControlConfigs;
 
 public class GamePlayer extends Player {
     private int playerControlledEntityID = -1;

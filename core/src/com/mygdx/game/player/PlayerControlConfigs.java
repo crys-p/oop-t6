@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.player;
 
 public enum PlayerControlConfigs {
     // Different player key configs

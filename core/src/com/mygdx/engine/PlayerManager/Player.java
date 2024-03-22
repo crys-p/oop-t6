@@ -1,7 +1,7 @@
 package com.mygdx.engine.PlayerManager;
 
 import com.mygdx.engine.EntityManager.EntityManager;
-import com.mygdx.game.PlayerControlConfigs;
+import com.mygdx.game.player.PlayerControlConfigs;
 import com.mygdx.game.player.Inventory;
 
 public abstract class Player {

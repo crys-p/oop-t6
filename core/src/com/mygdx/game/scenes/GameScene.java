@@ -14,11 +14,10 @@ import com.badlogic.gdx.graphics.Color;
 import com.mygdx.game.GameFactories.EntityFactoryManager;
 import com.mygdx.game.GameFactories.NonPlayableEntityFactory;
 import com.mygdx.engine.IOManager.IOManager;
-import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;
 import com.mygdx.game.GameMovementStrategy.Player1Movement;
-import com.mygdx.game.entities.EntityType;
+import com.mygdx.game.GameEntities.EntityType;
 import com.mygdx.game.player.GamePlayerManager;
 
 import java.util.Random;
@@ -69,7 +68,7 @@ public class GameScene extends Scene {
         AIMovement lrmovement = AIControlManager.getLRMovement();
         AIMovement udmovement = AIControlManager.getUDMovement();
 
-        nonPlayableFactory.create(EntityType.DRUMSTICK.getId(), numberOfEnemy, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.DRUMSTICK.getId(), numberOfEnemy, random, 0, lrmovement, -10);
         nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement);
         nonPlayableFactory.create(EntityType.COOKIE.getId(), numberOfEnemy, random, 0, udmovement);
         nonPlayableFactory.create(EntityType.BROCCOLI.getId(), numberOfCollectibles, random, 0, lrmovement);

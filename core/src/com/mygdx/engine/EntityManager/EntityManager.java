@@ -3,7 +3,7 @@ package com.mygdx.engine.EntityManager;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.entities.Enemy;
+import com.mygdx.game.GameEntities.Enemy;
 
 import java.util.*;
 
@@ -83,9 +83,6 @@ public class EntityManager implements EntityLifeCycle {
         }
     }
 
-    public float getDamage(Enemy entity) {
-        return entity.getDamage();
-    }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~INTERNAL/TESTING CODE~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // Set up Required Entity attributes

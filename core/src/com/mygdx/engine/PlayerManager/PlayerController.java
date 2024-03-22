@@ -1,7 +1,7 @@
 package com.mygdx.engine.PlayerManager;
 
 import com.badlogic.gdx.Input;
-import com.mygdx.game.PlayerControlConfigs;
+import com.mygdx.game.player.PlayerControlConfigs;
 
 import java.util.Arrays;
 import java.util.HashMap;

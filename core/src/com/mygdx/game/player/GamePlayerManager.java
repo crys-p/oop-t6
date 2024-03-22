@@ -6,8 +6,7 @@ import com.mygdx.engine.EntityManager.PlayableCharacter;
 import com.mygdx.engine.PlayerManager.Item;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.PlayerControlConfigs;
-import com.mygdx.game.entities.Enemy;
+import com.mygdx.game.GameEntities.Enemy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,7 +65,7 @@ public class GamePlayerManager extends PlayerManager {
     // Method to handle taking damage
     public void takeDamage(PlayableCharacter playableCharacter, Enemy enemy) {
         int characterID = entityManager.getEntityID(playableCharacter);
-        float damage = entityManager.getDamage(enemy);
+        float damage = enemy.getDamage();
         // Loop through all players and apply damage
         for (GamePlayer player : allPlayers) {
             if (playerEntityMap.get(player) == characterID) {

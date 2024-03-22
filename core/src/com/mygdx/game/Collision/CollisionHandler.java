@@ -2,12 +2,11 @@ package com.mygdx.game.Collision;
 
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.EntityManager.iCollidable;
-import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SoundManager.SoundManager;
 import com.mygdx.engine.SoundManager.SoundEffectType;
 import com.mygdx.engine.EntityManager.PlayableCharacter;
-import com.mygdx.game.entities.Collectible;
-import com.mygdx.game.entities.Enemy;
+import com.mygdx.game.GameEntities.Collectible;
+import com.mygdx.game.GameEntities.Enemy;
 import com.mygdx.game.player.GamePlayerManager;
 
 public class CollisionHandler {
