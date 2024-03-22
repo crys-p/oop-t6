@@ -3,6 +3,7 @@ package com.mygdx.game.scenes;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
@@ -40,6 +41,8 @@ public class GameScene extends Scene {
     private static final int VIEWPORT_WIDTH = 1280;
     private static final int VIEWPORT_HEIGHT = 720;
 
+    private Texture backgroundTexture;
+
 
     public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
@@ -48,6 +51,7 @@ public class GameScene extends Scene {
         this.cameraManager = cameraManager;
         uiBatch = new SpriteBatch();
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
+        backgroundTexture = new Texture(Gdx.files.internal("assets/gamescene.png"));
 
         // Assuming you are using a FitViewport for example
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera());
@@ -152,7 +156,9 @@ public class GameScene extends Scene {
         clearScreen();
         viewport.apply(true);
         batch.begin();
+        batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
             entityManager.drawAllEntities(batch);
+
         batch.end();
         uiBatch.begin();
             gameSceneButton.draw(uiBatch, 1); // Adjust parameters as needed

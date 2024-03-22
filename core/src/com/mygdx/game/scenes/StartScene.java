@@ -2,6 +2,7 @@ package com.mygdx.game.scenes;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -23,11 +24,14 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 public class StartScene extends Scene {
 
     protected TextButton countdownButton;
+    private Texture backgroundTexture;
 
     public StartScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.GRAY); // Set background color for start scene
         this.entityManager = entityManager;
+
+        backgroundTexture = new Texture(Gdx.files.internal("assets/startscene.png"));
     }
 
     @Override
@@ -65,6 +69,7 @@ public class StartScene extends Scene {
         // Clear the screen
         clearScreen();
         batch.begin();
+        batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
             countdownButton.draw(batch, 1);
             entityManager.drawAllEntities(batch);
         batch.end();
