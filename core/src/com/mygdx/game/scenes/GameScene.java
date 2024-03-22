@@ -85,6 +85,7 @@ public class GameScene extends Scene {
         // Retrieve AI movement objects from AIControlManager
         AIMovement lrmovement = AIControlManager.getLRMovement();
         AIMovement udmovement = AIControlManager.getUDMovement();
+        AIMovement nomovement = AIControlManager.getNoMovement();
 
         nonPlayableFactory.create(EntityType.DRUMSTICK.getId(), numberOfEnemy, random, 0, lrmovement);
         nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement);
