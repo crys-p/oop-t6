@@ -42,6 +42,9 @@ public class SceneManager {
     private iSceneFactory sceneFactory; // The scene factory instance
     private SceneType currentSceneType;
 
+    public static final int SCENE_WIDTH = 1980;
+    public static final int SCENE_HEIGHT = 1080;
+
 
 
     public SceneManager(Game game, EntityManager entityManager, EntityFactoryManager entityFactoryManager, IOManager ioManager, SoundManager soundManager, GamePlayerManager gameplayerManager, CameraManager cameraManager){

@@ -5,6 +5,8 @@ import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 public class Player1Movement extends PlayerMovement {
 
@@ -29,7 +31,7 @@ public class Player1Movement extends PlayerMovement {
     }
 
     private float[] moveUp(float x, float y, float speed) {
-        if (y > SCREEN_HEIGHT) return new float[] {x,y};
+        if (y > SCENE_HEIGHT - 40) return new float[] {x,y};
         y += speed;
         return new float[] {x, y};
     }
@@ -47,7 +49,7 @@ public class Player1Movement extends PlayerMovement {
     }
 
     private float[] moveRight(float x, float y, float speed) {
-        if (x > SCREEN_WIDTH) return new float[] {x,y};
+        if (x > SCENE_WIDTH - 40) return new float[] {x,y};
         x += speed;
         return new float[] {x, y};
     }
