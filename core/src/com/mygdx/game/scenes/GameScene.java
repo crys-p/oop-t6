@@ -87,9 +87,9 @@ public class GameScene extends Scene {
         AIMovement nomovement = AIControlManager.getNoMovement();
 
         nonPlayableFactory.create(EntityType.DRUMSTICK.getId(), numberOfEnemy, random, 0, lrmovement, -10);
-        nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.COOKIE.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.BROCCOLI.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement, -15);
+        nonPlayableFactory.create(EntityType.COOKIE.getId(), numberOfEnemy, random, 0, udmovement, -7);
+        nonPlayableFactory.create(EntityType.BROCCOLI.getId(), numberOfCollectibles, random, 0, lrmovement, 8);
         nonPlayableFactory.create(EntityType.CABBAGE.getId(), numberOfCollectibles, random, 0, lrmovement);
         nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, lrmovement);
         nonPlayableFactory.create(EntityType.BOKCHOY.getId(), numberOfCollectibles, random, 0, lrmovement);

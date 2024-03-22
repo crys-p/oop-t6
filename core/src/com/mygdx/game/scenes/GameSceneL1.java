@@ -21,7 +21,7 @@ import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;
 import com.mygdx.game.GameMovementStrategy.Player1Movement;
-import com.mygdx.game.entities.EntityType;
+import com.mygdx.game.GameEntities.EntityType;
 import com.mygdx.game.player.GamePlayerManager;
 
 import java.util.Random;

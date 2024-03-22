@@ -37,24 +37,24 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
     }
 
     protected Entity createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
-        return createSpecifiedEntity(typeId, x, y, speed, movement, 0); // Default game points to 0
+        return createSpecifiedEntity(typeId, x, y, speed, movement, 0); // Default game value to 0
     }
 
-    // Specific implementation overloaded with randomly generated entities and game points
-    protected NonPlayableCharacter createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement, int gamePoints) {
+    // Specific implementation overloaded with randomly generated entities and game value (points / damage)
+    protected NonPlayableCharacter createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement, int gameValue) {
         try {
             AIMovement aiMovement = (AIMovement) movement;
             EntityType type = EntityType.getEntityType(typeId);
             Texture texture = gameTextureFactory.getTexture(typeId);
             switch (type) {
                 case BOKCHOY: case BROCCOLI: case CARROT: case CABBAGE:
-                    return new Vegetable(x, y, speed, texture, aiMovement, gamePoints);
+                    return new Vegetable(x, y, speed, texture, aiMovement, gameValue);
                 case APPLE: case BANANA: case WATERMELON:
-                    return new Fruit(x, y, speed, texture, aiMovement, gamePoints);
+                    return new Fruit(x, y, speed, texture, aiMovement, gameValue);
                 case ICECREAM: case COOKIE: case CUPCAKE: case DOUGHNUT: case SUNDAE:
-                    return new Dessert(x, y, speed, texture, aiMovement, gamePoints);
+                    return new Dessert(x, y, speed, texture, aiMovement, gameValue);
                 case DRUMSTICK: case FRIES: case BURGER: case SODA:
-                    return new FastFood(x, y, speed, texture, aiMovement, gamePoints);
+                    return new FastFood(x, y, speed, texture, aiMovement, gameValue);
                 default:
                     SimulationManager.getInstance().logError("Creating unknown entity type: " + type);
             }
