@@ -1,13 +1,19 @@
 package com.mygdx.game.GameFactories;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.engine.EntityManager.NonPlayableCharacter;
 import com.mygdx.engine.MovementStrategy.AIMovement;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.Factory.AbstractEntityFactory;
 import com.mygdx.engine.MovementStrategy.Movement;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.entities.*;
+import com.mygdx.game.GameEntities.*;
+
+import java.util.Random;
+
+import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
+import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 
 public class NonPlayableEntityFactory extends AbstractEntityFactory {
@@ -18,22 +24,37 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
         this.gameTextureFactory = gameTextureFactory;
     }
 
+    // Specific implementation overloaded with randomly generated entities and game points
+    public void create(int typeId, int quantity, Random random, float speed, Movement movement, int gamePoints) {
+        for (int i = 0; i < quantity; i++) {
+            float randomX = random.nextFloat() * SCREEN_WIDTH - 50;
+            float randomY = random.nextFloat() * SCREEN_HEIGHT;
+            Entity entity = createSpecifiedEntity(typeId, randomX, randomY, speed, movement, gamePoints);
+            if (entity != null) {
+                entityManager.addEntity(entity);
+            }
+        }
+    }
 
-    @Override
     protected Entity createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
+        return createSpecifiedEntity(typeId, x, y, speed, movement, 0); // Default game points to 0
+    }
+
+    // Specific implementation overloaded with randomly generated entities and game points
+    protected NonPlayableCharacter createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement, int gamePoints) {
         try {
             AIMovement aiMovement = (AIMovement) movement;
             EntityType type = EntityType.getEntityType(typeId);
             Texture texture = gameTextureFactory.getTexture(typeId);
             switch (type) {
                 case BOKCHOY: case BROCCOLI: case CARROT: case CABBAGE:
-                    return new Vegetable(x, y, speed, texture, aiMovement);
+                    return new Vegetable(x, y, speed, texture, aiMovement, gamePoints);
                 case APPLE: case BANANA: case WATERMELON:
-                    return new Fruit(x, y, speed, texture, aiMovement);
+                    return new Fruit(x, y, speed, texture, aiMovement, gamePoints);
                 case ICECREAM: case COOKIE: case CUPCAKE: case DOUGHNUT: case SUNDAE:
-                    return new Dessert(x, y, speed, texture, aiMovement);
+                    return new Dessert(x, y, speed, texture, aiMovement, gamePoints);
                 case DRUMSTICK: case FRIES: case BURGER: case SODA:
-                    return new FastFood(x, y, speed, texture, aiMovement);
+                    return new FastFood(x, y, speed, texture, aiMovement, gamePoints);
                 default:
                     SimulationManager.getInstance().logError("Creating unknown entity type: " + type);
             }
@@ -42,5 +63,4 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
         }
         return null;
     }
-
 }

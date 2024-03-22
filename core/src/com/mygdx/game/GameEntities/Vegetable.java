@@ -9,4 +9,8 @@ public class Vegetable extends Collectible {
         super(x, y, speed, texture, movement);
     }
 
+    public Vegetable(float x, float y, float speed, Texture texture, AIMovement movement, float gamePoints) {
+        super(x, y, speed, texture, movement);
+        this.setPoints(gamePoints);
+    }
 }

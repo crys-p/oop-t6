@@ -9,7 +9,7 @@ import com.mygdx.engine.EntityManager.iCollidable;
 
 public abstract class Collectible extends NonPlayableCharacter implements iCollidable {
 
-    private float points = 10; // default points is 10
+    private float points = 0; // default points is 0
 
     public Collectible(float x, float y, float speed, Texture texture, AIMovement movement) {
         super(x, y, speed, texture, movement);

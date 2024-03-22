@@ -2,7 +2,7 @@ package com.mygdx.game.GameFactories;
 
 import com.mygdx.engine.Factory.AbstractTextureFactory;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.entities.EntityType;
+import com.mygdx.game.GameEntities.EntityType;
 
 public class GameTextureFactory extends AbstractTextureFactory {
     public GameTextureFactory() {

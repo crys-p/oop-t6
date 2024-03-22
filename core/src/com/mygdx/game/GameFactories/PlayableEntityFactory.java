@@ -7,8 +7,8 @@ import com.mygdx.engine.Factory.AbstractEntityFactory;
 import com.mygdx.engine.MovementStrategy.Movement;
 import com.mygdx.engine.MovementStrategy.PlayerMovement;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.entities.Boy;
-import com.mygdx.game.entities.EntityType;
+import com.mygdx.game.GameEntities.Boy;
+import com.mygdx.game.GameEntities.EntityType;
 
 
 public class PlayableEntityFactory extends AbstractEntityFactory {

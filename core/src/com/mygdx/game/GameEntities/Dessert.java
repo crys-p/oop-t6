@@ -10,4 +10,8 @@ public class Dessert extends Enemy {
     }
 
 
+    public Dessert(float x, float y, float speed, Texture texture, AIMovement movement, float gamePoints) {
+        super(x, y, speed, texture, movement);
+        this.setDamage(-1 * gamePoints);
+    }
 }

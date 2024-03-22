@@ -7,7 +7,7 @@ import com.mygdx.engine.EntityManager.NonPlayableCharacter;
 import com.mygdx.engine.EntityManager.iCollidable;
 
 public abstract class Enemy extends NonPlayableCharacter implements iCollidable {
-    private float damage = 10; // default damage is 10
+    private float damage = 0; // default damage is 0
 
     public Enemy(float x, float y, float speed, Texture texture, AIMovement movement) {
         super(x, y, speed, texture, movement);
