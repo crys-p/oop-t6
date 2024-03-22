@@ -31,7 +31,7 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 public class GameSceneL2 extends Scene {
 
-    private int numberOfEnemy = 1;
+    private int numberOfEnemy = 10;
     private int numberOfCollectibles = 2;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
@@ -82,10 +82,11 @@ public class GameSceneL2 extends Scene {
         AIMovement lrmovement = AIControlManager.getLRMovement();
         AIMovement udmovement = AIControlManager.getUDMovement();
 
-        nonPlayableFactory.create(EntityType.DRUMSTICK.getId(), numberOfEnemy, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.COOKIE.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.BROCCOLI.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.FRIES.getId(), numberOfEnemy, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.BURGER.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.SODA.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, udmovement);
 
         // Create same amt of characters as players
         int x = 0;

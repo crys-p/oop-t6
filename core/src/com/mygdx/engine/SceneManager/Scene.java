@@ -34,6 +34,8 @@ public abstract class Scene extends ScreenAdapter {
     private final int VIEWPORT_WIDTH = 1280;
     private final int VIEWPORT_HEIGHT = 720;
 
+
+
     private boolean paused = false;
 
     protected Scene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
@@ -50,6 +52,7 @@ public abstract class Scene extends ScreenAdapter {
         //viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
         viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         viewport.apply();
+
     }
 
 
