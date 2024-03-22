@@ -9,7 +9,7 @@ import com.mygdx.engine.EntityManager.iCollidable;
 
 public abstract class Collectible extends NonPlayableCharacter implements iCollidable {
 
-    private float points = 0; // default points is 0
+    private int points = 0; // default points is 0
 
     public Collectible(float x, float y, float speed, Texture texture, AIMovement movement) {
         super(x, y, speed, texture, movement);
@@ -19,11 +19,11 @@ public abstract class Collectible extends NonPlayableCharacter implements iColli
         System.out.printf("I am item at %f, %f, my EntityID is %d\n", this.getX(), this.getY(), this.getEntityID());
     }
 
-    public float getPoints() {
+    public int getPoints() {
         return this.points;
     }
 
-    public void setPoints(float dmg) {
+    public void setPoints(int dmg) {
         this.points = dmg;
     }
 

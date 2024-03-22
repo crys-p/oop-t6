@@ -32,7 +32,7 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 public class GameScene extends Scene {
 
     private int numberOfEnemy = 1;
-    private int numberOfCollectibles = 2;
+    private int numberOfCollectibles = 24;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
@@ -90,9 +90,9 @@ public class GameScene extends Scene {
         nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement, -15);
         nonPlayableFactory.create(EntityType.COOKIE.getId(), numberOfEnemy, random, 0, udmovement, -7);
         nonPlayableFactory.create(EntityType.BROCCOLI.getId(), numberOfCollectibles, random, 0, lrmovement, 8);
-        nonPlayableFactory.create(EntityType.CABBAGE.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.BOKCHOY.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.CABBAGE.getId(), numberOfCollectibles, random, 0, lrmovement, 17);
+        nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, lrmovement, 6);
+        nonPlayableFactory.create(EntityType.BOKCHOY.getId(), numberOfCollectibles, random, 0, lrmovement, 12);
 
         // Create same amt of characters as players
         int x = 0;
@@ -157,7 +157,7 @@ public class GameScene extends Scene {
         viewport.apply(true);
         batch.begin();
         batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
-            entityManager.drawAllEntities(batch);
+        entityManager.drawAllEntities(batch);
 
         batch.end();
         uiBatch.begin();

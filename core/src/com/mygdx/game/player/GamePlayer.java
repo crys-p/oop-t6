@@ -12,7 +12,7 @@ public class GamePlayer extends Player {
     private int health;
     private PlayerController playerController;
     protected Inventory inventory;
-
+    private int points = 0;
     public GamePlayer() {
         this.health = maxHealth;
         this.inventory = new Inventory();
@@ -71,4 +71,18 @@ public class GamePlayer extends Player {
             entityManager.inputMovement(this.playerControlledEntityID, instr);
         }
     }
+
+    public int getPoints() {
+        return this.points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
+    public void incrementPoints(int addPoints) {
+        System.out.println("adding " + addPoints);
+        this.points += addPoints;
+    }
+
 }

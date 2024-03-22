@@ -8,7 +8,7 @@ public class Fruit extends Collectible {
         super(x, y, speed, texture, movement);
     }
 
-    public Fruit(float x, float y, float speed, Texture texture, AIMovement movement, float gamePoints) {
+    public Fruit(float x, float y, float speed, Texture texture, AIMovement movement, int gamePoints) {
         super(x, y, speed, texture, movement);
         this.setPoints(gamePoints);
     }

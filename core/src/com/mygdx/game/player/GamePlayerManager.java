@@ -160,4 +160,20 @@ public class GamePlayerManager extends PlayerManager {
             return null;
         }
     }
+
+    public void addPoints(int characterID, int points) {
+        for (GamePlayer player: allPlayers) {
+            if (playerEntityMap.get(player) == characterID) {
+                player.incrementPoints(points);
+            }
+        }
+    }
+
+    public List<Integer> getAllPlayerPoints() {
+        List <Integer> allPoints = new ArrayList<>();
+        for (GamePlayer player : allPlayers) {
+            allPoints.add(player.getPoints());
+        }
+        return allPoints;
+    }
 }

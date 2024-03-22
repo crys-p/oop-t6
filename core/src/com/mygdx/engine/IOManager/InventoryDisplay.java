@@ -21,6 +21,7 @@ public class InventoryDisplay {
     }
     protected void render(SpriteBatch batch) {
         List<Integer> allPlayerInventory = gameplayerManager.getAllPlayerInventory();
+        List<Integer> allPlayerPoints = gameplayerManager.getAllPlayerPoints();
 
         // Define the position of the inventory
         float posX = SCREEN_WIDTH * 0.01f + 130; // Distance from the left edge of the screen
@@ -32,6 +33,20 @@ public class InventoryDisplay {
             batch.begin();
                 font.setColor(Color.WHITE);
                 font.draw(batch, collectiblesText, posX, posY);
+            batch.end();
+            posY -= 65;
+        }
+
+        posX = SCREEN_WIDTH * 0.01f + 250; // Distance from the left edge of the screen
+        posY = SCREEN_HEIGHT * 0.9f - 10; // Distance from the top edge of the screen
+
+        for (int playerPoints: allPlayerPoints) {
+            // Draw text showing total number of collectibles collected
+            String collectiblesText = "Points: " + playerPoints;
+            System.out.println(collectiblesText);
+            batch.begin();
+            font.setColor(Color.WHITE);
+            font.draw(batch, collectiblesText, posX, posY);
             batch.end();
             posY -= 65;
         }

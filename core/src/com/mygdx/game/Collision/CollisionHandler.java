@@ -7,6 +7,7 @@ import com.mygdx.engine.SoundManager.SoundEffectType;
 import com.mygdx.engine.EntityManager.PlayableCharacter;
 import com.mygdx.game.GameEntities.Collectible;
 import com.mygdx.game.GameEntities.Enemy;
+import com.mygdx.game.GameEntities.Vegetable;
 import com.mygdx.game.player.GamePlayerManager;
 
 public class CollisionHandler {
@@ -29,10 +30,10 @@ public class CollisionHandler {
         if ((entityA instanceof PlayableCharacter && entityB instanceof Collectible) || (entityB instanceof PlayableCharacter && entityA instanceof Collectible)) {
             characterCollectibleCollision(entityA, entityB);
         }
-        // Add other pairs
+        // Add other pairs if any
     }
 
-    // Handler methods
+    // Handling for Character(Player) & Enemy Collision
     private void characterEnemyCollision(iCollidable entityA, iCollidable entityB) {
         Enemy enemy;
         PlayableCharacter playableCharacter;
@@ -51,10 +52,10 @@ public class CollisionHandler {
         soundManager.playSoundEffect(SoundEffectType.HIT);
     }
 
+    // Handling for Character(Player) & Collectible Collision
     private void characterCollectibleCollision(iCollidable entityA, iCollidable entityB) {
         Collectible collectible;
         PlayableCharacter playableCharacter;
-        int characterID;
         if (entityA instanceof Collectible) {
             collectible = (Collectible) entityA;
             playableCharacter = (PlayableCharacter) entityB;
@@ -62,12 +63,22 @@ public class CollisionHandler {
             collectible = (Collectible) entityB;
             playableCharacter = (PlayableCharacter) entityA;
         }
-        characterID = entityManager.getEntityID(playableCharacter);
+        int characterID = entityManager.getEntityID(playableCharacter);
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectible);
-        // Add the collided collectible to the player's inventory
+
+        // Add the collided collectible to the player's inventory, add points //TODO: separate this based on game mechanics
         gameplayerManager.addItemToInventory(characterID);
+        gameplayerManager.addPoints(characterID, collectible.getPoints());
+
         // Play collected sound
         soundManager.playSoundEffect(SoundEffectType.COLLECT);
+
+    }
+
+    // ALTER THIS TO BE USED INSIDE characterCollectibleCollision
+    private void characterVegetableCollision(PlayableCharacter character, Vegetable vegetable) {
+        int characterID = entityManager.getEntityID(character);
+        gameplayerManager.addPoints(characterID, vegetable.getPoints());
     }
 }
