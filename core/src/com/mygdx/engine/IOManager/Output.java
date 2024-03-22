@@ -35,7 +35,7 @@ class Output {
 				{"menubutton.png", "buttonMenuStyle"},
 				{"gamebutton.png", "buttonGameStyle"},
 				{"menuButton.png", "buttonStartStyle"},
-				{"menuButton.png", "countdownButtonStyle"},
+				{"startbutton.png", "countdownButtonStyle"},
 				{"losebutton.png", "loseButtonStyle"},
 				{"victorybutton.png", "victoryButtonStyle"}
 		};

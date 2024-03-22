@@ -54,7 +54,7 @@ public class StartScene extends Scene {
     }
 
     protected void createCountdownButton() {
-        countdownButton = ioManager.createCountdownButton("Start Countdown", 0, IOManager.SCREEN_WIDTH / 2 - 100, IOManager.SCREEN_HEIGHT / 2 - 25, 200, 50, "countdownButtonStyle", 2); // Set the countdown duration to 10 seconds
+        countdownButton = ioManager.createCountdownButton("Start Countdown", 0, IOManager.SCREEN_WIDTH / 2 - 250, IOManager.SCREEN_HEIGHT / 2 - 300, 500, 500, "countdownButtonStyle", 2); // Set the countdown duration to 10 seconds
     }
 
 
