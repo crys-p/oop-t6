@@ -20,7 +20,7 @@ public abstract class Entity {
         this.y = y;
         this.speed = speed;
         this.texture = texture;
-        this.boundingBox = new Rectangle(this.x, this.y, this.getWidth() * 3/4, this.getHeight() * 3/4 );
+        this.boundingBox = new Rectangle(this.x, this.y, this.getWidth() * 3/4, this.getHeight() * 3/4);
     }
 
     protected float getX() {

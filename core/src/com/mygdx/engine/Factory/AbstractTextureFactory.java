@@ -10,15 +10,13 @@ import java.util.HashMap;
 public abstract class AbstractTextureFactory {
     protected HashMap<Integer, String> entityImageMap;
     protected HashMap<Integer, String[]> entityMultiImageMap;
-    protected ArrayList<Texture> textureList;
 
     public AbstractTextureFactory() {
         entityImageMap = new HashMap<>();
         entityMultiImageMap = new HashMap<>();
-        textureList = new ArrayList<>();
     }
 
-    protected void create() {
+    public void create() {
         createSingleTextureEntity();
         createMultiTextureEntity();
     }

@@ -43,7 +43,6 @@ public class InventoryDisplay {
         for (int playerPoints: allPlayerPoints) {
             // Draw text showing total number of collectibles collected
             String collectiblesText = "Points: " + playerPoints;
-            System.out.println(collectiblesText);
             batch.begin();
             font.setColor(Color.WHITE);
             font.draw(batch, collectiblesText, posX, posY);

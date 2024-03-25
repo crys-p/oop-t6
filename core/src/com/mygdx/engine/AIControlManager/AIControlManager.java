@@ -3,9 +3,9 @@ package com.mygdx.engine.AIControlManager;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.MovementStrategy.AIMovement;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.GameMovementStrategy.LRMovement;
-import com.mygdx.game.GameMovementStrategy.NoMovement;
-import com.mygdx.game.GameMovementStrategy.UDMovement;
+import com.mygdx.game.AIMovementStrategy.LRMovement;
+import com.mygdx.game.AIMovementStrategy.NoMovement;
+import com.mygdx.game.AIMovementStrategy.UDMovement;
 
 import java.util.HashMap;
 import java.util.Map;

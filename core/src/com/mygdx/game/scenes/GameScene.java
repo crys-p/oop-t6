@@ -2,14 +2,12 @@ package com.mygdx.game.scenes;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.mygdx.engine.AIControlManager.AIControlManager;
 import com.mygdx.engine.MovementStrategy.AIMovement;
 import com.mygdx.engine.CameraManager.CameraManager;
@@ -20,7 +18,7 @@ import com.mygdx.game.GameFactories.NonPlayableEntityFactory;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;
-import com.mygdx.game.GameMovementStrategy.Player1Movement;
+import com.mygdx.game.PlayerMovementStrategy.Player1Movement;
 import com.mygdx.game.GameEntities.EntityType;
 import com.mygdx.game.player.GamePlayerManager;
 
@@ -94,6 +92,9 @@ public class GameScene extends Scene {
         nonPlayableFactory.create(EntityType.CABBAGE.getId(), numberOfCollectibles, random, 0, lrmovement, 17);
         nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, lrmovement, 6);
         nonPlayableFactory.create(EntityType.BOKCHOY.getId(), numberOfCollectibles, random, 0, lrmovement, 12);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
+
 
         // Create same amt of characters as players
         int x = 0;

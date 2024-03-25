@@ -9,11 +9,6 @@ public class GameTextureFactory extends AbstractTextureFactory {
         SimulationManager.getInstance().logInfo("Texture Manager initialized"); // Log initialization message
     }
 
-    public void create() {
-        createSingleTextureEntity();
-        createMultiTextureEntity();
-    }
-
     protected void createSingleTextureEntity() {
         // Non-Playable
         // Vegetables
@@ -39,6 +34,10 @@ public class GameTextureFactory extends AbstractTextureFactory {
         entityImageMap.put(EntityType.FRIES.getId(), "sprites/fastfood/french_fries.png");
         entityImageMap.put(EntityType.BURGER.getId(), "sprites/fastfood/sandwich_burger.png");
         entityImageMap.put(EntityType.SODA.getId(), "sprites/fastfood/soda_glass.png");
+
+        // Wall
+        entityImageMap.put(EntityType.hBRICKWALL.getId(), "sprites/building-block-assets/Brickwall.png");
+        entityImageMap.put(EntityType.vBRICKWALL.getId(), "sprites/building-block-assets/Brickwall_vertical.png");
     }
 
     protected void createMultiTextureEntity() {

@@ -7,7 +7,8 @@ public enum EntityType {
     BROCCOLI(3), CABBAGE(4), CARROT(5), BOKCHOY(6),
     APPLE(7), BANANA(8), WATERMELON(9),
     COOKIE(10), CUPCAKE(11), DOUGHNUT(12), ICECREAM(13), SUNDAE(14),
-    DRUMSTICK(15), FRIES(16), BURGER(17), SODA(18);
+    DRUMSTICK(15), FRIES(16), BURGER(17), SODA(18),
+    vBRICKWALL(19), hBRICKWALL(20);
 
     private final int id;
     private static final HashMap<Integer, EntityType> idToEnumMap = new HashMap<>();

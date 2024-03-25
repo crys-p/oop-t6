@@ -55,6 +55,8 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
                     return new Dessert(x, y, speed, texture, aiMovement, gameValue);
                 case DRUMSTICK: case FRIES: case BURGER: case SODA:
                     return new FastFood(x, y, speed, texture, aiMovement, gameValue);
+                case vBRICKWALL: case hBRICKWALL:
+                    return new Wall(x, y, speed, texture, aiMovement);
                 default:
                     SimulationManager.getInstance().logError("Creating unknown entity type: " + type);
             }

@@ -81,7 +81,6 @@ public class GamePlayer extends Player {
     }
 
     public void incrementPoints(int addPoints) {
-        System.out.println("adding " + addPoints);
         this.points += addPoints;
     }
 

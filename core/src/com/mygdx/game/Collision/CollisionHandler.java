@@ -4,10 +4,7 @@ import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.EntityManager.iCollidable;
 import com.mygdx.engine.SoundManager.SoundManager;
 import com.mygdx.engine.SoundManager.SoundEffectType;
-import com.mygdx.engine.EntityManager.PlayableCharacter;
-import com.mygdx.game.GameEntities.Collectible;
-import com.mygdx.game.GameEntities.Enemy;
-import com.mygdx.game.GameEntities.Vegetable;
+import com.mygdx.game.GameEntities.*;
 import com.mygdx.game.player.GamePlayerManager;
 
 public class CollisionHandler {
@@ -24,10 +21,10 @@ public class CollisionHandler {
 
 
     public void handleCollision(iCollidable entityA, iCollidable entityB) {
-        if ((entityA instanceof PlayableCharacter && entityB instanceof Enemy) || (entityB instanceof PlayableCharacter && entityA instanceof Enemy)) {
+        if ((entityA instanceof GameCharacter && entityB instanceof Enemy) || (entityB instanceof GameCharacter && entityA instanceof Enemy)) {
             characterEnemyCollision(entityA, entityB);
         }
-        if ((entityA instanceof PlayableCharacter && entityB instanceof Collectible) || (entityB instanceof PlayableCharacter && entityA instanceof Collectible)) {
+        if ((entityA instanceof GameCharacter && entityB instanceof Collectible) || (entityB instanceof GameCharacter && entityA instanceof Collectible)) {
             characterCollectibleCollision(entityA, entityB);
         }
         // Add other pairs if any
@@ -36,34 +33,38 @@ public class CollisionHandler {
     // Handling for Character(Player) & Enemy Collision
     private void characterEnemyCollision(iCollidable entityA, iCollidable entityB) {
         Enemy enemy;
-        PlayableCharacter playableCharacter;
+        GameCharacter gameCharacter;
         if (entityA instanceof Enemy) {
             enemy = (Enemy) entityA;
-            playableCharacter = (PlayableCharacter) entityB;
+            gameCharacter = (GameCharacter) entityB;
         } else {
             enemy = (Enemy) entityB;
-            playableCharacter = (PlayableCharacter) entityA;
+            gameCharacter = (GameCharacter) entityA;
         }
-        // Remove the collectible from the entity manager
-        entityManager.removeEntity(enemy);
-        // Reduce health of player based on enemy damage
-        gameplayerManager.takeDamage(playableCharacter, enemy);
-        // Play hit sound
-        soundManager.playSoundEffect(SoundEffectType.HIT);
+        if (enemy instanceof Wall) {
+            gameCharacter.moveBackwards();
+        } else {
+            // Remove the collectible from the entity manager
+            entityManager.removeEntity(enemy);
+            // Reduce health of player based on enemy damage
+            gameplayerManager.takeDamage(gameCharacter, enemy);
+            // Play hit sound
+            soundManager.playSoundEffect(SoundEffectType.HIT);
+        }
     }
 
     // Handling for Character(Player) & Collectible Collision
     private void characterCollectibleCollision(iCollidable entityA, iCollidable entityB) {
         Collectible collectible;
-        PlayableCharacter playableCharacter;
+        GameCharacter gameCharacter;
         if (entityA instanceof Collectible) {
             collectible = (Collectible) entityA;
-            playableCharacter = (PlayableCharacter) entityB;
+            gameCharacter = (GameCharacter) entityB;
         } else {
             collectible = (Collectible) entityB;
-            playableCharacter = (PlayableCharacter) entityA;
+            gameCharacter = (GameCharacter) entityA;
         }
-        int characterID = entityManager.getEntityID(playableCharacter);
+        int characterID = entityManager.getEntityID(gameCharacter);
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectible);
 
@@ -77,7 +78,7 @@ public class CollisionHandler {
     }
 
     // ALTER THIS TO BE USED INSIDE characterCollectibleCollision
-    private void characterVegetableCollision(PlayableCharacter character, Vegetable vegetable) {
+    private void characterVegetableCollision(GameCharacter character, Vegetable vegetable) {
         int characterID = entityManager.getEntityID(character);
         gameplayerManager.addPoints(characterID, vegetable.getPoints());
     }

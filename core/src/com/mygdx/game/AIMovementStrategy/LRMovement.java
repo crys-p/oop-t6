@@ -1,4 +1,4 @@
-    package com.mygdx.game.GameMovementStrategy;
+    package com.mygdx.game.AIMovementStrategy;
 
     import com.badlogic.gdx.Gdx;
     import com.mygdx.engine.MovementStrategy.AIMovement;
