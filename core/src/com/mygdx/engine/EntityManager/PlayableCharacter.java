@@ -25,9 +25,7 @@ public abstract class PlayableCharacter extends Entity implements iCollidable {
             float[] newPosition = movement.calculateMovement(this.getX(), this.getY(), this.getSpeed() * Gdx.graphics.getDeltaTime());
             this.setX(newPosition[0]);
             this.setY(newPosition[1]);
-            System.out.println("current player instruction: " + getPlayerInstructions());
             movement.setPlayerInstructions(null);
-            System.out.println("setting instruction NULLLLL " + getPlayerInstructions());
             updateBoundingBox();
         } else {
             moving = true; // reset flag

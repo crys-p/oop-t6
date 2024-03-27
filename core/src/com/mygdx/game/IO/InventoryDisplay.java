@@ -1,4 +1,4 @@
-package com.mygdx.engine.IOManager;
+package com.mygdx.game.IO;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -15,11 +15,11 @@ public class InventoryDisplay {
     private GamePlayerManager gameplayerManager;
     protected final BitmapFont font;
 
-    protected InventoryDisplay(GamePlayerManager gameplayerManager) {
+    public InventoryDisplay(GamePlayerManager gameplayerManager) {
         this.gameplayerManager = gameplayerManager;
         this.font = new BitmapFont();
     }
-    protected void render(SpriteBatch batch) {
+    public void render(SpriteBatch batch) {
         List<Integer> allPlayerInventory = gameplayerManager.getAllPlayerInventory();
         List<Integer> allPlayerPoints = gameplayerManager.getAllPlayerPoints();
 

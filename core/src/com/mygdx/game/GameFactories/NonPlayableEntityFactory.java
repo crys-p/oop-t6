@@ -48,9 +48,9 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
             Texture texture = gameTextureFactory.getTexture(typeId);
             switch (type) {
                 case BOKCHOY: case BROCCOLI: case CARROT: case CABBAGE:
-                    return new Vegetable(x, y, speed, texture, aiMovement, gameValue);
+                    return new Vegetable(x, y, speed, texture, aiMovement, type, gameValue);
                 case APPLE: case BANANA: case WATERMELON:
-                    return new Fruit(x, y, speed, texture, aiMovement, gameValue);
+                    return new Fruit(x, y, speed, texture, aiMovement, type, gameValue);
                 case ICECREAM: case COOKIE: case CUPCAKE: case DOUGHNUT: case SUNDAE:
                     return new Dessert(x, y, speed, texture, aiMovement, gameValue);
                 case DRUMSTICK: case FRIES: case BURGER: case SODA:

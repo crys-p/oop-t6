@@ -7,6 +7,7 @@ import com.mygdx.engine.PlayerManager.Item;
 import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.GameEntities.Enemy;
+import com.mygdx.game.GameEntities.EntityType;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,13 +84,18 @@ public class GamePlayerManager extends PlayerManager {
         }
     }
 
+    // the previous one
     public void addItemToInventory(int characterID) {
         for (GamePlayer player: allPlayers) {
-             if (playerEntityMap.get(player) == characterID) {
-                 player.addToInventory(new Item(), 1);
-                 allPlayerInventoryCount++;
-             }
+            if (playerEntityMap.get(player) == characterID) {
+                player.addToInventory(new Item(), 1);
+                allPlayerInventoryCount++;
+            }
         }
+    }
+
+    // todo: update inventory count using entitytype
+    public void addItemToInventory(int characterID, EntityType myType) {
     }
 
     public int getTotalNumberOfPlayers() {
@@ -176,4 +182,5 @@ public class GamePlayerManager extends PlayerManager {
         }
         return allPoints;
     }
+
 }
