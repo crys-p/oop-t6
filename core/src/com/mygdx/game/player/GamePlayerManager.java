@@ -17,6 +17,8 @@ import java.util.Map;
 public class GamePlayerManager extends PlayerManager {
     private final ArrayList<GamePlayer> allPlayers;
     private final Map<GamePlayer, Integer> playerEntityMap; // Map to store GamePlayer instances and corresponding entity being controlled
+    private Map<Integer, Map<EntityType, Integer>> characterInventory = new HashMap<>();
+
     private int numDeadPlayers = 0;
     private int allPlayerInventoryCount = 0;
     private SimulationManager simulationManager;
@@ -85,17 +87,31 @@ public class GamePlayerManager extends PlayerManager {
     }
 
     // the previous one
-    public void addItemToInventory(int characterID) {
-        for (GamePlayer player: allPlayers) {
-            if (playerEntityMap.get(player) == characterID) {
-                player.addToInventory(new Item(), 1);
-                allPlayerInventoryCount++;
-            }
-        }
-    }
+//    public void addItemToInventory(int characterID) {
+//        for (GamePlayer player: allPlayers) {
+//            if (playerEntityMap.get(player) == characterID) {
+//                player.addToInventory(new Item(), 1);
+//                allPlayerInventoryCount++;
+//            }
+//        }
+//    }
 
     // todo: update inventory count using entitytype
     public void addItemToInventory(int characterID, EntityType myType) {
+        // Retrieve the inventory map for the specified character ID
+        Map<EntityType, Integer> inventory = characterInventory.getOrDefault(characterID, new HashMap<>());
+
+        // Get the current count for the specified EntityType
+        int count = inventory.getOrDefault(myType, 0);
+
+        // Increment the count by one
+        count++;
+
+        // Update the inventory map with the new count
+        inventory.put(myType, count);
+
+        // Update the character's inventory in the main inventory map
+        characterInventory.put(characterID, inventory);
     }
 
     public int getTotalNumberOfPlayers() {
