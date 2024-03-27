@@ -1,7 +1,7 @@
 package com.mygdx.game.Collision;
 
 import com.mygdx.engine.EntityManager.EntityManager;
-import com.mygdx.engine.EntityManager.iCollidable;
+import com.mygdx.engine.CollisionManager.iCollidable;
 import com.mygdx.engine.SoundManager.SoundManager;
 import com.mygdx.engine.SoundManager.SoundEffectType;
 import com.mygdx.game.GameEntities.*;

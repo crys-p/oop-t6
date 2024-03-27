@@ -3,6 +3,7 @@ package com.mygdx.engine.EntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.engine.CollisionManager.iCollidable;
 import com.mygdx.engine.MovementStrategy.PlayerMovement;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 

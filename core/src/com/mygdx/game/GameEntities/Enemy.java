@@ -4,7 +4,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.mygdx.engine.MovementStrategy.AIMovement;
 import com.mygdx.engine.EntityManager.NonPlayableCharacter;
-import com.mygdx.engine.EntityManager.iCollidable;
+import com.mygdx.engine.CollisionManager.iCollidable;
 
 public abstract class Enemy extends NonPlayableCharacter implements iCollidable {
     private float damage = 0; // default damage is 0

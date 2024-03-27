@@ -1,9 +1,9 @@
 package com.mygdx.engine.EntityManager;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.engine.CollisionManager.iCollidable;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.engine.SimulationManager.SimulationManager;
-import com.mygdx.game.GameEntities.Enemy;
 
 import java.util.*;
 
