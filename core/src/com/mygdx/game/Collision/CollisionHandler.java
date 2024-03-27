@@ -75,7 +75,7 @@ public class CollisionHandler {
         if (collectible instanceof Vegetable) {
             characterCollectVegetable(characterID, (Vegetable) collectible);
         }
-        gameplayerManager.addItemToInventory(characterID);
+//        gameplayerManager.addItemToInventory(characterID, );
         gameplayerManager.addPoints(characterID, collectible.getPoints());
     }
 
