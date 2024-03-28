@@ -26,8 +26,6 @@ import java.util.Random;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
-import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
-import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 public class GameScene extends Scene {
 
@@ -158,7 +156,7 @@ public class GameScene extends Scene {
         clearScreen();
         viewport.apply(true);
         batch.begin();
-            batch.draw(backgroundTexture, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
+            batch.draw(backgroundTexture, 0, 0, getSceneWidth(), getSceneHeight());
             entityManager.drawAllEntities(batch);
         batch.end();
         uiBatch.begin();
