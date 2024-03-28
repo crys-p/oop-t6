@@ -23,6 +23,9 @@ public class CharacterCollectibleHandler {
     private final GamePlayerManager gameplayerManager;
     private final SceneManager sceneManager;
 
+    private long lastRecoveryTime = 0; // Timestamp of the last collision
+    private long cooldownDuration = 1000; // Cooldown is one second
+
     public CharacterCollectibleHandler(EntityManager entityManager, SoundManager soundManager, GamePlayerManager gameplayerManager, SceneManager sceneManager) {
         this.entityManager = entityManager;
         this.soundManager = soundManager;
@@ -52,13 +55,31 @@ public class CharacterCollectibleHandler {
         }
         // Fruit specific stuff
         if (collectible instanceof Fruit) {
-            gameplayerManager.addPoints(characterID, collectible.getPoints()); // add points
+            characterCollectFruit(collectible, characterID);
         }
     }
 
     private void characterCollectVegetable(int characterID, Vegetable vegetable) {
         gameplayerManager.addItemToInventory(characterID, vegetable.getMyType());
     }
+
+    private void characterCollectFruit(Collectible collectible, int characterID) {
+        Fruit fruit = (Fruit) collectible;
+        // if fruit is a recovery fruit
+        if (fruit.isRecovery()) {
+            // check if cooldown is over
+            if (System.currentTimeMillis() - lastRecoveryTime < cooldownDuration) {
+                // don't recover health
+            } else {
+                gameplayerManager.recoverHealth(characterID, fruit.getPoints());
+                this.lastRecoveryTime = System.currentTimeMillis();
+            }
+        }
+        else {
+            gameplayerManager.addPoints(characterID, collectible.getPoints()); // add points
+        }
+    }
+
 
     private Entity[] downcastEntities(iCollidable entityA, iCollidable entityB) {
         Collectible collectible;
