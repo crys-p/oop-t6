@@ -26,8 +26,6 @@ import java.util.Random;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
-import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
-import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 public class GameScene extends Scene {
 
@@ -40,6 +38,7 @@ public class GameScene extends Scene {
     //private static final int VIEWPORT_WIDTH = 1280;
     //private static final int VIEWPORT_HEIGHT = 720;
     private Texture backgroundTexture;
+    private Texture backgroundTexture1;
 
 
     public GameScene(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
@@ -50,6 +49,7 @@ public class GameScene extends Scene {
         uiBatch = new SpriteBatch();
         setBackgroundColor(Color.BLUE); // setting of background color for end scene
         backgroundTexture = new Texture(Gdx.files.internal("assets/gamescene.png"));
+        backgroundTexture1 = new Texture(Gdx.files.internal("assets/startscene.png"));
 
         // Assuming you are using a FitViewport for example
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera());
@@ -158,7 +158,8 @@ public class GameScene extends Scene {
         clearScreen();
         viewport.apply(true);
         batch.begin();
-            batch.draw(backgroundTexture, 0, 0, SCENE_WIDTH, SCENE_HEIGHT);
+            //batch.draw(backgroundTexture1, -1000, -1000, 4000, 4000);
+            batch.draw(backgroundTexture, 0, 0, getSceneWidth(), getSceneHeight());
             entityManager.drawAllEntities(batch);
         batch.end();
         uiBatch.begin();

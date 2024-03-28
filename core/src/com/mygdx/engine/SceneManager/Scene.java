@@ -33,6 +33,8 @@ public abstract class Scene extends ScreenAdapter {
     // Set the desired viewport size
     private final int VIEWPORT_WIDTH = 1280;
     private final int VIEWPORT_HEIGHT = 720;
+    private static final int SCENE_WIDTH = 1980;
+    private static final int SCENE_HEIGHT = 1080;
 
 
 
@@ -105,6 +107,16 @@ public abstract class Scene extends ScreenAdapter {
 
     protected Color getBackgroundColor() {
         return backgroundColor;
+    }
+
+    protected static int getSceneHeight()
+    {
+        return SCENE_HEIGHT;
+    }
+
+    protected static int getSceneWidth()
+    {
+        return SCENE_WIDTH;
     }
 
 }

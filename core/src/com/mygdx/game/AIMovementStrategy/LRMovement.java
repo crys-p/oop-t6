@@ -6,6 +6,7 @@
 
     import static com.badlogic.gdx.math.MathUtils.random;
     import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
+    import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
 
     public class LRMovement extends AIMovement {
         public LRMovement(Entity entity) {
@@ -25,7 +26,7 @@
                 // Reverse the direction
                 direction *= -1;
                 // Randomize Y position
-                entityY = random.nextFloat() * (Gdx.graphics.getHeight() - 100);
+                entityY = random.nextFloat() * (SCENE_HEIGHT - 100);
                 // Adjust the position to keep the AI within screen bounds
                 newX = Math.max(0, Math.min((float) Gdx.graphics.getWidth(), newX)) * direction;
             }
