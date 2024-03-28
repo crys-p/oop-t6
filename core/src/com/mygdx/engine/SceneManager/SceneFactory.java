@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.game.GameFactories.EntityFactoryManager;
-import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.game.player.GamePlayerManager;
 import com.mygdx.game.scenes.*;
@@ -21,12 +20,12 @@ public class SceneFactory implements iSceneFactory {
         switch (type) {
             case START:
                 return new StartScene(game, sceneManager, entityManager, batch, shape, ioManager);
-            case GAME:
-                return new GameScene(game, sceneManager, entityManager, entityFactoryManager, batch, shape, ioManager, gameplayerManager, cameraManager);
             case GAMEL1:
                 return new GameSceneL1(game, sceneManager, entityManager, entityFactoryManager, batch, shape, ioManager, gameplayerManager, cameraManager);
             case GAMEL2:
                 return new GameSceneL2(game, sceneManager, entityManager, entityFactoryManager, batch, shape, ioManager, gameplayerManager, cameraManager);
+            case GAMEL3:
+                return new GameSceneL3(game, sceneManager, entityManager, entityFactoryManager, batch, shape, ioManager, gameplayerManager, cameraManager);
             case MENU:
                 return new MenuScene(game, sceneManager, entityManager, batch, shape, ioManager);
             case VICTORY:

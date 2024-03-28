@@ -40,11 +40,11 @@ public class StartScene extends Scene {
     public void show() {
         //createEntities();
         createCountdownButton();
-        // After 10 seconds, switch to the GameScene
+        // After 10 seconds, switch to the GameSceneL1
         Timer.schedule(new Timer.Task() {
             @Override
             public void run() {
-                Gdx.app.log("Timer", "Switching to GameScene after 5 seconds");
+                Gdx.app.log("Timer", "Switching to GameSceneL1 after 5 seconds");
                 sceneManager.showScene(SceneManager.SceneType.GAME);
             }
         }, 3); // Delay of 10 seconds

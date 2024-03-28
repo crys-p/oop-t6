@@ -22,6 +22,7 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
     public NonPlayableEntityFactory(EntityManager entityManager, GameTextureFactory gameTextureFactory) {
         super(entityManager);
         this.gameTextureFactory = gameTextureFactory;
+        SimulationManager.getInstance().logInfo("NonPlayable Entity Factory initialized"); // Log initialization message
     }
 
     // Specific implementation overloaded with randomly generated entities and game points
@@ -36,7 +37,7 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
         }
     }
 
-    protected Entity createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
+    protected NonPlayableCharacter createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
         return createSpecifiedEntity(typeId, x, y, speed, movement, 0); // Default game value to 0
     }
 

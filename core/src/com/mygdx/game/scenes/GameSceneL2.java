@@ -22,6 +22,7 @@ import com.mygdx.game.PlayerMovementStrategy.Player1Movement;
 import com.mygdx.game.GameEntities.EntityType;
 import com.mygdx.game.player.GamePlayerManager;
 
+
 import java.util.Random;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
@@ -29,8 +30,8 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 public class GameSceneL2 extends Scene {
 
-    private int numberOfEnemy = 10;
-    private int numberOfCollectibles = 2;
+    private int numberOfEnemy = 5;
+    private int numberOfCollectibles = 20;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
@@ -46,7 +47,7 @@ public class GameSceneL2 extends Scene {
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
         uiBatch = new SpriteBatch();
-        setBackgroundColor(Color.PINK); // setting of background color for end scene
+        setBackgroundColor(Color.PURPLE); // setting of background color for end scene
         backgroundTexture = new Texture(Gdx.files.internal("assets/gamescene.png"));
 
         // Assuming you are using a FitViewport for example
@@ -83,11 +84,14 @@ public class GameSceneL2 extends Scene {
         AIMovement udmovement = AIControlManager.getUDMovement();
         AIMovement nomovement = AIControlManager.getNoMovement();
 
-        nonPlayableFactory.create(EntityType.FRIES.getId(), numberOfEnemy, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.BURGER.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.SODA.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.CUPCAKE.getId(), numberOfEnemy, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.DOUGHNUT.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.SUNDAE.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.APPLE.getId(), numberOfCollectibles, random, 0, lrmovement, 8);
+        nonPlayableFactory.create(EntityType.BANANA.getId(), numberOfCollectibles, random, 0, lrmovement);
         nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
 
         // Create same amt of characters as players
         int x = 0;
@@ -170,7 +174,7 @@ public class GameSceneL2 extends Scene {
         }
         if (gameplayerManager.getNumAllCollectibles() == numberOfCollectibles) {
             // Detect total collectibles to call victory scene
-            this.sceneManager.showScene(SceneManager.SceneType.VICTORY);
+            this.sceneManager.showScene(SceneManager.SceneType.GAMEL3);
         }
         ioManager.updateMovement();
 

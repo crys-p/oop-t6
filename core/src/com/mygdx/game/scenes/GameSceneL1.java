@@ -22,7 +22,6 @@ import com.mygdx.game.PlayerMovementStrategy.Player1Movement;
 import com.mygdx.game.GameEntities.EntityType;
 import com.mygdx.game.player.GamePlayerManager;
 
-
 import java.util.Random;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
@@ -30,7 +29,7 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 public class GameSceneL1 extends Scene {
 
-    private int numberOfEnemy = 5;
+    private int numberOfEnemy = 10;
     private int numberOfCollectibles = 20;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
@@ -39,6 +38,7 @@ public class GameSceneL1 extends Scene {
     //private static final int VIEWPORT_WIDTH = 1280;
     //private static final int VIEWPORT_HEIGHT = 720;
     private Texture backgroundTexture;
+    private Texture backgroundTexture1;
 
 
     public GameSceneL1(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
@@ -47,8 +47,9 @@ public class GameSceneL1 extends Scene {
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
         uiBatch = new SpriteBatch();
-        setBackgroundColor(Color.PURPLE); // setting of background color for end scene
+        setBackgroundColor(Color.BLUE); // setting of background color for end scene
         backgroundTexture = new Texture(Gdx.files.internal("assets/gamescene.png"));
+        backgroundTexture1 = new Texture(Gdx.files.internal("assets/startscene.png"));
 
         // Assuming you are using a FitViewport for example
         //viewport = new FitViewport(VIEWPORT_WIDTH, VIEWPORT_HEIGHT, new OrthographicCamera());
@@ -84,14 +85,16 @@ public class GameSceneL1 extends Scene {
         AIMovement udmovement = AIControlManager.getUDMovement();
         AIMovement nomovement = AIControlManager.getNoMovement();
 
-        nonPlayableFactory.create(EntityType.CUPCAKE.getId(), numberOfEnemy, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.DOUGHNUT.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.SUNDAE.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.APPLE.getId(), numberOfCollectibles, random, 0, lrmovement, 8);
-        nonPlayableFactory.create(EntityType.BANANA.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.DRUMSTICK.getId(), numberOfEnemy, random, 0, lrmovement, -10);
+        nonPlayableFactory.create(EntityType.ICECREAM.getId(), numberOfEnemy, random, 0, udmovement, -15);
+        nonPlayableFactory.create(EntityType.COOKIE.getId(), numberOfEnemy, random, 0, udmovement, -7);
+        nonPlayableFactory.create(EntityType.BROCCOLI.getId(), numberOfCollectibles, random, 0, lrmovement, 8);
+        nonPlayableFactory.create(EntityType.CABBAGE.getId(), numberOfCollectibles, random, 0, lrmovement, 17);
+        nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, lrmovement, 6);
+        nonPlayableFactory.create(EntityType.BOKCHOY.getId(), numberOfCollectibles, random, 0, lrmovement, 12);
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
         nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
+
 
         // Create same amt of characters as players
         int x = 0;
@@ -155,6 +158,7 @@ public class GameSceneL1 extends Scene {
         clearScreen();
         viewport.apply(true);
         batch.begin();
+            //batch.draw(backgroundTexture1, -1000, -1000, 4000, 4000);
             batch.draw(backgroundTexture, 0, 0, getSceneWidth(), getSceneHeight());
             entityManager.drawAllEntities(batch);
         batch.end();

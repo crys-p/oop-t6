@@ -3,6 +3,7 @@ package com.mygdx.game.GameFactories;
 import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.engine.EntityManager.PlayableCharacter;
 import com.mygdx.engine.Factory.AbstractEntityFactory;
 import com.mygdx.engine.MovementStrategy.Movement;
 import com.mygdx.engine.MovementStrategy.PlayerMovement;
@@ -16,11 +17,12 @@ public class PlayableEntityFactory extends AbstractEntityFactory {
     public PlayableEntityFactory(EntityManager entityManager, GameTextureFactory gameTextureFactory) {
         super(entityManager);
         this.gameTextureFactory = gameTextureFactory;
+        SimulationManager.getInstance().logInfo("Playable Entity Factory initialized"); // Log initialization message
     }
 
 
     @Override
-    protected Entity createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
+    protected PlayableCharacter createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
         try {
             PlayerMovement playerMovement = (PlayerMovement) movement;
             EntityType type = EntityType.getEntityType(typeId);

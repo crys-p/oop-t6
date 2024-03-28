@@ -21,7 +21,7 @@ import java.util.Map;
 
 public class SceneManager {
     public enum SceneType {
-        START, GAME, GAMEL1 ,GAMEL2, MENU, VICTORY, LOSE
+        START, GAMEL1, GAMEL2 ,GAMEL3, MENU, VICTORY, LOSE
     }
 
     private final Game game;
@@ -71,7 +71,7 @@ public class SceneManager {
         allScenesMap.put(SceneType.START,
                 new StartScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
         allScenesMap.put(SceneType.GAME,
-                new GameScene(game, this, entityManager, entityFactoryManager, new SpriteBatch(), new ShapeRenderer(), ioManager, gameplayerManager, cameraManager));
+                new GameSceneL1(game, this, entityManager, entityFactoryManager, new SpriteBatch(), new ShapeRenderer(), ioManager, gameplayerManager, cameraManager));
         allScenesMap.put(SceneType.MENU,
                 new MenuScene(game, this, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager));
         allScenesMap.put(SceneType.LOSE,
@@ -127,8 +127,8 @@ public class SceneManager {
     }
 
 //    public void pauseGameSceneAndSwitchToMenu() {
-//        // Check if the current scene is an instance of GameScene
-//        if (currentScene instanceof GameScene) {
+//        // Check if the current scene is an instance of GameSceneL1
+//        if (currentScene instanceof GameSceneL1) {
 //            // Pause the game scene
 //            currentScene.pause();
 //
@@ -136,7 +136,7 @@ public class SceneManager {
 //            MenuScene menuScene = new MenuScene(game, entityManager, new SpriteBatch(), new ShapeRenderer(), ioManager);
 //            changeScene(menuScene);
 //        } else {
-//            System.out.println("Error: Current scene is not a GameScene.");
+//            System.out.println("Error: Current scene is not a GameSceneL1.");
 //        }
 //    }
 
