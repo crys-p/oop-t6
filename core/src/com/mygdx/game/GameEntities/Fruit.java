@@ -4,12 +4,17 @@ import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.engine.MovementStrategy.AIMovement;
 
 public class Fruit extends Collectible {
+
+    private EntityType myType;
+
     public Fruit(float x, float y, float speed, Texture texture, AIMovement movement) {
         super(x, y, speed, texture, movement);
     }
 
-    public Fruit(float x, float y, float speed, Texture texture, AIMovement movement, int gamePoints) {
+    public Fruit(float x, float y, float speed, Texture texture, AIMovement movement, EntityType type, int gameValue) {
         super(x, y, speed, texture, movement);
-        this.setPoints(gamePoints);
+        this.setPoints(gameValue);
+        this.myType = type;
     }
+
 }

@@ -82,9 +82,6 @@ public abstract class Entity {
 
     protected void setPlayerInstructions(PlayerInstructions instructions) {};
 
-    // Im not sure what to do here yet haha
-    protected void aiMovement() {}
-
     protected Texture getTexture() {
         return this.texture;
     }

@@ -1,8 +1,6 @@
 package com.mygdx.engine.CollisionManager;
 
-import com.mygdx.engine.EntityManager.Entity;
 import com.mygdx.engine.EntityManager.EntityManager;
-import com.mygdx.engine.EntityManager.iCollidable;
 import com.mygdx.game.Collision.CollisionHandler;
 
 import java.util.ArrayList;

@@ -42,8 +42,8 @@ public class SceneManager {
     private iSceneFactory sceneFactory; // The scene factory instance
     private SceneType currentSceneType;
 
-    public static final int SCENE_WIDTH = 1980;
-    public static final int SCENE_HEIGHT = 1080;
+    public static int SCENE_WIDTH;
+    public static int SCENE_HEIGHT;
 
 
 
@@ -61,6 +61,8 @@ public class SceneManager {
 
         simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("SceneManager initialized"); // Log initialization message
+        SCENE_WIDTH = Scene.getSceneWidth();
+        SCENE_HEIGHT = Scene.getSceneHeight();
     }
 
 

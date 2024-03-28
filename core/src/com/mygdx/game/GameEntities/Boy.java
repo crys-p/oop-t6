@@ -10,10 +10,6 @@ import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
 public class Boy extends GameCharacter {
 
-    public Boy(float x, float y, float speed, Texture texture) {
-        super(x, y, speed, texture);
-    }
-
     public Boy(float x, float y, float speed, Texture texture, Texture[] textures, PlayerMovement playerMovement) {
         super(x, y, speed, texture, textures, playerMovement);
     }

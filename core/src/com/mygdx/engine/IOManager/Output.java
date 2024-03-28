@@ -10,8 +10,8 @@ import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
-import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.game.IO.HealthBar;
+import com.mygdx.game.IO.InventoryDisplay;
 import com.mygdx.game.player.GamePlayerManager;
 
 class Output {

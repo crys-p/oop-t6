@@ -3,6 +3,7 @@ package com.mygdx.engine.EntityManager;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.engine.CollisionManager.iCollidable;
 import com.mygdx.engine.MovementStrategy.PlayerMovement;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
@@ -11,9 +12,6 @@ public abstract class PlayableCharacter extends Entity implements iCollidable {
 
     protected PlayerMovement movement; // movement object
     protected boolean moving = false; // flag for moving
-    public PlayableCharacter(float x, float y, float speed, Texture texture) {
-        super(x, y, speed, texture);
-    }
 
     public PlayableCharacter(float x, float y, float speed, Texture texture, PlayerMovement behaviour) {
         super(x, y, speed, texture);
@@ -25,9 +23,7 @@ public abstract class PlayableCharacter extends Entity implements iCollidable {
             float[] newPosition = movement.calculateMovement(this.getX(), this.getY(), this.getSpeed() * Gdx.graphics.getDeltaTime());
             this.setX(newPosition[0]);
             this.setY(newPosition[1]);
-            System.out.println("current player instruction: " + getPlayerInstructions());
             movement.setPlayerInstructions(null);
-            System.out.println("setting instruction NULLLLL " + getPlayerInstructions());
             updateBoundingBox();
         } else {
             moving = true; // reset flag
@@ -38,7 +34,7 @@ public abstract class PlayableCharacter extends Entity implements iCollidable {
         return this.movement.getPlayerInstructions();
     }
 
-    protected void setPlayerInstructions(PlayerInstructions instructions) {
+    public void setPlayerInstructions(PlayerInstructions instructions) {
         this.movement.setPlayerInstructions(instructions);
     }
 

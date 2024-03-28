@@ -1,10 +1,12 @@
 package com.mygdx.game.player;
 
 import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.engine.EntityManager.PlayableCharacter;
 import com.mygdx.engine.PlayerManager.Item;
 import com.mygdx.engine.PlayerManager.Player;
 import com.mygdx.engine.PlayerManager.PlayerController;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
+import com.mygdx.engine.SimulationManager.SimulationManager;
 
 public class GamePlayer extends Player {
     private int playerControlledEntityID = -1;
@@ -68,7 +70,12 @@ public class GamePlayer extends Player {
     public void move(Integer key, EntityManager entityManager) {
         PlayerInstructions instr = this.playerController.getPlayerMovement(key);
         if (instr != null) {
-            entityManager.inputMovement(this.playerControlledEntityID, instr);
+            try {
+                PlayableCharacter player = (PlayableCharacter) entityManager.getEntity(this.playerControlledEntityID);
+                player.setPlayerInstructions(instr);
+            } catch (Exception e) {
+                SimulationManager.getInstance().logError("Player move error: " + e);
+            }
         }
     }
 

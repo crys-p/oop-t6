@@ -1,4 +1,4 @@
-package com.mygdx.engine.EntityManager;
+package com.mygdx.engine.CollisionManager;
 
 import com.badlogic.gdx.math.Rectangle;
 

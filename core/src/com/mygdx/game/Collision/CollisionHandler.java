@@ -1,7 +1,7 @@
 package com.mygdx.game.Collision;
 
 import com.mygdx.engine.EntityManager.EntityManager;
-import com.mygdx.engine.EntityManager.iCollidable;
+import com.mygdx.engine.CollisionManager.iCollidable;
 import com.mygdx.engine.SoundManager.SoundManager;
 import com.mygdx.engine.SoundManager.SoundEffectType;
 import com.mygdx.game.GameEntities.*;
@@ -9,9 +9,9 @@ import com.mygdx.game.player.GamePlayerManager;
 
 public class CollisionHandler {
 
-    protected final EntityManager entityManager;
-    protected final SoundManager soundManager;
-    protected final GamePlayerManager gameplayerManager;
+    private final EntityManager entityManager;
+    private final SoundManager soundManager;
+    private final GamePlayerManager gameplayerManager;
 
     public CollisionHandler(EntityManager entityManager, SoundManager soundManager, GamePlayerManager gameplayerManager) {
         this.entityManager = entityManager;
@@ -67,19 +67,20 @@ public class CollisionHandler {
         int characterID = entityManager.getEntityID(gameCharacter);
         // Remove the collectible from the entity manager
         entityManager.removeEntity(collectible);
-
-        // Add the collided collectible to the player's inventory, add points //TODO: separate this based on game mechanics
-        gameplayerManager.addItemToInventory(characterID);
-        gameplayerManager.addPoints(characterID, collectible.getPoints());
-
         // Play collected sound
         soundManager.playSoundEffect(SoundEffectType.COLLECT);
 
+        // Add the collided collectible to the player's inventory, add points //TODO: separate this based on game mechanics
+        // if item is vegetable, add to inventory
+        if (collectible instanceof Vegetable) {
+            characterCollectVegetable(characterID, (Vegetable) collectible);
+        }
+//        gameplayerManager.addItemToInventory(characterID, );
+        gameplayerManager.addPoints(characterID, collectible.getPoints());
     }
 
     // ALTER THIS TO BE USED INSIDE characterCollectibleCollision
-    private void characterVegetableCollision(GameCharacter character, Vegetable vegetable) {
-        int characterID = entityManager.getEntityID(character);
-        gameplayerManager.addPoints(characterID, vegetable.getPoints());
+    private void characterCollectVegetable(int characterID, Vegetable vegetable) {
+        gameplayerManager.addItemToInventory(characterID, vegetable.getMyType());
     }
 }
