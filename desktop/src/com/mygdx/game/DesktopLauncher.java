@@ -11,7 +11,7 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
 		config.setForegroundFPS(60);
 
-		config.setTitle("LabSamples");
+		config.setTitle("Food Survivor");
 		new Lwjgl3Application(new GameMaster(), config);
 	}
 }

@@ -6,6 +6,7 @@
 
     import static com.badlogic.gdx.math.MathUtils.random;
     import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
+    import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
     public class UDMovement extends AIMovement {
         public UDMovement(Entity entity) {
@@ -25,7 +26,7 @@
                 // Reverse the direction if the edge is reached
                 direction *= -1;
                 // Randomize X position
-                entityX = random.nextFloat() * (Gdx.graphics.getWidth() - 100);
+                entityX = random.nextFloat() * (SCENE_WIDTH - 100);
                 // Adjust the position to keep the AI within screen bounds
                 newY = Math.max(0, Math.min((float) Gdx.graphics.getHeight(), newY)) * direction;
             }
