@@ -12,8 +12,8 @@ import com.mygdx.game.GameEntities.*;
 
 import java.util.Random;
 
-import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
-import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 
 public class NonPlayableEntityFactory extends AbstractEntityFactory {
@@ -25,17 +25,24 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
         SimulationManager.getInstance().logInfo("NonPlayable Entity Factory initialized"); // Log initialization message
     }
 
-    // Specific implementation overloaded with randomly generated entities and game points
+    @Override
+    public void create(int typeId, int quantity, Random random, float speed, Movement movement) {
+        create(typeId, quantity, random, speed, movement, 0); // Default game value to 0
+    }
+
     public void create(int typeId, int quantity, Random random, float speed, Movement movement, int gamePoints) {
+        float textureWidth = gameTextureFactory.getTextureWidth(typeId);
+        float textureHeight= gameTextureFactory.getTextureHeight(typeId);
         for (int i = 0; i < quantity; i++) {
-            float randomX = random.nextFloat() * SCREEN_WIDTH - 50;
-            float randomY = random.nextFloat() * SCREEN_HEIGHT;
+            float randomX = random.nextInt(SCENE_WIDTH - (int) textureWidth);
+            float randomY = random.nextInt(SCENE_HEIGHT - (int) textureHeight);
             Entity entity = createSpecifiedEntity(typeId, randomX, randomY, speed, movement, gamePoints);
             if (entity != null) {
                 entityManager.addEntity(entity);
             }
         }
     }
+
 
     protected NonPlayableCharacter createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
         return createSpecifiedEntity(typeId, x, y, speed, movement, 0); // Default game value to 0

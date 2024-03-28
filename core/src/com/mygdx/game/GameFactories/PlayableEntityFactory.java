@@ -11,6 +11,11 @@ import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.GameEntities.Boy;
 import com.mygdx.game.GameEntities.EntityType;
 
+import java.util.Random;
+
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
+
 
 public class PlayableEntityFactory extends AbstractEntityFactory {
     private GameTextureFactory gameTextureFactory;
@@ -20,6 +25,20 @@ public class PlayableEntityFactory extends AbstractEntityFactory {
         SimulationManager.getInstance().logInfo("Playable Entity Factory initialized"); // Log initialization message
     }
 
+
+    @Override
+    public void create(int typeId, int quantity, Random random, float speed, Movement movement) {
+        float textureWidth = gameTextureFactory.getTextureWidth(typeId);
+        float textureHeight = gameTextureFactory.getTextureHeight(typeId);
+        for (int i = 0; i < quantity; i++) {
+            float randomX = random.nextInt(SCENE_WIDTH - (int) textureWidth);
+            float randomY = random.nextInt(SCENE_HEIGHT - (int) textureHeight);
+            Entity entity = createSpecifiedEntity(typeId, randomX, randomY, speed, movement);
+            if (entity != null) {
+                entityManager.addEntity(entity);
+            }
+        }
+    }
 
     @Override
     protected PlayableCharacter createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {

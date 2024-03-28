@@ -1,5 +1,6 @@
 package com.mygdx.game.GameFactories;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.engine.Factory.AbstractTextureFactory;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.GameEntities.EntityType;
@@ -51,4 +52,17 @@ public class GameTextureFactory extends AbstractTextureFactory {
         entityMultiImageMap.put(EntityType.BOY.getId(), sprites);
     }
 
+    public float getTextureWidth(int typeId) {
+        Texture texture = new Texture(entityImageMap.get(typeId));
+        float width = texture.getWidth();
+        texture.dispose();
+        return width;
+    }
+
+    public float getTextureHeight(int typeId) {
+        Texture texture = new Texture(entityImageMap.get(typeId));
+        float height = texture.getHeight();
+        texture.dispose();
+        return height;
+    }
 }
