@@ -23,7 +23,7 @@ public class CollisionHandlers {
         this.soundManager = soundManager;
         this.gameplayerManager = gameplayerManager;
         this.sceneManager = sceneManager;
-        this.characterEnemyHandler = new CharacterEnemyHandler(entityManager, soundManager, gameplayerManager, sceneManager);
+        this.characterEnemyHandler = new CharacterEnemyHandler(soundManager, gameplayerManager);
         this.characterCollectibleHandler = new CharacterCollectibleHandler(entityManager, soundManager, gameplayerManager, sceneManager);
     }
 
@@ -35,7 +35,6 @@ public class CollisionHandlers {
         if ((entityA instanceof GameCharacter && entityB instanceof Collectible) || (entityB instanceof GameCharacter && entityA instanceof Collectible)) {
             characterCollectibleHandler.characterCollectibleCollision(entityA, entityB);
         }
-        // Add other pairs if any
     }
 
 }

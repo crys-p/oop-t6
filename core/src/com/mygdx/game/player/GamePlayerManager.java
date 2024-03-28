@@ -202,4 +202,11 @@ public class GamePlayerManager extends PlayerManager {
         return allPoints;
     }
 
+    public void recoverHealth(int characterID, int health) {
+        for (GamePlayer player: allPlayers) {
+            if (playerEntityMap.get(player) == characterID) {
+                player.recoverHealth(health);
+            }
+        }
+    }
 }

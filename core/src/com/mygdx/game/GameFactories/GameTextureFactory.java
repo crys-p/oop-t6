@@ -1,5 +1,6 @@
 package com.mygdx.game.GameFactories;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.mygdx.engine.Factory.AbstractTextureFactory;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.game.GameEntities.EntityType;
@@ -38,6 +39,12 @@ public class GameTextureFactory extends AbstractTextureFactory {
         // Wall
         entityImageMap.put(EntityType.hBRICKWALL.getId(), "sprites/building-block-assets/Brickwall.png");
         entityImageMap.put(EntityType.vBRICKWALL.getId(), "sprites/building-block-assets/Brickwall_vertical.png");
+
+        // Boss Collectible
+        entityImageMap.put(EntityType.VEGGIECART.getId(), "sprites/veggiecart.png");
+
+        // Boss Health
+        entityImageMap.put(EntityType.BIGAPPLE.getId(), "sprites/bigapple.png");
     }
 
     protected void createMultiTextureEntity() {
@@ -51,4 +58,17 @@ public class GameTextureFactory extends AbstractTextureFactory {
         entityMultiImageMap.put(EntityType.BOY.getId(), sprites);
     }
 
+    public float getTextureWidth(int typeId) {
+        Texture texture = new Texture(entityImageMap.get(typeId));
+        float width = texture.getWidth();
+        texture.dispose();
+        return width;
+    }
+
+    public float getTextureHeight(int typeId) {
+        Texture texture = new Texture(entityImageMap.get(typeId));
+        float height = texture.getHeight();
+        texture.dispose();
+        return height;
+    }
 }

@@ -6,8 +6,8 @@ import com.mygdx.engine.MovementStrategy.Movement;
 
 import java.util.Random;
 
-import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
-import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
+import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 
 public abstract class AbstractEntityFactory {
@@ -29,18 +29,8 @@ public abstract class AbstractEntityFactory {
         }
     }
 
-    // Create entities at random position within screen width
-    public void create(int typeId, int quantity, Random random, float speed, Movement movement) {
-        Entity entity;
-        for (int i = 0; i < quantity; i++) {
-            float randomX = random.nextFloat() * SCREEN_WIDTH - 50;
-            float randomY = random.nextFloat() * SCREEN_HEIGHT;
-            entity = createSpecifiedEntity(typeId, randomX, randomY, speed, movement);
-            if (entity != null) {
-                entityManager.addEntity(entity);
-            }
-        }
-    }
+    // Create entities at random position within screen width -> requires game specific scene width/height for random position
+    public abstract void create(int typeId, int quantity, Random random, float speed, Movement movement);
 
     protected abstract Entity createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement);
 }

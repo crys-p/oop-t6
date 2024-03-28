@@ -30,4 +30,9 @@ public abstract class Enemy extends NonPlayableCharacter implements iCollidable 
     public Rectangle getBoundingBox() {
         return this.boundingBox;
     }
+
+    public void respawn(float x, float y) {
+        this.setX(x);
+        this.setY(y);
+    }
 }

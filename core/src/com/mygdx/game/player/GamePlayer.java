@@ -25,27 +25,27 @@ public class GamePlayer extends Player {
         this.playerController = new PlayerController();
     }
 
-    public void setPlayerControlledEntityID(int entityID) {
+    protected void setPlayerControlledEntityID(int entityID) {
         this.playerControlledEntityID = entityID;
     }
 
     @Override
-    public int getHealth() {
+    protected int getHealth() {
         return this.health;
     }
 
     @Override
-    public void setHealth(int health) {
+    protected void setHealth(int health) {
         this.health = health;
     }
 
     @Override
-    public int getMaxHealth() {
+    protected int getMaxHealth() {
         return this.maxHealth;
     }
 
     @Override
-    public void setPlayerKeyConfigs(PlayerControlConfigs control) {
+    protected void setPlayerKeyConfigs(PlayerControlConfigs control) {
         this.playerController.setKeyConfigs(control);
     }
 
@@ -54,7 +54,7 @@ public class GamePlayer extends Player {
         return this.playerController.getKeyConfigs();
     }
 
-    public int getPlayerControlledEntityID() {
+    protected int getPlayerControlledEntityID() {
         return this.playerControlledEntityID;
     }
 
@@ -62,12 +62,12 @@ public class GamePlayer extends Player {
         return (Map<EntityType, Integer>) inventory;
     }
 
-    public void clearInventory() {
+    protected void clearInventory() {
         inventory.clear();
     }
 
     @Override
-    public void move(Integer key, EntityManager entityManager) {
+    protected void move(Integer key, EntityManager entityManager) {
         PlayerInstructions instr = this.playerController.getPlayerMovement(key);
         if (instr != null) {
             try {
@@ -79,16 +79,20 @@ public class GamePlayer extends Player {
         }
     }
 
-    public int getPoints() {
+    protected int getPoints() {
         return this.points;
     }
 
-    public void setPoints(int points) {
+    protected void setPoints(int points) {
         this.points = points;
     }
 
-    public void incrementPoints(int addPoints) {
+    protected void incrementPoints(int addPoints) {
         this.points += addPoints;
     }
 
+    protected void recoverHealth(int addedHealth) {
+        // add health but not beyond 100
+        this.health = Math.min(this.health + addedHealth, maxHealth);
+    }
 }
