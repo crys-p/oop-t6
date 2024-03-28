@@ -45,7 +45,7 @@ public class StartScene extends Scene {
             @Override
             public void run() {
                 Gdx.app.log("Timer", "Switching to GameSceneL1 after 5 seconds");
-                sceneManager.showScene(SceneManager.SceneType.GAME);
+                sceneManager.showScene(SceneManager.SceneType.GAMEL1);
             }
         }, 3); // Delay of 10 seconds
     }

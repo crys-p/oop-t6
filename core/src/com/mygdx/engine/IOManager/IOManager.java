@@ -81,7 +81,7 @@ public class IOManager{
 				// Handle button 1 click
 				// Example: Change to another scene
 				//game.setScreen(new AnotherScene(game));
-				sceneManager.showScene(SceneManager.SceneType.GAME);
+				sceneManager.showScene(SceneManager.SceneType.GAMEL1);
 				break;
 			case 1:
 				// Handle button 2 clickound
