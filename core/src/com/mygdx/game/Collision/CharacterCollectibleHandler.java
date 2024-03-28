@@ -40,15 +40,6 @@ public class CharacterCollectibleHandler {
         Collectible collectible = (Collectible) entities[1];
         int characterID = entityManager.getEntityID(gameCharacter);
 
-        // COMMON METHODS FOR CHARACTER & COLLECTIBLE
-        // If in GameL1, need to respawn from the corner instead of remove entity.
-        if (sceneManager.getCurrentSceneType() == SceneManager.SceneType.GAMEL1) {
-            collectible.respawn(0, MathUtils.random() * SCENE_HEIGHT);
-        } else {
-            entityManager.removeEntity(collectible); // remove collectible
-        }
-        soundManager.playSoundEffect(SoundEffectType.COLLECT); // play sfx
-
         // Vegetable specific stuff
         if (collectible instanceof Vegetable) {
             characterCollectVegetable(characterID, (Vegetable) collectible);
@@ -61,6 +52,13 @@ public class CharacterCollectibleHandler {
 
     private void characterCollectVegetable(int characterID, Vegetable vegetable) {
         gameplayerManager.addItemToInventory(characterID, vegetable.getMyType());
+        // If in GameL1, need to respawn from the corner instead of remove entity.
+        if (sceneManager.getCurrentSceneType() == SceneManager.SceneType.GAMEL1) {
+            vegetable.respawn(0, MathUtils.random() * SCENE_HEIGHT);
+        } else {
+            entityManager.removeEntity(vegetable); // remove collectible
+        }
+        soundManager.playSoundEffect(SoundEffectType.COLLECT); // play sfx
     }
 
     private void characterCollectFruit(Collectible collectible, int characterID) {
@@ -76,6 +74,13 @@ public class CharacterCollectibleHandler {
             }
         }
         else {
+            // If in GameL1, need to respawn from the corner instead of remove entity.
+            if (sceneManager.getCurrentSceneType() == SceneManager.SceneType.GAMEL1) {
+                fruit.respawn(0, MathUtils.random() * SCENE_HEIGHT);
+            } else {
+                entityManager.removeEntity(fruit); // remove collectible
+            }
+            soundManager.playSoundEffect(SoundEffectType.COLLECT); // play sfx
             gameplayerManager.addPoints(characterID, collectible.getPoints()); // add points
         }
     }
