@@ -31,8 +31,8 @@ import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 public class GameScene extends Scene {
 
-    private int numberOfEnemy = 1;
-    private int numberOfCollectibles = 24;
+    private int numberOfEnemy = 10;
+    private int numberOfCollectibles = 20;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;

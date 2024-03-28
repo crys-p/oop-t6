@@ -5,7 +5,9 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.Timer;
 import com.badlogic.gdx.graphics.Color;
@@ -45,7 +47,7 @@ public class StartScene extends Scene {
                 Gdx.app.log("Timer", "Switching to GameScene after 5 seconds");
                 sceneManager.showScene(SceneManager.SceneType.GAME);
             }
-        }, 2); // Delay of 10 seconds
+        }, 3); // Delay of 10 seconds
     }
 
     @Override
@@ -55,7 +57,10 @@ public class StartScene extends Scene {
 
     protected void createCountdownButton() {
         countdownButton = ioManager.createCountdownButton("Start Countdown", 0, IOManager.SCREEN_WIDTH / 2 - 250, IOManager.SCREEN_HEIGHT / 2 - 300, 500, 500, "countdownButtonStyle", 2); // Set the countdown duration to 10 seconds
+
     }
+
+
 
 
 

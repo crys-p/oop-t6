@@ -22,6 +22,7 @@ import com.mygdx.game.PlayerMovementStrategy.Player1Movement;
 import com.mygdx.game.GameEntities.EntityType;
 import com.mygdx.game.player.GamePlayerManager;
 
+
 import java.util.Random;
 
 import static com.mygdx.engine.IOManager.IOManager.SCREEN_HEIGHT;
@@ -31,8 +32,8 @@ import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
 
 public class GameSceneL1 extends Scene {
 
-    private int numberOfEnemy = 1;
-    private int numberOfCollectibles = 2;
+    private int numberOfEnemy = 5;
+    private int numberOfCollectibles = 20;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
@@ -91,6 +92,8 @@ public class GameSceneL1 extends Scene {
         nonPlayableFactory.create(EntityType.APPLE.getId(), numberOfCollectibles, random, 0, lrmovement, 8);
         nonPlayableFactory.create(EntityType.BANANA.getId(), numberOfCollectibles, random, 0, lrmovement);
         nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
 
         // Create same amt of characters as players
         int x = 0;
