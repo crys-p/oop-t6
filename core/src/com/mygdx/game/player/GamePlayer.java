@@ -62,6 +62,22 @@ public class GamePlayer extends Player {
         return (Map<EntityType, Integer>) inventory;
     }
 
+    protected void addItemToInventory(EntityType item) {
+        if (inventory.containsKey(item)) {
+            inventory.put(item, inventory.get(item) + 1);
+        } else {
+            inventory.put(item, 1);
+        }
+    }
+
+    protected int getInventoryCount() {
+        int totalInventoryCount = 0;
+        for (EntityType type : inventory.keySet()) {
+            totalInventoryCount += inventory.get(type);
+        }
+        return totalInventoryCount;
+    }
+
     protected void clearInventory() {
         inventory.clear();
     }

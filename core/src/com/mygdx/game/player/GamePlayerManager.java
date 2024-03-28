@@ -87,38 +87,14 @@ public class GamePlayerManager extends PlayerManager {
 
     // Method to add vegetable to inventory and update count
     public void addItemToInventory(int characterID, EntityType entityType) {
-        System.out.println("Adding item to inventory - Player ID: " + characterID + ", EntityType: " + entityType);
-
-        if (entityType != null) {
-            // Handle general entity type
-            // Retrieve the inventory map for the specified character ID
-            Map<EntityType, Integer> inventory = characterInventory.getOrDefault(characterID, new HashMap<>());
-
-            // Get the current count for the specified EntityType
-            int count = inventory.getOrDefault(entityType, 0);
-
-            // Increment the count by one
-            count++;
-
-            // Update the inventory map with the new count
-            inventory.put(entityType, count);
-
-            // Update the character's inventory in the main inventory map
-            characterInventory.put(characterID, inventory);
-            // Calculate total inventory count
-            int totalInventoryCount = 0;
-            for (Map<EntityType, Integer> playerInventory : characterInventory.values()) {
-                for (int itemCount : playerInventory.values()) {
-                    totalInventoryCount += itemCount;
-                }
+        for (GamePlayer player: allPlayers) {
+            if (playerEntityMap.get(player) == characterID) {
+                player.addItemToInventory(entityType);
             }
-            System.out.println("Total Inventory Count: " + totalInventoryCount); // Print total inventory count
-        } else {
-            System.out.println("Entity type is null, cannot add to inventory");
         }
-
-        System.out.println("Inventory after adding item: " + characterInventory);
+        allPlayerInventoryCount++;
     }
+
 
     public int getTotalNumberOfPlayers() {
         return allPlayers.size();
@@ -152,7 +128,9 @@ public class GamePlayerManager extends PlayerManager {
 
     public List<Map<EntityType, Integer>> getAllPlayerInventory() {
         List<Map<EntityType, Integer>> allInventories = new ArrayList<>();
-        allInventories.addAll(characterInventory.values());
+        for (GamePlayer player : allPlayers) {
+            allInventories.add(player.getInventory());
+        }
         return allInventories;
     }
 
@@ -172,8 +150,7 @@ public class GamePlayerManager extends PlayerManager {
         allPlayerInventoryCount = 0;
     }
 
-
-    public int getNumAllCollectibles() {
+    public int getAllPlayerInventoryCount() {
         return allPlayerInventoryCount;
     }
 

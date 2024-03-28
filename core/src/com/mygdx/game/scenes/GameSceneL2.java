@@ -172,7 +172,7 @@ public class GameSceneL2 extends Scene {
             // Detect player death to call end scene
             this.sceneManager.showScene(SceneManager.SceneType.LOSE);
         }
-        if (gameplayerManager.getNumAllCollectibles() == numberOfCollectibles) {
+        if (gameplayerManager.getAllPlayerInventoryCount() == numberOfCollectibles) {
             // Detect total collectibles to call victory scene
             this.sceneManager.showScene(SceneManager.SceneType.GAMEL3);
         }
