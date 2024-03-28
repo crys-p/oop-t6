@@ -94,8 +94,8 @@ public class GameSceneL1 extends Scene {
         nonPlayableFactory.create(EntityType.BOKCHOY.getId(), numberOfCollectibles, random, 0, lrmovement, 12);
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
         nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
-        nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 3, random, 0, lrmovement, 800);
-
+        // nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 3, random, 0, lrmovement, 800);
+        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 3, random, 0, lrmovement, 800);
 
         // Create same amt of characters as players
         int x = 0;

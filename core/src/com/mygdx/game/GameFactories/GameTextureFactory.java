@@ -42,6 +42,9 @@ public class GameTextureFactory extends AbstractTextureFactory {
 
         // Boss Collectible
         entityImageMap.put(EntityType.VEGGIECART.getId(), "sprites/veggiecart.png");
+
+        // Boss Health
+        entityImageMap.put(EntityType.BIGAPPLE.getId(), "sprites/bigapple.png");
     }
 
     protected void createMultiTextureEntity() {
