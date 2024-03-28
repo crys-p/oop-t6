@@ -62,16 +62,21 @@ public class GameMaster extends Game {
 		ioManager = new IOManager(5, soundManager, gameplayerManager, null);
 		ioManager.setWindowedMode(); // Setting the initial size of the window
 
-		// Initialize Collision Manager for all collision detection and handling
-		collisionManager = new CollisionManager(entityManager, soundManager, gameplayerManager);
-
 		// Initialize CameraManager
 		cameraManager = new CameraManager(gameplayerManager);
 
 		// Pass the game instance to SceneManager
 		sceneManager = new SceneManager((Game) Gdx.app.getApplicationListener(), entityManager, entityFactoryManager, ioManager, soundManager, gameplayerManager, cameraManager);
+
+		// Pass the SceneManager instance to ioManager
 		ioManager.setSceneMgr(sceneManager);
+
+		// Initialize Collision Manager for all collision detection and handling
+		collisionManager = new CollisionManager(entityManager, soundManager, gameplayerManager, sceneManager);
+
+
 		sceneManager.showScene(SceneManager.SceneType.START);
+
 	}
 
 	// Method to switch to another scene

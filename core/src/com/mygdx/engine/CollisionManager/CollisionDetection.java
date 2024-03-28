@@ -1,7 +1,7 @@
 package com.mygdx.engine.CollisionManager;
 
 import com.mygdx.engine.EntityManager.EntityManager;
-import com.mygdx.game.Collision.CollisionHandler;
+import com.mygdx.game.Collision.CollisionHandlers;
 
 import java.util.ArrayList;
 
@@ -22,13 +22,13 @@ public class CollisionDetection {
         collidableEntityList.addAll(entityManager.getCollidableEntities());
     }
 
-    protected void detectCollisions(CollisionHandler collisionHandler) {
+    protected void detectCollisions(CollisionHandlers collisionHandlers) {
         for (int i = 0; i < collidableEntityList.size(); i++) {
             iCollidable collidableA = collidableEntityList.get(i);
             for (int j = i + 1; j < collidableEntityList.size(); j++) {
                 iCollidable collidableB = collidableEntityList.get(j);
                 if (collidableA.getBoundingBox().overlaps(collidableB.getBoundingBox())) {
-                    collisionHandler.handleCollision(collidableA, collidableB);
+                    collisionHandlers.handleCollision(collidableA, collidableB);
                 }
             }
         }
