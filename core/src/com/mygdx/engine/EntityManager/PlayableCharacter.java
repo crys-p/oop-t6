@@ -12,9 +12,6 @@ public abstract class PlayableCharacter extends Entity implements iCollidable {
 
     protected PlayerMovement movement; // movement object
     protected boolean moving = false; // flag for moving
-    public PlayableCharacter(float x, float y, float speed, Texture texture) {
-        super(x, y, speed, texture);
-    }
 
     public PlayableCharacter(float x, float y, float speed, Texture texture, PlayerMovement behaviour) {
         super(x, y, speed, texture);

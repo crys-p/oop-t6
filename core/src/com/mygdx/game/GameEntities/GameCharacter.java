@@ -12,11 +12,6 @@ public abstract class GameCharacter extends PlayableCharacter {
     private Texture[] textures;
 
     private float[] previousPosition;
-    public GameCharacter(float x, float y, float speed, Texture texture) {
-        super(x, y, speed, texture);
-        this.setMoving(true);
-        previousPosition = new float[] {x, y};
-    }
 
     public GameCharacter(float x, float y, float speed, Texture texture, Texture[] textures, PlayerMovement behaviour) {
         super(x, y, speed, texture, behaviour);
