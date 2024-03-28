@@ -1,19 +1,21 @@
 package com.mygdx.engine.PlayerManager;
 
 import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.game.GameEntities.EntityType;
 import com.mygdx.game.player.PlayerControlConfigs;
-import com.mygdx.game.player.Inventory;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Player {
     protected int playerControlledEntityID = -1;
     protected final int maxHealth = 100;
     protected int health;
     protected PlayerController playerController;
-    protected Inventory inventory;
+    protected Map<EntityType, Integer> inventory;;
 
     protected Player() {
         this.health = maxHealth;
-        this.inventory = new Inventory();
+        this.inventory = new HashMap<>();
         this.playerController = new PlayerController();
     }
 

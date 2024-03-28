@@ -29,7 +29,7 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 public class GameSceneL1 extends Scene {
 
-    private int numberOfEnemy = 10;
+    private int numberOfEnemy = 1;
     private int numberOfCollectibles = 20;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
@@ -169,7 +169,7 @@ public class GameSceneL1 extends Scene {
         uiBatch.end();
 
         // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
-        ioManager.displayPlayerInformation(new SpriteBatch(), new ShapeRenderer());
+        ioManager.displayL1(new SpriteBatch(), new ShapeRenderer());
         // Process input events
         ioManager.processInput();
 

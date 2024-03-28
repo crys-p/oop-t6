@@ -160,7 +160,7 @@ public class GameSceneL3 extends Scene {
         uiBatch.end();
 
         // This is rendered separately as it requires both Shape and SpriteBatch which cannot overlap
-        ioManager.displayPlayerInformation(new SpriteBatch(), new ShapeRenderer());
+        ioManager.displayL3(new SpriteBatch(), new ShapeRenderer());
         // Process input events
         ioManager.processInput();
 
