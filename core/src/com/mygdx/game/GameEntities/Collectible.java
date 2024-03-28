@@ -27,9 +27,13 @@ public abstract class Collectible extends NonPlayableCharacter implements iColli
         this.points = dmg;
     }
 
-
     @Override
     public Rectangle getBoundingBox() {
         return this.boundingBox;
+    }
+
+    public void respawn(float x, float y) {
+        this.setX(x);
+        this.setY(y);
     }
 }

@@ -39,6 +39,9 @@ public class GameTextureFactory extends AbstractTextureFactory {
         // Wall
         entityImageMap.put(EntityType.hBRICKWALL.getId(), "sprites/building-block-assets/Brickwall.png");
         entityImageMap.put(EntityType.vBRICKWALL.getId(), "sprites/building-block-assets/Brickwall_vertical.png");
+
+        // Boss Collectible
+        entityImageMap.put(EntityType.VEGGIECART.getId(), "sprites/veggiecart.png");
     }
 
     protected void createMultiTextureEntity() {

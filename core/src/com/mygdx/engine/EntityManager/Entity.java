@@ -89,4 +89,5 @@ public abstract class Entity {
     protected void setTexture(Texture texture) {
         this.texture = texture;
     }
+
 }
