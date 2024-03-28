@@ -59,10 +59,11 @@ public class EntityManager implements EntityLifeCycle {
     }
 
     // For Player Controls
-    public void inputMovement(int entityID, PlayerInstructions control) {
+    public Entity getEntity(int entityID) {
         if (entityIDMap.containsKey(entityID)) {
-            entityIDMap.get(entityID).setPlayerInstructions(control);
+            return entityIDMap.get(entityID);
         }
+        return null;
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~FOR COLLISION MANAGER~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -37,7 +37,7 @@ public abstract class PlayableCharacter extends Entity implements iCollidable {
         return this.movement.getPlayerInstructions();
     }
 
-    protected void setPlayerInstructions(PlayerInstructions instructions) {
+    public void setPlayerInstructions(PlayerInstructions instructions) {
         this.movement.setPlayerInstructions(instructions);
     }
 

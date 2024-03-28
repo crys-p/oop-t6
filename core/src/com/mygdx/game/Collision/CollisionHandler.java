@@ -9,9 +9,9 @@ import com.mygdx.game.player.GamePlayerManager;
 
 public class CollisionHandler {
 
-    protected final EntityManager entityManager;
-    protected final SoundManager soundManager;
-    protected final GamePlayerManager gameplayerManager;
+    private final EntityManager entityManager;
+    private final SoundManager soundManager;
+    private final GamePlayerManager gameplayerManager;
 
     public CollisionHandler(EntityManager entityManager, SoundManager soundManager, GamePlayerManager gameplayerManager) {
         this.entityManager = entityManager;

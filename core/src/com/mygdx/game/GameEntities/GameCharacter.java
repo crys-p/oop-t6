@@ -8,7 +8,7 @@ import com.mygdx.engine.PlayerManager.PlayerInstructions;
 
 import java.util.Vector;
 
-public class GameCharacter extends PlayableCharacter {
+public abstract class GameCharacter extends PlayableCharacter {
     private Texture[] textures;
 
     private float[] previousPosition;
