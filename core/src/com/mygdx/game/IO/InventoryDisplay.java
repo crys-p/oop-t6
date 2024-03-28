@@ -45,8 +45,6 @@ public class InventoryDisplay {
                 for (Map.Entry<EntityType, Integer> entry : playerInventory.entrySet()) {
                     EntityType entityType = entry.getKey();
                     int count = entry.getValue();
-                    // Debugging: Print inventory data for each entity type
-                    System.out.println("Debug: Rendering - " + entityType + ": " + count + " at (" + posX + ", " + posY + ")");
                     // Draw text for each type of vegetable collected by the player
                     font.draw(batch, entityType + ": " + count, posX, posY);
                     // Move to the next position for drawing

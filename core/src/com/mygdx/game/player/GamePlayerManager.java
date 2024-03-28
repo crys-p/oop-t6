@@ -105,6 +105,14 @@ public class GamePlayerManager extends PlayerManager {
 
             // Update the character's inventory in the main inventory map
             characterInventory.put(characterID, inventory);
+            // Calculate total inventory count
+            int totalInventoryCount = 0;
+            for (Map<EntityType, Integer> playerInventory : characterInventory.values()) {
+                for (int itemCount : playerInventory.values()) {
+                    totalInventoryCount += itemCount;
+                }
+            }
+            System.out.println("Total Inventory Count: " + totalInventoryCount); // Print total inventory count
         } else {
             System.out.println("Entity type is null, cannot add to inventory");
         }
