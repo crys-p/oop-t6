@@ -7,26 +7,26 @@ import com.mygdx.engine.PlayerManager.Player;
 import com.mygdx.engine.PlayerManager.PlayerController;
 import com.mygdx.engine.PlayerManager.PlayerInstructions;
 import com.mygdx.engine.SimulationManager.SimulationManager;
+import com.mygdx.game.GameEntities.EntityType;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class GamePlayer extends Player {
     private int playerControlledEntityID = -1;
     private final int maxHealth = 100;
     private int health;
     private PlayerController playerController;
-    protected Inventory inventory;
+    protected final Map<EntityType, Integer> inventory;
     private int points = 0;
     public GamePlayer() {
         this.health = maxHealth;
-        this.inventory = new Inventory();
+        inventory = new HashMap<>();
         this.playerController = new PlayerController();
     }
 
     public void setPlayerControlledEntityID(int entityID) {
         this.playerControlledEntityID = entityID;
-    }
-
-    public void addToInventory(Item item, int quantity) {
-        inventory.addItem(item, quantity);
     }
 
     @Override
@@ -58,8 +58,8 @@ public class GamePlayer extends Player {
         return this.playerControlledEntityID;
     }
 
-    public int getInventoryCount() {
-        return inventory.getTotalItems();
+    public Map<EntityType, Integer> getInventory() {
+        return (Map<EntityType, Integer>) inventory;
     }
 
     public void clearInventory() {

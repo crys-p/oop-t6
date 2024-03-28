@@ -22,9 +22,9 @@ public class SoundManager {
 	public void createSounds() {
 		// Create Background Music
 		backgroundMusicMap.put(SceneManager.SceneType.START, new BackgroundMusic("start_music(new).mp3"));
-		backgroundMusicMap.put(SceneManager.SceneType.GAME, new BackgroundMusic("game_music(new).mp3"));
 		backgroundMusicMap.put(SceneManager.SceneType.GAMEL1, new BackgroundMusic("game_music(new).mp3"));
 		backgroundMusicMap.put(SceneManager.SceneType.GAMEL2, new BackgroundMusic("game_music(new).mp3"));
+		backgroundMusicMap.put(SceneManager.SceneType.GAMEL3, new BackgroundMusic("game_music(new).mp3"));
 		backgroundMusicMap.put(SceneManager.SceneType.MENU, new BackgroundMusic("start_music(new).mp3")); //same as start music
 		backgroundMusicMap.put(SceneManager.SceneType.VICTORY, new BackgroundMusic("win_music(new).mp3"));
 		backgroundMusicMap.put(SceneManager.SceneType.LOSE, new BackgroundMusic("lose_music(new).mp3"));

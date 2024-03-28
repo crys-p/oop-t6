@@ -56,9 +56,19 @@ public class IOManager{
 		}
 	}
 
-	public void displayPlayerInformation(SpriteBatch batch, ShapeRenderer shape) {
+	public void displayL1(SpriteBatch batch, ShapeRenderer shape) {
 		output.displayHealthBar(shape, batch);
-		output.displayInventory(batch);
+		output.displayLevel1Text(batch);
+	}
+
+	public void displayL2(SpriteBatch batch, ShapeRenderer shape) {
+		output.displayHealthBar(shape, batch);
+		output.displayLevel2Text(batch);
+	}
+
+	public void displayL3(SpriteBatch batch, ShapeRenderer shape) {
+		output.displayHealthBar(shape, batch);
+		output.displayLevel3Text(batch);
 	}
 
 	public TextButton createButton(String text, int index, float x, float y, float width, float height, String styleName) {
@@ -81,7 +91,7 @@ public class IOManager{
 				// Handle button 1 click
 				// Example: Change to another scene
 				//game.setScreen(new AnotherScene(game));
-				sceneManager.showScene(SceneManager.SceneType.GAME);
+				sceneManager.showScene(SceneManager.SceneType.GAMEL1);
 				break;
 			case 1:
 				// Handle button 2 clickound

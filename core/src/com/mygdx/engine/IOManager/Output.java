@@ -113,7 +113,23 @@ class Output {
 		healthBar.render(shape, batch);
 	}
 
-	protected void displayInventory(SpriteBatch batch) {
+//	protected void displayInventory(SpriteBatch batch) {
+//		inventoryDisplay.render(batch);
+//	}
+//
+	protected void displayLevel1Text(SpriteBatch batch) {
 		inventoryDisplay.render(batch);
 	}
+
+	protected void displayLevel2Text(SpriteBatch batch) {
+		inventoryDisplay.renderL2(batch);
+
+	}
+
+	protected void displayLevel3Text(SpriteBatch batch) {
+		inventoryDisplay.render(batch);
+
+	}
+
+
 }

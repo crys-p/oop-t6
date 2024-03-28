@@ -16,7 +16,7 @@ import com.mygdx.engine.SceneManager.SceneManager;
 
 import java.util.Random;
 
-public class MenuScene extends Scene {
+public class    MenuScene extends Scene {
 
     protected TextButton button1;
     protected TextButton button2;

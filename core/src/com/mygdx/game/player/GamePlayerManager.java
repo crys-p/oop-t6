@@ -17,17 +17,16 @@ import java.util.Map;
 public class GamePlayerManager extends PlayerManager {
     private final ArrayList<GamePlayer> allPlayers;
     private final Map<GamePlayer, Integer> playerEntityMap; // Map to store GamePlayer instances and corresponding entity being controlled
-    private Map<Integer, Map<EntityType, Integer>> characterInventory = new HashMap<>();
+    private final Map<Integer, Map<EntityType, Integer>> characterInventory = new HashMap<>();
 
     private int numDeadPlayers = 0;
     private int allPlayerInventoryCount = 0;
-    private SimulationManager simulationManager;
     public GamePlayerManager(EntityManager entityManager) {
         super(entityManager);
         playerEntityMap = new HashMap<>();
         allPlayers = new ArrayList<>();
 
-        simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
+        SimulationManager simulationManager = SimulationManager.getInstance(); // Obtain the instance of SimulationManager
         simulationManager.logInfo("PlayerManager initialized"); // Log initialization message
     }
 
@@ -86,32 +85,31 @@ public class GamePlayerManager extends PlayerManager {
         }
     }
 
-    // the previous one
-//    public void addItemToInventory(int characterID) {
-//        for (GamePlayer player: allPlayers) {
-//            if (playerEntityMap.get(player) == characterID) {
-//                player.addToInventory(new Item(), 1);
-//                allPlayerInventoryCount++;
-//            }
-//        }
-//    }
+    // Method to add vegetable to inventory and update count
+    public void addItemToInventory(int characterID, EntityType entityType) {
+        System.out.println("Adding item to inventory - Player ID: " + characterID + ", EntityType: " + entityType);
 
-    // todo: update inventory count using entitytype
-    public void addItemToInventory(int characterID, EntityType myType) {
-        // Retrieve the inventory map for the specified character ID
-        Map<EntityType, Integer> inventory = characterInventory.getOrDefault(characterID, new HashMap<>());
+        if (entityType != null) {
+            // Handle general entity type
+            // Retrieve the inventory map for the specified character ID
+            Map<EntityType, Integer> inventory = characterInventory.getOrDefault(characterID, new HashMap<>());
 
-        // Get the current count for the specified EntityType
-        int count = inventory.getOrDefault(myType, 0);
+            // Get the current count for the specified EntityType
+            int count = inventory.getOrDefault(entityType, 0);
 
-        // Increment the count by one
-        count++;
+            // Increment the count by one
+            count++;
 
-        // Update the inventory map with the new count
-        inventory.put(myType, count);
+            // Update the inventory map with the new count
+            inventory.put(entityType, count);
 
-        // Update the character's inventory in the main inventory map
-        characterInventory.put(characterID, inventory);
+            // Update the character's inventory in the main inventory map
+            characterInventory.put(characterID, inventory);
+        } else {
+            System.out.println("Entity type is null, cannot add to inventory");
+        }
+
+        System.out.println("Inventory after adding item: " + characterInventory);
     }
 
     public int getTotalNumberOfPlayers() {
@@ -144,14 +142,11 @@ public class GamePlayerManager extends PlayerManager {
         return allPlayerHealthStats;
     }
 
-    public List<Integer> getAllPlayerInventory() {
-        List <Integer> allInventory = new ArrayList<>();
-        for (GamePlayer player : allPlayers) {
-            allInventory.add(player.getInventoryCount());
-        }
-        return allInventory;
+    public List<Map<EntityType, Integer>> getAllPlayerInventory() {
+        List<Map<EntityType, Integer>> allInventories = new ArrayList<>();
+        allInventories.addAll(characterInventory.values());
+        return allInventories;
     }
-
 
     public int getNumDeadPlayers() {
         return numDeadPlayers;
