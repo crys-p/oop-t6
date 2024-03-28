@@ -17,7 +17,7 @@ public abstract class Enemy extends NonPlayableCharacter implements iCollidable 
         return this.damage;
     }
 
-    public void setDamage(float dmg) {
+    protected void setDamage(float dmg) {
         this.damage = dmg;
     }
 
