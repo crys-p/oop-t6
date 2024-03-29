@@ -45,6 +45,8 @@ public class GameTextureFactory extends AbstractTextureFactory {
 
         // Boss Health
         entityImageMap.put(EntityType.BIGAPPLE.getId(), "sprites/bigapple.png");
+
+
     }
 
     protected void createMultiTextureEntity() {

@@ -70,7 +70,7 @@ public class InstructScene extends Scene {
     }
 
     protected void createCountdownButton() {
-        countdownButton = ioManager.createCountdownButton("Start Countdown", 0, IOManager.SCREEN_WIDTH / 2 - 250, IOManager.SCREEN_HEIGHT / 2 - 300, 500, 500, "countdownButtonStyle", 2); // Set the countdown duration to 10 seconds
+        countdownButton = ioManager.createCountdownButton("Start Countdown", 0, IOManager.SCREEN_WIDTH / 2 - 250, IOManager.SCREEN_HEIGHT / 2 - 300, 500, 500, "countdownButtonStyle", 10); // Set the countdown duration to 10 seconds
 
     }
 
@@ -131,7 +131,7 @@ public class InstructScene extends Scene {
                 Gdx.app.log("Timer", "Switching to GameSceneL1 after 5 seconds");
                 sceneManager.showScene(SceneManager.SceneType.GAMEL1);
             }
-        }, 3); // Delay of 10 seconds
+        }, 10); // Delay of 10 seconds
     }
 
     @Override

@@ -88,12 +88,12 @@ public class GameSceneL2 extends Scene {
         AIMovement udmovement = AIControlManager.getUDMovement();
         AIMovement nomovement = AIControlManager.getNoMovement();
 
-        nonPlayableFactory.create(EntityType.CUPCAKE.getId(), numberOfEnemy, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.DOUGHNUT.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.SUNDAE.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.APPLE.getId(), numberOfCollectibles, random, 0, lrmovement, 100);
-        nonPlayableFactory.create(EntityType.BANANA.getId(), numberOfCollectibles, random, 0, lrmovement, 100);
-        nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement,100);
+        nonPlayableFactory.create(EntityType.CUPCAKE.getId(), numberOfEnemy, random, 0, lrmovement, -10);
+        nonPlayableFactory.create(EntityType.DOUGHNUT.getId(), numberOfEnemy, random, 0, udmovement, -10);
+        nonPlayableFactory.create(EntityType.SUNDAE.getId(), numberOfEnemy, random, 0, udmovement, -10);
+        nonPlayableFactory.create(EntityType.APPLE.getId(), numberOfCollectibles, random, 0, lrmovement, 50);
+        nonPlayableFactory.create(EntityType.BANANA.getId(), numberOfCollectibles, random, 0, lrmovement, 50);
+        nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement,50);
         //nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
         //nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
 

@@ -86,8 +86,8 @@ public class GameSceneL3 extends Scene {
         nonPlayableFactory.create(EntityType.FRIES.getId(), numberOfEnemy, random, 0, lrmovement,-1);
         nonPlayableFactory.create(EntityType.BURGER.getId(), numberOfEnemy, random, 0, udmovement,-1);
         nonPlayableFactory.create(EntityType.SODA.getId(), numberOfEnemy, random, 0, udmovement,-1);
-        nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, udmovement);
+        //nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
+        //nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, udmovement);
 
 
 
@@ -100,6 +100,8 @@ public class GameSceneL3 extends Scene {
         nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 400, 364, 0, nomovement, 5);
         nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1100, 50, 0, nomovement, 5);
         nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1500, 364, 0, nomovement, 5);
+
+        nonPlayableFactory.create(EntityType.BURGER.getId(), 1, 500, 1000, 0, nomovement, -80);
 
         // Creation of Maze starts here// Beginning walls
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 300, 0, 0, nomovement);

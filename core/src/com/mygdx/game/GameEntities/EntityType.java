@@ -10,6 +10,7 @@ public enum EntityType {
     DRUMSTICK(15), FRIES(16), BURGER(17), SODA(18),
     vBRICKWALL(19), hBRICKWALL(20),
     VEGGIECART(21), BIGAPPLE(22);
+
     private final int id;
     private static final HashMap<Integer, EntityType> idToEnumMap = new HashMap<>();
 
