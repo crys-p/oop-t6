@@ -9,11 +9,9 @@ import com.mygdx.game.AIMovementStrategy.UDMovement;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Random;
 
 public class AIControlManager {
     private final Map<Entity, AIMovement> aiEntities;
-    private static final Random random = new Random();
     private final SimulationManager simulationManager;
 
     private static AIMovement lrMovement;

@@ -80,9 +80,9 @@ public class InstructScene extends Scene {
         batch.begin();
         batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
         // Instructions for each level, potentially long and needing wrapping
-        String level1Instructions = "Level 1: Avoid obstacles and collect Vegetable! Make sure to avoid those pesky unhealthy food.";
-        String level2Instructions = "Level 2: Watch out for enemies! Collection 1000 point from the fruit to proceed to the next stage and remeber to avoid those unhealthy food";
-        String level3Instructions = "Level 3: Time to find those very rare healthy food. avoid as many enemy as you can while find it and rmb a apple a day keep the doctor away. the Apple is to get your health back";
+        String level1Instructions = "Level 1: Avoid obstacles and collect vegetables! Make sure to avoid those pesky unhealthy food!";
+        String level2Instructions = "Level 2: Watch out for enemies! Collect 1000 points from the fruits to proceed to the next stage and remember to avoid those unhealthy food";
+        String level3Instructions = "Level 3: Time to find the very rare healthy food. Avoid as many enemy as you can while find it. Remember, an apple a day keeps the doctor away! The Apple is to get your health back!";
 
         // Maximum width for each instruction set to wrap text
         float maxWidthLevel1 = SCREEN_WIDTH / 3f - 40; // Adjust these values as needed
