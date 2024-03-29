@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.engine.AIControlManager.AIControlManager;
+import com.mygdx.engine.Factory.AbstractEntityFactory;
 import com.mygdx.engine.MovementStrategy.AIMovement;
 import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.EntityManager.EntityManager;
@@ -34,6 +35,8 @@ public class GameSceneL2 extends Scene {
     private int numberOfCollectibles = 20;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
+
+    private AbstractEntityFactory abstractEntityFactory;
     private CameraManager cameraManager;
     private SpriteBatch uiBatch;
     //private static final int VIEWPORT_WIDTH = 1280;
@@ -90,8 +93,20 @@ public class GameSceneL2 extends Scene {
         nonPlayableFactory.create(EntityType.APPLE.getId(), numberOfCollectibles, random, 0, lrmovement, 8);
         nonPlayableFactory.create(EntityType.BANANA.getId(), numberOfCollectibles, random, 0, lrmovement);
         nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
-        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
+        //nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
+        //nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
+
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 200, 100, 0, nomovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 300, 150, 0, nomovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 200, 700, 0, nomovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 800, 500, 0, nomovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1000, 500, 0, nomovement);
+
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 1000, 400, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 1200, 800, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 700, 650, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 1010, 450, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 1400, 400, 0, nomovement);
 
         // Create same amt of characters as players
         int x = 0;

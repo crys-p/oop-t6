@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.engine.Factory.AbstractEntityFactory;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.SceneManager.Scene;
 import com.mygdx.engine.SceneManager.SceneManager;

@@ -15,6 +15,8 @@ public abstract class AbstractEntityFactory {
     }
 
     // Create entities at fixed position
+
+
     public void create(int typeId, int quantity, float x, float y, float speed, Movement movement) {
         Entity entity;
         for (int i = 0; i < quantity; i++) {

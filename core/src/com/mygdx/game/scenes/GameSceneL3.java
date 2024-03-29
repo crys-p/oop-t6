@@ -29,8 +29,8 @@ import static com.mygdx.engine.IOManager.IOManager.SCREEN_WIDTH;
 
 public class GameSceneL3 extends Scene {
 
-    private int numberOfEnemy = 10;
-    private int numberOfCollectibles = 2;
+    private int numberOfEnemy = 30;
+    private int numberOfCollectibles = 3;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
@@ -83,11 +83,42 @@ public class GameSceneL3 extends Scene {
         AIMovement udmovement = AIControlManager.getUDMovement();
         AIMovement nomovement = AIControlManager.getNoMovement();
 
-        nonPlayableFactory.create(EntityType.FRIES.getId(), numberOfEnemy, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.BURGER.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.SODA.getId(), numberOfEnemy, random, 0, udmovement);
+        nonPlayableFactory.create(EntityType.FRIES.getId(), numberOfEnemy, random, 0, lrmovement,-1);
+        nonPlayableFactory.create(EntityType.BURGER.getId(), numberOfEnemy, random, 0, udmovement,-1);
+        nonPlayableFactory.create(EntityType.SODA.getId(), numberOfEnemy, random, 0, udmovement,-1);
         nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
         nonPlayableFactory.create(EntityType.CARROT.getId(), numberOfCollectibles, random, 0, udmovement);
+
+
+
+        // Creation of Maze starts here// Beginning walls
+        nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 700, 0, nomovement);
+        nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 800, 0, nomovement);
+        nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 900, 0, nomovement);
+        nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 1000, 0, nomovement);
+
+        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 400, 364, 0, nomovement);
+        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1100, 50, 0, nomovement);
+        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1500, 364, 0, nomovement);
+
+        // Creation of Maze starts here// Beginning walls
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 300, 0, 0, nomovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 300, 364, 0, nomovement);
+// Second walls
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 600, 716, 0, nomovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 600, 364, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 600, 307, 0, nomovement);
+// path
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 964, 153, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 1021, 153, 0, nomovement);
+// dead end
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1328, 210, 0, nomovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1328, 574, 0, nomovement);
+        nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 1328, 881, 0, nomovement);
+// alt path
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1635, 153, 0, nomovement);
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1635, 517, 0, nomovement);// gap
+        nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 964, 716, 0, nomovement);
 
         // Create same amt of characters as players
         int x = 0;
