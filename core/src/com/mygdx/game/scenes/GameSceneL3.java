@@ -91,12 +91,13 @@ public class GameSceneL3 extends Scene {
 
 
 
-        // Creation of Maze starts here// Beginning walls
+        // Placement of Veggie cart
         nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 700, 0, nomovement);
         nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 800, 0, nomovement);
         nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 900, 0, nomovement);
         nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 1000, 0, nomovement);
 
+        // Placement of Big Apple
         nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 400, 364, 0, nomovement, 5);
         nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1100, 50, 0, nomovement, 5);
         nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1500, 364, 0, nomovement, 5);
