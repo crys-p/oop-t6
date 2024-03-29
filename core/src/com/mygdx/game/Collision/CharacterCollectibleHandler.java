@@ -70,6 +70,7 @@ public class CharacterCollectibleHandler {
             } else {
                 gameplayerManager.recoverHealth(characterID, fruit.getPoints());
                 this.lastRecoveryTime = System.currentTimeMillis();
+                soundManager.playSoundEffect(SoundEffectType.HEAL); // play sfx
             }
         }
         else {

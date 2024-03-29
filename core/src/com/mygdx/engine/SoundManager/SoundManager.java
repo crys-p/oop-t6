@@ -33,6 +33,7 @@ public class SoundManager {
 		// Create Sound Effects
 		soundEffectMap.put(SoundEffectType.COLLECT, new SoundEffect("collect_sfx.mp3"));
 		soundEffectMap.put(SoundEffectType.HIT, new SoundEffect("hit_sfx.mp3"));
+		soundEffectMap.put(SoundEffectType.HEAL, new SoundEffect("heal_sfx.mp3"));
 	}
 
 	public void playMusic(SceneManager.SceneType scene) {

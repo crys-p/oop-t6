@@ -1,5 +1,5 @@
 package com.mygdx.engine.SoundManager;
 
 public enum SoundEffectType {
-    COLLECT, HIT
+    COLLECT, HEAL, HIT
 }

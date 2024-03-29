@@ -170,6 +170,14 @@ public class GamePlayerManager extends PlayerManager {
         }
     }
 
+    public int getTotalPlayerPoints() {
+        int totalPoints = 0;
+        for (GamePlayer player : allPlayers) {
+            totalPoints += player.getPoints();
+        }
+        return totalPoints;
+    }
+
     public List<Integer> getAllPlayerPoints() {
         List <Integer> allPoints = new ArrayList<>();
         for (GamePlayer player : allPlayers) {

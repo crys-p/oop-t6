@@ -189,7 +189,7 @@ public class GameSceneL2 extends Scene {
             this.sceneManager.showScene(SceneManager.SceneType.LOSE);
         }
         // use gameplayerManager.getAllPlayerPoints for total point count
-        if (gameplayerManager.getAllPlayerInventoryCount() == point) {
+        if (point == gameplayerManager.getTotalPlayerPoints()) {
             // Detect total collectibles to call victory scene
             this.sceneManager.showScene(SceneManager.SceneType.GAMEL3);
         }
