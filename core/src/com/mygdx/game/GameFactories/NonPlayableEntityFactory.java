@@ -25,6 +25,16 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
         SimulationManager.getInstance().logInfo("NonPlayable Entity Factory initialized"); // Log initialization message
     }
 
+    public void create(int typeId, int quantity, float x, float y, float speed, Movement movement, int gamePoints) {
+        Entity entity;
+        for (int i = 0; i < quantity; i++) {
+            entity = createSpecifiedEntity(typeId, x, y, speed, movement, gamePoints);
+            if (entity != null) {
+                entityManager.addEntity(entity);
+            }
+        }
+    }
+
     @Override
     public void create(int typeId, int quantity, Random random, float speed, Movement movement) {
         create(typeId, quantity, random, speed, movement, 0); // Default game value to 0

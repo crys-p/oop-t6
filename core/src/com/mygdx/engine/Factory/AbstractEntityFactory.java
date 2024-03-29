@@ -6,10 +6,6 @@ import com.mygdx.engine.MovementStrategy.Movement;
 
 import java.util.Random;
 
-import static com.mygdx.engine.SceneManager.SceneManager.SCENE_HEIGHT;
-import static com.mygdx.engine.SceneManager.SceneManager.SCENE_WIDTH;
-
-
 public abstract class AbstractEntityFactory {
 
     protected EntityManager entityManager;

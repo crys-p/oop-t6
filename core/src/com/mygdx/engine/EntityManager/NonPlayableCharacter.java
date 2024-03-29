@@ -15,9 +15,8 @@ public abstract class NonPlayableCharacter extends Entity {
 
     @Override
     protected void movement() {
-        // Call moveLR to get the new positions
+        // Call movement method to get the new positions
         float[] newPosition = movement.calculateMovement(this.getX(), this.getY(), this.getSpeed()); // Pass entity speed if needed
-
         // Update the X position
         this.setX(newPosition[0]);
         // Update the Y position
