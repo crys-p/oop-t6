@@ -3,6 +3,7 @@ package com.mygdx.engine.SceneManager;
 import com.badlogic.gdx.Game;
 import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.EntityManager.EntityManager;
+import com.mygdx.engine.Factory.AbstractEntityFactory;
 import com.mygdx.game.GameFactories.EntityFactoryManager;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
@@ -34,6 +35,7 @@ public class SceneManager {
     private EntityFactoryManager entityFactoryManager;
     private CameraManager cameraManager;
 
+
     protected HashMap<SceneType, Scene> allScenesMap; // factory replace it
     private iSceneFactory sceneFactory; // The scene factory instance
     private SceneType currentSceneType;
@@ -51,6 +53,7 @@ public class SceneManager {
         this.gameplayerManager = gameplayerManager;
         this.entityFactoryManager = entityFactoryManager;
         this.cameraManager = cameraManager;
+
         // allScenesMap = new HashMap<>(); // factory replace it
         // initializeScenes();
         this.sceneFactory = new SceneFactory(); // Initialize the scene factory here

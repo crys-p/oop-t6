@@ -44,6 +44,8 @@ public class NonPlayableEntityFactory extends AbstractEntityFactory {
     }
 
 
+
+
     protected NonPlayableCharacter createSpecifiedEntity(int typeId, float x, float y, float speed, Movement movement) {
         return createSpecifiedEntity(typeId, x, y, speed, movement, 0); // Default game value to 0
     }
