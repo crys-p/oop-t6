@@ -97,25 +97,25 @@ public class GameSceneL3 extends Scene {
         nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 900, 0, nomovement);
         nonPlayableFactory.create(EntityType.VEGGIECART.getId(), 1, 700, 1000, 0, nomovement);
 
-        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 400, 364, 0, nomovement);
-        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1100, 50, 0, nomovement);
-        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1500, 364, 0, nomovement);
+        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 400, 364, 0, nomovement, 5);
+        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1100, 50, 0, nomovement, 5);
+        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1500, 364, 0, nomovement, 5);
 
         // Creation of Maze starts here// Beginning walls
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 300, 0, 0, nomovement);
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 300, 364, 0, nomovement);
-// Second walls
+        // Second walls
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 600, 716, 0, nomovement);
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 600, 364, 0, nomovement);
         nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 600, 307, 0, nomovement);
-// path
+        // path
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 964, 153, 0, nomovement);
         nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 1021, 153, 0, nomovement);
-// dead end
+        // dead end
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1328, 210, 0, nomovement);
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1328, 574, 0, nomovement);
         nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 1, 1328, 881, 0, nomovement);
-// alt path
+        // alt path
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1635, 153, 0, nomovement);
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 1635, 517, 0, nomovement);// gap
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 1, 964, 716, 0, nomovement);
