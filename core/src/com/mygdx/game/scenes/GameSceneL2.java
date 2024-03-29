@@ -33,6 +33,7 @@ public class GameSceneL2 extends Scene {
 
     private int numberOfEnemy = 5;
     private int numberOfCollectibles = 20;
+    private int point = 1000;
     private GamePlayerManager gameplayerManager;
     private EntityFactoryManager entityFactoryManager;
 
@@ -90,9 +91,9 @@ public class GameSceneL2 extends Scene {
         nonPlayableFactory.create(EntityType.CUPCAKE.getId(), numberOfEnemy, random, 0, lrmovement);
         nonPlayableFactory.create(EntityType.DOUGHNUT.getId(), numberOfEnemy, random, 0, udmovement);
         nonPlayableFactory.create(EntityType.SUNDAE.getId(), numberOfEnemy, random, 0, udmovement);
-        nonPlayableFactory.create(EntityType.APPLE.getId(), numberOfCollectibles, random, 0, lrmovement, 8);
-        nonPlayableFactory.create(EntityType.BANANA.getId(), numberOfCollectibles, random, 0, lrmovement);
-        nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement);
+        nonPlayableFactory.create(EntityType.APPLE.getId(), numberOfCollectibles, random, 0, lrmovement, 100);
+        nonPlayableFactory.create(EntityType.BANANA.getId(), numberOfCollectibles, random, 0, lrmovement, 100);
+        nonPlayableFactory.create(EntityType.WATERMELON.getId(), numberOfCollectibles, random, 0, lrmovement,100);
         //nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
         //nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
 
@@ -188,7 +189,7 @@ public class GameSceneL2 extends Scene {
             this.sceneManager.showScene(SceneManager.SceneType.LOSE);
         }
         // use gameplayerManager.getAllPlayerPoints for total point count
-        if (gameplayerManager.getAllPlayerInventoryCount() == numberOfCollectibles) {
+        if (gameplayerManager.getAllPlayerInventoryCount() == point) {
             // Detect total collectibles to call victory scene
             this.sceneManager.showScene(SceneManager.SceneType.GAMEL3);
         }
