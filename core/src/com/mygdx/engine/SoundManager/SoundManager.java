@@ -28,6 +28,7 @@ public class SoundManager {
 		backgroundMusicMap.put(SceneManager.SceneType.MENU, new BackgroundMusic("start_music(new).mp3")); //same as start music
 		backgroundMusicMap.put(SceneManager.SceneType.VICTORY, new BackgroundMusic("win_music(new).mp3"));
 		backgroundMusicMap.put(SceneManager.SceneType.LOSE, new BackgroundMusic("lose_music(new).mp3"));
+		backgroundMusicMap.put(SceneManager.SceneType.INSTRUCT, new BackgroundMusic("background_music_2.mp3"));
 
 		// Create Sound Effects
 		soundEffectMap.put(SoundEffectType.COLLECT, new SoundEffect("collect_sfx.mp3"));

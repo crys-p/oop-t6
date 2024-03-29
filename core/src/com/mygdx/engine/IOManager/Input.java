@@ -99,6 +99,9 @@ public class Input implements InputProcessor {
 		float buttonGameWidth = 200f; // Width of each button
 		float buttonGameHeight = 100f; // Height of each button
 
+		float loseGameWidth = 300f; // Adjust this value to match the width of your button
+		float loseGameHeight = 100f; // Adjust this value to match the height of your button
+
 		// Adjust the x and y coordinates based on the button index
 		float buttonX = ioManager.SCREEN_WIDTH - buttonGameWidth - 20; // 20 is the padding from the right edge
 		float buttonY = 20; // 20 is the padding from the top edge
@@ -115,6 +118,8 @@ public class Input implements InputProcessor {
 			buttonIndex = 3;
 		} else if (touchX >= buttonX && touchX <= buttonX + buttonGameWidth && touchY >= ioManager.SCREEN_HEIGHT - buttonGameHeight - 20 && touchY <= ioManager.SCREEN_HEIGHT - 20) {
 			buttonIndex = 4;
+		}  else if (touchX >= 500 && touchX <= 660 + loseGameWidth && touchY >= 660 + buttonIndex * buttonYDiff && touchY <= 660 + buttonIndex * buttonYDiff + loseGameHeight) {
+			buttonIndex = 5;
 		}
 
 		return buttonIndex;

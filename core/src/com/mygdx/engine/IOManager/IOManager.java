@@ -120,6 +120,13 @@ public class IOManager{
 				SceneManager.SceneType currentSceneType1 = sceneManager.getCurrentSceneType();
 				soundManager.toggleMusic(currentSceneType1);
 				break;
+			case 5:
+				// Handle button 3 click
+				// Example: Exit the game
+				//Gdx.app.exit();
+				//sceneManager.pauseGameSceneAndSwitchToMenu();
+				sceneManager.showScene(SceneManager.SceneType.GAMEL1);
+				break;
 			// Add cases for other buttons as needed
 		}
 	}

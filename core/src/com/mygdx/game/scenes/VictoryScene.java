@@ -6,7 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.engine.IOManager.IOManager;
 import com.mygdx.engine.SceneManager.Scene;
@@ -16,6 +18,7 @@ public class VictoryScene extends Scene {
     protected TextButton createButtonNoIndex;
     private Texture backgroundTexture;
 
+    protected TextButton button;
     public VictoryScene(Game game, SceneManager sceneManager, EntityManager entityManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager) {
         super(game, sceneManager, entityManager, batch, shape, ioManager);
         setBackgroundColor(Color.CYAN); // setting of background color for end scene
@@ -23,14 +26,37 @@ public class VictoryScene extends Scene {
         backgroundTexture = new Texture(Gdx.files.internal("assets/victoryscene.png"));
     }
 
-    protected void createButtonNoIndex() {
-        createButtonNoIndex = ioManager.createButtonNoIndex("", IOManager.SCREEN_WIDTH / 2 - 250, IOManager.SCREEN_HEIGHT / 2 - 250, 500, 500, "victoryButtonStyle"); // Set the countdown duration to 10 seconds
+    protected void createButtons() {
+        // Define width and height for the buttons (you can adjust these values as needed)
+        float buttonWidth = 300f;
+        float buttonHeight = 100f;
+
+        // Define button positions
+        float buttonX = (IOManager.SCREEN_WIDTH - buttonWidth) / 2; // Centered horizontally
+        float buttonY1 = 50; // Adjust this value for the first button's vertical position
+
+
+        // Create buttons using the IOManager
+        button = ioManager.createButton("Play Once More", 0, buttonX, buttonY1, buttonWidth, buttonHeight, "buttonMenuStyle");
+
+
+        // Add click listeners to the buttons
+        button.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                // Handle click for button 1
+                int buttonIndex = 5; // Assuming button 1 is at index 0
+                ioManager.handleButtonClick(buttonIndex);
+            }
+        });
+        // Set button positions and add listeners if needed
     }
+    // Other methods for managing the menu scene
 
     @Override
     public void show() {
         //createEntities();
-        createButtonNoIndex();
+        createButtons();
     }
 
     @Override
@@ -49,7 +75,12 @@ public class VictoryScene extends Scene {
         batch.begin();
         batch.draw(backgroundTexture, 0, 0, viewport.getWorldWidth(), viewport.getWorldHeight());
             //createButtonNoIndex.draw(batch, 1);
+        button.draw(batch, 1); // Adjust parameters as needed
         batch.end();
+
+        // Process input events
+        ioManager.processInput();
+
     }
 }
 

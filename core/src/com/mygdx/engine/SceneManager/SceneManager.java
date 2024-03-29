@@ -1,27 +1,23 @@
 package com.mygdx.engine.SceneManager;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.engine.CameraManager.CameraManager;
 import com.mygdx.engine.EntityManager.EntityManager;
 import com.mygdx.game.GameFactories.EntityFactoryManager;
 import com.mygdx.engine.IOManager.IOManager;
-import com.mygdx.engine.PlayerManager.PlayerManager;
 import com.mygdx.engine.SimulationManager.SimulationManager;
 import com.mygdx.engine.SoundManager.SoundManager;
+import com.mygdx.game.GameFactories.SceneFactory;
+import com.mygdx.game.GameFactories.iSceneFactory;
 import com.mygdx.game.player.GamePlayerManager;
-import com.mygdx.game.scenes.*;
 
 
 import java.util.HashMap;
-import java.util.Map;
-
 
 
 public class SceneManager {
     public enum SceneType {
-        START, GAMEL1, GAMEL2 ,GAMEL3, MENU, VICTORY, LOSE
+        START, GAMEL1, GAMEL2 ,GAMEL3, MENU, VICTORY, LOSE,INSTRUCT
     }
 
     private final Game game;
