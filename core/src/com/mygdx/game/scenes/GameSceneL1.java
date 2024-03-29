@@ -38,7 +38,6 @@ public class GameSceneL1 extends Scene {
     //private static final int VIEWPORT_WIDTH = 1280;
     //private static final int VIEWPORT_HEIGHT = 720;
     private Texture backgroundTexture;
-    private Texture backgroundTexture1;
 
 
     public GameSceneL1(Game game, SceneManager sceneManager, EntityManager entityManager, EntityFactoryManager entityFactoryManager, SpriteBatch batch, ShapeRenderer shape, IOManager ioManager, GamePlayerManager gameplayerManager, CameraManager cameraManager) {
