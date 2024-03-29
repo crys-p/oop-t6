@@ -95,8 +95,6 @@ public class GameSceneL1 extends Scene {
         nonPlayableFactory.create(EntityType.vBRICKWALL.getId(), 3, random, 0, nomovement);
         nonPlayableFactory.create(EntityType.hBRICKWALL.getId(), 3, random, 0, nomovement);
 
-        nonPlayableFactory.create(EntityType.BIGAPPLE.getId(), 1, 1500, 364, 0, nomovement);
-
 
         // Create same amt of characters as players
         int x = 0;
