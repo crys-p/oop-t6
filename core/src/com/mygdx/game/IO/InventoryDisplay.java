@@ -51,9 +51,6 @@ public class InventoryDisplay {
                     posX += 100; // Adjust as needed
                 }
             }
-            else {
-                System.out.println("Debug: playerInventory is empty");
-            }
             batch.end();
             // Move to the next row for drawing the inventory of the next player
             posY -= 20; // Adjust as needed
