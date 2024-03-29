@@ -17,7 +17,6 @@ import java.util.Map;
 public class GamePlayerManager extends PlayerManager {
     private final ArrayList<GamePlayer> allPlayers;
     private final Map<GamePlayer, Integer> playerEntityMap; // Map to store GamePlayer instances and corresponding entity being controlled
-    private final Map<Integer, Map<EntityType, Integer>> characterInventory = new HashMap<>();
 
     private int numDeadPlayers = 0;
     private int allPlayerInventoryCount = 0;

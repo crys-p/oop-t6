@@ -46,7 +46,7 @@ public class CharacterCollectibleHandler {
         }
         // Fruit specific stuff
         if (collectible instanceof Fruit) {
-            characterCollectFruit(collectible, characterID);
+            characterCollectFruit(characterID, (Fruit)collectible);
         }
     }
 
@@ -61,8 +61,7 @@ public class CharacterCollectibleHandler {
         soundManager.playSoundEffect(SoundEffectType.COLLECT); // play sfx
     }
 
-    private void characterCollectFruit(Collectible collectible, int characterID) {
-        Fruit fruit = (Fruit) collectible;
+    private void characterCollectFruit(int characterID, Fruit fruit) {
         // if fruit is a recovery fruit
         if (fruit.isRecovery()) {
             // check if cooldown is over
@@ -81,7 +80,7 @@ public class CharacterCollectibleHandler {
                 entityManager.removeEntity(fruit); // remove collectible
             }
             soundManager.playSoundEffect(SoundEffectType.COLLECT); // play sfx
-            gameplayerManager.addPoints(characterID, collectible.getPoints()); // add points
+            gameplayerManager.addPoints(characterID, fruit.getPoints()); // add points
         }
     }
 

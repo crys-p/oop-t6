@@ -10,19 +10,10 @@ import com.mygdx.game.player.GamePlayerManager;
 
 public class CollisionHandlers {
 
-    private final EntityManager entityManager;
-    private final SoundManager soundManager;
-    private final GamePlayerManager gameplayerManager;
-    private final SceneManager sceneManager;
-
     private final CharacterEnemyHandler characterEnemyHandler;
     private final CharacterCollectibleHandler characterCollectibleHandler;
 
     public CollisionHandlers(EntityManager entityManager, SoundManager soundManager, GamePlayerManager gameplayerManager, SceneManager sceneManager) {
-        this.entityManager = entityManager;
-        this.soundManager = soundManager;
-        this.gameplayerManager = gameplayerManager;
-        this.sceneManager = sceneManager;
         this.characterEnemyHandler = new CharacterEnemyHandler(soundManager, gameplayerManager);
         this.characterCollectibleHandler = new CharacterCollectibleHandler(entityManager, soundManager, gameplayerManager, sceneManager);
     }
